@@ -1,0 +1,6 @@
+[
+  { "id": "orion-lesson", "positionNo": 1, "title": "A pattern in the sky", "kind": "lesson", "minutes": 2, "unitId": "first-sky" },
+  { "id": "orion-tale", "positionNo": 2, "title": "A light on Orion’s shoulder", "kind": "tale", "minutes": 3, "unitId": "first-sky", "taleId": "orion-shoulder" },
+  { "id": "star-lesson", "positionNo": 3, "title": "A star with a warm colour", "kind": "lesson", "minutes": 2, "unitId": "first-sky" },
+  { "id": "orion-quiz", "positionNo": 4, "title": "Two small things to remember", "kind": "quiz", "minutes": 2, "unitId": "first-sky" }
+]

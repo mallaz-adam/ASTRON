@@ -1,0 +1,18 @@
+.dev-sheet { max-width: 720px; margin-inline: auto; display: grid; gap: var(--space-24); }
+.dev-label { color: var(--vermilion); font: var(--font-weight) var(--type-label)/1.5 var(--font-label); letter-spacing: var(--label-spacing); }
+.dev-summary { display: flex; align-items: center; gap: var(--space-18); border: var(--border-ink); background: var(--card); padding: var(--space-18); }
+.dev-summary dl { margin: 0; flex: 1; }
+.dev-summary dl > div { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-8); }
+.dev-summary dt { color: var(--soft-ink); }
+.dev-summary dd { margin: 0; }
+.dev-actions { display: flex; flex-wrap: wrap; gap: var(--space-12); margin-block: var(--space-14); }
+.dev-quests { display: grid; gap: var(--space-12); margin-block: var(--space-18); }
+.dev-note { color: var(--soft-ink); font-size: var(--type-small); }
+.dev-error { padding: var(--space-14); border: var(--border-ink); background: var(--panel); }
+.dev-sheet a { display: inline-flex; align-items: center; min-height: var(--touch-min); }
+.dev-sun { width: 100px; height: 100px; flex-shrink: 0; fill: none; stroke: var(--ink); stroke-width: 1; }
+.dev-sun--0 .dev-sun-disc { stroke-dasharray: 2 4; }
+.dev-sun--1 .dev-sun-disc { fill: var(--gold); }
+.dev-sun--2 .dev-sun-disc, .dev-sun--3 .dev-sun-disc { fill: var(--gold-light); }
+.dev-sun-corona { stroke: var(--vermilion); }
+@media (max-width: 479px) { .dev-summary { align-items: start; } .dev-sun { width: 60px; height: 60px; } }

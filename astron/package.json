@@ -12,6 +12,7 @@
     "preview": "vite preview --open"
   },
   "dependencies": {
+    "dexie": "4.4.6",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
@@ -20,6 +21,7 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "6.1.2",
+    "fake-indexeddb": "6.2.5",
     "typescript": "7.0.2",
     "vite": "8.3.4",
     "vite-plugin-pwa": "2.0.0",
