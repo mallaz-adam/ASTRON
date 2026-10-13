@@ -1,0 +1,47 @@
+.sheet-header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-18); padding-bottom: var(--space-18); border-bottom: var(--border-ink); }
+.wordmark { display: inline-flex; align-items: center; min-height: var(--touch-min); color: var(--ink); font: var(--font-weight) var(--type-large)/1.4 var(--font-label); letter-spacing: .22em; text-decoration: none; }
+.eyebrow { font: var(--font-weight) var(--type-label)/1.5 var(--font-label); text-transform: uppercase; letter-spacing: var(--label-spacing); color: var(--soft-ink); }
+.sheet-header > .eyebrow { text-align: right; max-width: 160px; }
+.sheet-intro { display: flex; justify-content: space-between; align-items: center; gap: var(--space-24); padding-block: var(--space-36); }
+.sheet-intro h1 { margin-block: var(--space-8) var(--space-12); }
+.intro-copy { max-width: 480px; color: var(--soft-ink); font-size: var(--type-large); }
+.atlas-emblem { width: 100px; height: 100px; flex-shrink: 0; fill: none; stroke: var(--line); stroke-width: 1; }
+.atlas-emblem .emblem-star { fill: var(--gold); stroke: var(--ink); }
+.specimen-grid { display: grid; gap: var(--space-36); }
+.sheet-section { border-top: var(--border-ink); padding-top: var(--space-18); min-width: 0; }
+.section-heading { display: flex; align-items: baseline; gap: var(--space-14); margin-bottom: var(--space-12); }
+.section-number { font: var(--font-weight) var(--type-label)/1.4 var(--font-label); color: var(--vermilion); }
+.section-note { color: var(--soft-ink); font-size: var(--type-small); }
+.palette-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-18) var(--space-12); margin-top: var(--space-24); }
+.swatch { display: grid; align-content: start; gap: var(--space-4); font-size: var(--type-small); }
+.swatch-colour { display: block; height: 52px; border: var(--border-ink); }
+.swatch-token { font-size: var(--type-small); font-style: italic; color: var(--soft-ink); overflow-wrap: anywhere; }
+.type-specimens { display: grid; gap: var(--space-18); margin-top: var(--space-24); }
+.sample-note { font-size: var(--type-small); color: var(--soft-ink); margin-bottom: var(--space-8); }
+.font-cinzel { font-family: var(--font-label); letter-spacing: var(--label-spacing); text-transform: uppercase; }
+.font-fell { font-family: var(--font-reading); }
+.italic { font-style: italic; }
+.size-13 { font-size: var(--type-label); }
+.size-15 { font-size: var(--type-small); }
+.size-18 { font-size: var(--type-body); }
+.size-20 { font-size: var(--type-large); }
+.size-25 { font-size: var(--type-heading-small); }
+.size-30 { font-size: var(--type-heading); }
+.size-36 { font-size: var(--type-heading-large); }
+.specimen-stack { display: grid; gap: var(--space-36); margin-top: var(--space-24); }
+.specimen-stack h3 { margin-bottom: var(--space-14); }
+.control-row { display: flex; flex-wrap: wrap; gap: var(--space-12); margin-top: var(--space-12); }
+.interaction-note { min-height: 3em; margin-top: var(--space-14); color: var(--soft-ink); font-size: var(--type-small); }
+.control-row + .section-note { margin-top: var(--space-12); }
+.motion-specimen { display: flex; align-items: center; gap: var(--space-18); margin-top: var(--space-18); padding: var(--space-18); border: var(--border-line); }
+.motion-star { width: 60px; height: 60px; flex-shrink: 0; fill: var(--gold-light); stroke: var(--ink); stroke-width: 1; animation: slow-turn var(--motion-slow) ease-in-out infinite alternate; }
+.motion-star circle { fill: none; stroke: var(--line); stroke-dasharray: 2 4; }
+@keyframes slow-turn { from { transform: rotate(-12deg); } to { transform: rotate(12deg); } }
+.quest-stack, .progress-stack { display: grid; gap: var(--space-12); }
+.progress-stack { gap: var(--space-18); }
+.sheet-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-12); border-top: var(--border-ink); margin-top: var(--space-36); padding-top: var(--space-18); color: var(--soft-ink); font-size: var(--type-small); }
+@media (max-width: 479px) { .atlas-emblem { display: none; } }
+@media (min-width: 768px) {
+  .specimen-grid { grid-template-columns: 1fr 1fr; column-gap: calc(var(--space-36) * 2); }
+  .palette-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
