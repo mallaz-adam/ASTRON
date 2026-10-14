@@ -1,4 +1,5 @@
 import { Page } from '../design/Page';
+import { Link } from 'react-router-dom';
 import { Button } from '../design/Button';
 import { Chip } from '../design/Chip';
 import { SpeechBox } from '../design/SpeechBox';
@@ -41,7 +42,7 @@ export function Dev() {
         <p className="dev-label">TEMPORARY · Developer check</p>
         <h1>Rules under a small sky</h1>
         <p>This is a test bench, not a learning screen.</p>
-        <p><a href={import.meta.env.BASE_URL}>Return to Design check</a></p>
+        <p><Link to="/">Today</Link> · <Link to="/design">Return to Design check</Link></p>
         <SpeechBox>The pretend date resets to your real date on reload. Saved progress stays on this device.</SpeechBox>
         <p>Pretend local date: <time dateTime={dayDate}>{dayDate}</time></p>
         {state.error && <p className="dev-error" role="alert">{state.error}</p>}
@@ -83,7 +84,7 @@ export function Dev() {
           <Button variant="secondary" disabled={state.busy} onClick={state.erase}>Erase progress</Button>
         </div>
         <p role="status">{state.busy ? 'Saving on this device…' : state.message}</p>
-        <p className="dev-note">Erase progress clears this browser’s ASTRON progress, including this test bench’s records. New learners start with zero freezes.</p>
+        <p className="dev-note">Erase progress clears this browser’s ASTRON progress, including this test bench’s records. New learners start with one freeze.</p>
       </main>
     </Page>
   );

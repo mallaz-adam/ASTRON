@@ -1,9 +1,10 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
 import { VitePWA } from 'vite-plugin-pwa';
+import { fileURLToPath } from 'node:url';
 
 export default defineConfig(({ mode }) => ({
-  base: './',
+  base: '/',
   plugins: [
     react(),
     ...(mode === 'test' ? [] : [VitePWA({
@@ -54,6 +55,10 @@ export default defineConfig(({ mode }) => ({
     })]),
   ],
   test: {
+    // The test runner needs a real Windows path for public SVG raw imports.
+    alias: { '/art': fileURLToPath(new URL('./public/art', import.meta.url)).replace(/\\/g, '/') },
+    // Forked processes let clock tests change TZ without affecting other tests.
+    pool: 'forks',
     environment: 'node',
     include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
   },

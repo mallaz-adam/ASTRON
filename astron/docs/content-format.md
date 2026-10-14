@@ -112,7 +112,7 @@ Nothing is uploaded. There are eight tables:
 
 As approved, ActivityDay also stores `dailyGoal`. Changing the goal changes today
 and future days; earlier days keep their original goal. New learners start at goal 2
-with zero freezes. There is no stored streak or stored total XP.
+with one freeze. There is no stored streak or stored total XP.
 
 - `localDate(now)` uses the device’s local date, not the UTC date.
 - `questsDoneOn(records, dayDate)` returns the number of different quests that day.
@@ -163,4 +163,5 @@ midnight, that unfinished day breaks the streak unless a freeze protected it.
 Browser storage is separate for each address: localhost:5173 and localhost:4173
 have separate progress. Use the same address when checking reload persistence.
 The PWA build caches the sample JSON as well as the page, so the loader works offline.
-`public/art` is still empty; no real learning screens have been added.
+The supplied static SVGs live in `public/art`. Today is now the first real screen;
+lesson and tale-reading screens have not been added.

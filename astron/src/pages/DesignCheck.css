@@ -40,6 +40,7 @@
 .quest-stack, .progress-stack { display: grid; gap: var(--space-12); }
 .progress-stack { gap: var(--space-18); }
 .sheet-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-12); border-top: var(--border-ink); margin-top: var(--space-36); padding-top: var(--space-18); color: var(--soft-ink); font-size: var(--type-small); }
+.design-today-link { display: inline-flex; align-items: center; min-height: var(--touch-min); }
 @media (max-width: 479px) { .atlas-emblem { display: none; } }
 @media (min-width: 768px) {
   .specimen-grid { grid-template-columns: 1fr 1fr; column-gap: calc(var(--space-36) * 2); }

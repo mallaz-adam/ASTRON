@@ -20,10 +20,10 @@ async function xp() {
 }
 
 describe('On-device progress services', () => {
-  it('creates a learner with the Steady goal and no freezes', async () => {
+  it('creates a learner with the Steady goal and one freeze', async () => {
     const learner = await openDay(database, learnerId, now);
     expect(learner.dailyGoal).toBe(2);
-    expect(learner.freezesLeft).toBe(0);
+    expect(learner.freezesLeft).toBe(1);
   });
   it('saves only the first cell completion and first daily Learn reward', async () => {
     await completeCell(database, content, learnerId, 'orion-lesson', now, { xpEarned: 8 });
@@ -94,6 +94,7 @@ describe('On-device progress services', () => {
   });
   it('keeps the streak next day, then breaks after an empty day passes', async () => {
     await completeCell(database, content, learnerId, 'orion-tale', now);
+    await database.learners.update(learnerId, { freezesLeft: 0 });
     await openDay(database, learnerId, atLocalNoon('2026-10-14'));
     expect(computeStreak('2026-10-14', toRuleDays(await readProgress(database)), 2)).toBe(1);
     await openDay(database, learnerId, atLocalNoon('2026-10-15'));

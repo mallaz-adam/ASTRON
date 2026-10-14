@@ -1,4 +1,9 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { db } from '../data/db';
+import { localLearnerId } from '../data/learner';
+import { setReduceMotion } from '../data/services';
+import { useProgress } from '../hooks/useProgress';
 import { Page } from '../design/Page';
 import { Button } from '../design/Button';
 import { Chip } from '../design/Chip';
@@ -17,7 +22,9 @@ const palette = [
 ] as const;
 
 export function DesignCheck() {
-  const [reduceMotion, setReduceMotion] = useState(false);
+  const { progress } = useProgress();
+  const reduceMotion = progress?.learners.find(row => row.id === localLearnerId)?.reduceMotion ?? false;
+  const [motionError, setMotionError] = useState('');
   const [sampleSwitch, setSampleSwitch] = useState(true);
   const [selectedChips, setSelectedChips] = useState(['Selected']);
   const [buttonMessage, setButtonMessage] = useState('Try a button. Nothing here changes your progress.');
@@ -104,7 +111,11 @@ export function DesignCheck() {
               <div>
                 <h3>Switches &amp; motion</h3>
                 <Toggle label="Sample switch" checked={sampleSwitch} onChange={setSampleSwitch} />
-                <Toggle label="Reduce motion" checked={reduceMotion} onChange={setReduceMotion} />
+                <Toggle label="Reduce motion" checked={reduceMotion} onChange={value => {
+                  setMotionError('');
+                  void setReduceMotion(db, localLearnerId, value).catch(problem => setMotionError(String(problem.message)));
+                }} />
+                {motionError && <p role="alert">{motionError}</p>}
                 <div className="motion-specimen">
                   <svg className="motion-star" viewBox="0 0 60 60" role="img" aria-label="A slowly turning star. It stays still when motion is reduced.">
                     <circle cx="30" cy="30" r="26" />
@@ -141,7 +152,7 @@ export function DesignCheck() {
         </div>
       </main>
 
-      <footer className="sheet-footer"><span className="eyebrow">ASTRON · Design study</span><p>No lessons yet. Just the beginnings of an atlas.</p></footer>
+      <footer className="sheet-footer"><span className="eyebrow">ASTRON · Design study</span><p>No lessons yet. Just the beginnings of an atlas.</p><Link className="design-today-link" to="/">Today</Link></footer>
     </Page>
   );
 }

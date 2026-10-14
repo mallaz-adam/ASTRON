@@ -25,6 +25,7 @@
   --type-heading-small: 25px;
   --type-heading: 30px;
   --type-heading-large: 36px;
+  --type-streak: 52px;
   --label-spacing: 0.14em;
   --line-height: 1.5;
 
@@ -32,7 +33,9 @@
   --space-8: 8px;
   --space-12: 12px;
   --space-14: 14px;
+  --space-16: 16px;
   --space-18: 18px;
+  --space-20: 20px;
   --space-24: 24px;
   --space-36: 36px;
 
@@ -54,6 +57,13 @@
   --motion-slow: 4s;
   --motion-small: 180ms;
   --paper-grain-opacity: 0.035;
+  --week-circle: 34px;
+  --sun-size: 48px;
+  --glaux-size: 36px;
+  --motion-orbit: 48s;
+  --motion-pulse: 2.5s;
+  --motion-tilt: 6s;
+  --motion-blink: 4s;
 }
 
 @media (min-width: 768px) {

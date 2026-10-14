@@ -3,9 +3,15 @@ import type { DailyGoal, Learner, Progress } from './types';
 import { checkGoal, questsDoneOn } from '../logic/quests';
 import { localDate } from '../logic/dates';
 import { closePastDays, type RuleDay } from '../logic/streak';
+import { defaultLearner } from './learner';
 
-export function defaultLearner(id: string): Learner {
-  return { id, displayName: 'Sky learner', dailyGoal: 2, language: 'en', reduceMotion: false, freezesLeft: 0 };
+export { defaultLearner } from './learner';
+
+export function setReduceMotion(database: AstronDb, learnerId: string, reduceMotion: boolean) {
+  return database.transaction('rw', database.learners, async () => {
+    const learner = await database.learners.get(learnerId) ?? defaultLearner(learnerId);
+    await database.learners.put({ ...learner, reduceMotion });
+  });
 }
 
 // Call inside a write transaction. No day or running streak is hidden in memory.

@@ -14,7 +14,8 @@
   "dependencies": {
     "dexie": "4.4.6",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "react-router-dom": "7.18.4"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

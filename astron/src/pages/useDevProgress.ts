@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { db } from '../data/db';
+import { localLearnerId } from '../data/learner';
 import { loadContent } from '../data/contentLoader';
 import type { Content, DailyGoal, Progress } from '../data/types';
 import { changeDailyGoal, completeCell, completeQuest, eraseProgress, exportProgress, markArticleRead, openDay, readProgress } from '../data/services';
 import { addDays, atLocalNoon, localDate } from '../logic/dates';
 
-export const devLearnerId = 'local-learner';
+export const devLearnerId = localLearnerId;
 
 export function useDevProgress() {
   // Only this page owns the pretend clock. Reload starts at the real local date.
