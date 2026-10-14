@@ -32,5 +32,5 @@ export function useToday() {
   }, [dayDate, hasLearner]);
 
   const model = ready && content && progress ? buildTodayModel(progress, content, now) : undefined;
-  return { model, weekday: new Intl.DateTimeFormat('en', { weekday: 'long' }).format(now), error: error || storageError };
+  return { model, progress, content, now, weekday: new Intl.DateTimeFormat('en', { weekday: 'long' }).format(now), error: error || storageError };
 }

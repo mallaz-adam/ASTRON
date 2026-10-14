@@ -40,4 +40,8 @@ describe('Today controls and art', () => {
     expect(render()).not.toContain('href="/dev"');
     expect(render(false, true)).toContain('href="/dev"');
   });
+  it('links the complete streak card to Your sun with its requested label', () => {
+    expect(render()).toMatch(/<a[^>]*class="streak-card"[^>]*aria-label="See your sun"[^>]*href="\/sun"/);
+    expect(render()).toContain('navigation-wordmark">ASTRON');
+  });
 });

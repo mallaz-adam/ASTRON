@@ -3,7 +3,7 @@ import { db } from '../data/db';
 import { localLearnerId } from '../data/learner';
 import { loadContent } from '../data/contentLoader';
 import type { Content, DailyGoal, Progress } from '../data/types';
-import { changeDailyGoal, completeCell, completeQuest, eraseProgress, exportProgress, markArticleRead, openDay, readProgress } from '../data/services';
+import { changeDailyGoal, completeCell, completeQuest, createTestHistory, eraseProgress, exportProgress, markArticleRead, openDay, readProgress } from '../data/services';
 import { addDays, atLocalNoon, localDate } from '../logic/dates';
 
 export const devLearnerId = localLearnerId;
@@ -16,6 +16,7 @@ export function useDevProgress() {
   const [busy, setBusy] = useState(true);
   const [error, setError] = useState('');
   const [message, setMessage] = useState('Ready for a small experiment.');
+  const [historyDays, setHistoryDays] = useState('13');
   const locked = useRef(false);
 
   useEffect(() => {
@@ -80,6 +81,17 @@ export function useDevProgress() {
     void run(() => eraseProgress(db), 'All eight progress tables are empty. The next action starts fresh.');
   }
 
+  function history() {
+    if (!content) return;
+    if (!/^\d+$/.test(historyDays)) { setError('Enter a whole number of days, zero or greater.'); return; }
+    // Anchor this fixture to the real date, so /sun can use the real device clock.
+    const realNow = new Date();
+    void run(async () => {
+      await createTestHistory(db, content, devLearnerId, Number(historyDays), realNow);
+      setNow(realNow);
+    }, 'Create a test history');
+  }
+
   function download() {
     void run(async () => {
       const json = await exportProgress(db);
@@ -94,7 +106,7 @@ export function useDevProgress() {
     }, 'Downloaded the progress tables. Content was not included.');
   }
 
-  return { now, content, progress, busy, error, message, learn, discover, read, nextDay, goal, erase, download };
+  return { now, content, progress, busy, error, message, historyDays, setHistoryDays, history, learn, discover, read, nextDay, goal, erase, download };
 }
 
 function describeError(problem: unknown) {

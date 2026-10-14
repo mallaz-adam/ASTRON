@@ -13,6 +13,7 @@ Press Ctrl+C in the terminal to stop the server.
 | Address | Page |
 | --- | --- |
 | `/` | Today: phone layout, or a wider two-column layout on a computer. |
+| `/sun` | Your sun: streak dial, stage progress, longest streak and ready freezes. |
 | `/design` | Design check, including the saved Reduce motion switch. |
 | `/dev` | Temporary quest controls and a pretend date. |
 
@@ -57,7 +58,7 @@ server does not install a service worker.
 
 Use the browser's Install app action when available. On iPhone, use Share > Add to
 Home Screen. Phone hosting needs HTTPS; localhost is suitable for desktop testing.
-Later hosting must serve index.html for `/design` and `/dev` as well as `/`.
+Later hosting must serve index.html for `/sun`, `/design` and `/dev` as well as `/`.
 
 Google Fonts are the only external page resources. They are cached after loading;
 Georgia is the fallback if they have not yet been cached. Browser storage is separate
@@ -75,3 +76,28 @@ for each address, including different ports: use the same address to check persi
 No lesson, tale-reading, profile, timeline, or journal screen is built yet.
 The future navigation tabs are visibly disabled. Profile is a keyboard-accessible
 placeholder with no action.
+
+## Your sun and Task 4 checks
+
+Click the Today streak card (accessible name: See your sun) to open `/sun`.
+Back to Today returns to the main screen. At 1024 px and wider, the wordmark,
+tabs and Profile form a top bar. Smaller screens keep the tabs at the bottom.
+Your sun uses one column below 1024 px and a dial/details pair above it.
+
+Numerical streak and XP values use Cinzel lining figures. The dial number also
+uses Cinzel, approved because IM Fell English's zero retains its old-style shape.
+Headings and sentences retain IM Fell English.
+
+On `/dev`, enter 0, 5, 13, 30 or 100 in the number field, then press Create a test
+history. This replaces the local learner's day and quest history with exactly N
+kept calendar days ending yesterday, and an unfinished today. It anchors to the
+real device date and resets the pretend date to match. Other progress, preferences
+and freeze balances remain saved; this feature neither spends nor refills freezes.
+Erase progress removes generated history too. It is a test bench, not a feature
+for earning progress.
+
+The dial uses the same kept-day rules as Today's week row, including each day's
+saved goal and freezes. No setting, resting or new-day states have been built.
+The new pure-rule, history-service and accessible-view tests are included in
+`npm test`. Check both screens at 390, 768 and 1280 px; on `/design`, Reduce motion
+stops the dial glow, today's kept-ray pulse, tier drawings and Glaux.

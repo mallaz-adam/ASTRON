@@ -1,0 +1,52 @@
+.atlas-page.sun-page { padding: var(--space-24); }
+.sun-page .page-content { max-width: 420px; }
+.sun-main { display: flex; flex-direction: column; gap: var(--space-16); min-height: calc(100dvh - var(--space-24) * 2); }
+.sun-back { display: inline-flex; align-items: center; align-self: start; min-height: var(--touch-min); font-size: var(--type-small); }
+.sun-main h1 { font-size: var(--type-heading-large); }
+.sun-dial-block { width: 100%; max-width: 420px; justify-self: center; }
+.sun-dial-block p { text-align: center; font-style: italic; color: var(--soft-ink); margin-top: var(--space-16); }
+.sun-dial { display: block; width: 100%; height: auto; }
+.dial-track, .dial-progress { fill: none; stroke-width: 6; }
+.dial-track { stroke: var(--track); }
+.dial-progress { stroke: var(--gold); stroke-linecap: round; }
+.dial-tick { stroke: var(--ink); stroke-width: 1.4; }
+.dial-marker { fill: var(--gold); stroke: var(--ink); stroke-width: 1; }
+.dial-halo { fill: var(--gold-light); opacity: .25; transform-box: view-box; transform-origin: center; animation: dial-glow 2.5s ease-in-out infinite; }
+.dial-ray-ink { stroke: var(--ink); stroke-width: 17; stroke-linecap: round; }
+.dial-ray-gold { stroke: var(--gold-light); stroke-width: 13; stroke-linecap: round; }
+.dial-ray--missed .dial-ray-ink { stroke-width: 1.4; stroke-dasharray: 4 4; }
+.dial-ray--notYet .dial-ray-ink { stroke-width: 1.4; stroke-dasharray: 1 4; }
+.dial-ray--pulse .dial-ray-ink, .dial-ray--pulse .dial-ray-gold { animation: dial-ray-pulse 2s ease-in-out infinite; }
+.dial-initial { font: var(--font-weight) 12px var(--font-label); fill: var(--ink); }
+.dial-initial--today { fill: var(--vermilion); }
+.dial-disc { fill: var(--gold-light); stroke: var(--ink); stroke-width: 2; }
+.dial-number { font: var(--font-weight) 52px var(--font-label); font-variant-numeric: lining-nums; fill: var(--ink); }
+.dial-days { font: var(--font-weight) 11px var(--font-label); letter-spacing: 2px; fill: var(--ink); }
+.sun-details { display: grid; align-content: start; gap: var(--space-24); min-width: 0; }
+.sun-tiers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-4); }
+.sun-tier { display: flex; flex-direction: column; align-items: center; gap: var(--space-8); border: var(--border-line); padding: var(--space-8) var(--space-4); text-align: center; min-width: 0; }
+.sun-tier--current { border: 2px solid var(--vermilion); background: var(--card); }
+.tier-art { width: 44px; height: 44px; }
+.sun-tier-name { font: var(--font-weight) 11px/1.4 var(--font-label); letter-spacing: .04em; }
+.sun-tier-range { font-size: var(--type-small); line-height: 1.3; }
+.sun-stats { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12); }
+.sun-stats > div { border: var(--border-line); background: var(--panel); padding: var(--space-12); }
+.sun-stats dt { font: var(--font-weight) 11px/1.4 var(--font-label); letter-spacing: .08em; }
+.sun-stats dd { margin: var(--space-8) 0 0; font-family: var(--font-label); font-variant-numeric: lining-nums; font-size: var(--type-large); }
+.sun-speech { display: flex; align-items: center; gap: var(--space-8); }
+.sun-glaux { width: 56px; height: 56px; }
+.sun-speech .speech-box { flex: 1; min-width: 0; padding: var(--space-14); font-size: var(--type-body); }
+@keyframes dial-glow { 0%, 100% { transform: scale(.967742); } 50% { transform: scale(1.064516); } }
+@keyframes dial-ray-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .6; } }
+
+@media (min-width: 1024px) {
+  .atlas-page.sun-page { padding: calc(var(--space-36) * 2); }
+  .sun-page .page-content { max-width: 960px; }
+  .sun-main { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); grid-template-rows: auto auto auto 1fr; gap: var(--space-24); min-height: calc(100dvh - var(--space-36) * 4); }
+  .sun-back { grid-column: 1; grid-row: 2; }
+  .sun-main h1 { grid-column: 2; grid-row: 2; align-self: center; }
+  .sun-dial-block { grid-column: 1; grid-row: 3 / 5; align-self: start; }
+  .sun-details { grid-column: 2; grid-row: 3 / 5; }
+}
+
+@media (hover: hover) { .sun-back:hover { color: var(--ink); text-decoration-thickness: 2px; } }

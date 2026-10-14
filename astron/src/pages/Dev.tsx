@@ -78,6 +78,10 @@ export function Dev() {
           </div>
           <p>Changes apply to today and future days. Earlier days keep their original goal.</p>
         </section>
+        <div className="dev-history">
+          <input type="number" min="0" step="1" value={state.historyDays} onChange={event => state.setHistoryDays(event.target.value)} aria-label="Create a test history" disabled={state.busy} />
+          <Button disabled={state.busy || !state.content} onClick={state.history}>Create a test history</Button>
+        </div>
         <div className="dev-actions">
           <Button disabled={state.busy || !state.content} onClick={state.nextDay}>Next day</Button>
           <Button variant="secondary" disabled={state.busy} onClick={state.download}>Export progress</Button>

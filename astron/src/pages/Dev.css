@@ -10,6 +10,8 @@
 .dev-note { color: var(--soft-ink); font-size: var(--type-small); }
 .dev-error { padding: var(--space-14); border: var(--border-ink); background: var(--panel); }
 .dev-sheet a { display: inline-flex; align-items: center; min-height: var(--touch-min); }
+.dev-history { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-12); }
+.dev-history input { width: 100px; min-height: var(--button-height); padding: var(--space-8); color: var(--ink); background: var(--card); border: var(--border-ink); border-radius: 0; font-family: var(--font-label); }
 .dev-sun { width: 100px; height: 100px; flex-shrink: 0; fill: none; stroke: var(--ink); stroke-width: 1; }
 .dev-sun--0 .dev-sun-disc { stroke-dasharray: 2 4; }
 .dev-sun--1 .dev-sun-disc { fill: var(--gold); }

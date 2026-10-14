@@ -1,12 +1,12 @@
 import type { Content, Progress, QuestKind } from '../data/types';
 import { defaultLearner, localLearnerId } from '../data/learner';
-import { addDays, atLocalNoon, localDate } from './dates';
+import { localDate } from './dates';
 import { goalMet, questsDoneOn, sunStage } from './quests';
-import { computeStreak, dayKept, streakStage } from './streak';
+import { computeStreak, streakStage } from './streak';
+import { weekDays } from './week';
 
 const questOrder: QuestKind[] = ['learn', 'read', 'story'];
 const labels = { learn: 'Learn', read: 'Read', story: 'Discover' };
-type WeekState = 'kept' | 'missed' | 'today';
 
 // This function only reads its inputs. The screen supplies the real device time.
 export function buildTodayModel(progress: Progress, content: Content, now: Date, learnerId = localLearnerId) {
@@ -32,15 +32,7 @@ export function buildTodayModel(progress: Progress, content: Content, now: Date,
   const streakText = met ? 'Your sun is safe tonight.' : streak === 0
     ? `Finish ${remaining} ${questWord} today to begin your streak.`
     : `Finish ${remaining} more ${questWord} today to make it ${streak + 1}.`;
-  const week = Array.from({ length: 7 }, (_, index) => {
-    const date = addDays(dayDate, index - 6);
-    const saved = days.find(day => day.dayDate === date);
-    const kept = saved ? dayKept(saved) : false;
-    const isToday = date === dayDate;
-    const state: WeekState = kept ? 'kept' : isToday ? 'today' : 'missed';
-    const weekday = new Intl.DateTimeFormat('en', { weekday: 'long' }).format(atLocalNoon(date));
-    return { dayDate: date, weekday, initial: weekday[0], state, isToday, freezeUsed: saved?.freezeUsed ?? false };
-  });
+  const week = weekDays(dayDate, days);
   const xpEarned = questRows.reduce((sum, row) => sum + row.earned, 0);
   const xpAvailable = questRows.reduce((sum, row) => sum + row.xp, 0);
   return {

@@ -5,7 +5,7 @@ button, input { font: inherit; }
 button { cursor: pointer; border-radius: var(--radius-square); }
 button:disabled { cursor: not-allowed; }
 a { color: var(--vermilion); }
-button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+button:focus-visible, a:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
 h1, h2, h3, p { margin: 0; }
 h1, h2, h3 { font-family: var(--font-reading); font-style: italic; font-weight: var(--font-weight); }
 h1 { font-size: var(--type-heading-large); }
@@ -44,7 +44,7 @@ strong, b { font-weight: var(--font-weight); }
 .quest-kind { color: var(--vermilion); font: var(--font-weight) var(--type-label)/1.4 var(--font-label); text-transform: uppercase; letter-spacing: var(--label-spacing); }
 .quest-title { font-size: var(--type-large); overflow-wrap: anywhere; }
 .quest-status { color: var(--soft-ink); font-size: var(--type-small); }
-.quest-xp { white-space: nowrap; font-size: var(--type-small); }
+.quest-xp { white-space: nowrap; font-size: var(--type-small); font-family: var(--font-label); font-variant-numeric: lining-nums; }
 
 .toggle-field { display: flex; align-items: center; gap: var(--space-12); }
 .toggle-label { flex: 1; }

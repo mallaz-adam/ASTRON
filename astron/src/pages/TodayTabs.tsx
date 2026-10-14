@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { ProfileButton } from './ProfileButton';
 
 const tabs = [
   { label: 'Learn', path: 'M4 4h6l2 2 2-2h6v16h-6l-2 2-2-2H4zM12 6v16' },
@@ -9,13 +10,17 @@ const tabs = [
 
 export function TodayTabs() {
   return (
-    <nav className="today-tabs" aria-label="Learn, Stories, Timeline, Journal">
+    <div className="navigation-bar">
+      <span className="navigation-wordmark">ASTRON</span>
+      <nav className="today-tabs" aria-label="Learn, Stories, Timeline, Journal">
       {tabs.map((tab, index) => {
         const contents = <><svg viewBox="0 0 24 24" aria-hidden="true"><path d={tab.path} /></svg><span>{tab.label}</span></>;
         return index === 0
           ? <NavLink key={tab.label} className="today-tab today-tab--active" to="/" end>{contents}</NavLink>
           : <button key={tab.label} className="today-tab" type="button" disabled aria-disabled="true">{contents}</button>;
       })}
-    </nav>
+      </nav>
+      <ProfileButton className="navigation-profile" />
+    </div>
   );
 }

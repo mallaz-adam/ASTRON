@@ -2,15 +2,18 @@ import { Link } from 'react-router-dom';
 import { Page } from '../design/Page';
 import { QuestRow } from '../design/QuestRow';
 import type { TodayModel } from '../logic/today';
+import { useDesktopLayout } from '../hooks/useDesktopLayout';
 import { StreakCard } from './StreakCard';
 import { TodayHeader } from './TodayHeader';
 import { TodayTabs } from './TodayTabs';
 import './Today.css';
 
 export function TodayView({ model, showDevLink = false }: { model: TodayModel; showDevLink?: boolean }) {
+  const desktop = useDesktopLayout();
   return (
     <Page className="today-page" reduceMotion={model.reduceMotion} skipLabel="Today">
       <main id="main-content" className="today-main" tabIndex={-1}>
+        {desktop && <TodayTabs />}
         <TodayHeader weekday={model.weekday} />
         <StreakCard model={model} />
         <p className="daily-quests-label">{model.questHeading}</p>
@@ -23,9 +26,9 @@ export function TodayView({ model, showDevLink = false }: { model: TodayModel; s
         <div className="today-quests">
           {model.questRows.map(quest => <QuestRow key={quest.id} kind={quest.kind} title={quest.title} xp={quest.xp} done={quest.done} />)}
         </div>
-        <p className="today-bonus">{model.bonusText}</p>
+        <p className="today-bonus">Finish all three today for <span className="lining-figures">+10 XP</span>.</p>
         {showDevLink && <Link className="today-dev-link" to="/dev">/dev</Link>}
-        <TodayTabs />
+        {!desktop && <TodayTabs />}
       </main>
     </Page>
   );

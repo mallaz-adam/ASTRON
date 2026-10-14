@@ -36,3 +36,15 @@ no feature for earning or refilling freezes. Older missed-day service tests set
 the balance to zero explicitly when they need to check an unprotected gap.
 
 Run every test with `npm test`. Run only pure rules with `npm test -- src/logic`.
+
+## Task 4 additions
+
+- `src/logic/sun.test.ts`: stage, target, ratio at 0, 1, 6, 7, 13, 29, 30, 99,
+  and 100; tick positions; longest runs with missing/missed days, historical goals
+  and freezes; clockwise rays and their agreement with Today; all requested copy.
+- `src/data/testHistory.test.ts`: fixtures at 0, 5, 13, 30 and 100; replacement,
+  unchanged freeze balances and preferences, other learners, invalid counts,
+  and full erasure.
+- `src/pages/YourSunView.test.tsx`: Back to Today, descriptive SVG, supplied art,
+  unselected zero stage and reduced-motion state. Today view tests also check
+  the labelled link to Your sun and the desktop wordmark.
