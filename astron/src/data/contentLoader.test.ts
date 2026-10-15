@@ -7,7 +7,7 @@ describe('Content files', () => {
     const content = sampleContent();
     expect(content.cells.map(cell => cell.kind)).toEqual(['lesson', 'lesson', 'lesson', 'tale', 'lesson', 'lesson', 'tale', 'lesson', 'lesson', 'lesson', 'quiz']);
     expect(content.chapters).toHaveLength(3);
-    expect(content.exercises).toHaveLength(2);
+    expect(content.exercises).toHaveLength(4);
     expect(Object.isFrozen(content.tales[0])).toBe(true);
   });
   it('names the file and field for a bad number', () => {

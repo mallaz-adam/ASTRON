@@ -4,6 +4,8 @@ import sun2 from '/art/sun-stage-2.svg?raw';
 import sun3 from '/art/sun-stage-3.svg?raw';
 import happyOwl from '/art/glaux-happy.svg?raw';
 import proudOwl from '/art/glaux-proud.svg?raw';
+import thinkingOwl from '/art/glaux-thinking.svg?raw';
+import type { GlauxMood } from '../data/types';
 import dawn from '/art/tier-dawn.svg?raw';
 import morning from '/art/tier-morning.svg?raw';
 import noon from '/art/tier-noon.svg?raw';
@@ -17,8 +19,9 @@ export function SunArt({ stage }: { stage: 0 | 1 | 2 | 3 }) {
   return <span className="inline-art today-sun" dangerouslySetInnerHTML={{ __html: suns[stage] }} />;
 }
 
-export function GlauxArt({ mood = 'happy' }: { mood?: 'happy' | 'proud' }) {
-  return <span className={`inline-art ${mood === 'proud' ? 'sun-glaux' : 'today-glaux'}`} dangerouslySetInnerHTML={{ __html: mood === 'proud' ? proudOwl : happyOwl }} />;
+export function GlauxArt({ mood = 'happy', className = '' }: { mood?: GlauxMood; className?: string }) {
+  const owl = { happy: happyOwl, proud: proudOwl, thinking: thinkingOwl }[mood];
+  return <span className={`inline-art ${mood === 'proud' ? 'sun-glaux' : 'today-glaux'} ${className}`.trim()} dangerouslySetInnerHTML={{ __html: owl }} />;
 }
 
 const tiers = { dawn, morning, noon, corona };

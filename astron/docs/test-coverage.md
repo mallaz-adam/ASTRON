@@ -60,4 +60,21 @@ Run every test with `npm test`. Run only pure rules with `npm test -- src/logic`
 - `src/pages/CoursePathView.test.tsx`: eleven native controls with labels,
   selected current cell, BEGIN destination, announcements and reduced motion.
 - Existing content-loader and Today tests reflect the eleven-cell sample and
-  the new Continue link. The lesson format and exercise data remain unchanged.
+  the new Continue link.
+
+## Task 6 additions
+
+- `src/data/lessonContent.test.ts`: exact supplied lesson and exercise copy,
+  six cards, moods, picture descriptions, exercise references, required feedback,
+  correct answers and useful diagnostics for invalid content.
+- `src/logic/lessonPlayer.test.ts`: progressive card gating, tap-to-place and Undo,
+  correct answers, repeated misses, reveal after two misses, first-try scoring,
+  native-choice selection state and a fresh practice run.
+- `src/data/lessonServices.test.ts`: prerequisites, 40 XP, saved first-try scores,
+  retries, conditional Learn reward, assisted completion, duplicate/concurrent
+  calls, persistence and practice with no extra writes or XP, including later days.
+- `src/pages/LessonPlayer.test.tsx`: initial card visibility, accessible progress,
+  labelled Close, described inline art, Glaux, saved motion preference and radios.
+- Browser checks cover keyboard use, actual scrolling and AGAIN, both exercises,
+  two-miss SHOW ME, saved XP, and the 390/768/1280 px layouts. Device motion rules
+  are covered by CSS; the saved Reduce motion switch is also checked in the browser.

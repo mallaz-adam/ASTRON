@@ -15,7 +15,7 @@ Press Ctrl+C in the terminal to stop the server.
 | `/` | Today: phone layout, or a wider two-column layout on a computer. |
 | `/sun` | Your sun: streak dial, stage progress, longest streak and ready freezes. |
 | `/learn` | Course path: eleven cells in a honeycomb, with selected-cell details. |
-| `/cell/:id` | Temporary Cell page with a test completion button. |
+| `/cell/:id` | Six-card player for Why stars differ; temporary completion page for other cells. |
 | `/design` | Design check, including the saved Reduce motion switch. |
 | `/dev` | Temporary quest controls and a pretend date. |
 
@@ -76,7 +76,7 @@ for each address, including different ports: use the same address to check persi
 - `src/logic`: pure rules and Today's screen model.
 - `src/data`: content checks, progress database, and services.
 
-No lesson player, tale-reading, profile, timeline, or journal screen is built yet.
+Why stars differ has a real lesson player. Tale-reading, profile, timeline and journal screens are still future work.
 The future navigation tabs are visibly disabled. Profile is a keyboard-accessible
 placeholder with no action.
 
@@ -112,7 +112,7 @@ tab still opens Today. The first unfinished cell is selected when Course path
 opens. Click or use Tab and Enter on any hexagon to inspect it. A locked cell
 shows the prerequisite message and a disabled BEGIN button.
 
-BEGIN opens a temporary `/cell/:id` page. Mark as finished (test) saves through
+BEGIN opens `/cell/:id`. Placeholder cells have Mark as finished (test), which saves through
 the existing completion service and returns to the path. The next cell opens,
 and Today shows Learn done. Finish cell 4, Orion, to meet Discover too and light
 Betelgeuse. The Pleiades links to Alcyone. AGAIN revisits completed cells without
@@ -126,5 +126,28 @@ still be selected and revisited; Today has no unfinished cell to Continue.
 
 Check `/learn` at 390, 768 and 1280 px. Phone and tablet have details below the map;
 desktop has them on the right. Reduce motion at `/design` stops the current-cell
-pulse. Every `/cell/:id` is temporary, including Why stars differ. Task 6 is deferred
-until you confirm this step works and send its instructions again.
+pulse. Cell 3 now opens the real lesson player; the remaining cells keep their temporary controls.
+
+## Lesson player and Task 6 checks
+
+On a fresh learner, finish cells 1 and 2 with their temporary controls, then BEGIN
+cell 3, Why stars differ. Six cards appear in order, with inline pictures and Glaux.
+CONTINUE and Up/Down move between available cards; unfinished exercises keep the
+following card hidden. Choice options use native radio buttons, including arrow keys.
+
+Place Red star, Orange star, then Blue star and CHECK. In the second exercise,
+choose A, The heavier star. Each first correct exercise earns 10 XP once. With the
+daily Learn reward, the fresh learner's total is 40 XP. After two misses, SHOW ME
+reveals the answer without exercise XP. Finishing the recap saves the first-try
+score, meets Learn, and opens cell 4. BACK TO THE PATH returns to the honeycomb.
+
+AGAIN restarts the cards for practice. Practice cannot change the saved completion,
+answers, or XP, even on another day. Its end card reports that practice run's score.
+Saved attempts from an unfinished first run survive reloading, so reloading cannot
+turn a retry into a first try. Existing progress is preserved.
+
+Check at 390, 768 and 1280 px: the scrolling column stays at most 640 px wide,
+pictures keep their proportions, and controls remain usable with Tab and Enter.
+The saved Reduce motion switch and the device preference stop Glaux's animations
+and replace smooth card navigation with immediate movement. All lesson JSON and
+inline art are included in the production offline cache. No new library was added.

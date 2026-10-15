@@ -16,8 +16,8 @@ export const contentSchema = {
   chapters: { taleId: text, number: positive, title: text, text, marginNotes: texts },
   units: { id: text, title: text, summary: text, orderNo: positive },
   cells: { id: text, positionNo: positive, title: text, kind: oneOf('lesson', 'tale', 'quiz'), minutes: positive, unitId: text },
-  lessons: { id: text, title: text, body: text, cellId: text },
-  exercises: { id: text, type: oneOf('choice', 'connect', 'order', 'find', 'estimate'), prompt: text, contentData: object, xpValue: whole, cellId: text },
+  lessons: { id: text, title: text, cards: value => Array.isArray(value) && value.length > 0, cellId: text },
+  exercises: { id: text, type: oneOf('choice', 'connect', 'order', 'find', 'estimate'), prompt: text, contentData: object, xpValue: whole, cellId: text, glaux: text, hint: text, rightLine: text, missedLine: text, explanation: text },
   quests: { id: text, kind: oneOf('learn', 'story', 'read'), title: text, xpReward: whole },
   articles: { id: text, title: text, summary: text, body: text, readingMin: positive },
   unitArticles: { unitId: text, articleId: text },
@@ -34,6 +34,7 @@ export function checkRows(value: unknown, schema: Schema, file: string): Record<
     const record = row as Record<string, unknown>;
     const fields = { ...schema };
     if (file.endsWith('cells.json') && record.kind === 'tale') fields.taleId = text;
+    if (file.endsWith('lessons.json') && record.placeholder !== undefined) fields.placeholder = value => typeof value === 'boolean';
     for (const [field, check] of Object.entries(fields)) {
       if (!check(record[field])) contentError(file, `[${index}].${field}`, 'missing or invalid value.');
     }

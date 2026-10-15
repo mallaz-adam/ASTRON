@@ -2,6 +2,7 @@ import type { Content } from './types';
 import { checkRows, contentError, contentSchema } from './contentSchema';
 import { validateRelations } from './contentRelations';
 import { validateExercise } from './exerciseValidation';
+import { validateLessons } from './lessonValidation';
 
 export const contentFiles = Object.keys(contentSchema) as (keyof Content)[];
 
@@ -13,6 +14,7 @@ export function validateContent(files: Record<string, unknown>, folder = ''): Co
   const content = rows as unknown as Content;
   validateRelations(content, folder);
   content.exercises.forEach((exercise, index) => validateExercise(exercise, `${folder}exercises.json`, index));
+  validateLessons(content, folder);
   return freezeContent(content);
 }
 

@@ -4,7 +4,7 @@ import { ProgressProvider } from './hooks/useProgress';
 import { Today } from './pages/Today';
 import { YourSun } from './pages/YourSun';
 import { CoursePath } from './pages/CoursePath';
-import { TemporaryCell } from './pages/TemporaryCell';
+import { Cell } from './pages/Cell';
 import { DesignCheck } from './pages/DesignCheck';
 import { Dev } from './pages/Dev';
 
@@ -23,7 +23,7 @@ function AppRoutes() {
       <Route path="/" element={<Today />} />
       <Route path="/sun" element={<YourSun />} />
       <Route path="/learn" element={<CoursePath />} />
-      <Route path="/cell/:id" element={<TemporaryCell />} />
+      <Route path="/cell/:id" element={<Cell />} />
       <Route path="/design" element={<DesignCheck />} />
       <Route path="/dev" element={<Dev />} />
       <Route path="*" element={<Navigate to="/" replace />} />

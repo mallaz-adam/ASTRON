@@ -6,7 +6,7 @@ const quest = (questId: string, xpEarned: number, dayDate = '2026-10-13'): Quest
 const quests = [quest('learn', 20), quest('story', 15), quest('read', 10)];
 const completion: Completion = { learnerId: 'one', cellId: 'cell', completedOn: '2026-10-13T12:00:00Z', correctAnswers: 0, xpEarned: 5 };
 const answer: Answer = { learnerId: 'one', exerciseId: 'exercise', answeredOn: '2026-10-13T12:00:00Z', correct: true, attempts: 1 };
-const exercise: Exercise = { id: 'exercise', type: 'choice', prompt: 'Sample', contentData: {}, xpValue: 7, cellId: 'cell' };
+const exercise: Exercise = { id: 'exercise', type: 'choice', prompt: 'Sample', contentData: {}, xpValue: 7, cellId: 'cell', glaux: 'Sample', hint: 'Sample', rightLine: 'Sample', missedLine: 'Sample', explanation: 'Sample' };
 
 describe('XP totals', () => {
   it('starts at zero', () => expect(totalXp([], [], [], [])).toBe(0));

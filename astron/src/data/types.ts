@@ -8,10 +8,20 @@ export type Unit = { id: string; title: string; summary: string; orderNo: number
 export type CellKind = 'lesson' | 'tale' | 'quiz';
 type CellFields = { id: string; positionNo: number; title: string; minutes: number; unitId: string };
 export type Cell = CellFields & ({ kind: 'tale'; taleId: string } | { kind: 'lesson' | 'quiz'; taleId?: never });
-export type Lesson = { id: string; title: string; body: string; cellId: string };
+export type GlauxMood = 'happy' | 'thinking' | 'proud';
+type SpokenCard = { mood: GlauxMood; glaux: string; art?: string };
+export type LessonCard =
+  | (SpokenCard & { kind: 'say' })
+  | (SpokenCard & { kind: 'idea'; text: string })
+  | { kind: 'exercise'; exerciseId: string }
+  | (SpokenCard & { kind: 'recap'; items: string[] });
+export type Lesson = { id: string; title: string; cards: LessonCard[]; cellId: string; placeholder?: boolean };
 export type ExerciseType = 'choice' | 'connect' | 'order' | 'find' | 'estimate';
 export type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
-export type Exercise = { id: string; type: ExerciseType; prompt: string; contentData: { [key: string]: JsonValue }; xpValue: number; cellId: string };
+export type Exercise = {
+  id: string; type: ExerciseType; prompt: string; contentData: { [key: string]: JsonValue }; xpValue: number; cellId: string;
+  glaux: string; hint: string; rightLine: string; missedLine: string; explanation: string;
+};
 export type QuestKind = 'learn' | 'story' | 'read';
 export type Quest = { id: string; kind: QuestKind; title: string; xpReward: number };
 export type Article = { id: string; title: string; summary: string; body: string; readingMin: number };

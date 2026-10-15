@@ -1,4 +1,125 @@
 [
-  { "id": "orion-choice", "type": "choice", "prompt": "Which constellation contains Betelgeuse?", "contentData": { "options": [{ "id": "orion", "text": "Orion" }, { "id": "lyra", "text": "Lyra" }], "correctOptionId": "orion" }, "xpValue": 5, "cellId": "orion-quiz" },
-  { "id": "orion-order", "type": "order", "prompt": "Put these steps in the order used by this sample unit.", "contentData": { "items": [{ "id": "pattern", "text": "Meet the pattern" }, { "id": "tale", "text": "Read the tale" }, { "id": "star", "text": "Meet the star" }], "correctOrder": ["pattern", "tale", "star"] }, "xpValue": 5, "cellId": "orion-quiz" }
+  {
+    "id": "orion-choice",
+    "type": "choice",
+    "prompt": "Which constellation contains Betelgeuse?",
+    "contentData": {
+      "options": [
+        {
+          "id": "orion",
+          "text": "Orion"
+        },
+        {
+          "id": "lyra",
+          "text": "Lyra"
+        }
+      ],
+      "correctOptionId": "orion"
+    },
+    "xpValue": 5,
+    "cellId": "orion-quiz",
+    "glaux": "Lessons arrive in the next step.",
+    "hint": "Lessons arrive in the next step.",
+    "rightLine": "Lessons arrive in the next step.",
+    "missedLine": "Lessons arrive in the next step.",
+    "explanation": "Lessons arrive in the next step."
+  },
+  {
+    "id": "orion-order",
+    "type": "order",
+    "prompt": "Put these steps in the order used by this sample unit.",
+    "contentData": {
+      "items": [
+        {
+          "id": "pattern",
+          "text": "Meet the pattern"
+        },
+        {
+          "id": "tale",
+          "text": "Read the tale"
+        },
+        {
+          "id": "star",
+          "text": "Meet the star"
+        }
+      ],
+      "correctOrder": [
+        "pattern",
+        "tale",
+        "star"
+      ]
+    },
+    "xpValue": 5,
+    "cellId": "orion-quiz",
+    "glaux": "Lessons arrive in the next step.",
+    "hint": "Lessons arrive in the next step.",
+    "rightLine": "Lessons arrive in the next step.",
+    "missedLine": "Lessons arrive in the next step.",
+    "explanation": "Lessons arrive in the next step."
+  },
+  {
+    "id": "ex-03-order",
+    "type": "order",
+    "cellId": "star-lesson",
+    "glaux": "Take your time. Follow the colours.",
+    "prompt": "Arrange these stars from coolest surface to hottest.",
+    "contentData": {
+      "items": [
+        {
+          "id": "blue",
+          "text": "Blue star",
+          "colour": "#A9C4EE"
+        },
+        {
+          "id": "red",
+          "text": "Red star",
+          "colour": "#D9735A"
+        },
+        {
+          "id": "orange",
+          "text": "Orange star",
+          "colour": "#E9B173"
+        }
+      ],
+      "correctOrder": [
+        "red",
+        "orange",
+        "blue"
+      ]
+    },
+    "hint": "Blue stars are the hottest. Start with the coolest.",
+    "rightLine": "You found the pattern. Let those colours guide you.",
+    "missedLine": "Begin with red, then move towards blue. You can try again.",
+    "explanation": "For these star colours, surface heat increases from red through orange to blue.",
+    "xpValue": 10
+  },
+  {
+    "id": "ex-03-choice",
+    "type": "choice",
+    "cellId": "star-lesson",
+    "glaux": "Think about how quickly each star uses its fuel.",
+    "prompt": "Two stars are in their steady stage. Which one usually lives shorter?",
+    "contentData": {
+      "options": [
+        {
+          "id": "A",
+          "text": "The heavier star."
+        },
+        {
+          "id": "B",
+          "text": "The lighter star."
+        },
+        {
+          "id": "C",
+          "text": "Both live the same time."
+        }
+      ],
+      "correctOptionId": "A"
+    },
+    "hint": "Look at fuel use, not just fuel supply.",
+    "rightLine": "You followed the fuel. That is the key.",
+    "missedLine": "More mass means faster fuel use during this stage. Try that clue.",
+    "explanation": "Heavier stars use fuel faster. The heaviest shine for only millions of years; the Sun for about ten billion.",
+    "xpValue": 10
+  }
 ]

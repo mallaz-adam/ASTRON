@@ -13,6 +13,8 @@ export function validateExercise(exercise: Exercise, file: string, index: number
       if (!object(item) || !text((item as Record<string, unknown>).id) || !text((item as Record<string, unknown>).text)) {
         fail(`${name}[${itemIndex}]`, 'expected { id, text }.');
       }
+      const colour = (item as Record<string, unknown>).colour;
+      if (colour !== undefined && (typeof colour !== 'string' || !/^#[0-9a-f]{6}$/i.test(colour))) fail(`${name}[${itemIndex}].colour`, 'expected a six-digit hex colour.');
       return (item as { id: string }).id;
     });
     if (new Set(ids).size !== ids.length) fail(name, 'item ids must be unique.');

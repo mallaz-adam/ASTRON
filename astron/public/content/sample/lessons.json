@@ -1,10 +1,139 @@
 [
-  { "id": "patterns", "title": "Scale of the cosmos", "body": "Lessons arrive in the next step.", "cellId": "orion-lesson" },
-  { "id": "light-distance", "title": "Light and distance", "body": "Lessons arrive in the next step.", "cellId": "light-distance" },
-  { "id": "warm-star", "title": "Why stars differ", "body": "Lessons arrive in the next step.", "cellId": "star-lesson" },
-  { "id": "birth-star", "title": "Birth of a star", "body": "Lessons arrive in the next step.", "cellId": "birth-star" },
-  { "id": "long-middle", "title": "The long middle", "body": "Lessons arrive in the next step.", "cellId": "long-middle" },
-  { "id": "giants-dwarfs", "title": "Giants and dwarfs", "body": "Lessons arrive in the next step.", "cellId": "giants-dwarfs" },
-  { "id": "stars-explode", "title": "When stars explode", "body": "Lessons arrive in the next step.", "cellId": "stars-explode" },
-  { "id": "what-left", "title": "What is left", "body": "Lessons arrive in the next step.", "cellId": "what-left" }
+  {
+    "id": "patterns",
+    "title": "Scale of the cosmos",
+    "cellId": "orion-lesson",
+    "placeholder": true,
+    "cards": [
+      {
+        "kind": "say",
+        "mood": "happy",
+        "glaux": "Lessons arrive in the next step."
+      }
+    ]
+  },
+  {
+    "id": "light-distance",
+    "title": "Light and distance",
+    "cellId": "light-distance",
+    "placeholder": true,
+    "cards": [
+      {
+        "kind": "say",
+        "mood": "happy",
+        "glaux": "Lessons arrive in the next step."
+      }
+    ]
+  },
+  {
+    "id": "lesson-03",
+    "title": "Why stars differ",
+    "cellId": "star-lesson",
+    "cards": [
+      {
+        "kind": "say",
+        "mood": "happy",
+        "glaux": "Why do some stars glow blue, while others glow like embers?",
+        "art": "lesson-03-hook"
+      },
+      {
+        "kind": "idea",
+        "mood": "happy",
+        "glaux": "Colour is a clue, even across the dark.",
+        "text": "Stars come in many colours. Blue stars have the hottest surfaces. Red stars are cooler, though still fiercely hot.",
+        "art": "lesson-03-colours"
+      },
+      {
+        "kind": "exercise",
+        "exerciseId": "ex-03-order"
+      },
+      {
+        "kind": "idea",
+        "mood": "thinking",
+        "glaux": "More fuel does not always mean more time. Let's look closer.",
+        "text": "Mass means how much stuff a star holds. In their long, steady stage, heavier stars are bigger and hotter. They use up their fuel, a light gas called hydrogen, faster. So they live shorter lives.",
+        "art": "lesson-03-fuel"
+      },
+      {
+        "kind": "exercise",
+        "exerciseId": "ex-03-choice"
+      },
+      {
+        "kind": "recap",
+        "mood": "proud",
+        "glaux": "Keep these three small clues. We will meet them again.",
+        "items": [
+          "Blue stars are hotter than red stars.",
+          "Heavier stars are usually bigger and hotter.",
+          "Heavier stars use fuel faster and live shorter lives."
+        ],
+        "art": "lesson-03-emblems"
+      }
+    ]
+  },
+  {
+    "id": "birth-star",
+    "title": "Birth of a star",
+    "cellId": "birth-star",
+    "placeholder": true,
+    "cards": [
+      {
+        "kind": "say",
+        "mood": "happy",
+        "glaux": "Lessons arrive in the next step."
+      }
+    ]
+  },
+  {
+    "id": "long-middle",
+    "title": "The long middle",
+    "cellId": "long-middle",
+    "placeholder": true,
+    "cards": [
+      {
+        "kind": "say",
+        "mood": "happy",
+        "glaux": "Lessons arrive in the next step."
+      }
+    ]
+  },
+  {
+    "id": "giants-dwarfs",
+    "title": "Giants and dwarfs",
+    "cellId": "giants-dwarfs",
+    "placeholder": true,
+    "cards": [
+      {
+        "kind": "say",
+        "mood": "happy",
+        "glaux": "Lessons arrive in the next step."
+      }
+    ]
+  },
+  {
+    "id": "stars-explode",
+    "title": "When stars explode",
+    "cellId": "stars-explode",
+    "placeholder": true,
+    "cards": [
+      {
+        "kind": "say",
+        "mood": "happy",
+        "glaux": "Lessons arrive in the next step."
+      }
+    ]
+  },
+  {
+    "id": "what-left",
+    "title": "What is left",
+    "cellId": "what-left",
+    "placeholder": true,
+    "cards": [
+      {
+        "kind": "say",
+        "mood": "happy",
+        "glaux": "Lessons arrive in the next step."
+      }
+    ]
+  }
 ]
