@@ -1,6 +1,13 @@
 [
-  { "id": "orion-lesson", "positionNo": 1, "title": "A pattern in the sky", "kind": "lesson", "minutes": 2, "unitId": "first-sky" },
-  { "id": "orion-tale", "positionNo": 2, "title": "A light on Orion’s shoulder", "kind": "tale", "minutes": 3, "unitId": "first-sky", "taleId": "orion-shoulder" },
-  { "id": "star-lesson", "positionNo": 3, "title": "A star with a warm colour", "kind": "lesson", "minutes": 2, "unitId": "first-sky" },
-  { "id": "orion-quiz", "positionNo": 4, "title": "Two small things to remember", "kind": "quiz", "minutes": 2, "unitId": "first-sky" }
+  { "id": "orion-lesson", "positionNo": 1, "title": "Scale of the cosmos", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
+  { "id": "light-distance", "positionNo": 2, "title": "Light and distance", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
+  { "id": "star-lesson", "positionNo": 3, "title": "Why stars differ", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
+  { "id": "orion-tale", "positionNo": 4, "title": "Orion", "kind": "tale", "minutes": 6, "unitId": "first-sky", "taleId": "orion-shoulder" },
+  { "id": "birth-star", "positionNo": 5, "title": "Birth of a star", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
+  { "id": "long-middle", "positionNo": 6, "title": "The long middle", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
+  { "id": "pleiades-tale", "positionNo": 7, "title": "The Pleiades", "kind": "tale", "minutes": 6, "unitId": "first-sky", "taleId": "pleiades-placeholder" },
+  { "id": "giants-dwarfs", "positionNo": 8, "title": "Giants and dwarfs", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
+  { "id": "stars-explode", "positionNo": 9, "title": "When stars explode", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
+  { "id": "what-left", "positionNo": 10, "title": "What is left", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
+  { "id": "orion-quiz", "positionNo": 11, "title": "Unit quiz", "kind": "quiz", "minutes": 5, "unitId": "first-sky" }
 ]

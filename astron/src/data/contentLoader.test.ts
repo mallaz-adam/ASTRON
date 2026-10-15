@@ -5,8 +5,8 @@ import { sampleContent, sampleFiles } from './contentFixtures';
 describe('Content files', () => {
   it('loads the complete authoring sample', () => {
     const content = sampleContent();
-    expect(content.cells.map(cell => cell.kind)).toEqual(['lesson', 'tale', 'lesson', 'quiz']);
-    expect(content.chapters).toHaveLength(2);
+    expect(content.cells.map(cell => cell.kind)).toEqual(['lesson', 'lesson', 'lesson', 'tale', 'lesson', 'lesson', 'tale', 'lesson', 'lesson', 'lesson', 'quiz']);
+    expect(content.chapters).toHaveLength(3);
     expect(content.exercises).toHaveLength(2);
     expect(Object.isFrozen(content.tales[0])).toBe(true);
   });
@@ -33,12 +33,12 @@ describe('Content files', () => {
   });
   it('rejects duplicate chapter keys', () => {
     const files = sampleFiles(); const chapters = files.chapters as unknown[]; chapters.push(chapters[0]);
-    expect(() => validateContent(files)).toThrow('chapters.json: [2].taleId+number');
+    expect(() => validateContent(files)).toThrow('chapters.json: [3].taleId+number');
   });
   it('requires taleId on a tale cell only', () => {
-    const files = sampleFiles(); const cells = files.cells as Record<string, unknown>[]; delete cells[1].taleId;
-    expect(() => validateContent(files)).toThrow('cells.json: [1].taleId');
-    cells[1].taleId = 'orion-shoulder'; cells[0].taleId = 'orion-shoulder';
+    const files = sampleFiles(); const cells = files.cells as Record<string, unknown>[]; delete cells[3].taleId;
+    expect(() => validateContent(files)).toThrow('cells.json: [3].taleId');
+    cells[3].taleId = 'orion-shoulder'; cells[0].taleId = 'orion-shoulder';
     expect(() => validateContent(files)).toThrow('cells.json: [0].taleId');
   });
   it('requires the fixed daily quest rewards', () => {

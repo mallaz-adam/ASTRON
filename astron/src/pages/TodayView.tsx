@@ -27,6 +27,7 @@ export function TodayView({ model, showDevLink = false }: { model: TodayModel; s
           {model.questRows.map(quest => <QuestRow key={quest.id} kind={quest.kind} title={quest.title} xp={quest.xp} done={quest.done} />)}
         </div>
         <p className="today-bonus">Finish all three today for <span className="lining-figures">+10 XP</span>.</p>
+        {model.currentCellTitle && <Link className="atlas-button atlas-button--primary today-continue" to="/learn">Continue: {model.currentCellTitle}</Link>}
         {showDevLink && <Link className="today-dev-link" to="/dev">/dev</Link>}
         {!desktop && <TodayTabs />}
       </main>

@@ -4,6 +4,7 @@ import { localDate } from './dates';
 import { goalMet, questsDoneOn, sunStage } from './quests';
 import { computeStreak, streakStage } from './streak';
 import { weekDays } from './week';
+import { buildCoursePath } from './coursePath';
 
 const questOrder: QuestKind[] = ['learn', 'read', 'story'];
 const labels = { learn: 'Learn', read: 'Read', story: 'Discover' };
@@ -46,6 +47,7 @@ export function buildTodayModel(progress: Progress, content: Content, now: Date,
     diamonds: Array.from({ length: dailyGoal }, (_, index) => index < done),
     goalText: met ? 'Goal met. Your streak is safe tonight.' : `${Math.min(done, dailyGoal)} of ${dailyGoal} quests keeps your streak alive`,
     bonusText: 'Finish all three today for +10 XP.',
+    currentCellTitle: buildCoursePath(content, progress, learnerId).current?.title ?? null,
   };
 }
 

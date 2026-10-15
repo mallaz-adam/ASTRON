@@ -89,8 +89,13 @@ The full `Exercise` row wraps this data inside `contentData` and also contains
 
 ## The sample
 
-There is one unit, four cells (lesson, tale, lesson, quiz), two lessons, two exercises,
-one Orion tale with two chapters, Betelgeuse, Orion, three daily quests, and one article.
+There is one unit, `How stars live and die`, with eleven cells: eight lessons,
+two tales, and a final quiz. The eight lesson bodies are short placeholders. The
+two existing quiz exercises keep their authoring format; no lesson player has
+been built. The Orion tale keeps its two chapters. The Pleiades sample adds one
+placeholder chapter, Alcyone, and a Pleiades group in the existing constellation
+table. Its descriptive fields and Greek-letter field are marked as placeholders.
+There are still three daily quests and one article.
 The tale is an original fictional vignette, not an ancient text.
 The astronomy source is [NASA’s Betelgeuse article](https://science.nasa.gov/universe/what-is-betelgeuse-inside-the-strange-volatile-star/).
 
@@ -163,5 +168,38 @@ midnight, that unfinished day breaks the streak unless a freeze protected it.
 Browser storage is separate for each address: localhost:5173 and localhost:4173
 have separate progress. Use the same address when checking reload persistence.
 The PWA build caches the sample JSON as well as the page, so the loader works offline.
-The supplied static SVGs live in `public/art`. Today is now the first real screen;
-lesson and tale-reading screens have not been added.
+The supplied static SVGs live in `public/art`. Today, Your sun and Course path are
+real screens; `/cell/:id` remains a clearly labelled temporary completion page.
+
+## Course path (Task 5)
+
+`/learn` reads this unit's cells in `positionNo` order. Existing ids stay stable:
+`orion-lesson` is cell 1, `star-lesson` is cell 3, `orion-tale` is cell 4, and
+`orion-quiz` is cell 11. Existing saved completions are preserved.
+
+The eleven positions are Scale of the cosmos; Light and distance; Why stars
+differ; Orion; Birth of a star; The long middle; The Pleiades; Giants and dwarfs;
+When stars explode; What is left; Unit quiz. Lessons and the quiz take five
+minutes; tales take six. All lesson bodies remain plain strings for now.
+
+`buildCoursePath(content, progress, learnerId, unitId?)` is pure. A matching
+completion makes a cell done. The first unfinished cell is current, and the
+remaining unfinished cells are locked. Only this learner's completions count;
+duplicates and unrelated cells cannot increase the unit count. All done means
+there is no current cell, so Today's Continue link is hidden. The map still allows
+selecting and revisiting completed cells with AGAIN.
+
+Locked map cells can be selected to read their details, but BEGIN is disabled.
+Directly opening a locked `/cell/:id` also leaves the temporary finish button
+disabled. `completePathCell` rechecks prerequisites inside a database transaction
+before calling the existing `completeCell` service. For tales, the same transaction
+calls `lightStar` with the tale's linked star. This meets Learn and Discover and
+lights the star once, without multiplying completion or daily quest XP.
+
+The honeycomb geometry is code-drawn SVG, with eleven native HTML buttons over
+its hexagons. Focus draws a visible SVG outline around the corresponding button.
+The middle row runs right to left. Details stay below the map below 1024 px and
+move to its right on desktop. The current cell's two-second pulse obeys both
+saved Reduce motion and the device preference.
+
+This step adds no lesson cards, exercise player, or Task 6 artwork.

@@ -34,6 +34,7 @@
 .today-quests .quest-title { font-size: var(--type-body); }
 .today-bonus { color: var(--soft-ink); font-style: italic; font-size: var(--type-small); }
 .lining-figures { font-family: var(--font-label); font-variant-numeric: lining-nums; font-style: normal; }
+.today-continue { display: inline-flex; align-items: center; justify-content: center; text-align: center; text-decoration: none; }
 .navigation-bar { margin-top: auto; }
 .navigation-wordmark, .navigation-profile { display: none; }
 .today-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: var(--border-line); padding-top: var(--space-12); }
@@ -49,7 +50,7 @@
   .today-main {
     display: grid;
     grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-    grid-template-rows: auto auto auto auto auto auto 1fr;
+    grid-template-rows: auto auto auto auto auto auto auto 1fr;
     gap: var(--space-24);
     min-height: calc(100dvh - var(--space-36) * 4);
   }
@@ -60,7 +61,8 @@
   .today-goal { grid-column: 2; grid-row: 4; }
   .today-quests { grid-column: 2; grid-row: 5; }
   .today-bonus { grid-column: 2; grid-row: 6; }
-  .today-dev-link { grid-column: 1; grid-row: 7; }
+  .today-continue { grid-column: 2; grid-row: 7; align-self: start; }
+  .today-dev-link { grid-column: 1; grid-row: 8; }
   .navigation-bar { grid-column: 1 / -1; grid-row: 1; margin-top: 0; display: grid; grid-template-columns: 1fr minmax(0, 2fr) 1fr; align-items: center; gap: var(--space-24); border-bottom: var(--border-line); padding-bottom: var(--space-16); }
   .navigation-wordmark { display: block; font: var(--font-weight) var(--type-large)/1.4 var(--font-label); letter-spacing: var(--label-spacing); }
   .navigation-profile { display: grid; justify-self: end; }

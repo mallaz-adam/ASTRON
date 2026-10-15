@@ -1,4 +1,5 @@
 [
   { "taleId": "orion-shoulder", "number": 1, "title": "The quiet hunter", "text": "Orion rested his bow beside a stone. For once, there was nothing to chase.\n\nAbove him, the stars waited in their patient places. He wondered whether a story could travel farther than a hunter’s feet.", "marginNotes": ["This is an imagined scene, offered as a sample of the tone."] },
-  { "taleId": "orion-shoulder", "number": 2, "title": "A warm light", "text": "In the sky’s picture of Orion, a reddish light rests on his shoulder: **Betelgeuse**.\n\nGlaux might say, *a name is one way to begin looking*. The tale gives us a figure to remember; astronomy gives us a star to wonder about.", "marginNotes": ["Betelgeuse is a red supergiant. A constellation is a pattern as seen from Earth."] }
+  { "taleId": "orion-shoulder", "number": 2, "title": "A warm light", "text": "In the sky’s picture of Orion, a reddish light rests on his shoulder: **Betelgeuse**.\n\nGlaux might say, *a name is one way to begin looking*. The tale gives us a figure to remember; astronomy gives us a star to wonder about.", "marginNotes": ["Betelgeuse is a red supergiant. A constellation is a pattern as seen from Earth."] },
+  { "taleId": "pleiades-placeholder", "number": 1, "title": "The Pleiades", "text": "Placeholder.", "marginNotes": [] }
 ]

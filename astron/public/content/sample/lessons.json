@@ -1,4 +1,10 @@
 [
-  { "id": "patterns", "title": "A pattern in the sky", "body": "A **constellation** helps us name a region of the sky.\n\nThe picture we trace is a view from Earth. Its stars need not be near one another in space.", "cellId": "orion-lesson" },
-  { "id": "warm-star", "title": "A star with a warm colour", "body": "Betelgeuse is a **red supergiant**. Its reddish appearance is one clue to the kind of star it is.\n\nFor now, remember just the name and its place in Orion.", "cellId": "star-lesson" }
+  { "id": "patterns", "title": "Scale of the cosmos", "body": "Lessons arrive in the next step.", "cellId": "orion-lesson" },
+  { "id": "light-distance", "title": "Light and distance", "body": "Lessons arrive in the next step.", "cellId": "light-distance" },
+  { "id": "warm-star", "title": "Why stars differ", "body": "Lessons arrive in the next step.", "cellId": "star-lesson" },
+  { "id": "birth-star", "title": "Birth of a star", "body": "Lessons arrive in the next step.", "cellId": "birth-star" },
+  { "id": "long-middle", "title": "The long middle", "body": "Lessons arrive in the next step.", "cellId": "long-middle" },
+  { "id": "giants-dwarfs", "title": "Giants and dwarfs", "body": "Lessons arrive in the next step.", "cellId": "giants-dwarfs" },
+  { "id": "stars-explode", "title": "When stars explode", "body": "Lessons arrive in the next step.", "cellId": "stars-explode" },
+  { "id": "what-left", "title": "What is left", "body": "Lessons arrive in the next step.", "cellId": "what-left" }
 ]

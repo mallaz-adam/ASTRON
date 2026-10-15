@@ -48,3 +48,16 @@ Run every test with `npm test`. Run only pure rules with `npm test -- src/logic`
 - `src/pages/YourSunView.test.tsx`: Back to Today, descriptive SVG, supplied art,
   unselected zero stage and reduced-motion state. Today view tests also check
   the labelled link to Your sun and the desktop wordmark.
+
+## Task 5 additions
+
+- `src/logic/coursePath.test.ts`: none, three, or eleven completions; tale and quiz
+  details; unrelated/duplicate completions; stable ordering; 4/3/4 honeycomb
+  coordinates, spacing, radius gaps and title wrapping.
+- `src/data/pathServices.test.ts`: locked-cell protection, Learn on completion,
+  Discover and a lit star for tales, Alcyone's placeholder chapter, no repeat
+  rewards, and persistence after reopening storage.
+- `src/pages/CoursePathView.test.tsx`: eleven native controls with labels,
+  selected current cell, BEGIN destination, announcements and reduced motion.
+- Existing content-loader and Today tests reflect the eleven-cell sample and
+  the new Continue link. The lesson format and exercise data remain unchanged.

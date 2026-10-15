@@ -14,6 +14,8 @@ Press Ctrl+C in the terminal to stop the server.
 | --- | --- |
 | `/` | Today: phone layout, or a wider two-column layout on a computer. |
 | `/sun` | Your sun: streak dial, stage progress, longest streak and ready freezes. |
+| `/learn` | Course path: eleven cells in a honeycomb, with selected-cell details. |
+| `/cell/:id` | Temporary Cell page with a test completion button. |
 | `/design` | Design check, including the saved Reduce motion switch. |
 | `/dev` | Temporary quest controls and a pretend date. |
 
@@ -58,7 +60,8 @@ server does not install a service worker.
 
 Use the browser's Install app action when available. On iPhone, use Share > Add to
 Home Screen. Phone hosting needs HTTPS; localhost is suitable for desktop testing.
-Later hosting must serve index.html for `/sun`, `/design` and `/dev` as well as `/`.
+Later hosting must serve index.html for `/learn`, `/cell/:id`, `/sun`, `/design`
+and `/dev` as well as `/`.
 
 Google Fonts are the only external page resources. They are cached after loading;
 Georgia is the fallback if they have not yet been cached. Browser storage is separate
@@ -73,7 +76,7 @@ for each address, including different ports: use the same address to check persi
 - `src/logic`: pure rules and Today's screen model.
 - `src/data`: content checks, progress database, and services.
 
-No lesson, tale-reading, profile, timeline, or journal screen is built yet.
+No lesson player, tale-reading, profile, timeline, or journal screen is built yet.
 The future navigation tabs are visibly disabled. Profile is a keyboard-accessible
 placeholder with no action.
 
@@ -101,3 +104,27 @@ saved goal and freezes. No setting, resting or new-day states have been built.
 The new pure-rule, history-service and accessible-view tests are included in
 `npm test`. Check both screens at 390, 768 and 1280 px; on `/design`, Reduce motion
 stops the dial glow, today's kept-ray pulse, tier drawings and Glaux.
+
+## Course path and Task 5 checks
+
+Today has a Continue link naming the current cell. It opens `/learn`; the Learn
+tab still opens Today. The first unfinished cell is selected when Course path
+opens. Click or use Tab and Enter on any hexagon to inspect it. A locked cell
+shows the prerequisite message and a disabled BEGIN button.
+
+BEGIN opens a temporary `/cell/:id` page. Mark as finished (test) saves through
+the existing completion service and returns to the path. The next cell opens,
+and Today shows Learn done. Finish cell 4, Orion, to meet Discover too and light
+Betelgeuse. The Pleiades links to Alcyone. AGAIN revisits completed cells without
+adding a second completion or repeat daily XP.
+
+Saved progress is preserved, so an existing browser may already show completed
+cells. To check from cell 1, use a fresh local address/port or intentionally use
+Erase progress on `/dev`. Progress is separate between ports. The path count and
+current cell survive reloads. When all eleven cells are done, the last cell can
+still be selected and revisited; Today has no unfinished cell to Continue.
+
+Check `/learn` at 390, 768 and 1280 px. Phone and tablet have details below the map;
+desktop has them on the right. Reduce motion at `/design` stops the current-cell
+pulse. Every `/cell/:id` is temporary, including Why stars differ. Task 6 is deferred
+until you confirm this step works and send its instructions again.

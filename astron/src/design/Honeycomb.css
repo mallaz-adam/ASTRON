@@ -1,0 +1,27 @@
+.honeycomb { position: relative; width: 100%; max-width: 520px; margin-inline: auto; }
+.honeycomb-drawing { width: 100%; height: 100%; display: block; pointer-events: none; overflow: visible; }
+.hex { fill: var(--ink); }
+.hex-face { fill: var(--gold); stroke: var(--ink); stroke-width: 1.5; }
+.hex--alternate .hex-face { fill: var(--gold-deep); }
+.hex--tale, .hex--quiz { fill: var(--parchment); }
+.hex--tale .hex-face { fill: var(--lapis-light); }
+.hex--quiz .hex-face { fill: var(--terracotta-deep); }
+.hex--lesson.hex--locked { fill: var(--soft-ink); }
+.hex--lesson.hex--locked .hex-face { fill: var(--locked-paper); stroke: var(--locked-line); }
+.hex--current { fill: var(--ink); }
+.hex--current .hex-face { fill: var(--gold-light); stroke: var(--vermilion); stroke-width: 3; }
+.hex-label { font: var(--font-weight) 10px var(--font-label); font-variant-numeric: lining-nums; }
+.hex-title { font: var(--font-weight) 13px var(--font-reading); }
+.hex-status { font: var(--font-weight) 11px var(--font-reading); }
+.hex-begin { fill: var(--vermilion); font: var(--font-weight) 9px var(--font-label); }
+.hex-lock { fill: none; stroke: currentColor; stroke-width: 1.2; }
+.hex--locked .hex-lock { color: var(--soft-ink); }
+.hex--tale .hex-lock, .hex--quiz .hex-lock { color: var(--parchment); }
+.hex-pulse { fill: none; stroke: var(--vermilion); stroke-width: 1.5; animation: hex-pulse 2s ease-in-out infinite; }
+.hex-selection { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 2 3; }
+.hex-focus { fill: none; stroke: var(--lapis); stroke-width: 3; }
+.hex-arrow { fill: var(--ink); }
+.hex-button { position: absolute; padding: 0; border: 0; background: transparent; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+.hex-button:focus-visible { outline: none; }
+.hex-button:hover { background: rgb(42 28 19 / 5%); }
+@keyframes hex-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }

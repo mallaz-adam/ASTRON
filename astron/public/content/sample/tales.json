@@ -1,3 +1,4 @@
 [
-  { "id": "orion-shoulder", "title": "A light on Orion’s shoulder", "subtitle": "A small imagined tale", "minutes": 3, "teaser": "A hunter pauses beneath a sky that will hold his story.", "sourceNote": "An original fictional vignette inspired by the Greek figure of Orion, not a translation of an ancient source. Astronomy reference: https://science.nasa.gov/universe/what-is-betelgeuse-inside-the-strange-volatile-star/", "starId": "betelgeuse" }
+  { "id": "orion-shoulder", "title": "A light on Orion’s shoulder", "subtitle": "A small imagined tale", "minutes": 6, "teaser": "A hunter pauses beneath a sky that will hold his story.", "sourceNote": "An original fictional vignette inspired by the Greek figure of Orion, not a translation of an ancient source. Astronomy reference: https://science.nasa.gov/universe/what-is-betelgeuse-inside-the-strange-volatile-star/", "starId": "betelgeuse" },
+  { "id": "pleiades-placeholder", "title": "The Pleiades", "subtitle": "Placeholder.", "minutes": 6, "teaser": "Placeholder.", "sourceNote": "Placeholder.", "starId": "alcyone" }
 ]

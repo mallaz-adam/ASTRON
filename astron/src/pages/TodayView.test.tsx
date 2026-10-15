@@ -19,7 +19,7 @@ describe('Today controls and art', () => {
     const html = render();
     expect(html).toContain('type="button" class="profile-control" aria-label="Profile"');
     expect(html).toContain('aria-current="page"');
-    expect(html).not.toContain('Continue');
+    expect(html).toContain('Continue: Scale of the cosmos');
   });
   it('marks all three future tabs disabled with no navigation action', () => {
     const html = render();
