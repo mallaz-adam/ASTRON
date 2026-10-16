@@ -1,23 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import type { Content, GlauxMood, Lesson } from '../data/types';
+import type { Content, Exercise, HunchChoice, Lesson } from '../data/types';
 import { db } from '../data/db';
 import { localLearnerId } from '../data/learner';
 import { finishLesson, saveLessonAnswer } from '../data/lessonServices';
 import { Button } from '../design/Button';
 import { Page } from '../design/Page';
 import { ProgressSegments } from '../design/ProgressSegments';
-import { GlauxArt } from '../design/InlineArt';
 import { LessonArt, RecapStar } from '../design/LessonArt';
-import { SpeechBox } from '../design/SpeechBox';
-import { checkExercise, exerciseSpeech, firstTryCount, newLessonRun, revealExercise, selectItem, showCard, undoItem, visibleCardCount } from '../logic/lessonPlayer';
+import { checkExercise, chooseHunch, firstTryCount, newLessonRun, revealExercise, selectItem, showCard, undoItem, useHint, visibleCardCount } from '../logic/lessonPlayer';
+import { newReactionMemory, reactGlaux, rightEvent } from '../logic/glauxReactions';
+import type { GlauxReaction, ReactionEvent } from '../logic/glauxReactions';
 import { LessonExercise } from './LessonExercise';
+import { LessonGlaux } from './LessonGlaux';
 import './LessonPlayer.css';
 
-function GlauxSpeech({ mood, lines }: { mood: GlauxMood; lines: string[] }) {
-  return <div className="lesson-speech"><GlauxArt mood={mood} className="lesson-glaux" /><SpeechBox><div role="status" aria-live="polite">{lines.map(line => <p key={line}>{line}</p>)}</div></SpeechBox></div>;
-}
 type End = Awaited<ReturnType<typeof finishLesson>>;
 
 export function LessonPlayer({ lesson, content, reduceMotion, completedBefore = false }: { lesson: Lesson; content: Content; reduceMotion: boolean; completedBefore?: boolean }) {
@@ -27,6 +25,8 @@ export function LessonPlayer({ lesson, content, reduceMotion, completedBefore = 
   const [error, setError] = useState('');
   const [end, setEnd] = useState<End>();
   const [showingEnd, setShowingEnd] = useState(false);
+  const [reactions, setReactions] = useState<Record<string, GlauxReaction>>({});
+  const reactionMemory = useRef(newReactionMemory());
   const saving = useRef(false);
   const finishing = useRef(false);
   const resetting = useRef(false);
@@ -67,6 +67,26 @@ export function LessonPlayer({ lesson, content, reduceMotion, completedBefore = 
       event.preventDefault(); move(Math.min(run.active + 1, end ? total : visible - 1));
     }
   }
+  function react(event: ReactionEvent, key: string, exercise?: Exercise, hunch = run.hunch) {
+    const result = reactGlaux({ event, memory: reactionMemory.current, pools: content.glauxLines,
+      exercise, hunch, lineRoll: Math.random(), sneezeRoll: Math.random() });
+    reactionMemory.current = result.memory;
+    setReactions(value => ({ ...value, [key]: result.reaction }));
+  }
+  function hunch(choice: HunchChoice) {
+    setRun(value => chooseHunch(value, lesson, choice));
+    react('hunch', 'hunch', undefined, choice);
+  }
+  function hint(exercise: Exercise) {
+    setRun(value => useHint(value, exercise));
+    react('hint', exercise.id, exercise);
+  }
+  function reveal(exercise: Exercise) {
+    const revealed = revealExercise(run, lesson, exercise);
+    if (revealed === run) return;
+    setRun(revealed);
+    react('showMe', exercise.id, exercise);
+  }
   async function check(exerciseId: string, index: number) {
     if (saving.current) return;
     const exercise = content.exercises.find(row => row.id === exerciseId)!;
@@ -75,6 +95,7 @@ export function LessonPlayer({ lesson, content, reduceMotion, completedBefore = 
     try {
       await saveLessonAnswer(db, content, localLearnerId, lesson.id, exercise.id, result.correct, new Date());
       setRun(result.run);
+      react(result.correct ? rightEvent(result.run.answers[exercise.id]) : 'missed', exercise.id, exercise);
       move(index);
     } catch (problem) { setError(problem instanceof Error ? problem.message : String(problem)); }
     finally { saving.current = false; setBusy(false); }
@@ -98,6 +119,7 @@ export function LessonPlayer({ lesson, content, reduceMotion, completedBefore = 
     scroll.current?.scrollTo({ top: 0, behavior: 'instant' });
     setEnd(undefined); setError(''); setShowingEnd(false); finishing.current = false;
     practicing.current = true;
+    setReactions({});
     setRun(showCard(newLessonRun(lesson), lesson, 0));
     requestAnimationFrame(() => {
       scroll.current?.scrollTo({ top: 0, behavior: 'instant' });
@@ -117,26 +139,41 @@ export function LessonPlayer({ lesson, content, reduceMotion, completedBefore = 
         {lesson.cards.slice(0, visible).map((card, index) => {
           const exercise = card.kind === 'exercise' ? content.exercises.find(row => row.id === card.exerciseId)! : undefined;
           const answer = exercise ? run.answers[exercise.id] : undefined;
-          const lines = exercise && answer ? exerciseSpeech(exercise, answer) : card.kind !== 'exercise' ? [card.glaux] : [];
+          const reaction = exercise ? reactions[exercise.id] : card.kind === 'hunch' ? reactions.hunch : undefined;
+          const lines = reaction?.lines ?? (exercise ? [exercise.glaux] : card.kind !== 'exercise' ? (Array.isArray(card.glaux) ? card.glaux : [card.glaux]) : []);
+          const placeholder = ['dial', 'mass', 'race', 'gap'].includes(card.kind);
+          const art = card.kind !== 'exercise' ? card.art ?? (placeholder ? 'lesson-03-colours' : undefined) : undefined;
           return <section className="lesson-card" aria-label={`Card ${index + 1} of ${total}`} key={index} ref={node => { sections.current[index] = node; }}>
-            {card.kind !== 'exercise' && card.art && <LessonArt name={card.art} />}
-            <GlauxSpeech mood={card.kind === 'exercise' ? 'happy' : card.mood} lines={lines} />
-            {card.kind === 'idea' && <p className="lesson-body">{card.text}</p>}
+            {art && <LessonArt name={art} />}
+            <LessonGlaux mood={reaction?.mood ?? (card.kind === 'exercise' ? 'happy' : card.mood)} lines={lines} reaction={reaction} reduceMotion={reduceMotion} />
+            {'text' in card && <p className="lesson-body">{card.text}</p>}
+            {placeholder && <p className="lesson-placeholder">Interactive card arrives in the next step.</p>}
+            {card.kind === 'hunch' && <div className="hunch-controls">
+              <div className="hunch-options">
+                {card.options.map(option => <button key={option.id} type="button" className="hunch-option"
+                  aria-pressed={run.hunch === option.id} disabled={busy} onClick={() => hunch(option.id)}>
+                  <span className="hunch-disc" style={{ background: option.colour }} aria-hidden="true" />
+                  <span>{option.text}</span>
+                </button>)}
+              </div>
+              <Button variant="secondary" aria-pressed={run.hunch === 'skipped'} disabled={busy} onClick={() => hunch('skipped')}>{card.skipLabel}</Button>
+            </div>}
             {card.kind === 'recap' && <ul className="lesson-recap">{card.items.map(item => <li key={item}><RecapStar /><span>{item}</span></li>)}</ul>}
             {exercise && answer && <>
               {(answer.status === 'correct' || answer.status === 'revealed') && <p className="lesson-explanation">{exercise.explanation}</p>}
               <LessonExercise exercise={exercise} answer={answer} busy={busy}
                 select={id => setRun(value => selectItem(value, exercise, id))} undo={() => setRun(value => undoItem(value, exercise))}
-                check={() => void check(exercise.id, index)} reveal={() => setRun(value => revealExercise(value, lesson, exercise))} />
+                check={() => void check(exercise.id, index)} reveal={() => reveal(exercise)} hint={() => hint(exercise)} />
             </>}
             {error && run.active === index && <p role="alert">{error}</p>}
-            <Button className="lesson-continue" disabled={!run.done[index] || busy || (index === total - 1 && !end && !error)}
+            {(card.kind !== 'hunch' || run.hunch) && <Button className="lesson-continue" disabled={!run.done[index] || busy || (index === total - 1 && !end && !error)}
               onClick={() => { if (index === total - 1 && !end) void finish(); else move(index + 1); }}>CONTINUE</Button>
+            }
           </section>;
         })}
         {end && <section className="lesson-card lesson-end" aria-label="LESSON COMPLETE" ref={node => { sections.current[total] = node; }}>
           <h1>LESSON COMPLETE</h1>
-          <GlauxSpeech mood="proud" lines={[`${end.correctAnswers} of ${Object.keys(run.answers).length} right on the first try.`]} />
+          <LessonGlaux mood="proud" lines={[`${end.correctAnswers} of ${Object.keys(run.answers).length} right on the first try.`]} reduceMotion={reduceMotion} />
           {end.learnQuestEarned && <p>Learn quest done: <span className="lesson-number">+20 XP</span>.</p>}
           <Link className="atlas-button atlas-button--primary lesson-path" to="/learn">BACK TO THE PATH</Link>
           <Button variant="secondary" onClick={again}>AGAIN</Button>

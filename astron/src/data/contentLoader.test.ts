@@ -56,9 +56,9 @@ describe('Content files', () => {
   });
   it('loads all files through the supplied reader', async () => {
     const files = sampleFiles();
-    const read = vi.fn(async (path: string | URL | Request) => new Response(JSON.stringify(files[String(path).split('/').at(-1)!.replace('.json', '')])));
+    const read = vi.fn(async (path: string | URL | Request) => new Response(JSON.stringify(files[String(path).split('/').at(-1)!.replace('.json', '').replace('glaux-lines', 'glauxLines')])));
     expect((await loadContent('/content/sample/', read)).units).toHaveLength(1);
-    expect(read).toHaveBeenCalledTimes(12);
+    expect(read).toHaveBeenCalledTimes(13);
   });
   it('reports invalid JSON clearly', async () => {
     const read = vi.fn(async () => new Response('{broken'));

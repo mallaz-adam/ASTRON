@@ -15,7 +15,7 @@ Press Ctrl+C in the terminal to stop the server.
 | `/` | Today: phone layout, or a wider two-column layout on a computer. |
 | `/sun` | Your sun: streak dial, stage progress, longest streak and ready freezes. |
 | `/learn` | Course path: eleven cells in a honeycomb, with selected-cell details. |
-| `/cell/:id` | Six-card player for Why stars differ; temporary completion page for other cells. |
+| `/cell/:id` | Eight-card player for Why stars differ; temporary completion page for other cells. |
 | `/design` | Design check, including the saved Reduce motion switch. |
 | `/dev` | Temporary quest controls and a pretend date. |
 
@@ -131,7 +131,7 @@ pulse. Cell 3 now opens the real lesson player; the remaining cells keep their t
 ## Lesson player and Task 6 checks
 
 On a fresh learner, finish cells 1 and 2 with their temporary controls, then BEGIN
-cell 3, Why stars differ. Six cards appear in order, with inline pictures and Glaux.
+cell 3, Why stars differ. The lesson now has eight cards, with inline pictures and Glaux.
 CONTINUE and Up/Down move between available cards; unfinished exercises keep the
 following card hidden. Choice options use native radio buttons, including arrow keys.
 
@@ -151,3 +151,27 @@ pictures keep their proportions, and controls remain usable with Tab and Enter.
 The saved Reduce motion switch and the device preference stop Glaux's animations
 and replace smooth card navigation with immediate movement. All lesson JSON and
 inline art are included in the production offline cache. No new library was added.
+
+## Reactions, hunch and heat ladder (Task 7)
+
+Start cell 3 with a hunch: Blue star, Orange star, Red star, or I'd rather not
+guess. Each has its own Glaux response and then CONTINUE appears. This choice is
+only in memory and earns nothing. AGAIN and reload clear it. The order exercise
+remembers a colour choice in its successful feedback.
+
+Correct answers, retries, hints, misses and SHOW ME have different owl moods and
+approved lines from `public/content/sample/glaux-lines.json`. Two-line pools avoid
+repeating their previous line. HINT shows the exercise hint without an attempt or
+score penalty. A rare right answer gives Glaux five drifting gold sneeze stars;
+consecutive right answers cannot both trigger one.
+
+The heat ladder appears after checking an order. A correct order moves the discs
+onto their rungs. A miss keeps its placed discs and shows faint rungs with a soft
+clue pulse; use UNDO to revise it. SHOW ME still works after two misses. On phone
+and tablet the ladder is underneath; on desktop it is alongside the slots.
+
+At `/design`, Reduce motion stops all the movement and keeps every spoken line,
+including the short sneeze caption. The device preference has the same effect.
+The dial, mass, race and gap cards are deliberately labelled placeholders until
+the next task. Their approved copy and colours picture are present; no dial,
+slider, race, new ending, reward system or new dependency has been added here.

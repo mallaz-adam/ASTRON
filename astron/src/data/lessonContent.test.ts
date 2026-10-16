@@ -2,20 +2,22 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { sampleContent, sampleFiles } from './contentFixtures';
 import { validateContent } from './contentLoader';
-import type { Exercise, Lesson } from './types';
+import { glauxPoolIds, type Exercise, type Lesson } from './types';
 
 describe('Authored lesson files', () => {
-  it('links cell three to the six exact card kinds, moods and pictures', () => {
+  it('links cell three to the eight approved cards, hunch choices and four placeholders', () => {
     const content = sampleContent();
     const cell = content.cells.find(row => row.positionNo === 3)!;
     const lesson = content.lessons.find(row => row.cellId === cell.id)!;
     expect(lesson.id).toBe('lesson-03');
     expect(lesson.title).toBe('Why stars differ');
-    expect(lesson.cards.map(card => card.kind)).toEqual(['say', 'idea', 'exercise', 'idea', 'exercise', 'recap']);
-    expect(lesson.cards[0]).toMatchObject({ mood: 'happy', glaux: 'Why do some stars glow blue, while others glow like embers?', art: 'lesson-03-hook' });
-    expect(lesson.cards[1]).toMatchObject({ mood: 'happy', glaux: 'Colour is a clue, even across the dark.', text: 'Stars come in many colours. Blue stars have the hottest surfaces. Red stars are cooler, though still fiercely hot.', art: 'lesson-03-colours' });
-    expect(lesson.cards[3]).toMatchObject({ mood: 'thinking', glaux: "More fuel does not always mean more time. Let's look closer.", text: 'Mass means how much stuff a star holds. In their long, steady stage, heavier stars are bigger and hotter. They use up their fuel, a light gas called hydrogen, faster. So they live shorter lives.', art: 'lesson-03-fuel' });
-    expect(lesson.cards[5]).toMatchObject({ mood: 'proud', glaux: 'Keep these three small clues. We will meet them again.', items: ['Blue stars are hotter than red stars.', 'Heavier stars are usually bigger and hotter.', 'Heavier stars use fuel faster and live shorter lives.'], art: 'lesson-03-emblems' });
+    expect(lesson.cards.map(card => card.kind)).toEqual(['hunch', 'dial', 'exercise', 'mass', 'race', 'exercise', 'gap', 'recap']);
+    expect(lesson.cards[0]).toEqual({ kind: 'hunch', mood: 'happy', glaux: ['Why do some stars glow blue, while others glow like embers?', "Before I explain, take a guess: which one is hottest? No points. I'm just nosy."], art: 'lesson-03-hook', options: [{ id: 'blue', text: 'Blue star', colour: '#A9C4EE' }, { id: 'orange', text: 'Orange star', colour: '#E9B173' }, { id: 'red', text: 'Red star', colour: '#D9735A' }], skipLabel: "I'd rather not guess" });
+    expect(lesson.cards[1]).toMatchObject({ mood: 'happy', glaux: 'Colour is a clue, even across the dark.', text: 'Stars come in many colours. Blue stars have the hottest surfaces. Red stars are cooler, though still fiercely hot.' });
+    expect(lesson.cards[3]).toMatchObject({ mood: 'happy', glaux: 'Heavier stars have a lot to say.', text: 'Mass means how much stuff a star holds. In their long, steady stage, heavier stars are bigger and hotter.' });
+    expect(lesson.cards[4]).toMatchObject({ mood: 'thinking', glaux: "More fuel does not always mean more time. Let's look closer.", text: 'They use up their fuel, a light gas called hydrogen, faster. So they live shorter lives.' });
+    expect(lesson.cards[6]).toMatchObject({ mood: 'happy', glaux: 'This part gets me every time.', text: 'A very heavy star may shine for only a few million years. The Sun shines for about ten billion. Slide along the line and feel the gap.' });
+    expect(lesson.cards[7]).toMatchObject({ mood: 'proud', glaux: 'Keep these three small clues. We will meet them again.', items: ['Blue stars are hotter than red stars.', 'Heavier stars are usually bigger and hotter.', 'Heavier stars use fuel faster and live shorter lives.'] });
     expect(content.lessons.filter(row => row.id !== lesson.id).every(row => row.placeholder && row.cards.length === 1)).toBe(true);
   });
   it('validates every exercise reference, every feedback line and each answer among its items', () => {
@@ -60,6 +62,30 @@ describe('Authored lesson files', () => {
     for (const change of [{ kind: 'other' }, { mood: ['happy'] }, { glaux: '' }, { art: 'missing' }]) {
       const files = sampleFiles(); const lesson = (files.lessons as Lesson[]).find(row => row.id === 'lesson-03')!;
       Object.assign(lesson.cards[0], change);
+      expect(() => validateContent(files)).toThrow('cards[0]');
+    }
+  });
+  it('requires each reaction pool and rejects duplicate, empty or unknown pools', () => {
+    expect(sampleContent().glauxLines.map(pool => pool.id)).toEqual([...glauxPoolIds]);
+    for (const edit of ['missing', 'duplicate', 'empty', 'unknown']) {
+      const files = sampleFiles();
+      const pools = files.glauxLines as { id: string; lines: string[] }[];
+      if (edit === 'missing') pools.pop();
+      if (edit === 'duplicate') pools.push(pools[0]);
+      if (edit === 'empty') pools[0].lines = [];
+      if (edit === 'unknown') pools[0].id = 'other';
+      expect(() => validateContent(files)).toThrow('glaux-lines.json');
+    }
+  });
+  it('requires two hunch lines, three named distinct colours and valid colour values', () => {
+    for (const change of ['lines', 'duplicate', 'colour', 'label']) {
+      const files = sampleFiles();
+      const card = (files.lessons as Lesson[]).find(row => row.id === 'lesson-03')!.cards[0];
+      if (card.kind !== 'hunch') throw new Error('Expected hunch fixture');
+      if (change === 'lines') card.glaux.pop();
+      if (change === 'duplicate') card.options[0].id = 'red';
+      if (change === 'colour') card.options[0].colour = 'blue';
+      if (change === 'label') card.options[0].text = '';
       expect(() => validateContent(files)).toThrow('cards[0]');
     }
   });

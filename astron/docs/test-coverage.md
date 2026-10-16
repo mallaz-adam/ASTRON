@@ -65,7 +65,7 @@ Run every test with `npm test`. Run only pure rules with `npm test -- src/logic`
 ## Task 6 additions
 
 - `src/data/lessonContent.test.ts`: exact supplied lesson and exercise copy,
-  six cards, moods, picture descriptions, exercise references, required feedback,
+  approved card sequence, moods, picture descriptions, exercise references, required feedback,
   correct answers and useful diagnostics for invalid content.
 - `src/logic/lessonPlayer.test.ts`: progressive card gating, tap-to-place and Undo,
   correct answers, repeated misses, reveal after two misses, first-try scoring,
@@ -78,3 +78,25 @@ Run every test with `npm test`. Run only pure rules with `npm test -- src/logic`
 - Browser checks cover keyboard use, actual scrolling and AGAIN, both exercises,
   two-miss SHOW ME, saved XP, and the 390/768/1280 px layouts. Device motion rules
   are covered by CSS; the saved Reduce motion switch is also checked in the browser.
+
+## Task 7 additions
+
+- `src/logic/glauxReactions.test.ts`: all event moods and approved speech, each
+  hunch response, variants without immediate repetition, one-line pools, callback
+  substitution, hint priority, twenty-percent sneeze boundary, no consecutive
+  right-answer sneezes, deterministic results and unchanged inputs.
+- `src/logic/lessonPlayer.test.ts`: hunch gating and four session-only choices,
+  eight-card restart, retained missed discs, Undo/retry, and hints that do not add
+  attempts or alter the existing score rules.
+- `src/data/lessonContent.test.ts`: exact eight-card copy, unchanged exercises,
+  required reaction pools, malformed hunch choices, missing/empty/duplicate pools.
+  The content loader now reads thirteen files, including glaux-lines.json.
+- `src/pages/LessonReactions.test.tsx`: one speech box, callback and five decorative
+  stars, all text retained without particles under Reduce motion, missed/solved
+  ladder states and SHOW ME gating. First-render tests check the hunch choices
+  and absence of CONTINUE before a choice.
+- Browser checks cover every hunch response, a first-try celebration and sneeze,
+  nonrepeating missed lines, gentle/thinking/proud moods, hint, SHOW ME, Undo and
+  retry, correct callback, 40 XP and unchanged practice rewards. Widths 390, 768
+  and 1280 px fit without horizontal scrolling. Saved Reduce motion also updates
+  the open lesson from another tab and stops owl, clue and ladder animations.

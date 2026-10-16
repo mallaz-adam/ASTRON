@@ -1,3 +1,5 @@
+import { glauxPoolIds } from './types';
+
 // Small checks give the author a file name and an exact field to fix.
 type Check = (value: unknown) => boolean;
 export type Schema = Record<string, Check>;
@@ -21,7 +23,12 @@ export const contentSchema = {
   quests: { id: text, kind: oneOf('learn', 'story', 'read'), title: text, xpReward: whole },
   articles: { id: text, title: text, summary: text, body: text, readingMin: positive },
   unitArticles: { unitId: text, articleId: text },
+  glauxLines: { id: oneOf(...glauxPoolIds), lines: value => Array.isArray(value) && value.length > 0 && value.every(text) },
 } satisfies Record<string, Schema>;
+
+export function contentFileName(name: string) {
+  return `${name === 'glauxLines' ? 'glaux-lines' : name}.json`;
+}
 
 export function contentError(file: string, field: string, message: string): never {
   throw new Error(`${file}: ${field} — ${message}`);

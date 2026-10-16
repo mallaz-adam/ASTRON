@@ -2,14 +2,16 @@ import { useRef } from 'react';
 import { Button } from '../design/Button';
 import type { Exercise } from '../data/types';
 import { canCheck, exerciseDone, exerciseItems, type ExerciseRun } from '../logic/lessonPlayer';
+import { HeatLadder } from './HeatLadder';
 
 type Props = {
   exercise: Exercise; answer: ExerciseRun; busy: boolean;
-  select: (id: string) => void; undo: () => void; check: () => void; reveal: () => void;
+  select: (id: string) => void; undo: () => void; check: () => void; reveal: () => void; hint: () => void;
 };
 
-export function LessonExercise({ exercise, answer, busy, select, undo, check, reveal }: Props) {
+export function LessonExercise({ exercise, answer, busy, select, undo, check, reveal, hint }: Props) {
   const controls = useRef<HTMLDivElement>(null);
+  const slots = useRef<HTMLOListElement>(null);
   const items = exerciseItems(exercise);
   const solved = exerciseDone(answer);
   function place(id: string) {
@@ -20,16 +22,21 @@ export function LessonExercise({ exercise, answer, busy, select, undo, check, re
   return <div className="lesson-exercise" ref={controls}>
     {exercise.type === 'order' ? <>
       <p className="exercise-prompt">{exercise.prompt}</p>
-      <ol className="order-slots" aria-label={exercise.prompt}>
+      <div className={`order-board${answer.attempts ? ' order-board--ladder' : ''}`} data-state={answer.status}>
+      <div className="order-input">
+      <ol className="order-slots" aria-label={exercise.prompt} ref={slots}>
         {items.map((_, index) => {
           const item = items.find(row => row.id === answer.selection[index]);
-          return <li key={index}><span className="order-place">{index + 1}</span>{item && <span className="order-placed"><span className="colour-disc" style={{ background: item.colour }} aria-hidden="true" />{item.text}</span>}</li>;
+          return <li key={index}><span className="order-place">{index + 1}</span>{item && <span className="order-placed"><span className="colour-disc" data-star={item.id} style={{ background: item.colour }} aria-hidden="true" />{item.text}</span>}</li>;
         })}
       </ol>
       <div className="order-available">
         {items.filter(item => !answer.selection.includes(item.id)).map(item => <button key={item.id} type="button" className="order-item" disabled={busy || solved} onClick={() => place(item.id)}>
           <span className="colour-disc" style={{ background: item.colour }} aria-hidden="true" />{item.text}
         </button>)}
+      </div>
+      </div>
+      {answer.attempts > 0 && <HeatLadder exercise={exercise} answer={answer} source={slots} />}
       </div>
     </> : <fieldset className="choice-options" disabled={busy || solved}>
       <legend>{exercise.prompt}</legend>
@@ -42,6 +49,7 @@ export function LessonExercise({ exercise, answer, busy, select, undo, check, re
     <div className="exercise-actions">
       {exercise.type === 'order' && <Button variant="secondary" disabled={busy || solved || answer.selection.length === 0} onClick={undo}>UNDO</Button>}
       <Button className="exercise-check" disabled={busy || !canCheck(exercise, answer)} onClick={check}>CHECK</Button>
+      {!solved && <Button variant="secondary" disabled={busy} onClick={hint}>HINT</Button>}
       {answer.attempts >= 2 && !solved && <Button variant="secondary" disabled={busy} onClick={reveal}>SHOW ME</Button>}
     </div>
   </div>;

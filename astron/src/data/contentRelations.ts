@@ -1,5 +1,5 @@
 import type { Content } from './types';
-import { contentError } from './contentSchema';
+import { contentError, contentFileName } from './contentSchema';
 
 export function validateRelations(content: Content, folder: string) {
   function relation(table: keyof Content, field: string, target: keyof Content, targetField = 'id') {
@@ -30,7 +30,7 @@ export function validateRelations(content: Content, folder: string) {
       const record = row as unknown as Record<string, unknown>;
       const keyFields = table === 'chapters' ? ['taleId', 'number'] : table === 'unitArticles' ? ['unitId', 'articleId'] : ['id'];
       const key = JSON.stringify(keyFields.map(field => record[field]));
-      if (seen.has(key)) contentError(`${folder}${table}.json`, `[${index}].${keyFields.join('+')}`, 'duplicate key.');
+      if (seen.has(key)) contentError(`${folder}${contentFileName(table)}`, `[${index}].${keyFields.join('+')}`, 'duplicate key.');
       seen.add(key);
     });
   }

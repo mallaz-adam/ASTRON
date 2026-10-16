@@ -10,7 +10,7 @@ publishing: progress refers to these names. Ids must be unique within their file
 Order numbers start at 1. Minutes are positive whole numbers. XP is a whole number,
 zero or greater. Fields are required unless described as optional or conditional.
 
-## The twelve files
+## The thirteen files
 
 | File | Fields and what they mean |
 | --- | --- |
@@ -26,11 +26,12 @@ zero or greater. Fields are required unless described as optional or conditional
 | `quests.json` | `id`, `kind`, `title`, `xpReward`. Exactly one each: `learn` with 20 XP, `story` with 15 XP, `read` with 10 XP. The visible name of `story` is Discover. |
 | `articles.json` | `id`, `title`, `summary`, `body`, `readingMin`. |
 | `unitArticles.json` | `unitId`, `articleId`: links an article to a unit. Each pair must be unique. |
+| `glaux-lines.json` | `id`: a reaction pool name; `lines`: a nonempty array of approved lines. Loaded as `content.glauxLines`. All eighteen pools are required. |
 
 These files are read-only content. They are not copied into the progress database.
 The loader freezes the loaded objects so pages cannot accidentally edit them.
 `loadContent()` loads this sample folder. A later task can pass a different folder.
-Even if a table has no rows, keep its file and write `[]`.
+Unused authoring tables can use `[]`; the required quest rows and Glaux pools must remain present.
 
 ## Long text and Markdown
 
@@ -59,18 +60,30 @@ lesson. Do not keep the old `body` field. These are the supported card shapes:
 | --- | --- |
 | `say` | `kind`, `mood`, `glaux`; optional `art`. |
 | `idea` | `kind`, `mood`, `glaux`, `text`; optional `art`. |
+| `hunch` | `kind`, `mood`, `glaux`: exactly two strings; `options`: three distinct `{id, text, colour}` rows for blue, orange and red; `skipLabel`; optional `art`. |
+| `dial`, `mass`, `race`, `gap` | `kind`, `mood`, `glaux`, `text`; optional `art`. These are temporary interaction placeholders in Task 7. |
 | `exercise` | `kind`, `exerciseId`. The exercise must belong to this cell. |
 | `recap` | `kind`, `mood`, `glaux`, `items`: exactly three strings; optional `art`. |
 
-The supported moods are `happy`, `thinking`, and `proud`. The current picture ids
+The supported moods are `happy`, `thinking`, `proud`, `cheering`, `gentle`, and
+`sleepy`, using the supplied owl SVGs. The current picture ids
 are `lesson-03-hook`, `lesson-03-colours`, `lesson-03-fuel`, and `lesson-03-emblems`.
 Art is imported from the matching supplied SVG, with its text description retained.
 Adding another picture also requires registering its import in `LessonArt.tsx`
 and its id in `lessonValidation.ts`. Unknown fields, moods, pictures, repeated
 exercise references, missing exercises and cross-cell links produce diagnostics.
 
-The real six-card lesson ends in a recap. Other lessons remain one-card
-placeholders until their complete content and exercises are authored.
+Why stars differ now has eight cards: hunch, dial, order exercise, mass, race,
+choice exercise, gap, recap. The four future interactions show their exact copy,
+`lesson-03-colours`, and "Interactive card arrives in the next step." They count
+as done when shown. The recap has its approved three items and no extra picture.
+Other lessons remain one-card placeholders.
+
+Hunch option labels always name the colour; `colour` must be a six-digit hex value.
+The hunch waits for a selection or skip before showing CONTINUE and unlocking the
+next card. Choices can be revised before moving on. The value (`blue`, `orange`,
+`red`, or `skipped`) stays only in lesson session memory: no Answer, XP, or database
+write. Reload, Close, and AGAIN start without that hunch.
 
 ## Exercise data
 
@@ -115,15 +128,64 @@ contain every item id once. A choice's correct option must be among its options.
 The full `Exercise` row wraps this data inside `contentData` and also contains
 `id`, `type`, `prompt`, `xpValue`, `cellId`, and five nonempty feedback strings:
 `glaux`, `hint`, `rightLine`, `missedLine`, `explanation`. See `exercises.json` for
-complete rows. The first miss displays missedLine and hint in one speech box;
-later misses display missedLine. A correct answer displays rightLine and then the
-explanation. SHOW ME becomes available after two misses and displays the hint,
-explanation and revealed answer. It completes the card without exercise XP.
+complete rows. Feedback now uses the reaction pools below. HINT displays only the
+exercise hint in Glaux's speech box and does not add an attempt. SHOW ME becomes
+available after two misses, reveals the answer and explanation, and completes
+the card without exercise XP. Missed order items stay in place; UNDO makes room
+to revise the arrangement.
+
+## Glaux reactions (Task 7)
+
+`glaux-lines.json` contains array rows such as:
+
+```json
+{ "id": "missed", "lines": ["Ooh, close. The sky likes to tease.", "Let me lend you a clue."] }
+```
+
+The required pool ids are `firstTryRight`, `rightAfterMisses`, `rightWithHint`,
+`missed`, `showMe`, `sneeze`, `hunchBlue`, `hunchOrange`, `hunchRed`, `hunchSkip`,
+`orderCallbackBlue`, `orderCallbackOther`, `dialRedEnd`, `gapFlagFew`, `gapFlagTen`,
+`endingHunch`, `endingSkipped`, and `endingTease`. The future interaction and ending
+lines are stored now but are not displayed by those placeholders or the old ending.
+Empty pools, missing pools, duplicate ids and unrecognised ids are rejected.
+
+`reactGlaux` is pure: its event, content pools, previous memory and two random
+numbers are explicit inputs. It returns mood, text and new memory without writes.
+It excludes the previous selection from each pool when alternatives exist; a
+single-line pool can repeat. The memory lasts across AGAIN for varied practice.
+
+| Event | Mood | Speech box |
+| --- | --- | --- |
+| First-try right | cheering | Pool line, then exercise rightLine. |
+| Right after misses | proud | Pool line, then exercise rightLine. |
+| Right with a requested hint | proud | Pool line, then exercise rightLine. |
+| Missed | gentle | Pool line, then exercise missedLine. |
+| Hint | thinking | Exercise hint only. |
+| SHOW ME | thinking | showMe pool line only. |
+| Hunch | happy | Matching hunch pool line. |
+
+The two main feedback lines share one box. The order exercise adds its requested
+third callback line underneath: blue uses orderCallbackBlue; red/orange replace
+`{colour}` in orderCallbackOther; skipped has no callback. A selected sneeze gets
+the separate short caption "Excuse me. Stardust." so no main line is dropped.
+
+A right answer has a 20% sneeze draw unless the previous right answer sneezed.
+Misses and hints cannot sneeze or reset that consecutive-right protection. Five
+decorative gold stars drift for 1.2 seconds. Mood changes fade for 300 ms, and
+cheering wings lift gently once. Reduced motion hides particles and stops all
+animation, including the mood fade, while retaining the caption and feedback.
+
+After a right order, discs move from their slots to the heat ladder in 600 ms.
+Hotter is at the top (blue), cooler at the bottom (red). The ladder sits beside
+the slots at desktop widths, underneath on smaller screens. A miss leaves its
+placed discs alone and shows faint empty rungs, with the correct sequence pulsing
+once as a clue. Reduced motion shows no clue pulse and places solved discs at
+their final rungs immediately. Taller feedback cards can scroll vertically.
 
 ## The sample
 
 There is one unit, `How stars live and die`, with eleven cells: eight lessons,
-two tales, and a final quiz. Why stars differ is the real six-card lesson with two
+two tales, and a final quiz. Why stars differ is the eight-card lesson with two
 10 XP exercises. The other seven lessons have short placeholder cards. The two
 existing quiz exercises retain their data and have placeholder feedback lines.
 The Orion tale keeps its two chapters. The Pleiades sample adds one

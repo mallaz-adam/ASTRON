@@ -15,7 +15,11 @@ describe('Lesson controls and first render', () => {
     expect(html).toContain('Three star discs of the same size, glowing blue, orange and red');
     expect(html).toContain('Glaux the owl, happy');
     expect(html.match(/class="lesson-card"/g)).toHaveLength(1);
-    expect(html).toContain('Card 1 of 6');
+    expect(html).toContain('Card 1 of 8');
+    expect(html).toContain('Before I explain, take a guess:');
+    expect(html.match(/class="hunch-option"/g)).toHaveLength(3);
+    expect(html).toContain('I&#x27;d rather not guess');
+    expect(html).not.toContain('>CONTINUE<');
     expect(html).not.toContain('Arrange these stars');
   });
   it('applies the saved motion preference around the supplied SVG parts', () => {
@@ -25,7 +29,7 @@ describe('Lesson controls and first render', () => {
   });
   it('uses labelled native radio inputs and an initially disabled CHECK', () => {
     const exercise = content.exercises.find(row => row.id === 'ex-03-choice')!;
-    const html = renderToStaticMarkup(<LessonExercise exercise={exercise} answer={{ selection: [], attempts: 0, status: 'ready' }} busy={false} select={() => {}} undo={() => {}} check={() => {}} reveal={() => {}} />);
+    const html = renderToStaticMarkup(<LessonExercise exercise={exercise} answer={{ selection: [], attempts: 0, hintUsed: false, status: 'ready' }} busy={false} select={() => {}} undo={() => {}} check={() => {}} reveal={() => {}} hint={() => {}} />);
     expect(html.match(/type="radio"/g)).toHaveLength(3);
     expect(html).toContain('The heavier star.');
     expect(html).toMatch(/disabled=""[^>]*>CHECK/);

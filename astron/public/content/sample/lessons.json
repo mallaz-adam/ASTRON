@@ -31,32 +31,48 @@
     "cellId": "star-lesson",
     "cards": [
       {
-        "kind": "say",
+        "kind": "hunch",
         "mood": "happy",
-        "glaux": "Why do some stars glow blue, while others glow like embers?",
-        "art": "lesson-03-hook"
+        "glaux": ["Why do some stars glow blue, while others glow like embers?", "Before I explain, take a guess: which one is hottest? No points. I'm just nosy."],
+        "art": "lesson-03-hook",
+        "options": [
+          { "id": "blue", "text": "Blue star", "colour": "#A9C4EE" },
+          { "id": "orange", "text": "Orange star", "colour": "#E9B173" },
+          { "id": "red", "text": "Red star", "colour": "#D9735A" }
+        ],
+        "skipLabel": "I'd rather not guess"
       },
       {
-        "kind": "idea",
+        "kind": "dial",
         "mood": "happy",
         "glaux": "Colour is a clue, even across the dark.",
-        "text": "Stars come in many colours. Blue stars have the hottest surfaces. Red stars are cooler, though still fiercely hot.",
-        "art": "lesson-03-colours"
+        "text": "Stars come in many colours. Blue stars have the hottest surfaces. Red stars are cooler, though still fiercely hot."
       },
       {
         "kind": "exercise",
         "exerciseId": "ex-03-order"
       },
       {
-        "kind": "idea",
+        "kind": "mass",
+        "mood": "happy",
+        "glaux": "Heavier stars have a lot to say.",
+        "text": "Mass means how much stuff a star holds. In their long, steady stage, heavier stars are bigger and hotter."
+      },
+      {
+        "kind": "race",
         "mood": "thinking",
         "glaux": "More fuel does not always mean more time. Let's look closer.",
-        "text": "Mass means how much stuff a star holds. In their long, steady stage, heavier stars are bigger and hotter. They use up their fuel, a light gas called hydrogen, faster. So they live shorter lives.",
-        "art": "lesson-03-fuel"
+        "text": "They use up their fuel, a light gas called hydrogen, faster. So they live shorter lives."
       },
       {
         "kind": "exercise",
         "exerciseId": "ex-03-choice"
+      },
+      {
+        "kind": "gap",
+        "mood": "happy",
+        "glaux": "This part gets me every time.",
+        "text": "A very heavy star may shine for only a few million years. The Sun shines for about ten billion. Slide along the line and feel the gap."
       },
       {
         "kind": "recap",
@@ -66,8 +82,7 @@
           "Blue stars are hotter than red stars.",
           "Heavier stars are usually bigger and hotter.",
           "Heavier stars use fuel faster and live shorter lives."
-        ],
-        "art": "lesson-03-emblems"
+        ]
       }
     ]
   },

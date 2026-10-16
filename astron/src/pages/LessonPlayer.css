@@ -14,6 +14,22 @@
 .lesson-speech .lesson-glaux { width: 56px; height: 56px; }
 .lesson-speech .speech-box { min-width: 0; flex: 1; padding: var(--space-14); font-size: var(--type-body); }
 .lesson-speech .speech-box p + p { margin-top: var(--space-8); }
+.lesson-feedback { display: grid; gap: var(--space-8); }
+.lesson-glaux-wrap { position: relative; display: inline-flex; width: 56px; height: 56px; flex-shrink: 0; }
+.lesson-glaux { animation: glaux-arrive 300ms ease-out; }
+.lesson-glaux .glaux-cheering .wing-l, .lesson-glaux .glaux-cheering .wing-r { transform-box: fill-box; transform-origin: 50% 15%; animation: glaux-cheer 700ms ease-in-out; }
+.lesson-glaux .glaux-cheering .wing-r { animation-direction: reverse; }
+.sneeze-stars { position: absolute; left: 32px; top: 16px; pointer-events: none; }
+.sneeze-stars svg { position: absolute; width: 10px; height: 10px; fill: var(--gold); animation: glaux-stardust 1.2s ease-out both; }
+.sneeze-caption { margin-left: 76px; font-style: italic; color: var(--soft-ink); }
+.hunch-callback { padding-top: var(--space-8); border-top: var(--border-line); }
+.hunch-controls { display: grid; gap: var(--space-12); }
+.hunch-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8); }
+.hunch-option { display: grid; justify-items: center; gap: var(--space-8); border: var(--border-ink); padding: var(--space-12) var(--space-4); background: var(--card); color: var(--ink); line-height: 1.2; }
+.hunch-disc { width: 52px; height: 52px; border-radius: 50%; border: var(--border-ink); box-shadow: 0 0 0 4px var(--parchment); }
+.hunch-option[aria-pressed='true'] { outline: 2px solid var(--vermilion); outline-offset: -4px; }
+.hunch-controls > .atlas-button { text-transform: none; letter-spacing: normal; }
+.lesson-placeholder { color: var(--soft-ink); font-style: italic; border-top: var(--border-line); padding-top: var(--space-12); }
 .lesson-body, .lesson-explanation, .exercise-prompt, .choice-options legend { font-size: var(--type-body); line-height: 1.5; }
 .lesson-recap { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-14); }
 .lesson-recap li { display: flex; align-items: start; gap: var(--space-12); }
@@ -26,6 +42,20 @@
 .order-place { display: block; font-size: var(--type-label); color: var(--soft-ink); }
 .order-placed { display: grid; justify-items: center; gap: var(--space-4); line-height: 1.2; }
 .order-available { display: grid; gap: var(--space-8); }
+.order-board, .order-input { display: grid; gap: var(--space-14); min-width: 0; }
+.order-board[data-state='correct'] .order-placed > .colour-disc,
+.order-board[data-state='revealed'] .order-placed > .colour-disc { opacity: 0; }
+.heat-ladder { width: min(100%, 240px); justify-self: center; display: grid; gap: var(--space-8); padding: var(--space-12); border: var(--border-line); background: var(--card); }
+.heat-label { color: var(--soft-ink); text-align: center; font-style: italic; }
+.heat-rungs { list-style: none; padding: 0 var(--space-8); margin: 0; border-inline: var(--border-line); display: grid; gap: var(--space-12); }
+.heat-rungs li { min-height: 36px; display: grid; align-items: center; border-bottom: var(--border-line); padding-bottom: var(--space-8); }
+.heat-arrival, .heat-clue { display: flex; align-items: center; gap: var(--space-8); }
+.heat-clue { opacity: 0; animation: heat-clue 600ms var(--clue-delay) ease-in-out; }
+.heat-ladder--faint { background: transparent; border-color: var(--track); }
+.heat-ladder--faint .heat-rungs, .heat-ladder--faint .heat-rungs li { border-color: var(--track); }
+.heat-star { position: relative; z-index: 1; }
+.heat-ladder[data-state='correct'] .heat-star { animation: heat-arrive 600ms ease-out both; }
+.heat-ladder[data-state='revealed'] .heat-star { animation: none; }
 .order-item { display: flex; align-items: center; gap: var(--space-14); min-height: 52px; border: var(--border-ink); background: var(--card); color: var(--ink); padding: var(--space-8) var(--space-14); text-align: left; }
 .colour-disc { display: inline-block; width: 24px; height: 24px; flex-shrink: 0; border: var(--border-ink); border-radius: 50%; background: var(--panel); }
 .exercise-actions { display: flex; flex-wrap: wrap; gap: var(--space-12); }
@@ -39,6 +69,25 @@
 .lesson-end { justify-content: center; }
 .lesson-end h1 { font: var(--font-weight) var(--type-large)/1.5 var(--font-label); letter-spacing: var(--label-spacing); }
 .lesson-path { display: flex; align-items: center; justify-content: center; text-align: center; text-decoration: none; }
+@keyframes glaux-arrive { from { opacity: .35; } to { opacity: 1; } }
+@keyframes glaux-cheer { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(18deg); } }
+@keyframes glaux-stardust {
+  0% { opacity: 0; transform: translate(0, 0) scale(.65); }
+  15% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--drift-x), var(--drift-y)) rotate(var(--turn)); }
+}
+@keyframes heat-arrive { from { transform: translate(var(--from-x, 0px), var(--from-y, 0px)); } to { transform: translate(0, 0); } }
+@keyframes heat-clue { 0%, 100% { opacity: 0; } 50% { opacity: .65; } }
+@media (min-width: 1024px) {
+  .order-board--ladder { grid-template-columns: minmax(0, 1fr) 160px; align-items: start; }
+  .heat-ladder { width: 100%; }
+}
+/* Reduced motion keeps the final arrangement and every spoken line. */
+[data-reduce-motion='true'] .sneeze-stars,
+[data-reduce-motion='true'] .heat-clue { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .sneeze-stars, .heat-clue { display: none; }
+}
 @media (hover: hover) {
   .order-item:hover, .choice-option:hover, .lesson-close:hover { background: var(--panel); }
   .lesson-path:hover { background: var(--ink); }

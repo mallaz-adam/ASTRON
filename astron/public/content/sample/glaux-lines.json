@@ -1,0 +1,20 @@
+[
+  { "id": "firstTryRight", "lines": ["Ha! Right the first time. I'm taking notes.", "Clean, like a comet with a plan."] },
+  { "id": "rightAfterMisses", "lines": ["Stubborn beats speedy. The stars approve."] },
+  { "id": "rightWithHint", "lines": ["You took your time on that one. Good. Stars do, too."] },
+  { "id": "missed", "lines": ["Ooh, close. The sky likes to tease.", "Let me lend you a clue."] },
+  { "id": "showMe", "lines": ["No shame in a peek. Now it's yours."] },
+  { "id": "sneeze", "lines": ["Excuse me. Stardust."] },
+  { "id": "hunchBlue", "lines": ["Bold. Let's see if the sky agrees."] },
+  { "id": "hunchOrange", "lines": ["The diplomat's choice."] },
+  { "id": "hunchRed", "lines": ["Fire is red, so I see your logic."] },
+  { "id": "hunchSkip", "lines": ["Fair. Wise people read the map first."] },
+  { "id": "orderCallbackBlue", "lines": ["You picked blue at the start. Nose for the truth."] },
+  { "id": "orderCallbackOther", "lines": ["You started with {colour}, then reasoned your way here. That's the better trick."] },
+  { "id": "dialRedEnd", "lines": ["Cooler, yes. Still fiercely hot. Don't touch."] },
+  { "id": "gapFlagFew", "lines": ["Blink, and it's over."] },
+  { "id": "gapFlagTen", "lines": ["Now that's a long stay."] },
+  { "id": "endingHunch", "lines": ["Your hunch, now a star. I'd call that a good start."] },
+  { "id": "endingSkipped", "lines": ["Pale gold, for a careful reader."] },
+  { "id": "endingTease", "lines": ["Next: a hunter who boasted a little too loudly. I'll tell it slowly."] }
+]

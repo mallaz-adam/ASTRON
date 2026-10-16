@@ -8,11 +8,22 @@ export type Unit = { id: string; title: string; summary: string; orderNo: number
 export type CellKind = 'lesson' | 'tale' | 'quiz';
 type CellFields = { id: string; positionNo: number; title: string; minutes: number; unitId: string };
 export type Cell = CellFields & ({ kind: 'tale'; taleId: string } | { kind: 'lesson' | 'quiz'; taleId?: never });
-export type GlauxMood = 'happy' | 'thinking' | 'proud';
+export type GlauxMood = 'happy' | 'thinking' | 'proud' | 'cheering' | 'gentle' | 'sleepy';
+export type HunchChoice = 'blue' | 'orange' | 'red' | 'skipped';
+export type HunchOption = { id: Exclude<HunchChoice, 'skipped'>; text: string; colour: string };
+export const glauxPoolIds = [
+  'firstTryRight', 'rightAfterMisses', 'rightWithHint', 'missed', 'showMe', 'sneeze',
+  'hunchBlue', 'hunchOrange', 'hunchRed', 'hunchSkip', 'orderCallbackBlue', 'orderCallbackOther',
+  'dialRedEnd', 'gapFlagFew', 'gapFlagTen', 'endingHunch', 'endingSkipped', 'endingTease',
+] as const;
+export type GlauxPoolId = typeof glauxPoolIds[number];
+export type GlauxLinePool = { id: GlauxPoolId; lines: string[] };
 type SpokenCard = { mood: GlauxMood; glaux: string; art?: string };
 export type LessonCard =
   | (SpokenCard & { kind: 'say' })
   | (SpokenCard & { kind: 'idea'; text: string })
+  | (Omit<SpokenCard, 'glaux'> & { kind: 'hunch'; glaux: [string, string]; options: HunchOption[]; skipLabel: string })
+  | (SpokenCard & { kind: 'dial' | 'mass' | 'race' | 'gap'; text: string })
   | { kind: 'exercise'; exerciseId: string }
   | (SpokenCard & { kind: 'recap'; items: string[] });
 export type Lesson = { id: string; title: string; cards: LessonCard[]; cellId: string; placeholder?: boolean };
@@ -42,7 +53,7 @@ export type Content = {
   interests: Interest[]; constellations: Constellation[]; stars: Star[];
   tales: Tale[]; chapters: Chapter[]; units: Unit[]; cells: Cell[];
   lessons: Lesson[]; exercises: Exercise[]; quests: Quest[];
-  articles: Article[]; unitArticles: UnitArticle[];
+  articles: Article[]; unitArticles: UnitArticle[]; glauxLines: GlauxLinePool[];
 };
 
 export type Progress = {
