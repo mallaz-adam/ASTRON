@@ -82,4 +82,13 @@ describe('Glaux reactions', () => {
     expect(JSON.stringify(options)).toBe(original);
     expect(reactGlaux({ ...input, lineRoll: 1 }).reaction.lines[0]).toBe('Clean, like a comet with a plan.');
   });
+  it.each([
+    ['dialRedEnd', "Cooler, yes. Still fiercely hot. Don't touch."],
+    ['gapFlagFew', "Blink, and it's over."],
+    ['gapFlagTen', "Now that's a long stay."],
+  ] as const)('uses the happy %s interaction line without an exercise or reward', (event, text) => {
+    const { reaction } = reactGlaux({ pools, memory: newReactionMemory(), event, sneezeRoll: 0 });
+    expect(reaction).toMatchObject({ mood: 'happy', lines: [text], sneeze: false });
+    expect(reaction.callback).toBeUndefined();
+  });
 });

@@ -1,6 +1,6 @@
 import type { Exercise, GlauxLinePool, GlauxMood, GlauxPoolId, HunchChoice } from '../data/types';
 
-export type ReactionEvent = 'firstTryRight' | 'rightAfterMisses' | 'rightWithHint' | 'missed' | 'hint' | 'showMe' | 'hunch';
+export type ReactionEvent = 'firstTryRight' | 'rightAfterMisses' | 'rightWithHint' | 'missed' | 'hint' | 'showMe' | 'hunch' | 'dialRedEnd' | 'gapFlagFew' | 'gapFlagTen';
 export type ReactionMemory = { lastLines: Partial<Record<GlauxPoolId, string>>; lastRightSneezed: boolean; sequence: number };
 export type GlauxReaction = { id: number; mood: GlauxMood; lines: string[]; callback?: string; sneeze: boolean; sneezeLine?: string };
 
@@ -31,6 +31,7 @@ export function reactGlaux({ event, pools, memory, exercise, hunch, lineRoll = 0
   const moods: Record<ReactionEvent, GlauxMood> = {
     firstTryRight: 'cheering', rightAfterMisses: 'proud', rightWithHint: 'proud',
     missed: 'gentle', hint: 'thinking', showMe: 'thinking', hunch: 'happy',
+    dialRedEnd: 'happy', gapFlagFew: 'happy', gapFlagTen: 'happy',
   };
   const right = ['firstTryRight', 'rightAfterMisses', 'rightWithHint'].includes(event);
   let lines: string[];

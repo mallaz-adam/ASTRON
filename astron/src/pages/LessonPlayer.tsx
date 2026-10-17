@@ -14,11 +14,14 @@ import { newReactionMemory, reactGlaux, rightEvent } from '../logic/glauxReactio
 import type { GlauxReaction, ReactionEvent } from '../logic/glauxReactions';
 import { LessonExercise } from './LessonExercise';
 import { LessonGlaux } from './LessonGlaux';
+import { InteractiveCard } from './InteractiveCards';
+import { useReducedMotion } from '../design/useReducedMotion';
 import './LessonPlayer.css';
 
 type End = Awaited<ReturnType<typeof finishLesson>>;
 
-export function LessonPlayer({ lesson, content, reduceMotion, completedBefore = false }: { lesson: Lesson; content: Content; reduceMotion: boolean; completedBefore?: boolean }) {
+export function LessonPlayer({ lesson, content, reduceMotion: savedMotion, completedBefore = false }: { lesson: Lesson; content: Content; reduceMotion: boolean; completedBefore?: boolean }) {
+  const reduceMotion = useReducedMotion(savedMotion);
   const navigate = useNavigate();
   const [run, setRun] = useState(() => newLessonRun(lesson));
   const [busy, setBusy] = useState(false);
@@ -139,15 +142,16 @@ export function LessonPlayer({ lesson, content, reduceMotion, completedBefore = 
         {lesson.cards.slice(0, visible).map((card, index) => {
           const exercise = card.kind === 'exercise' ? content.exercises.find(row => row.id === card.exerciseId)! : undefined;
           const answer = exercise ? run.answers[exercise.id] : undefined;
-          const reaction = exercise ? reactions[exercise.id] : card.kind === 'hunch' ? reactions.hunch : undefined;
+          const reaction = exercise ? reactions[exercise.id] : card.kind === 'hunch' ? reactions.hunch : reactions[`card-${index}`];
           const lines = reaction?.lines ?? (exercise ? [exercise.glaux] : card.kind !== 'exercise' ? (Array.isArray(card.glaux) ? card.glaux : [card.glaux]) : []);
-          const placeholder = ['dial', 'mass', 'race', 'gap'].includes(card.kind);
-          const art = card.kind !== 'exercise' ? card.art ?? (placeholder ? 'lesson-03-colours' : undefined) : undefined;
+          const interactive = card.kind === 'dial' || card.kind === 'mass' || card.kind === 'race' || card.kind === 'gap';
+          const art = card.kind !== 'exercise' && !interactive ? card.art : undefined;
           return <section className="lesson-card" aria-label={`Card ${index + 1} of ${total}`} key={index} ref={node => { sections.current[index] = node; }}>
             {art && <LessonArt name={art} />}
             <LessonGlaux mood={reaction?.mood ?? (card.kind === 'exercise' ? 'happy' : card.mood)} lines={lines} reaction={reaction} reduceMotion={reduceMotion} />
             {'text' in card && <p className="lesson-body">{card.text}</p>}
-            {placeholder && <p className="lesson-placeholder">Interactive card arrives in the next step.</p>}
+            {interactive && <InteractiveCard kind={card.kind} reduceMotion={reduceMotion} active={run.active === index && !showingEnd}
+              react={event => react(event, `card-${index}`)} />}
             {card.kind === 'hunch' && <div className="hunch-controls">
               <div className="hunch-options">
                 {card.options.map(option => <button key={option.id} type="button" className="hunch-option"
@@ -161,7 +165,7 @@ export function LessonPlayer({ lesson, content, reduceMotion, completedBefore = 
             {card.kind === 'recap' && <ul className="lesson-recap">{card.items.map(item => <li key={item}><RecapStar /><span>{item}</span></li>)}</ul>}
             {exercise && answer && <>
               {(answer.status === 'correct' || answer.status === 'revealed') && <p className="lesson-explanation">{exercise.explanation}</p>}
-              <LessonExercise exercise={exercise} answer={answer} busy={busy}
+              <LessonExercise exercise={exercise} answer={answer} busy={busy} reduceMotion={reduceMotion} active={run.active === index && !showingEnd}
                 select={id => setRun(value => selectItem(value, exercise, id))} undo={() => setRun(value => undoItem(value, exercise))}
                 check={() => void check(exercise.id, index)} reveal={() => reveal(exercise)} hint={() => hint(exercise)} />
             </>}

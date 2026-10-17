@@ -100,3 +100,26 @@ Run every test with `npm test`. Run only pure rules with `npm test -- src/logic`
   retry, correct callback, 40 XP and unchanged practice rewards. Widths 390, 768
   and 1280 px fit without horizontal scrolling. Saved Reduce motion also updates
   the open lesson from another tab and stops owl, clue and ladder animations.
+
+## Task 8 additions
+
+- `src/logic/lessonDiagrams.test.ts`: exact red/orange/blue stops and intermediate
+  blends, continuity, radius range, fuel levels at several times, dimming, lighter
+  fuel remaining, six-second timing, resume/end clamping, right/reveal versus miss
+  plans, reduced-motion end states, equally spaced powers of ten, three-million
+  flag placement, proximity thresholds and word-based live descriptions.
+- `src/pages/InteractiveCards.test.tsx`: native labelled ranges and live states,
+  described lapis SVGs, schematic notes, full and empty gauges, PLAY visibility,
+  all five gap labels, two real flag buttons, three native picture-choice radios
+  with their existing letters and full text.
+- `src/logic/glauxReactions.test.ts`: the happy dialRedEnd, gapFlagFew and
+  gapFlagTen reactions use the approved pool lines without exercises or rewards.
+- Browser checks cover keyboard sliders, colour and size changes, PLAY/PAUSE,
+  correct-answer and SHOW ME replays, the quarter-time missed-answer clue, both
+  gap reactions, and layouts at 390, 768 and 1280 px without horizontal overflow.
+  Saved Reduce motion hides playback controls, stops movement and shows a solved
+  race's end state immediately; manual sliders still work. Restoring motion does
+  not restart the solved race. Practice retained the saved 40 XP. No browser
+  warnings or errors were reported during the final checks.
+- Final verification: 299 tests across 25 files passed; the production build and
+  PWA generation completed successfully.

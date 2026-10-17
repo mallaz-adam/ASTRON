@@ -61,7 +61,7 @@ lesson. Do not keep the old `body` field. These are the supported card shapes:
 | `say` | `kind`, `mood`, `glaux`; optional `art`. |
 | `idea` | `kind`, `mood`, `glaux`, `text`; optional `art`. |
 | `hunch` | `kind`, `mood`, `glaux`: exactly two strings; `options`: three distinct `{id, text, colour}` rows for blue, orange and red; `skipLabel`; optional `art`. |
-| `dial`, `mass`, `race`, `gap` | `kind`, `mood`, `glaux`, `text`; optional `art`. These are temporary interaction placeholders in Task 7. |
+| `dial`, `mass`, `race`, `gap` | `kind`, `mood`, `glaux`, `text`. Task 8 draws their interactive SVG diagrams in code. |
 | `exercise` | `kind`, `exerciseId`. The exercise must belong to this cell. |
 | `recap` | `kind`, `mood`, `glaux`, `items`: exactly three strings; optional `art`. |
 
@@ -74,9 +74,9 @@ and its id in `lessonValidation.ts`. Unknown fields, moods, pictures, repeated
 exercise references, missing exercises and cross-cell links produce diagnostics.
 
 Why stars differ now has eight cards: hunch, dial, order exercise, mass, race,
-choice exercise, gap, recap. The four future interactions show their exact copy,
-`lesson-03-colours`, and "Interactive card arrives in the next step." They count
-as done when shown. The recap has its approved three items and no extra picture.
+choice exercise, gap, recap. The four interactive cards keep their approved copy
+and count as done when shown. They now use live schematic SVG pictures rather
+than the temporary colours picture and note. The recap has its approved three items and no extra picture.
 Other lessons remain one-card placeholders.
 
 Hunch option labels always name the colour; `colour` must be a six-digit hex value.
@@ -145,8 +145,9 @@ to revise the arrangement.
 The required pool ids are `firstTryRight`, `rightAfterMisses`, `rightWithHint`,
 `missed`, `showMe`, `sneeze`, `hunchBlue`, `hunchOrange`, `hunchRed`, `hunchSkip`,
 `orderCallbackBlue`, `orderCallbackOther`, `dialRedEnd`, `gapFlagFew`, `gapFlagTen`,
-`endingHunch`, `endingSkipped`, and `endingTease`. The future interaction and ending
-lines are stored now but are not displayed by those placeholders or the old ending.
+`endingHunch`, `endingSkipped`, and `endingTease`. The dialRedEnd, gapFlagFew and
+gapFlagTen pools now supply the live interactions. Future ending lines remain
+stored for a later task; the existing completion ending is preserved.
 Empty pools, missing pools, duplicate ids and unrecognised ids are rejected.
 
 `reactGlaux` is pure: its event, content pools, previous memory and two random
@@ -163,6 +164,7 @@ single-line pool can repeat. The memory lasts across AGAIN for varied practice.
 | Hint | thinking | Exercise hint only. |
 | SHOW ME | thinking | showMe pool line only. |
 | Hunch | happy | Matching hunch pool line. |
+| Red dial end or gap flag | happy | Matching interaction pool line. |
 
 The two main feedback lines share one box. The order exercise adds its requested
 third callback line underneath: blue uses orderCallbackBlue; red/orange replace
@@ -181,6 +183,53 @@ the slots at desktop widths, underneath on smaller screens. A miss leaves its
 placed discs alone and shows faint empty rungs, with the correct sequence pulsing
 once as a clue. Reduced motion shows no clue pulse and places solved discs at
 their final rungs immediately. Taller feedback cards can scroll vertically.
+
+## Interactive diagrams (Task 8)
+
+The lesson and exercise JSON are unchanged. The existing `dial`, `mass`, `race`
+and `gap` kinds now select code-drawn SVGs. `ex-03-choice` uses the same three
+option ids, words, correct answer and XP, with star-and-gauge pictures for A/B.
+The diagrams add no database records, rewards, or lesson completion conditions.
+
+All controls are native ranges or buttons. Sliders have associated labels,
+word-based aria-valuetext and a visible live state. Arrow keys, Home and End
+remain native slider actions; lesson navigation does not intercept input keys.
+Slider positions are normalised internally; numeric slider values are not shown.
+The drawings share the supplied red/orange/blue tints, a lapis plate and dotted
+gold border. They are schematic comparisons, not measurements of real stars.
+
+- Heat starts at orange. RGB interpolation blends red to orange to blue without
+  changing the disc radius. Its halo grows slightly. Reaching red triggers the
+  happy dialRedEnd line once per lesson session; moving back again does not
+  replay it. AGAIN/reload starts a new session.
+- Mass starts small and red. Its schematic radius varies from 16 to 40 drawing
+  units, while the same colour blend turns it blue. Its note says "A picture,
+  not to scale."
+- Fuel time starts at zero and stays still until the learner moves the range or
+  presses PLAY. The heavier gauge is 100 drawing units tall; the lighter is 60.
+  Heavy fuel reaches zero at time .35. Light fuel is `1 - .55 * time`, leaving
+  .45 at the end. The heavy star dims to a faint outline; the light star stays
+  bright. These are teaching diagrams, not physical simulations.
+- PLAY takes six seconds from start to end; PAUSE holds the current value. PLAY
+  resumes from there, or restarts an ended race. Seeking pauses immediately.
+  Leaving the card or hiding the browser tab also pauses it. No hidden race keeps
+  running. Saved or device Reduce motion hides PLAY and prevents automatic time
+  changes while leaving manual sliders usable.
+- The picture exercise starts with full gauges. Each miss sets time to .25 and
+  stops. A correct answer or SHOW ME starts a controllable replay, with its own
+  PAUSE and time range. Reduced motion sets the end state immediately instead.
+- Gap positions use `(log10(years) - 6) / 4` between one million and ten billion
+  years. The five powers of ten are equally spaced. The three-million flag sits
+  near .11928 of the line; the ten-billion flag is at the end. Entering a flag's
+  .0125 neighbourhood shows its happy pool line once per visit. The flag labels
+  are also buttons, so keyboard users can jump straight to them. Live values use
+  approved tick/flag labels or the bounding interval, without extra year numbers.
+
+`src/logic/lessonDiagrams.ts` contains the pure blend, radius, fuel, replay and
+logarithmic-position rules. `useControlledRace` owns the cancellable animation
+frame loop. `useReducedMotion` listens to the device preference as well as the
+saved setting, so JavaScript playback obeys both. SVG geometry follows inputs
+directly; it has no independent CSS animation or transition.
 
 ## The sample
 

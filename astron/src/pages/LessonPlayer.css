@@ -29,7 +29,6 @@
 .hunch-disc { width: 52px; height: 52px; border-radius: 50%; border: var(--border-ink); box-shadow: 0 0 0 4px var(--parchment); }
 .hunch-option[aria-pressed='true'] { outline: 2px solid var(--vermilion); outline-offset: -4px; }
 .hunch-controls > .atlas-button { text-transform: none; letter-spacing: normal; }
-.lesson-placeholder { color: var(--soft-ink); font-style: italic; border-top: var(--border-line); padding-top: var(--space-12); }
 .lesson-body, .lesson-explanation, .exercise-prompt, .choice-options legend { font-size: var(--type-body); line-height: 1.5; }
 .lesson-recap { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-14); }
 .lesson-recap li { display: flex; align-items: start; gap: var(--space-12); }

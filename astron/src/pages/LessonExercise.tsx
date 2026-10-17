@@ -3,13 +3,15 @@ import { Button } from '../design/Button';
 import type { Exercise } from '../data/types';
 import { canCheck, exerciseDone, exerciseItems, type ExerciseRun } from '../logic/lessonPlayer';
 import { HeatLadder } from './HeatLadder';
+import { PictureChoice } from './PictureChoice';
 
 type Props = {
   exercise: Exercise; answer: ExerciseRun; busy: boolean;
   select: (id: string) => void; undo: () => void; check: () => void; reveal: () => void; hint: () => void;
+  reduceMotion?: boolean; active?: boolean;
 };
 
-export function LessonExercise({ exercise, answer, busy, select, undo, check, reveal, hint }: Props) {
+export function LessonExercise({ exercise, answer, busy, select, undo, check, reveal, hint, reduceMotion = false, active = true }: Props) {
   const controls = useRef<HTMLDivElement>(null);
   const slots = useRef<HTMLOListElement>(null);
   const items = exerciseItems(exercise);
@@ -38,7 +40,8 @@ export function LessonExercise({ exercise, answer, busy, select, undo, check, re
       </div>
       {answer.attempts > 0 && <HeatLadder exercise={exercise} answer={answer} source={slots} />}
       </div>
-    </> : <fieldset className="choice-options" disabled={busy || solved}>
+    </> : exercise.id === 'ex-03-choice' ? <PictureChoice exercise={exercise} answer={answer} busy={busy} select={select} reduceMotion={reduceMotion} active={active} />
+    : <fieldset className="choice-options" disabled={busy || solved}>
       <legend>{exercise.prompt}</legend>
       {items.map(item => <label key={item.id} className={`choice-option${answer.selection[0] === item.id ? ' choice-option--selected' : ''}`}>
         <input type="radio" name={exercise.id} value={item.id} checked={answer.selection[0] === item.id} onChange={() => select(item.id)}

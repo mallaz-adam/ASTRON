@@ -172,6 +172,29 @@ and tablet the ladder is underneath; on desktop it is alongside the slots.
 
 At `/design`, Reduce motion stops all the movement and keeps every spoken line,
 including the short sneeze caption. The device preference has the same effect.
-The dial, mass, race and gap cards are deliberately labelled placeholders until
-the next task. Their approved copy and colours picture are present; no dial,
-slider, race, new ending, reward system or new dependency has been added here.
+Task 8 now replaces the four interaction placeholders; the existing ending and
+reward rules remain in place.
+
+## Interactive cards and picture answers (Task 8)
+
+In cell 3, try the Heat slider on card 2. Home reaches the red end and triggers
+Glaux once; End reaches blue. Card 4's Mass slider grows and colours its star,
+with the note that the picture is not to scale.
+
+Card 5 compares full fuel gauges under heavier/lighter stars. Drag time or use
+arrow keys: the heavier gauge empties first and its star becomes an outline.
+PLAY advances the race over six seconds; PAUSE holds it and PLAY resumes. The
+range can always take over. Leaving the card or hiding the browser pauses it.
+
+Card 6 keeps the original prompt, A/B/C answers and feedback. A/B now have star
+pictures with full gauges. A miss shows the quarter-time clue and stops. A right
+answer or SHOW ME runs a replay that can also be paused or moved by hand.
+
+Card 7 shows an evenly spaced logarithmic line, from 1 million to 10 billion
+years, with both named flags. Its native range or flag buttons move the pointer
+and trigger the two approved Glaux lines.
+
+Every range reports its state in words. With saved or device Reduce motion,
+PLAY is hidden, manual controls still work, and answered exercise pictures show
+their end state immediately. The code-drawn SVGs work offline. No dependency,
+database change or XP/streak/quest rule was added.
