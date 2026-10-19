@@ -46,7 +46,8 @@ export type ActivityDay = { learnerId: string; dayDate: string; freezeUsed: bool
 export type QuestDone = { learnerId: string; dayDate: string; questId: string; doneOn: string; xpEarned: number };
 export type Completion = { learnerId: string; cellId: string; completedOn: string; correctAnswers: number; xpEarned: number };
 export type Answer = { learnerId: string; exerciseId: string; answeredOn: string; correct: boolean; attempts: number };
-export type LitStar = { learnerId: string; starId: string; litOn: string; how: 'tale' | 'lesson' | 'sighting' };
+export type StarTint = 'blue' | 'orange' | 'red' | 'gold';
+export type LitStar = { learnerId: string; starId: string; litOn: string; how: 'tale' | 'lesson' | 'sighting'; tint?: StarTint };
 export type ArticleRead = { learnerId: string; articleId: string; readOn: string };
 
 export type Content = {

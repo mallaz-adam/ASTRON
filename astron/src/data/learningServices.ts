@@ -4,6 +4,7 @@ import { checkCount } from '../logic/quests';
 import { localDate } from '../logic/dates';
 import { prepareDay } from './progressServices';
 import { saveQuest } from './questServices';
+import { checkStarTint } from '../logic/stars';
 
 type CellResult = { xpEarned?: number; correctAnswers?: number };
 
@@ -38,14 +39,15 @@ export function markArticleRead(database: AstronDb, content: Content, learnerId:
   });
 }
 
-export function lightStar(database: AstronDb, content: Content, learnerId: string, starId: string, how: LitStar['how'], now: Date) {
+export function lightStar(database: AstronDb, content: Content, learnerId: string, starId: string, how: LitStar['how'], now: Date, tint?: LitStar['tint']) {
   if (!content.stars.some(row => row.id === starId)) throw new Error(`Unknown star: ${starId}`);
   if (!['tale', 'lesson', 'sighting'].includes(how)) throw new Error('Unknown way of lighting a star.');
   localDate(now);
+  checkStarTint(tint);
   return database.transaction('rw', database.tables, async () => {
     if (!await database.learners.get(learnerId)) throw new Error('Create a learner before lighting a star.');
     if (await database.litStars.get([learnerId, starId])) return false;
-    await database.litStars.add({ learnerId, starId, litOn: now.toISOString(), how });
+    await database.litStars.add({ learnerId, starId, litOn: now.toISOString(), how, ...(tint === undefined ? {} : { tint }) });
     return true;
   });
 }

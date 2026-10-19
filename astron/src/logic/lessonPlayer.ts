@@ -20,9 +20,14 @@ export function visibleCardCount(run: LessonRun): number {
 export function showCard(run: LessonRun, lesson: Lesson, index: number): LessonRun {
   if (index < 0 || index >= visibleCardCount(run)) return run;
   const done = [...run.done];
-  if (!['exercise', 'hunch'].includes(lesson.cards[index].kind)) done[index] = true;
+  if (!['exercise', 'hunch', 'recap'].includes(lesson.cards[index].kind)) done[index] = true;
   if (run.active === index && done.every((value, i) => value === run.done[i])) return run;
   return { ...run, active: index, done };
+}
+export function completeRecap(run: LessonRun, lesson: Lesson): LessonRun {
+  const index = lesson.cards.length - 1;
+  if (lesson.cards[index].kind !== 'recap' || run.active !== index || !run.done.slice(0, index).every(Boolean)) return run;
+  return { ...run, done: run.done.map(() => true) };
 }
 export function chooseHunch(run: LessonRun, lesson: Lesson, choice: HunchChoice): LessonRun {
   const index = lesson.cards.findIndex(card => card.kind === 'hunch');

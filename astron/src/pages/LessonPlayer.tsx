@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import type { Content, Exercise, HunchChoice, Lesson } from '../data/types';
@@ -8,40 +8,44 @@ import { finishLesson, saveLessonAnswer } from '../data/lessonServices';
 import { Button } from '../design/Button';
 import { Page } from '../design/Page';
 import { ProgressSegments } from '../design/ProgressSegments';
-import { LessonArt, RecapStar } from '../design/LessonArt';
-import { checkExercise, chooseHunch, firstTryCount, newLessonRun, revealExercise, selectItem, showCard, undoItem, useHint, visibleCardCount } from '../logic/lessonPlayer';
+import { LessonArt } from '../design/LessonArt';
+import { checkExercise, chooseHunch, completeRecap, newLessonRun, revealExercise, selectItem, showCard, undoItem, useHint, visibleCardCount } from '../logic/lessonPlayer';
 import { newReactionMemory, reactGlaux, rightEvent } from '../logic/glauxReactions';
 import type { GlauxReaction, ReactionEvent } from '../logic/glauxReactions';
 import { LessonExercise } from './LessonExercise';
 import { LessonGlaux } from './LessonGlaux';
 import { InteractiveCard } from './InteractiveCards';
 import { useReducedMotion } from '../design/useReducedMotion';
+import { LessonRecap } from './LessonRecap';
 import './LessonPlayer.css';
 
 type End = Awaited<ReturnType<typeof finishLesson>>;
 
-export function LessonPlayer({ lesson, content, reduceMotion: savedMotion, completedBefore = false }: { lesson: Lesson; content: Content; reduceMotion: boolean; completedBefore?: boolean }) {
+export function LessonPlayer({ lesson, content, reduceMotion: savedMotion }: { lesson: Lesson; content: Content; reduceMotion: boolean }) {
   const reduceMotion = useReducedMotion(savedMotion);
   const navigate = useNavigate();
   const [run, setRun] = useState(() => newLessonRun(lesson));
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [end, setEnd] = useState<End>();
-  const [showingEnd, setShowingEnd] = useState(false);
   const [reactions, setReactions] = useState<Record<string, GlauxReaction>>({});
   const reactionMemory = useRef(newReactionMemory());
   const saving = useRef(false);
   const finishing = useRef(false);
   const resetting = useRef(false);
-  const practicing = useRef(completedBefore);
   const scroll = useRef<HTMLDivElement>(null);
   const sections = useRef<(HTMLElement | null)[]>([]);
   const visible = visibleCardCount(run);
   const total = lesson.cards.length;
-  const allDone = run.done.every(Boolean);
 
   useEffect(() => { setRun(value => showCard(value, lesson, 0)); }, [lesson]);
   useEffect(() => { document.title = `${lesson.title} · ASTRON`; }, [lesson.title]);
+  useLayoutEffect(() => {
+    if (!end) return;
+    const recap = sections.current[total - 1];
+    recap?.focus({ preventScroll: true });
+    if (recap) scroll.current?.scrollTo({ top: recap.offsetTop, behavior: 'instant' });
+  }, [end, total]);
 
   function move(index: number) {
     const section = sections.current[index];
@@ -54,20 +58,15 @@ export function LessonPlayer({ lesson, content, reduceMotion: savedMotion, compl
     const probe = scroll.current.scrollTop + Math.min(120, scroll.current.clientHeight * .35);
     let index = 0;
     sections.current.forEach((section, position) => { if (section && section.offsetTop <= probe) index = position; });
-    setShowingEnd(index >= total);
     if (index < total) setRun(value => showCard(value, lesson, index));
   }
   function arrows(event: KeyboardEvent<HTMLDivElement>) {
     if ((event.target as HTMLElement).closest('input, textarea, select')) return;
-    if (showingEnd) {
-      if (event.key === 'ArrowUp') { event.preventDefault(); move(total - 1); }
-      return;
-    }
     if (event.key === 'ArrowUp' && run.active > 0) {
       event.preventDefault(); move(run.active - 1);
     }
-    if (event.key === 'ArrowDown' && run.done[run.active]) {
-      event.preventDefault(); move(Math.min(run.active + 1, end ? total : visible - 1));
+    if (event.key === 'ArrowDown' && run.done[run.active] && run.active < visible - 1) {
+      event.preventDefault(); move(run.active + 1);
     }
   }
   function react(event: ReactionEvent, key: string, exercise?: Exercise, hunch = run.hunch) {
@@ -104,24 +103,25 @@ export function LessonPlayer({ lesson, content, reduceMotion: savedMotion, compl
     finally { saving.current = false; setBusy(false); }
   }
   async function finish() {
-    if (finishing.current) return;
+    const completed = completeRecap(run, lesson);
+    if (finishing.current || completed === run) return;
     finishing.current = true; setBusy(true); setError('');
     try {
       const revealed = Object.entries(run.answers).filter(([, answer]) => answer.status === 'revealed').map(([id]) => id);
-      const result = await finishLesson(db, content, localLearnerId, lesson.id, revealed, new Date());
-      setEnd({ ...result, correctAnswers: practicing.current ? firstTryCount(run) : result.correctAnswers });
+      const result = await finishLesson(db, content, localLearnerId, lesson.id, revealed, new Date(), run.hunch);
+      setRun(completed);
+      setEnd(result);
+      react('ending', 'ending');
     } catch (problem) {
       setError(problem instanceof Error ? problem.message : String(problem));
       finishing.current = false;
     } finally { setBusy(false); }
   }
-  useEffect(() => { if (allDone) void finish(); }, [allDone]);
 
   function again() {
     resetting.current = true;
     scroll.current?.scrollTo({ top: 0, behavior: 'instant' });
-    setEnd(undefined); setError(''); setShowingEnd(false); finishing.current = false;
-    practicing.current = true;
+    setEnd(undefined); setError(''); finishing.current = false;
     setReactions({});
     setRun(showCard(newLessonRun(lesson), lesson, 0));
     requestAnimationFrame(() => {
@@ -146,11 +146,11 @@ export function LessonPlayer({ lesson, content, reduceMotion: savedMotion, compl
           const lines = reaction?.lines ?? (exercise ? [exercise.glaux] : card.kind !== 'exercise' ? (Array.isArray(card.glaux) ? card.glaux : [card.glaux]) : []);
           const interactive = card.kind === 'dial' || card.kind === 'mass' || card.kind === 'race' || card.kind === 'gap';
           const art = card.kind !== 'exercise' && !interactive ? card.art : undefined;
-          return <section className="lesson-card" aria-label={`Card ${index + 1} of ${total}`} key={index} ref={node => { sections.current[index] = node; }}>
+          return <section className="lesson-card" tabIndex={-1} aria-label={card.kind === 'recap' && end ? 'Added to your sky' : `Card ${index + 1} of ${total}`} key={index} ref={node => { sections.current[index] = node; }}>
             {art && <LessonArt name={art} />}
-            <LessonGlaux mood={reaction?.mood ?? (card.kind === 'exercise' ? 'happy' : card.mood)} lines={lines} reaction={reaction} reduceMotion={reduceMotion} />
+            {!(card.kind === 'recap' && end) && <LessonGlaux mood={reaction?.mood ?? (card.kind === 'exercise' ? 'happy' : card.mood)} lines={lines} reaction={reaction} reduceMotion={reduceMotion} />}
             {'text' in card && <p className="lesson-body">{card.text}</p>}
-            {interactive && <InteractiveCard kind={card.kind} reduceMotion={reduceMotion} active={run.active === index && !showingEnd}
+            {interactive && <InteractiveCard kind={card.kind} reduceMotion={reduceMotion} active={run.active === index}
               react={event => react(event, `card-${index}`)} />}
             {card.kind === 'hunch' && <div className="hunch-controls">
               <div className="hunch-options">
@@ -162,26 +162,27 @@ export function LessonPlayer({ lesson, content, reduceMotion: savedMotion, compl
               </div>
               <Button variant="secondary" aria-pressed={run.hunch === 'skipped'} disabled={busy} onClick={() => hunch('skipped')}>{card.skipLabel}</Button>
             </div>}
-            {card.kind === 'recap' && <ul className="lesson-recap">{card.items.map(item => <li key={item}><RecapStar /><span>{item}</span></li>)}</ul>}
+            {card.kind === 'recap' && <LessonRecap items={card.items} finished={!!end} hunch={run.hunch} reduceMotion={reduceMotion} />}
+            {card.kind === 'recap' && end && <>
+              <div className="lesson-farewell"><LessonGlaux mood="proud" lines={reactions.ending?.lines ?? []} reduceMotion={reduceMotion} /></div>
+              {end.learnQuestEarned && <p>Learn quest done: <span className="lesson-number">+20 XP</span>.</p>}
+              <div className="lesson-ending-actions">
+                <Link className="atlas-button atlas-button--primary lesson-path" to="/learn">BACK TO THE PATH</Link>
+                <Button variant="secondary" onClick={again}>AGAIN</Button>
+              </div>
+            </>}
             {exercise && answer && <>
               {(answer.status === 'correct' || answer.status === 'revealed') && <p className="lesson-explanation">{exercise.explanation}</p>}
-              <LessonExercise exercise={exercise} answer={answer} busy={busy} reduceMotion={reduceMotion} active={run.active === index && !showingEnd}
+              <LessonExercise exercise={exercise} answer={answer} busy={busy} reduceMotion={reduceMotion} active={run.active === index}
                 select={id => setRun(value => selectItem(value, exercise, id))} undo={() => setRun(value => undoItem(value, exercise))}
                 check={() => void check(exercise.id, index)} reveal={() => reveal(exercise)} hint={() => hint(exercise)} />
             </>}
             {error && run.active === index && <p role="alert">{error}</p>}
-            {(card.kind !== 'hunch' || run.hunch) && <Button className="lesson-continue" disabled={!run.done[index] || busy || (index === total - 1 && !end && !error)}
+            {!(card.kind === 'recap' && end) && (card.kind !== 'hunch' || run.hunch) && <Button className="lesson-continue" disabled={busy || (card.kind === 'recap' ? run.active !== index || !run.done.slice(0, index).every(Boolean) : !run.done[index])}
               onClick={() => { if (index === total - 1 && !end) void finish(); else move(index + 1); }}>CONTINUE</Button>
             }
           </section>;
         })}
-        {end && <section className="lesson-card lesson-end" aria-label="LESSON COMPLETE" ref={node => { sections.current[total] = node; }}>
-          <h1>LESSON COMPLETE</h1>
-          <LessonGlaux mood="proud" lines={[`${end.correctAnswers} of ${Object.keys(run.answers).length} right on the first try.`]} reduceMotion={reduceMotion} />
-          {end.learnQuestEarned && <p>Learn quest done: <span className="lesson-number">+20 XP</span>.</p>}
-          <Link className="atlas-button atlas-button--primary lesson-path" to="/learn">BACK TO THE PATH</Link>
-          <Button variant="secondary" onClick={again}>AGAIN</Button>
-        </section>}
       </div>
     </main>
   </Page>;

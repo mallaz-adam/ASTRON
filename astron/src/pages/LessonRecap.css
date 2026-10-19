@@ -1,0 +1,36 @@
+.lesson-clues { min-width: 0; }
+.clue-picture { position: relative; }
+.lesson-clues--finished .clue-picture { padding-bottom: 84px; }
+.lesson-clues--finished .lesson-recap li { position: relative; padding-left: 62px; }
+.clue-anchor { position: absolute; left: 12px; top: .75em; width: 0; height: 0; }
+.clue-anchor--1 { left: 42px; }
+.clue-constellation { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.clue-lines, .clue-traveller { opacity: 0; }
+.clue-arrival { opacity: 1; }
+.clue-caption { color: var(--soft-ink); text-align: center; font-style: italic; }
+.clue-fallback { position: absolute; bottom: 2px; left: calc(50% - 40px); width: 80px; height: 80px; }
+.lesson-clues--drawing .clue-fallback { visibility: hidden; }
+.lesson-clues--drawing .clue-lines { animation: clue-lines-fade 1s 1.5s both; }
+.lesson-clues--drawing .clue-line { stroke-dasharray: 1; animation: clue-draw .5s var(--line-delay) linear both; }
+.lesson-clues--drawing .clue-traveller { animation: clue-merge 1s 1.5s ease-in-out both; }
+.lesson-clues--drawing .clue-arrival { animation: clue-arrive 1s 1.5s ease-in-out both; }
+.lesson-clues--drawing .clue-caption { animation: clue-caption .3s 2.2s both; }
+.lesson-farewell .lesson-glaux, .lesson-farewell .lesson-glaux * { animation: none; }
+.lesson-farewell .lesson-glaux .happy-eyes { transform-box: fill-box; transform-origin: center; animation: clue-happy-blink 1.4s 2.5s ease-in-out both; }
+.lesson-ending-actions { display: grid; gap: var(--space-12); margin-top: auto; }
+.lesson-card[aria-label='Added to your sky']:focus { outline: none; }
+@keyframes clue-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes clue-lines-fade { from { opacity: 1; } to { opacity: 0; } }
+@keyframes clue-merge {
+  0% { opacity: 1; transform: translate(0, 0); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--merge-x), var(--merge-y)); }
+}
+@keyframes clue-arrive { 0%, 50% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes clue-caption { from { opacity: 0; } to { opacity: 1; } }
+@keyframes clue-happy-blink { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.12); } }
+/* The default styles are the finished picture, so cancelling motion never hides it. */
+[data-reduce-motion='true'] .lesson-clues *, [data-reduce-motion='true'] .lesson-farewell * { animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .lesson-clues *, .lesson-farewell * { animation: none !important; }
+}

@@ -1,4 +1,5 @@
 [
   { "id": "orion", "name": "Orion", "mythNote": "In Greek tradition, Orion is a hunter whose figure is imagined among the stars." },
-  { "id": "pleiades", "name": "The Pleiades", "mythNote": "Placeholder." }
+  { "id": "pleiades", "name": "The Pleiades", "mythNote": "Placeholder." },
+  { "id": "clues", "name": "Clues", "mythNote": "" }
 ]

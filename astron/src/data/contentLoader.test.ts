@@ -3,6 +3,17 @@ import { loadContent, validateContent } from './contentLoader';
 import { sampleContent, sampleFiles } from './contentFixtures';
 
 describe('Content files', () => {
+  it('loads the Clues constellation with no myth or invented Greek letter', () => {
+    const content = sampleContent();
+    expect(content.constellations.find(row => row.id === 'clues')).toEqual({ id: 'clues', name: 'Clues', mythNote: '' });
+    expect(content.stars.find(row => row.id === 'star-clue-03')).toEqual({ id: 'star-clue-03', name: 'The first clue', greekLetter: '', factText: 'Blue stars are hotter than red stars.', constellationId: 'clues' });
+    for (const field of ['mythNote', 'greekLetter']) {
+      const files = sampleFiles();
+      const rows = (field === 'mythNote' ? files.constellations : files.stars) as Record<string, unknown>[];
+      delete rows[0][field];
+      expect(() => validateContent(files)).toThrow(field);
+    }
+  });
   it('loads the complete authoring sample', () => {
     const content = sampleContent();
     expect(content.cells.map(cell => cell.kind)).toEqual(['lesson', 'lesson', 'lesson', 'tale', 'lesson', 'lesson', 'tale', 'lesson', 'lesson', 'lesson', 'quiz']);

@@ -1,9 +1,10 @@
 import type { AstronDb } from './db';
-import type { Content } from './types';
-import { completeCell, recordAnswer } from './learningServices';
+import type { Content, HunchChoice } from './types';
+import { completeCell, lightStar, recordAnswer } from './learningServices';
 import { readProgress } from './progressServices';
 import { buildCoursePath } from '../logic/coursePath';
 import { localDate } from '../logic/dates';
+import { hunchTint } from '../logic/stars';
 
 async function availableLesson(database: AstronDb, content: Content, learnerId: string, lessonId: string) {
   const lesson = content.lessons.find(row => row.id === lessonId && !row.placeholder);
@@ -26,11 +27,18 @@ export function saveLessonAnswer(database: AstronDb, content: Content, learnerId
   });
 }
 
-export function finishLesson(database: AstronDb, content: Content, learnerId: string, lessonId: string, revealed: readonly string[], now: Date) {
+export function finishLesson(database: AstronDb, content: Content, learnerId: string, lessonId: string, revealed: readonly string[], now: Date, hunch?: HunchChoice) {
   return database.transaction('rw', database.tables, async () => {
     const lesson = await availableLesson(database, content, learnerId, lessonId);
     const previous = await database.completions.get([learnerId, lesson.cellId]);
-    if (previous) return { correctAnswers: previous.correctAnswers, learnQuestEarned: false };
+    async function lightClue() {
+      if (lesson.id === 'lesson-03') await lightStar(database, content, learnerId, 'star-clue-03', 'lesson', now, hunchTint(hunch));
+    }
+    if (previous) {
+      // Also gives pre-Task-9 learners their first clue when they replay.
+      await lightClue();
+      return { correctAnswers: previous.correctAnswers, learnQuestEarned: false };
+    }
     const exercises = lesson.cards.filter(card => card.kind === 'exercise');
     let correctAnswers = 0;
     for (const card of exercises) {
@@ -41,6 +49,7 @@ export function finishLesson(database: AstronDb, content: Content, learnerId: st
     const learn = content.quests.find(quest => quest.kind === 'learn')!;
     const learnQuestEarned = !await database.questDone.get([learnerId, localDate(now), learn.id]);
     await completeCell(database, content, learnerId, lesson.cellId, now, { correctAnswers });
+    await lightClue();
     return { correctAnswers, learnQuestEarned };
   });
 }

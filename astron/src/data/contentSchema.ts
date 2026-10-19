@@ -9,11 +9,12 @@ const whole: Check = value => typeof value === 'number' && Number.isInteger(valu
 const positive: Check = value => whole(value) && (value as number) > 0;
 const oneOf = (...choices: string[]): Check => value => typeof value === 'string' && choices.includes(value);
 const texts: Check = value => Array.isArray(value) && value.every(text);
+const optionalText: Check = value => typeof value === 'string';
 
 export const contentSchema = {
   interests: { id: text, label: text },
-  constellations: { id: text, name: text, mythNote: text },
-  stars: { id: text, name: text, greekLetter: text, factText: text, constellationId: text },
+  constellations: { id: text, name: text, mythNote: optionalText },
+  stars: { id: text, name: text, greekLetter: optionalText, factText: text, constellationId: text },
   tales: { id: text, title: text, subtitle: text, minutes: positive, teaser: text, sourceNote: text, starId: text },
   chapters: { taleId: text, number: positive, title: text, text, marginNotes: texts },
   units: { id: text, title: text, summary: text, orderNo: positive },

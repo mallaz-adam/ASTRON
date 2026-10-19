@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { sampleContent } from '../data/contentFixtures';
-import { canCheck, checkExercise, chooseHunch, firstTryCount, newLessonRun, revealExercise, selectItem, showCard, undoItem, useHint, visibleCardCount } from './lessonPlayer';
+import { canCheck, checkExercise, chooseHunch, completeRecap, firstTryCount, newLessonRun, revealExercise, selectItem, showCard, undoItem, useHint, visibleCardCount } from './lessonPlayer';
 
 const content = sampleContent();
 const lesson = content.lessons.find(row => row.id === 'lesson-03')!;
@@ -8,6 +8,16 @@ const order = content.exercises.find(row => row.id === 'ex-03-order')!;
 const choice = content.exercises.find(row => row.id === 'ex-03-choice')!;
 
 describe('Lesson player rules', () => {
+  it('waits for recap confirmation and requires every earlier card before ending', () => {
+    const start = newLessonRun(lesson);
+    expect(completeRecap(start, lesson)).toBe(start);
+    const ready = { ...start, done: [true, true, true, true, true, true, true, false] };
+    expect(completeRecap(ready, lesson)).toBe(ready);
+    const recap = showCard(ready, lesson, 7);
+    expect(recap.done[7]).toBe(false);
+    expect(completeRecap(recap, lesson).done.every(Boolean)).toBe(true);
+    expect(recap.done[7]).toBe(false);
+  });
   it('keeps the hunch gated until chosen, then reveals one card at a time', () => {
     const start = newLessonRun(lesson);
     expect(visibleCardCount(start)).toBe(1);

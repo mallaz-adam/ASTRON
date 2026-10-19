@@ -172,8 +172,8 @@ and tablet the ladder is underneath; on desktop it is alongside the slots.
 
 At `/design`, Reduce motion stops all the movement and keeps every spoken line,
 including the short sneeze caption. The device preference has the same effect.
-Task 8 now replaces the four interaction placeholders; the existing ending and
-reward rules remain in place.
+Task 8 replaces the four interaction placeholders. Task 9 replaces the grade
+ending with a constellation while keeping the reward rules.
 
 ## Interactive cards and picture answers (Task 8)
 
@@ -198,3 +198,19 @@ Every range reports its state in words. With saved or device Reduce motion,
 PLAY is hidden, manual controls still work, and answered exercise pictures show
 their end state immediately. The code-drawn SVGs work offline. No dependency,
 database change or XP/streak/quest rule was added.
+
+## A constellation of clues (Task 9)
+
+Read the recap and press CONTINUE. Three gold lines join its stars into a small
+triangle, then the stars merge into a new star in the colour of the opening
+hunch. Skipping gives pale gold. Glaux's proud closing line and tease accompany
+`Added to your sky`; BACK TO THE PATH and AGAIN remain available.
+
+On `/dev`, My sky lists `The first clue`, `star-clue-03`, its tint and lesson
+source. Reload and repeat the lesson: only one clue stays saved, with its first
+tint. Replays preserve the original assessment and rewards. Version 2 upgrades
+older on-device progress without replacing it; existing untinted stars still work.
+
+Check the ending at 390, 768 and 1280 px with Tab and Enter. At `/design`, turn
+on Reduce motion and finish again: the final star appears immediately, with all
+closing text and no owl blink. The device preference has the same effect.

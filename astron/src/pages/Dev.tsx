@@ -14,6 +14,7 @@ import { totalXp } from '../logic/xp';
 import { DevSun } from './DevSun';
 import { devLearnerId, useDevProgress } from './useDevProgress';
 import './Dev.css';
+import { starColours } from '../logic/stars';
 
 const goals: { value: DailyGoal; label: string }[] = [
   { value: 1, label: 'Light · 1' }, { value: 2, label: 'Steady · 2' }, { value: 3, label: 'Full · 3' },
@@ -55,6 +56,17 @@ export function Dev() {
             <div><dt>Total XP</dt><dd>{xp} XP</dd></div>
             <div><dt>Freezes left</dt><dd>{learner.freezesLeft}</dd></div>
           </dl>
+        </section>
+        <section aria-labelledby="dev-stars">
+          <h2 id="dev-stars">My sky</h2>
+          <ul className="dev-stars">
+            {state.progress?.litStars.filter(star => star.learnerId === devLearnerId).map(star => <li key={star.starId}>
+              <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 20 12 30 16 20 20 16 30 12 20 2 16 12 12Z" fill={starColours[star.tint ?? 'gold']} stroke="var(--ink)" /></svg>
+              <div><p>{state.content?.stars.find(row => row.id === star.starId)?.name ?? star.starId}</p>
+                <code>{star.starId} · tint: {star.tint ?? '—'} · how: {star.how}</code>
+              </div>
+            </li>)}
+          </ul>
         </section>
         <section aria-labelledby="dev-quests">
           <h2 id="dev-quests">Today’s quests</h2>

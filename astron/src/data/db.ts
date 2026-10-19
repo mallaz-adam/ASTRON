@@ -24,6 +24,9 @@ export class AstronDb extends Dexie {
       litStars: '[learnerId+starId], learnerId',
       articleReads: '[learnerId+articleId], learnerId',
     });
+    // Tint is optional data, not an index. Existing stars and all other progress
+    // stay untouched; older stars simply have no tint.
+    this.version(2).stores({ litStars: '[learnerId+starId], learnerId' });
   }
 }
 

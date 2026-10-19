@@ -123,3 +123,29 @@ Run every test with `npm test`. Run only pure rules with `npm test -- src/logic`
   warnings or errors were reported during the final checks.
 - Final verification: 299 tests across 25 files passed; the production build and
   PWA generation completed successfully.
+
+## Task 9 additions
+
+- `src/logic/stars.test.ts`: all three hunch colours, skipped/legacy gold,
+  approved tint values, and invalid-key rejection.
+- `src/data/starPersistence.test.ts`: each tint saved, exported and reopened;
+  all four lesson hunches; concurrent/later replay preserving the first tint;
+  legacy completed learners receiving a missing clue without more XP; unfinished
+  lessons earning no star; transaction rollback on a star-write error; and a real
+  version-one database upgrading with every progress table unchanged.
+- `src/logic/lessonPlayer.test.ts`: the recap waits for confirmation, requires
+  the earlier cards, and completes without mutating the previous run.
+- `src/pages/LessonRecap.test.tsx`: all recap words, no premature reward caption,
+  each tint's final picture under Reduce motion, the correct ending and tease
+  pools, proud mood and the owl's happy-eye hook.
+- `src/data/contentLoader.test.ts`: exact Clues/star data, valid empty myth note
+  and Greek letter, while still requiring those fields.
+- Browser checks cover the sequential gold lines, merge, blue ending, pale-gold
+  skipped ending, proud copy and tease, focus after completion, Tab/Enter and
+  AGAIN, the saved blue clue on `/dev`, and unchanged 40 XP after practice.
+  Layouts at 390, 768 and 1280 px have no horizontal overflow. Saved Reduce
+  motion shows the final star immediately, keeps all words and stops the owl;
+  restoring motion does not restart the merge. Device motion is also respected
+  by the shared preference hook and CSS rules.
+- Final verification: 325 tests across 28 files passed. Type checking, the
+  production build and PWA generation passed, with 45 offline cache entries.

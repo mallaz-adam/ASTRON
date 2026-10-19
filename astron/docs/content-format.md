@@ -15,8 +15,8 @@ zero or greater. Fields are required unless described as optional or conditional
 | File | Fields and what they mean |
 | --- | --- |
 | `interests.json` | `id`: stable name; `label`: a readable interest name. |
-| `constellations.json` | `id`, `name`, `mythNote`: a brief note about the myth. |
-| `stars.json` | `id`, `name`, `greekLetter`: for example `α`; `factText`: astronomy text; `constellationId`: a constellation id. |
+| `constellations.json` | `id`, `name`, `mythNote`: a brief note about the myth, or an empty string when there is no myth. |
+| `stars.json` | `id`, `name`, `greekLetter`: for example `α`, or an empty string when none applies; `factText`: astronomy text; `constellationId`: a constellation id. |
 | `tales.json` | `id`, `title`, `subtitle`, `minutes`, `teaser`, `sourceNote`: identify the source or explain that it is original; `starId`: a star id. |
 | `chapters.json` | `taleId`, `number`, `title`, `text`, `marginNotes`: an array of strings, or `[]`. The combination of taleId and number must be unique. |
 | `units.json` | `id`, `title`, `summary`, `orderNo`: the unit’s position. |
@@ -76,7 +76,8 @@ exercise references, missing exercises and cross-cell links produce diagnostics.
 Why stars differ now has eight cards: hunch, dial, order exercise, mass, race,
 choice exercise, gap, recap. The four interactive cards keep their approved copy
 and count as done when shown. They now use live schematic SVG pictures rather
-than the temporary colours picture and note. The recap has its approved three items and no extra picture.
+than the temporary colours picture and note. The recap keeps its approved three items;
+confirming it draws the constellation ending described below.
 Other lessons remain one-card placeholders.
 
 Hunch option labels always name the colour; `colour` must be a six-digit hex value.
@@ -146,8 +147,8 @@ The required pool ids are `firstTryRight`, `rightAfterMisses`, `rightWithHint`,
 `missed`, `showMe`, `sneeze`, `hunchBlue`, `hunchOrange`, `hunchRed`, `hunchSkip`,
 `orderCallbackBlue`, `orderCallbackOther`, `dialRedEnd`, `gapFlagFew`, `gapFlagTen`,
 `endingHunch`, `endingSkipped`, and `endingTease`. The dialRedEnd, gapFlagFew and
-gapFlagTen pools now supply the live interactions. Future ending lines remain
-stored for a later task; the existing completion ending is preserved.
+gapFlagTen pools supply the live interactions. The ending uses endingHunch or
+endingSkipped followed by endingTease, with a proud mood.
 Empty pools, missing pools, duplicate ids and unrecognised ids are rejected.
 
 `reactGlaux` is pure: its event, content pools, previous memory and two random
@@ -264,6 +265,12 @@ As approved, ActivityDay also stores `dailyGoal`. Changing the goal changes toda
 and future days; earlier days keep their original goal. New learners start at goal 2
 with one freeze. There is no stored streak or stored total XP.
 
+Database version 2 adds optional `LitStar.tint`: `blue`, `orange`, `red`, or `gold`.
+The unique key and indexes stay the same. Upgrading preserves every existing row;
+old stars can keep the field absent. Exports include tint when it was saved.
+`checkStarTint` rejects unsupported keys before a write. `hunchTint` maps a colour
+hunch to its key and a skipped or absent hunch to `gold`.
+
 - `localDate(now)` uses the device’s local date, not the UTC date.
 - `questsDoneOn(records, dayDate)` returns the number of different quests that day.
 - `sunStage(count)` returns 0, 1, 2, or 3; `goalMet(count, dailyGoal)` checks the goal.
@@ -293,7 +300,9 @@ Separate cell XP defaults to zero, as approved. If passed explicitly, it must no
 include exercise or daily quest rewards; those are counted separately.
 
 `markArticleRead` keeps the first reading date and meets Read once per day.
-`lightStar` keeps the first lighting date and source. `recordAnswer` keeps the latest
+`lightStar(database, content, learnerId, starId, how, now, tint?)` keeps the first
+lighting date, source and optional tint. Omitting tint remains supported. Concurrent
+or repeated calls keep the first row, including its original tint. `recordAnswer` keeps the latest
 result and increases attempts. Because the requested Answer table keeps only the
 latest result, a later incorrect answer removes that exercise’s XP from the derived
 total. Attempts do not multiply the reward.
@@ -303,9 +312,39 @@ The lesson player calls `saveLessonAnswer`, a transaction wrapper around
 after that, the correct answer and its XP are preserved. `finishLesson` checks
 prerequisites and saved answers, accepts SHOW ME only after two saved misses,
 then calls `completeCell` with the number correct on the first saved attempt.
-An already completed lesson makes neither wrapper write anything, even on a
-later day. Practice scores appear only in that run's end card. Reloading an
+An already completed lesson never rewrites assessment, XP or quest records, even
+on a later day. A Task 9 replay may add the missing clue star for a learner who
+finished before this feature; further replays leave it unchanged. Reloading an
 unfinished lesson restarts its cards but retains saved attempts and earned XP.
+
+## The constellation ending (Task 9)
+
+The sample constellation `clues` is named `Clues`, with `mythNote: ""`.
+Its star `star-clue-03` is named `The first clue`, has no Greek letter, and uses
+`Blue stars are hotter than red stars.` as its fact text.
+
+Viewing the recap does not complete the lesson. Its CONTINUE confirms the three
+clues. `finishLesson` accepts the current hunch as its optional final argument,
+checks the saved exercises, then calls `completeCell` and `lightStar` with
+`how: 'lesson'` in one transaction. A failed star write rolls back completion and
+the Learn reward, so the learner can retry safely. Scores remain saved for progress
+but the ending no longer displays a grade.
+
+Three small stars sit beside the three recap items. The three gold edges draw
+in sequence over 1.5 seconds, then the stars merge over one second into a star
+below the list. A ResizeObserver keeps the drawing aligned when text wraps or
+the screen changes size. The new star uses blue `#A9C4EE`, orange `#E9B173`,
+red `#D9735A`, or pale gold `#F0D9A8` after a skipped hunch.
+The caption is `Added to your sky`. A proud Glaux uses the `endingHunch` or
+`endingSkipped` pool, followed by `endingTease`, with one slow happy blink.
+The Learn quest line is shown only when this completion earned it.
+
+Saved or device Reduce motion shows the final picture immediately and stops
+the blink. Disabling Reduce motion afterwards does not replay the merge. Buttons
+remain available throughout. AGAIN clears the current hunch and animation;
+the saved star retains its first tint and date. The temporary `/dev` page lists
+saved stars by name, id, source and optional tint, so persistence can be checked
+without editing storage. XP, streak and quest rules are unchanged.
 
 `exportProgress` returns JSON containing only the eight progress tables. The temporary
 page’s Export progress button downloads it as `astron-progress.json`.
