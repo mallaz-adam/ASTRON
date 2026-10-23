@@ -1,11 +1,11 @@
 import type { Exercise, GlauxLinePool, GlauxMood, GlauxPoolId, HunchChoice } from '../data/types';
 
 export type ReactionEvent = 'firstTryRight' | 'rightAfterMisses' | 'rightWithHint' | 'missed' | 'hint' | 'showMe' | 'hunch' | 'dialRedEnd' | 'gapFlagFew' | 'gapFlagTen' | 'ending';
-export type ReactionMemory = { lastLines: Partial<Record<GlauxPoolId, string>>; lastRightSneezed: boolean; sequence: number };
-export type GlauxReaction = { id: number; mood: GlauxMood; lines: string[]; callback?: string; sneeze: boolean; sneezeLine?: string };
+export type ReactionMemory = { lastLines: Partial<Record<GlauxPoolId, string>>; sequence: number };
+export type GlauxReaction = { id: number; mood: GlauxMood; lines: string[]; callback?: string };
 
 export function newReactionMemory(): ReactionMemory {
-  return { lastLines: {}, lastRightSneezed: false, sequence: 0 };
+  return { lastLines: {}, sequence: 0 };
 }
 
 export function rightEvent(answer: { attempts: number; hintUsed: boolean }): ReactionEvent {
@@ -14,9 +14,9 @@ export function rightEvent(answer: { attempts: number; hintUsed: boolean }): Rea
 }
 
 // Random values are inputs, so the rules can be tested without clocks or chance.
-export function reactGlaux({ event, pools, memory, exercise, hunch, lineRoll = 0, sneezeRoll = 1 }: {
+export function reactGlaux({ event, pools, memory, exercise, hunch, lineRoll = 0 }: {
   event: ReactionEvent; pools: readonly GlauxLinePool[]; memory: ReactionMemory;
-  exercise?: Exercise; hunch?: HunchChoice; lineRoll?: number; sneezeRoll?: number;
+  exercise?: Exercise; hunch?: HunchChoice; lineRoll?: number;
 }): { reaction: GlauxReaction; memory: ReactionMemory } {
   const next = { ...memory, lastLines: { ...memory.lastLines }, sequence: memory.sequence + 1 };
   function line(id: GlauxPoolId) {
@@ -29,7 +29,7 @@ export function reactGlaux({ event, pools, memory, exercise, hunch, lineRoll = 0
     return selected;
   }
   const moods: Record<ReactionEvent, GlauxMood> = {
-    firstTryRight: 'cheering', rightAfterMisses: 'proud', rightWithHint: 'proud',
+    firstTryRight: 'proud', rightAfterMisses: 'proud', rightWithHint: 'proud',
     missed: 'gentle', hint: 'thinking', showMe: 'thinking', hunch: 'happy',
     dialRedEnd: 'happy', gapFlagFew: 'happy', gapFlagTen: 'happy', ending: 'proud',
   };
@@ -50,8 +50,8 @@ export function reactGlaux({ event, pools, memory, exercise, hunch, lineRoll = 0
     if (hunch === 'blue') callback = line('orderCallbackBlue');
     if (hunch === 'orange' || hunch === 'red') callback = line('orderCallbackOther').replace('{colour}', hunch);
   }
-  const sneeze = right && !memory.lastRightSneezed && sneezeRoll >= 0 && sneezeRoll < .2;
-  if (right) next.lastRightSneezed = sneeze;
-  const sneezeLine = sneeze ? line('sneeze') : undefined;
-  return { reaction: { id: next.sequence, mood: moods[event], lines, callback, sneeze, sneezeLine }, memory: next };
+  // A remembered hunch replaces the generic acknowledgement. The useful
+  // explanation remains, with at most two short paragraphs in one speech box.
+  if (callback) lines = [exercise!.rightLine];
+  return { reaction: { id: next.sequence, mood: moods[event], lines, callback }, memory: next };
 }

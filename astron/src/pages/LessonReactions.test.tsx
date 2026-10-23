@@ -10,21 +10,22 @@ const exercise = content.exercises.find(row => row.id === 'ex-03-order')!;
 const callbacks = { select: () => {}, undo: () => {}, check: () => {}, reveal: () => {}, hint: () => {} };
 
 describe('Visible lesson reactions', () => {
-  it('uses the cheering picture, one live speech box, the callback and five decorative sneeze stars', () => {
-    const { reaction } = reactGlaux({ event: 'firstTryRight', pools: content.glauxLines, memory: newReactionMemory(), exercise, hunch: 'blue', sneezeRoll: 0 });
+  it('uses proud Glaux, one live speech box and two useful paragraphs including the callback', () => {
+    const { reaction } = reactGlaux({ event: 'firstTryRight', pools: content.glauxLines, memory: newReactionMemory(), exercise, hunch: 'blue' });
     const html = renderToStaticMarkup(<LessonGlaux mood={reaction.mood} lines={reaction.lines} reaction={reaction} reduceMotion={false} />);
-    expect(html).toContain('Glaux the owl, cheering');
+    expect(html).toContain('Glaux the owl, proud');
     expect(html).toContain('aria-atomic="true"');
     expect(html.match(/class="speech-box"/g)).toHaveLength(1);
-    expect(html.match(/--drift-x:/g)).toHaveLength(5);
-    expect(html).toContain('You picked blue at the start. Nose for the truth.');
-    expect(html).toContain('Excuse me. Stardust.');
+    expect(html).toContain('You kept blue in mind, then followed the clues.');
+    expect(html.match(/<p[ >]/g)).toHaveLength(2);
+    expect(html).not.toContain('sneeze-stars');
+    expect(html).toContain('lesson-glaux--response');
   });
-  it('keeps all sneeze and callback words with Reduce motion while omitting particles', () => {
-    const { reaction } = reactGlaux({ event: 'firstTryRight', pools: content.glauxLines, memory: newReactionMemory(), exercise, hunch: 'red', sneezeRoll: 0 });
+  it('keeps the useful acknowledgement and callback with Reduce motion, without the nod', () => {
+    const { reaction } = reactGlaux({ event: 'firstTryRight', pools: content.glauxLines, memory: newReactionMemory(), exercise, hunch: 'red' });
     const html = renderToStaticMarkup(<LessonGlaux mood={reaction.mood} lines={reaction.lines} reaction={reaction} reduceMotion />);
-    expect(html).toContain('Excuse me. Stardust.');
-    expect(html).toContain('You started with red, then reasoned your way here.');
+    expect(html).toContain('You began with red. Looking closely gave you another answer.');
+    expect(html).not.toContain('lesson-glaux--response');
     expect(html).not.toContain('class="sneeze-stars"');
     for (const line of reaction.lines) expect(html).toContain(line.replaceAll("'", '&#x27;'));
   });

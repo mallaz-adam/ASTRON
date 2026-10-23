@@ -5,6 +5,7 @@ import { checkCount, questsDoneOn } from './quests';
 import { dayKept, streakStage } from './streak';
 import { buildTodayModel } from './today';
 import { weekDays, type KeptDay } from './week';
+import { glauxLine } from './glauxVoice';
 
 export function longestStreak(days: readonly KeptDay[]): number {
   const sorted = [...new Map(days.map(day => [day.dayDate, day])).values()].sort((a, b) => a.dayDate.localeCompare(b.dayDate));
@@ -53,7 +54,7 @@ export function buildSunModel(progress: Progress, content: Content, now: Date, l
   return {
     streak: today.streak, reduceMotion: today.reduceMotion, freezesLeft: today.freezesLeft,
     longest: longestStreak(days), ring, rays: sunRays(today.dayDate, days), sentence, description,
-    speech: today.streak > 0 ? `${today.streak} days of light. Your sun is growing.` : 'Start with one quest. I am here.',
+    speech: glauxLine(content, today.streak === 0 ? 'sunBegin' : today.status === 'atRisk' ? 'sunReturn' : 'sunGrowing', { days: today.streak }),
   };
 }
 

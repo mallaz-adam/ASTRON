@@ -32,28 +32,28 @@ describe('Today messages and progress', () => {
     const model = buildTodayModel(progress([], goal), content, now);
     expect(model.streak).toBe(0);
     expect(model.status).toBe('none');
-    expect(model.streakText).toBe(`Finish ${goal} ${goal === 1 ? 'quest' : 'quests'} today to begin your streak.`);
+    expect(model.streakText).toBe(`Begin with ${goal} ${goal === 1 ? 'quest' : 'quests'} today. The atlas grows one discovery at a time.`);
   });
   it('asks only for the remaining quest when starting a streak', () => {
     const model = buildTodayModel(progress(['learn']), content, now);
-    expect(model.streakText).toBe('Finish 1 quest today to begin your streak.');
+    expect(model.streakText).toBe('Begin with 1 quest today. The atlas grows one discovery at a time.');
     expect(model.goalText).toBe('1 of 2 quests keeps your streak alive');
   });
   it('shows an at-risk thirteen-day streak and its next target', () => {
     const model = buildTodayModel(progress([], 2, 13), content, now);
     expect(model.streak).toBe(13);
     expect(model.status).toBe('atRisk');
-    expect(model.streakText).toBe('Finish 2 more quests today to make it 14.');
+    expect(model.streakText).toBe('Finish 2 more quests today to keep your sun alight.');
   });
   it('uses singular quest when one more is needed to keep the streak', () => {
     const model = buildTodayModel(progress(['learn'], 2, 13), content, now);
-    expect(model.streakText).toBe('Finish 1 more quest today to make it 14.');
+    expect(model.streakText).toBe('Finish 1 more quest today to keep your sun alight.');
   });
   it.each([1, 2, 3] as const)('shows the safe text when goal %s is met', goal => {
     const model = buildTodayModel(progress(content.quests.slice(0, goal).map(row => row.kind), goal, 13), content, now);
     expect(model.status).toBe('kept');
     expect(model.streak).toBe(14);
-    expect(model.streakText).toBe('Your sun is safe tonight.');
+    expect(model.streakText).toBe("Your sun is safe tonight. Let today's discoveries settle.");
     expect(model.goalText).toBe('Goal met. Your streak is safe tonight.');
   });
   it('orders rows Learn, Read, Discover and marks only today’s matching quest', () => {

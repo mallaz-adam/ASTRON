@@ -15,6 +15,8 @@ describe('Course path accessible controls', () => {
     expect(html).toContain('href="/cell/orion-lesson"');
     expect(html).toContain('0 of 11 done');
     expect(html).toContain('aria-live="polite"');
+    expect(html).toContain('Glaux the owl, thinking');
+    expect(html).toContain('Each cell holds a small discovery. Begin with the open one.');
   });
   it('passes Reduce motion through to the current-cell pulse', () => {
     const model = buildCoursePath(sampleContent(), { completions: [] });

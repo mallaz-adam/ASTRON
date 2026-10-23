@@ -6,29 +6,28 @@ import type { ReactionEvent } from './glauxReactions';
 const content = sampleContent();
 const exercise = content.exercises.find(row => row.id === 'ex-03-order')!;
 const pools = content.glauxLines;
-const options = { pools, exercise, memory: newReactionMemory(), lineRoll: 0, sneezeRoll: 1 };
+const options = { pools, exercise, memory: newReactionMemory(), lineRoll: 0 };
 
 describe('Glaux reactions', () => {
   it.each([
-    ['firstTryRight', 'cheering', "Ha! Right the first time. I'm taking notes.", exercise.rightLine],
-    ['rightAfterMisses', 'proud', 'Stubborn beats speedy. The stars approve.', exercise.rightLine],
-    ['rightWithHint', 'proud', 'You took your time on that one. Good. Stars do, too.', exercise.rightLine],
-    ['missed', 'gentle', 'Ooh, close. The sky likes to tease.', exercise.missedLine],
+    ['firstTryRight', 'proud', "You noticed the clue.", exercise.rightLine],
+    ['rightAfterMisses', 'proud', 'You looked again, and the picture became clearer.', exercise.rightLine],
+    ['rightWithHint', 'proud', 'A clue helped you see the pattern.', exercise.rightLine],
+    ['missed', 'gentle', 'Let us look a little closer.', exercise.missedLine],
     ['hint', 'thinking', exercise.hint],
-    ['showMe', 'thinking', "No shame in a peek. Now it's yours."],
+    ['showMe', 'thinking', "Follow the clues with me."],
   ])('uses the approved mood and lines for %s', (event, mood, ...lines) => {
     const result = reactGlaux({ ...options, event: event as ReactionEvent });
     expect(result.reaction.mood).toBe(mood);
     expect(result.reaction.lines).toEqual(lines);
     expect(result.reaction.lines.length).toBeLessThanOrEqual(2);
-    expect(result.reaction.sneeze).toBe(false);
   });
   it.each([
-    ['blue', "Bold. Let's see if the sky agrees."], ['orange', "The diplomat's choice."],
-    ['red', 'Fire is red, so I see your logic.'], ['skipped', 'Fair. Wise people read the map first.'],
+    ['blue', "Keep blue in mind. Let us follow the clues."], ['orange', "Keep orange in mind. Let us follow the clues."],
+    ['red', 'Keep red in mind. Let us follow the clues.'], ['skipped', 'Then we shall begin by looking.'],
   ] as const)('uses the exact %s hunch response without grading it', (hunch, text) => {
-    const { reaction } = reactGlaux({ ...options, event: 'hunch', hunch, sneezeRoll: 0 });
-    expect(reaction).toMatchObject({ mood: 'happy', lines: [text], sneeze: false });
+    const { reaction } = reactGlaux({ ...options, event: 'hunch', hunch });
+    expect(reaction).toMatchObject({ mood: 'happy', lines: [text] });
     expect(reaction.callback).toBeUndefined();
   });
   it.each(['firstTryRight', 'missed'] as const)('never repeats consecutive %s pool choices, even with the same random input', event => {
@@ -48,9 +47,9 @@ describe('Glaux reactions', () => {
     expect(reactGlaux({ ...options, event: 'rightAfterMisses', memory: one.memory }).reaction.lines).toEqual(one.reaction.lines);
   });
   it.each([
-    ['blue', 'You picked blue at the start. Nose for the truth.'],
-    ['orange', "You started with orange, then reasoned your way here. That's the better trick."],
-    ['red', "You started with red, then reasoned your way here. That's the better trick."],
+    ['blue', 'You kept blue in mind, then followed the clues.'],
+    ['orange', "You began with orange. Looking closely gave you another answer."],
+    ['red', "You began with red. Looking closely gave you another answer."],
     ['skipped', undefined], [undefined, undefined],
   ] as const)('adds the %s hunch callback only to a right order', (hunch, callback) => {
     const result = reactGlaux({ ...options, event: 'firstTryRight', hunch });
@@ -59,15 +58,14 @@ describe('Glaux reactions', () => {
     const choice = content.exercises.find(row => row.id === 'ex-03-choice')!;
     expect(reactGlaux({ ...options, exercise: choice, event: 'firstTryRight', hunch }).reaction.callback).toBeUndefined();
   });
-  it('selects the twenty-percent sneeze range but never two right answers in a row', () => {
-    const first = reactGlaux({ ...options, event: 'firstTryRight', sneezeRoll: .199 });
-    expect(first.reaction).toMatchObject({ sneeze: true, sneezeLine: 'Excuse me. Stardust.' });
-    const miss = reactGlaux({ ...options, event: 'missed', sneezeRoll: 0, memory: first.memory });
-    expect(miss.reaction.sneeze).toBe(false);
-    const second = reactGlaux({ ...options, event: 'rightAfterMisses', sneezeRoll: 0, memory: miss.memory });
-    expect(second.reaction.sneeze).toBe(false);
-    expect(reactGlaux({ ...options, event: 'rightWithHint', sneezeRoll: 0, memory: second.memory }).reaction.sneeze).toBe(true);
-    expect(reactGlaux({ ...options, event: 'firstTryRight', sneezeRoll: .2 }).reaction.sneeze).toBe(false);
+  it('keeps a successful hunch callback within the two-paragraph speech budget', () => {
+    for (const hunch of ['blue', 'orange', 'red', 'skipped'] as const) {
+      const { reaction } = reactGlaux({ ...options, event: 'firstTryRight', hunch });
+      expect(reaction.lines.length + (reaction.callback ? 1 : 0)).toBeLessThanOrEqual(2);
+      expect(reaction.mood).toBe('proud');
+      expect(reaction).not.toHaveProperty('sneeze');
+      expect(reaction).not.toHaveProperty('sneezeLine');
+    }
   });
   it('distinguishes a first try, a retry and a requested hint without changing assessment attempts', () => {
     expect(rightEvent({ attempts: 1, hintUsed: false })).toBe('firstTryRight');
@@ -80,15 +78,15 @@ describe('Glaux reactions', () => {
     const input = { ...options, event: 'firstTryRight' as const };
     expect(reactGlaux(input)).toEqual(reactGlaux(input));
     expect(JSON.stringify(options)).toBe(original);
-    expect(reactGlaux({ ...input, lineRoll: 1 }).reaction.lines[0]).toBe('Clean, like a comet with a plan.');
+    expect(reactGlaux({ ...input, lineRoll: 1 }).reaction.lines[0]).toBe('The pattern is clearer now.');
   });
   it.each([
-    ['dialRedEnd', "Cooler, yes. Still fiercely hot. Don't touch."],
-    ['gapFlagFew', "Blink, and it's over."],
-    ['gapFlagTen', "Now that's a long stay."],
+    ['dialRedEnd', "Cooler, yes. Even a red star is fiercely hot."],
+    ['gapFlagFew', "A few million years. Brief, on a star's scale."],
+    ['gapFlagTen', "About ten billion years. Let that distance in time settle."],
   ] as const)('uses the happy %s interaction line without an exercise or reward', (event, text) => {
-    const { reaction } = reactGlaux({ pools, memory: newReactionMemory(), event, sneezeRoll: 0 });
-    expect(reaction).toMatchObject({ mood: 'happy', lines: [text], sneeze: false });
+    const { reaction } = reactGlaux({ pools, memory: newReactionMemory(), event });
+    expect(reaction).toMatchObject({ mood: 'happy', lines: [text] });
     expect(reaction.callback).toBeUndefined();
   });
 });

@@ -16,13 +16,7 @@
 .lesson-speech .speech-box p + p { margin-top: var(--space-8); }
 .lesson-feedback { display: grid; gap: var(--space-8); }
 .lesson-glaux-wrap { position: relative; display: inline-flex; width: 56px; height: 56px; flex-shrink: 0; }
-.lesson-glaux { animation: glaux-arrive 300ms ease-out; }
-.lesson-glaux .glaux-cheering .wing-l, .lesson-glaux .glaux-cheering .wing-r { transform-box: fill-box; transform-origin: 50% 15%; animation: glaux-cheer 700ms ease-in-out; }
-.lesson-glaux .glaux-cheering .wing-r { animation-direction: reverse; }
-.sneeze-stars { position: absolute; left: 32px; top: 16px; pointer-events: none; }
-.sneeze-stars svg { position: absolute; width: 10px; height: 10px; fill: var(--gold); animation: glaux-stardust 1.2s ease-out both; }
-.sneeze-caption { margin-left: 76px; font-style: italic; color: var(--soft-ink); }
-.hunch-callback { padding-top: var(--space-8); border-top: var(--border-line); }
+.lesson-glaux--response .head { animation: glaux-notice 1.2s ease-in-out; }
 .hunch-controls { display: grid; gap: var(--space-12); }
 .hunch-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8); }
 .hunch-option { display: grid; justify-items: center; gap: var(--space-8); border: var(--border-ink); padding: var(--space-12) var(--space-4); background: var(--card); color: var(--ink); line-height: 1.2; }
@@ -66,13 +60,7 @@
 .choice-option input { width: 20px; height: 20px; margin: 0; accent-color: var(--vermilion); flex-shrink: 0; }
 .choice-option:focus-within { outline: var(--focus-ring); outline-offset: 2px; }
 .lesson-path { display: flex; align-items: center; justify-content: center; text-align: center; text-decoration: none; }
-@keyframes glaux-arrive { from { opacity: .35; } to { opacity: 1; } }
-@keyframes glaux-cheer { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(18deg); } }
-@keyframes glaux-stardust {
-  0% { opacity: 0; transform: translate(0, 0) scale(.65); }
-  15% { opacity: 1; }
-  100% { opacity: 0; transform: translate(var(--drift-x), var(--drift-y)) rotate(var(--turn)); }
-}
+@keyframes glaux-notice { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(3deg); } }
 @keyframes heat-arrive { from { transform: translate(var(--from-x, 0px), var(--from-y, 0px)); } to { transform: translate(0, 0); } }
 @keyframes heat-clue { 0%, 100% { opacity: 0; } 50% { opacity: .65; } }
 @media (min-width: 1024px) {
@@ -80,10 +68,9 @@
   .heat-ladder { width: 100%; }
 }
 /* Reduced motion keeps the final arrangement and every spoken line. */
-[data-reduce-motion='true'] .sneeze-stars,
 [data-reduce-motion='true'] .heat-clue { display: none; }
 @media (prefers-reduced-motion: reduce) {
-  .sneeze-stars, .heat-clue { display: none; }
+  .heat-clue { display: none; }
 }
 @media (hover: hover) {
   .order-item:hover, .choice-option:hover, .lesson-close:hover { background: var(--panel); }

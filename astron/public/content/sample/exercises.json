@@ -61,7 +61,7 @@
     "id": "ex-03-order",
     "type": "order",
     "cellId": "star-lesson",
-    "glaux": "Take your time. Follow the colours.",
+    "glaux": "Take your time. Let the colours guide your eye.",
     "prompt": "Arrange these stars from coolest surface to hottest.",
     "contentData": {
       "items": [
@@ -88,8 +88,8 @@
       ]
     },
     "hint": "Blue stars are the hottest. Start with the coolest.",
-    "rightLine": "You found the pattern. Let those colours guide you.",
-    "missedLine": "Begin with red, then move towards blue. You can try again.",
+    "rightLine": "The colours now run from cooler to hotter.",
+    "missedLine": "Start with red, then orange, then blue. Follow how the heat changes.",
     "explanation": "For these star colours, surface heat increases from red through orange to blue.",
     "xpValue": 10
   },
@@ -97,7 +97,7 @@
     "id": "ex-03-choice",
     "type": "choice",
     "cellId": "star-lesson",
-    "glaux": "Think about how quickly each star uses its fuel.",
+    "glaux": "Follow how quickly each star uses its fuel.",
     "prompt": "Two stars are in their steady stage. Which one usually lives shorter?",
     "contentData": {
       "options": [
@@ -116,9 +116,9 @@
       ],
       "correctOptionId": "A"
     },
-    "hint": "Look at fuel use, not just fuel supply.",
-    "rightLine": "You followed the fuel. That is the key.",
-    "missedLine": "More mass means faster fuel use during this stage. Try that clue.",
+    "hint": "Compare how quickly the fuel is used.",
+    "rightLine": "Faster fuel use means a shorter life.",
+    "missedLine": "The heavier star uses fuel faster. Follow that clue.",
     "explanation": "Heavier stars use fuel faster. The heaviest shine for only millions of years; the Sun for about ten billion.",
     "xpValue": 10
   }

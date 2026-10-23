@@ -5,6 +5,9 @@
 .course-heading h1 { font-size: var(--type-heading-large); line-height: 1.2; }
 .course-label { color: var(--vermilion); font: var(--font-weight) var(--type-label)/1.5 var(--font-label); letter-spacing: var(--label-spacing); }
 .course-count { font: var(--font-weight) var(--type-small)/1.5 var(--font-label); font-variant-numeric: lining-nums; }
+.course-guide { display: flex; align-items: center; gap: var(--space-12); color: var(--soft-ink); }
+.course-guide .inline-art { width: 36px; height: 36px; }
+.course-guide p { font-style: italic; font-size: var(--type-body); }
 .course-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-24); align-items: center; }
 .cell-details { display: grid; align-content: start; gap: var(--space-14); border: var(--border-ink); background: var(--card); padding: var(--space-24); min-width: 0; }
 .cell-details h2 { font-size: 22px; line-height: 1.3; }

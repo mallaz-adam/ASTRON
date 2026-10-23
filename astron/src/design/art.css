@@ -4,7 +4,7 @@
 .inline-art .halo { transform-box: view-box; transform-origin: center; animation: atlas-halo var(--motion-pulse) ease-in-out infinite; }
 .inline-art .twinkle { animation: atlas-twinkle var(--motion-pulse) ease-in-out infinite; }
 .inline-art .twinkle:last-child { animation-delay: -1.25s; }
-.inline-art .head { transform-box: fill-box; transform-origin: 50% 80%; animation: atlas-head var(--motion-tilt) ease-in-out infinite; }
+.inline-art .head { transform-box: fill-box; transform-origin: 50% 80%; }
 .inline-art .eye { transform-box: fill-box; transform-origin: center; animation: atlas-blink var(--motion-blink) linear infinite; }
 @keyframes atlas-rays { to { transform: rotate(360deg); } }
 @keyframes atlas-halo { 0%, 100% { opacity: .65; transform: scale(.95); } 50% { opacity: 1; transform: scale(1.04); } }

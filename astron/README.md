@@ -1,5 +1,12 @@
 # ASTRON
 
+Glaux's current character is the wise, mysterious keeper of a living star atlas.
+His [character guide](docs/glaux-character.md) covers the app and future
+presentations. Today, Course path, Your sun and lesson 3 share his calmer voice.
+He rests still, blinks occasionally, and gives brief useful feedback. Routine
+cheering and random sneeze effects have been replaced by quiet acknowledgement;
+the special constellation ending remains. Progress and reward rules stay the same.
+
 A calm learning app about the sky, built with React, TypeScript, and Vite.
 Today is the first real screen. Progress is kept on the device with Dexie / IndexedDB.
 There are no accounts, analytics, or progress uploads.
@@ -160,18 +167,18 @@ only in memory and earns nothing. AGAIN and reload clear it. The order exercise
 remembers a colour choice in its successful feedback.
 
 Correct answers, retries, hints, misses and SHOW ME have different owl moods and
-approved lines from `public/content/sample/glaux-lines.json`. Two-line pools avoid
+authored lines from `public/content/sample/glaux-lines.json`. Two-line pools avoid
 repeating their previous line. HINT shows the exercise hint without an attempt or
-score penalty. A rare right answer gives Glaux five drifting gold sneeze stars;
-consecutive right answers cannot both trigger one.
+score penalty. The current atlas-keeper personality uses proud acknowledgement
+and one small head movement, with at most two short paragraphs per response.
 
 The heat ladder appears after checking an order. A correct order moves the discs
 onto their rungs. A miss keeps its placed discs and shows faint rungs with a soft
 clue pulse; use UNDO to revise it. SHOW ME still works after two misses. On phone
 and tablet the ladder is underneath; on desktop it is alongside the slots.
 
-At `/design`, Reduce motion stops all the movement and keeps every spoken line,
-including the short sneeze caption. The device preference has the same effect.
+At `/design`, Reduce motion stops all the movement and keeps every spoken line.
+The device preference has the same effect.
 Task 8 replaces the four interaction placeholders. Task 9 replaces the grade
 ending with a constellation while keeping the reward rules.
 

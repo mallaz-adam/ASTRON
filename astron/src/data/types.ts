@@ -15,6 +15,8 @@ export const glauxPoolIds = [
   'firstTryRight', 'rightAfterMisses', 'rightWithHint', 'missed', 'showMe', 'sneeze',
   'hunchBlue', 'hunchOrange', 'hunchRed', 'hunchSkip', 'orderCallbackBlue', 'orderCallbackOther',
   'dialRedEnd', 'gapFlagFew', 'gapFlagTen', 'endingHunch', 'endingSkipped', 'endingTease',
+  'todayBegin', 'todayContinue', 'todayKept', 'sunBegin', 'sunGrowing', 'sunReturn',
+  'pathBegin', 'pathContinue', 'pathComplete',
 ] as const;
 export type GlauxPoolId = typeof glauxPoolIds[number];
 export type GlauxLinePool = { id: GlauxPoolId; lines: string[] };

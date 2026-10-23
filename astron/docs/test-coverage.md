@@ -81,6 +81,8 @@ Run every test with `npm test`. Run only pure rules with `npm test -- src/logic`
 
 ## Task 7 additions
 
+The personality pass below supersedes the original sneeze and cheering checks.
+
 - `src/logic/glauxReactions.test.ts`: all event moods and approved speech, each
   hunch response, variants without immediate repetition, one-line pools, callback
   substitution, hint priority, twenty-percent sneeze boundary, no consecutive
@@ -149,3 +151,21 @@ Run every test with `npm test`. Run only pure rules with `npm test -- src/logic`
   by the shared preference hook and CSS rules.
 - Final verification: 325 tests across 28 files passed. Type checking, the
   production build and PWA generation passed, with 45 offline cache entries.
+
+## Glaux's atlas-keeper personality
+
+- `src/logic/glauxVoice.test.ts`: readable count interpolation, missing-value
+  diagnostics, path guidance for new/continuing/completed units, short authored
+  dialogue and preserved lesson answer definitions and rewards.
+- Updated reaction tests cover proud first-try/retry acknowledgement, helpful
+  misses and hints, ungraded hunches, nonrepeating variants and callbacks within
+  a two-paragraph budget. Random sneeze responses are no longer generated.
+- Updated lesson, Today and Your sun expectations match the new authored copy;
+  existing tests for XP, streaks, tints and progress persistence still pass.
+- Browser checks cover Today and Your sun dialogue, a still resting head, one
+  course-path message, phone/tablet/desktop path layouts, keyboard input, a miss,
+  a hint, a correct retry with remembered hunch, proud first-try feedback and the
+  closing atlas lines. Reduce motion stops all head movement and retains the
+  words. The saved 40 XP and original blue clue remain unchanged after practice.
+- Verification: 329 tests across 29 files pass, as do type checking, production
+  build and PWA generation. The temporary test preview is stopped afterwards.

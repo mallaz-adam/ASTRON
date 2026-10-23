@@ -26,7 +26,7 @@ zero or greater. Fields are required unless described as optional or conditional
 | `quests.json` | `id`, `kind`, `title`, `xpReward`. Exactly one each: `learn` with 20 XP, `story` with 15 XP, `read` with 10 XP. The visible name of `story` is Discover. |
 | `articles.json` | `id`, `title`, `summary`, `body`, `readingMin`. |
 | `unitArticles.json` | `unitId`, `articleId`: links an article to a unit. Each pair must be unique. |
-| `glaux-lines.json` | `id`: a reaction pool name; `lines`: a nonempty array of approved lines. Loaded as `content.glauxLines`. All eighteen pools are required. |
+| `glaux-lines.json` | `id`: a dialogue pool name; `lines`: a nonempty array of approved lines. Loaded as `content.glauxLines`. All twenty-seven pools are required. |
 
 These files are read-only content. They are not copied into the progress database.
 The loader freezes the loaded objects so pages cannot accidentally edit them.
@@ -140,25 +140,26 @@ to revise the arrangement.
 `glaux-lines.json` contains array rows such as:
 
 ```json
-{ "id": "missed", "lines": ["Ooh, close. The sky likes to tease.", "Let me lend you a clue."] }
+{ "id": "missed", "lines": ["Let us look a little closer.", "There is another detail worth noticing."] }
 ```
 
 The required pool ids are `firstTryRight`, `rightAfterMisses`, `rightWithHint`,
 `missed`, `showMe`, `sneeze`, `hunchBlue`, `hunchOrange`, `hunchRed`, `hunchSkip`,
 `orderCallbackBlue`, `orderCallbackOther`, `dialRedEnd`, `gapFlagFew`, `gapFlagTen`,
-`endingHunch`, `endingSkipped`, and `endingTease`. The dialRedEnd, gapFlagFew and
+`endingHunch`, `endingSkipped`, and `endingTease`, plus the nine application pools
+below. The dialRedEnd, gapFlagFew and
 gapFlagTen pools supply the live interactions. The ending uses endingHunch or
 endingSkipped followed by endingTease, with a proud mood.
 Empty pools, missing pools, duplicate ids and unrecognised ids are rejected.
 
-`reactGlaux` is pure: its event, content pools, previous memory and two random
-numbers are explicit inputs. It returns mood, text and new memory without writes.
+`reactGlaux` is pure: its event, content pools, previous memory and one random
+line-selection value are explicit inputs. It returns mood, text and new memory without writes.
 It excludes the previous selection from each pool when alternatives exist; a
 single-line pool can repeat. The memory lasts across AGAIN for varied practice.
 
 | Event | Mood | Speech box |
 | --- | --- | --- |
-| First-try right | cheering | Pool line, then exercise rightLine. |
+| First-try right | proud | Pool line, then exercise rightLine. |
 | Right after misses | proud | Pool line, then exercise rightLine. |
 | Right with a requested hint | proud | Pool line, then exercise rightLine. |
 | Missed | gentle | Pool line, then exercise missedLine. |
@@ -167,16 +168,39 @@ single-line pool can repeat. The memory lasts across AGAIN for varied practice.
 | Hunch | happy | Matching hunch pool line. |
 | Red dial end or gap flag | happy | Matching interaction pool line. |
 
-The two main feedback lines share one box. The order exercise adds its requested
-third callback line underneath: blue uses orderCallbackBlue; red/orange replace
-`{colour}` in orderCallbackOther; skipped has no callback. A selected sneeze gets
-the separate short caption "Excuse me. Stardust." so no main line is dropped.
+Feedback shares one box with at most two short paragraphs. A remembered hunch
+replaces the generic pool acknowledgement: blue uses orderCallbackBlue;
+red/orange replace `{colour}` in orderCallbackOther; skipped has no callback.
+The useful exercise feedback stays visible. The `sneeze` pool remains registered
+for existing content compatibility but is not emitted. There is no random sneeze,
+particle caption, routine wing cheer or automatic mood fade in this personality.
+A deliberate response gets one small head movement over 1.2 seconds. Resting heads
+stay still and natural eye blinks are twelve seconds apart. Reduce motion keeps
+all words and stops every movement.
 
-A right answer has a 20% sneeze draw unless the previous right answer sneezed.
-Misses and hints cannot sneeze or reset that consecutive-right protection. Five
-decorative gold stars drift for 1.2 seconds. Mood changes fade for 300 ms, and
-cheering wings lift gently once. Reduced motion hides particles and stops all
-animation, including the mood fade, while retaining the caption and feedback.
+## Glaux across the application
+
+The character direction is recorded in [glaux-character.md](glaux-character.md).
+Application dialogue is also authored in `glaux-lines.json`. `glauxLine` reads
+the first line of the requested pool and fills only explicitly supplied values.
+Missing pools or values give a diagnostic instead of unfinished visible copy.
+
+| Pool | Used when | Values |
+| --- | --- | --- |
+| `todayBegin` | Starting a streak | `{remaining}`, `{questWord}` |
+| `todayContinue` | Keeping an existing streak | `{remaining}`, `{questWord}` |
+| `todayKept` | Today's goal is met | None |
+| `sunBegin` | The streak is zero | None |
+| `sunGrowing` | Today's goal is met with a streak | `{days}` |
+| `sunReturn` | The existing streak can be continued today | `{days}` |
+| `pathBegin` | No cell in the unit is finished | None |
+| `pathContinue` | Some cells are finished | None |
+| `pathComplete` | All cells are finished | None |
+
+Each screen has one brief Glaux message. Course-path guidance follows completion
+progress, not the selected cell, so exploring cells does not trigger extra speech.
+Messages have no timers or automatic pop-ups. Goal counts, XP, streak dates,
+saved answers, star tints and completion rules are unchanged by this voice pass.
 
 After a right order, discs move from their slots to the heat ladder in 600 ms.
 Hotter is at the top (blue), cooler at the bottom (red). The ladder sits beside

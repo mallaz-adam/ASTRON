@@ -33,7 +33,7 @@
       {
         "kind": "hunch",
         "mood": "happy",
-        "glaux": ["Why do some stars glow blue, while others glow like embers?", "Before I explain, take a guess: which one is hottest? No points. I'm just nosy."],
+        "glaux": ["Why do some stars glow blue, while others glow like embers?", "Which star seems hottest to you? A hunch is enough for now."],
         "art": "lesson-03-hook",
         "options": [
           { "id": "blue", "text": "Blue star", "colour": "#A9C4EE" },
@@ -55,7 +55,7 @@
       {
         "kind": "mass",
         "mood": "happy",
-        "glaux": "Heavier stars have a lot to say.",
+        "glaux": "Look closely. A star's mass changes the story.",
         "text": "Mass means how much stuff a star holds. In their long, steady stage, heavier stars are bigger and hotter."
       },
       {
@@ -71,7 +71,7 @@
       {
         "kind": "gap",
         "mood": "happy",
-        "glaux": "This part gets me every time.",
+        "glaux": "Look at the space between these lifetimes.",
         "text": "A very heavy star may shine for only a few million years. The Sun shines for about ten billion. Slide along the line and feel the gap."
       },
       {

@@ -1,5 +1,6 @@
 import type { Content, Progress } from '../data/types';
 import { localLearnerId } from '../data/learner';
+import { glauxLine } from './glauxVoice';
 
 export function buildCoursePath(content: Content, progress: Pick<Progress, 'completions'>, learnerId = localLearnerId, unitId?: string) {
   const unit = unitId ? content.units.find(row => row.id === unitId) : [...content.units].sort((a, b) => a.orderNo - b.orderNo)[0];
@@ -21,6 +22,7 @@ export function buildCoursePath(content: Content, progress: Pick<Progress, 'comp
   return {
     unit, cells, doneCount, current: cells.find(cell => cell.state === 'current') ?? null,
     countText: `${doneCount} of ${cells.length} done`, unitLabel: `UNIT ${unit.orderNo}`,
+    glaux: glauxLine(content, doneCount === 0 ? 'pathBegin' : doneCount === cells.length ? 'pathComplete' : 'pathContinue'),
   };
 }
 

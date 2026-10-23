@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Page } from '../design/Page';
 import { Honeycomb } from '../design/Honeycomb';
 import { Button } from '../design/Button';
+import { GlauxArt } from '../design/InlineArt';
 import type { CoursePathModel } from '../logic/coursePath';
 import { useDesktopLayout } from '../hooks/useDesktopLayout';
 import { TodayTabs } from './TodayTabs';
@@ -20,6 +21,7 @@ export function CoursePathView({ model, reduceMotion }: { model: CoursePathModel
         <p className="course-label">{model.unitLabel}</p>
         <h1>{model.unit.title}</h1>
         <p className="course-count" role="status">{model.countText}</p>
+        <div className="course-guide"><GlauxArt mood="thinking" /><p>{model.glaux}</p></div>
       </header>
       {selected && <div className="course-layout">
         <Honeycomb cells={model.cells} selectedId={selected.id} onSelect={setSelectedId} />

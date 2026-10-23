@@ -28,7 +28,7 @@ describe('Constellation ending', () => {
     expect(html).not.toContain('lesson-clues--drawing');
     const { reaction } = reactGlaux({ event: 'ending', hunch, pools: content.glauxLines, memory: newReactionMemory() });
     expect(reaction.mood).toBe('proud');
-    expect(reaction.sneeze).toBe(false);
+    expect(reaction).not.toHaveProperty('sneeze');
     expect(reaction.lines).toEqual([
       content.glauxLines.find(pool => pool.id === (hunch === 'skipped' ? 'endingSkipped' : 'endingHunch'))!.lines[0],
       content.glauxLines.find(pool => pool.id === 'endingTease')!.lines[0],

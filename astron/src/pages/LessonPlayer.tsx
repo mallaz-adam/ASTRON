@@ -71,7 +71,7 @@ export function LessonPlayer({ lesson, content, reduceMotion: savedMotion }: { l
   }
   function react(event: ReactionEvent, key: string, exercise?: Exercise, hunch = run.hunch) {
     const result = reactGlaux({ event, memory: reactionMemory.current, pools: content.glauxLines,
-      exercise, hunch, lineRoll: Math.random(), sneezeRoll: Math.random() });
+      exercise, hunch, lineRoll: Math.random() });
     reactionMemory.current = result.memory;
     setReactions(value => ({ ...value, [key]: result.reaction }));
   }

@@ -5,6 +5,7 @@ import { goalMet, questsDoneOn, sunStage } from './quests';
 import { computeStreak, streakStage } from './streak';
 import { weekDays } from './week';
 import { buildCoursePath } from './coursePath';
+import { glauxLine } from './glauxVoice';
 
 const questOrder: QuestKind[] = ['learn', 'read', 'story'];
 const labels = { learn: 'Learn', read: 'Read', story: 'Discover' };
@@ -30,9 +31,7 @@ export function buildTodayModel(progress: Progress, content: Content, now: Date,
   const streak = computeStreak(dayDate, days, dailyGoal);
   const remaining = Math.max(0, dailyGoal - done);
   const questWord = remaining === 1 ? 'quest' : 'quests';
-  const streakText = met ? 'Your sun is safe tonight.' : streak === 0
-    ? `Finish ${remaining} ${questWord} today to begin your streak.`
-    : `Finish ${remaining} more ${questWord} today to make it ${streak + 1}.`;
+  const streakText = glauxLine(content, met ? 'todayKept' : streak === 0 ? 'todayBegin' : 'todayContinue', { remaining, questWord });
   const week = weekDays(dayDate, days);
   const xpEarned = questRows.reduce((sum, row) => sum + row.earned, 0);
   const xpAvailable = questRows.reduce((sum, row) => sum + row.xp, 0);

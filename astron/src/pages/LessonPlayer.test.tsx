@@ -16,7 +16,7 @@ describe('Lesson controls and first render', () => {
     expect(html).toContain('Glaux the owl, happy');
     expect(html.match(/class="lesson-card"/g)).toHaveLength(1);
     expect(html).toContain('Card 1 of 8');
-    expect(html).toContain('Before I explain, take a guess:');
+    expect(html).toContain('A hunch is enough for now.');
     expect(html.match(/class="hunch-option"/g)).toHaveLength(3);
     expect(html).toContain('I&#x27;d rather not guess');
     expect(html).not.toContain('>CONTINUE<');

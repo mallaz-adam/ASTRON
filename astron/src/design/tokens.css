@@ -65,7 +65,7 @@
   --motion-orbit: 48s;
   --motion-pulse: 2.5s;
   --motion-tilt: 6s;
-  --motion-blink: 4s;
+  --motion-blink: 12s;
 }
 
 @media (min-width: 768px) {

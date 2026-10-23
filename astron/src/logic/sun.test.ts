@@ -92,7 +92,7 @@ describe('Your sun copy and saved records', () => {
     const model = buildSunModel(saved(Number(count)), content, atLocalNoon(today));
     expect(model.sentence).toBe(sentence);
     expect(model.longest).toBe(count);
-    expect(model.speech).toBe(count === 0 ? 'Start with one quest. I am here.' : `${count} days of light. Your sun is growing.`);
+    expect(model.speech).toBe(count === 0 ? 'Every sun begins with a small discovery. We can start here.' : `Your sun holds ${count} days of light. We can look again today.`);
     expect(model.description).toContain(`a streak of ${count} days`);
   });
   it('describes the real outer ring values', () => {

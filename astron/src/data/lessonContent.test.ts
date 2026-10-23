@@ -5,18 +5,18 @@ import { validateContent } from './contentLoader';
 import { glauxPoolIds, type Exercise, type Lesson } from './types';
 
 describe('Authored lesson files', () => {
-  it('links cell three to the eight approved cards, hunch choices and four placeholders', () => {
+  it('links cell three to eight cards, calm authored dialogue and ungraded hunch choices', () => {
     const content = sampleContent();
     const cell = content.cells.find(row => row.positionNo === 3)!;
     const lesson = content.lessons.find(row => row.cellId === cell.id)!;
     expect(lesson.id).toBe('lesson-03');
     expect(lesson.title).toBe('Why stars differ');
     expect(lesson.cards.map(card => card.kind)).toEqual(['hunch', 'dial', 'exercise', 'mass', 'race', 'exercise', 'gap', 'recap']);
-    expect(lesson.cards[0]).toEqual({ kind: 'hunch', mood: 'happy', glaux: ['Why do some stars glow blue, while others glow like embers?', "Before I explain, take a guess: which one is hottest? No points. I'm just nosy."], art: 'lesson-03-hook', options: [{ id: 'blue', text: 'Blue star', colour: '#A9C4EE' }, { id: 'orange', text: 'Orange star', colour: '#E9B173' }, { id: 'red', text: 'Red star', colour: '#D9735A' }], skipLabel: "I'd rather not guess" });
+    expect(lesson.cards[0]).toEqual({ kind: 'hunch', mood: 'happy', glaux: ['Why do some stars glow blue, while others glow like embers?', "Which star seems hottest to you? A hunch is enough for now."], art: 'lesson-03-hook', options: [{ id: 'blue', text: 'Blue star', colour: '#A9C4EE' }, { id: 'orange', text: 'Orange star', colour: '#E9B173' }, { id: 'red', text: 'Red star', colour: '#D9735A' }], skipLabel: "I'd rather not guess" });
     expect(lesson.cards[1]).toMatchObject({ mood: 'happy', glaux: 'Colour is a clue, even across the dark.', text: 'Stars come in many colours. Blue stars have the hottest surfaces. Red stars are cooler, though still fiercely hot.' });
-    expect(lesson.cards[3]).toMatchObject({ mood: 'happy', glaux: 'Heavier stars have a lot to say.', text: 'Mass means how much stuff a star holds. In their long, steady stage, heavier stars are bigger and hotter.' });
+    expect(lesson.cards[3]).toMatchObject({ mood: 'happy', glaux: "Look closely. A star's mass changes the story.", text: 'Mass means how much stuff a star holds. In their long, steady stage, heavier stars are bigger and hotter.' });
     expect(lesson.cards[4]).toMatchObject({ mood: 'thinking', glaux: "More fuel does not always mean more time. Let's look closer.", text: 'They use up their fuel, a light gas called hydrogen, faster. So they live shorter lives.' });
-    expect(lesson.cards[6]).toMatchObject({ mood: 'happy', glaux: 'This part gets me every time.', text: 'A very heavy star may shine for only a few million years. The Sun shines for about ten billion. Slide along the line and feel the gap.' });
+    expect(lesson.cards[6]).toMatchObject({ mood: 'happy', glaux: 'Look at the space between these lifetimes.', text: 'A very heavy star may shine for only a few million years. The Sun shines for about ten billion. Slide along the line and feel the gap.' });
     expect(lesson.cards[7]).toMatchObject({ mood: 'proud', glaux: 'Keep these three small clues. We will meet them again.', items: ['Blue stars are hotter than red stars.', 'Heavier stars are usually bigger and hotter.', 'Heavier stars use fuel faster and live shorter lives.'] });
     expect(content.lessons.filter(row => row.id !== lesson.id).every(row => row.placeholder && row.cards.length === 1)).toBe(true);
   });
@@ -32,10 +32,10 @@ describe('Authored lesson files', () => {
       if (exercise.type === 'order') expect([...(exercise.contentData.correctOrder as string[])].sort()).toEqual(items.map(row => row.id).sort());
     }
   });
-  it('keeps the two exercise definitions verbatim', () => {
+  it('keeps the two exercise prompts, answers and explanations with the current Glaux voice', () => {
     const exercises = sampleContent().exercises;
-    expect(exercises.find(row => row.id === 'ex-03-order')).toMatchObject({ glaux: 'Take your time. Follow the colours.', prompt: 'Arrange these stars from coolest surface to hottest.', hint: 'Blue stars are the hottest. Start with the coolest.', rightLine: 'You found the pattern. Let those colours guide you.', missedLine: 'Begin with red, then move towards blue. You can try again.', explanation: 'For these star colours, surface heat increases from red through orange to blue.', xpValue: 10, contentData: { items: [{ id: 'blue', text: 'Blue star', colour: '#A9C4EE' }, { id: 'red', text: 'Red star', colour: '#D9735A' }, { id: 'orange', text: 'Orange star', colour: '#E9B173' }], correctOrder: ['red', 'orange', 'blue'] } });
-    expect(exercises.find(row => row.id === 'ex-03-choice')).toMatchObject({ glaux: 'Think about how quickly each star uses its fuel.', prompt: 'Two stars are in their steady stage. Which one usually lives shorter?', hint: 'Look at fuel use, not just fuel supply.', rightLine: 'You followed the fuel. That is the key.', missedLine: 'More mass means faster fuel use during this stage. Try that clue.', explanation: 'Heavier stars use fuel faster. The heaviest shine for only millions of years; the Sun for about ten billion.', xpValue: 10, contentData: { options: [{ id: 'A', text: 'The heavier star.' }, { id: 'B', text: 'The lighter star.' }, { id: 'C', text: 'Both live the same time.' }], correctOptionId: 'A' } });
+    expect(exercises.find(row => row.id === 'ex-03-order')).toMatchObject({ glaux: 'Take your time. Let the colours guide your eye.', prompt: 'Arrange these stars from coolest surface to hottest.', hint: 'Blue stars are the hottest. Start with the coolest.', rightLine: 'The colours now run from cooler to hotter.', missedLine: 'Start with red, then orange, then blue. Follow how the heat changes.', explanation: 'For these star colours, surface heat increases from red through orange to blue.', xpValue: 10, contentData: { items: [{ id: 'blue', text: 'Blue star', colour: '#A9C4EE' }, { id: 'red', text: 'Red star', colour: '#D9735A' }, { id: 'orange', text: 'Orange star', colour: '#E9B173' }], correctOrder: ['red', 'orange', 'blue'] } });
+    expect(exercises.find(row => row.id === 'ex-03-choice')).toMatchObject({ glaux: 'Follow how quickly each star uses its fuel.', prompt: 'Two stars are in their steady stage. Which one usually lives shorter?', hint: 'Compare how quickly the fuel is used.', rightLine: 'Faster fuel use means a shorter life.', missedLine: 'The heavier star uses fuel faster. Follow that clue.', explanation: 'Heavier stars use fuel faster. The heaviest shine for only millions of years; the Sun for about ten billion.', xpValue: 10, contentData: { options: [{ id: 'A', text: 'The heavier star.' }, { id: 'B', text: 'The lighter star.' }, { id: 'C', text: 'Both live the same time.' }], correctOptionId: 'A' } });
   });
   it('requires a supplied static, described SVG for every picture', () => {
     for (const lesson of sampleContent().lessons) for (const card of lesson.cards) {
