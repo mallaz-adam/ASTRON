@@ -11,6 +11,30 @@ A calm learning app about the sky, built with React, TypeScript, and Vite.
 Today is the first real screen. Progress is kept on the device with Dexie / IndexedDB.
 There are no accounts, analytics, or progress uploads.
 
+## Web test version 0.1 (Task 10)
+
+The production test begins at **cell 3, Why stars differ**, as approved. Only
+authored lessons appear on the online path; cells 1 and 2 receive no completion
+or XP. The development course still has all eleven cells and its test controls.
+This section supersedes the earlier development-only descriptions below.
+
+Production `/dev`, `/design` and temporary cell addresses show `not found`.
+Today includes `Test version 0.1` and a confirmed, device-only erase action.
+Noindex and robots rules discourage indexing; the test URL is unlisted, not
+password-protected. Anyone with the address can open the static app.
+
+Fonts, art, content and the app shell are cached locally. Fonts are bundled with
+their licenses, so visiting the app no longer contacts Google Fonts. The first
+install shows no update bar. Later updates wait for **REFRESH**, preserving
+IndexedDB progress. Checks run on returning online, returning to the app, and
+once per minute while visible and online.
+
+See [the plain-language publishing and phone checklist](docs/private-test.md).
+The GitHub production branch is **master**; the Cloudflare project root is
+**astron**, build command **npm run build**, output folder **dist**. The
+`.node-version` file requests Node 24. The actual hosted address and phone
+installation remain to be checked after publishing.
+
 ## Open the app
 
 Open PowerShell in this folder. Packages are already installed; on a fresh clone,
@@ -67,12 +91,14 @@ server does not install a service worker.
 
 Use the browser's Install app action when available. On iPhone, use Share > Add to
 Home Screen. Phone hosting needs HTTPS; localhost is suitable for desktop testing.
-Later hosting must serve index.html for `/learn`, `/cell/:id`, `/sun`, `/design`
-and `/dev` as well as `/`.
+Hosting must serve index.html for client-side addresses. Cloudflare Pages does
+this automatically when there is no top-level `404.html`. The app then decides
+which addresses exist; production developer pages remain unavailable.
 
-Google Fonts are the only external page resources. They are cached after loading;
-Georgia is the fallback if they have not yet been cached. Browser storage is separate
-for each address, including different ports: use the same address to check persistence.
+Fonts are served from `public/fonts`, with Georgia as the fallback. Browser
+storage is separate for each address, including different ports: use the same
+address to check persistence. Localhost progress does not transfer to the online
+address; GitHub backs up code, not learners' device progress.
 
 ## Content and art
 

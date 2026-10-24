@@ -2,10 +2,13 @@ import type { Content, Progress } from '../data/types';
 import { localLearnerId } from '../data/learner';
 import { glauxLine } from './glauxVoice';
 
-export function buildCoursePath(content: Content, progress: Pick<Progress, 'completions'>, learnerId = localLearnerId, unitId?: string) {
+export function buildCoursePath(content: Content, progress: Pick<Progress, 'completions'>, learnerId = localLearnerId, unitId?: string, testRelease = import.meta.env.PROD) {
   const unit = unitId ? content.units.find(row => row.id === unitId) : [...content.units].sort((a, b) => a.orderNo - b.orderNo)[0];
   if (!unit) throw new Error('Course unit is missing.');
-  const ordered = content.cells.filter(cell => cell.unitId === unit.id).sort((a, b) => a.positionNo - b.positionNo);
+  // The online test exposes authored lessons only. No placeholder is completed
+  // or rewarded to bypass prerequisites; development keeps the full course.
+  const playableIds = new Set(content.lessons.filter(lesson => !lesson.placeholder).map(lesson => lesson.cellId));
+  const ordered = content.cells.filter(cell => cell.unitId === unit.id && (!testRelease || playableIds.has(cell.id))).sort((a, b) => a.positionNo - b.positionNo);
   const doneIds = new Set(progress.completions.filter(row => row.learnerId === learnerId).map(row => row.cellId));
   const currentId = ordered.find(cell => !doneIds.has(cell.id))?.id;
   const cells = ordered.map(cell => {

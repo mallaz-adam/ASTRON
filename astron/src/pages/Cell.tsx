@@ -4,12 +4,14 @@ import { buildCoursePath } from '../logic/coursePath';
 import { useToday } from './useToday';
 import { TemporaryCell } from './TemporaryCell';
 import { LessonPlayer } from './LessonPlayer';
+import { NotFound } from './NotFound';
 
 export function Cell() {
   const { id } = useParams();
   const { content, progress, model, error } = useToday();
   const cell = content?.cells.find(row => row.id === id);
   const lesson = content?.lessons.find(row => row.cellId === id && !row.placeholder);
+  if (import.meta.env.PROD && content && (!cell || !lesson)) return <NotFound />;
   if (content && !cell) return <Navigate to="/learn" replace />;
   if (cell && !lesson) return <TemporaryCell />;
   if (cell && lesson && content && progress && model) {

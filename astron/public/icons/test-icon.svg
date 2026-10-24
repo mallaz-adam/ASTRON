@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="ASTRON">
+  <rect width="512" height="512" fill="#1E2D52"/>
+  <g fill="none" stroke="#E8C46A" stroke-width="10" stroke-linecap="square">
+    <path d="M128 322a128 128 0 0 1 256 0Z" fill="#E8C46A" stroke="none"/>
+    <path d="M112 338h288M256 142v26M152 188l18 20M360 188l-18 20M111 256l25 8M401 256l-25 8"/>
+  </g>
+  <path fill="#E8C46A" d="m349 101 8 24 24 8-24 8-8 24-8-24-24-8 24-8Z"/>
+</svg>

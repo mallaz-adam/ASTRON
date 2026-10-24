@@ -1,6 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" fill="#E9DBBB"/>
-  <circle cx="256" cy="256" r="152" fill="none" stroke="#2A1C13" stroke-width="4"/>
-  <circle cx="256" cy="256" r="132" fill="none" stroke="#7A6544" stroke-width="2"/>
-  <path d="M256 140l28 88 88 28-88 28-28 88-28-88-88-28 88-28z" fill="#8F2D1F" stroke="#2A1C13" stroke-width="3"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="ASTRON">
+  <rect width="512" height="512" fill="#1E2D52"/>
+  <g fill="none" stroke="#E8C46A" stroke-width="10" stroke-linecap="square">
+    <path d="M128 322a128 128 0 0 1 256 0Z" fill="#E8C46A" stroke="none"/>
+    <path d="M112 338h288M256 142v26M152 188l18 20M360 188l-18 20M111 256l25 8M401 256l-25 8"/>
+  </g>
+  <path fill="#E8C46A" d="m349 101 8 24 24 8-24 8-8 24-8-24-24-8 24-8Z"/>
 </svg>

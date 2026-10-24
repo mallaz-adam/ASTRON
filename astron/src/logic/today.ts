@@ -35,6 +35,7 @@ export function buildTodayModel(progress: Progress, content: Content, now: Date,
   const week = weekDays(dayDate, days);
   const xpEarned = questRows.reduce((sum, row) => sum + row.earned, 0);
   const xpAvailable = questRows.reduce((sum, row) => sum + row.xp, 0);
+  const path = buildCoursePath(content, progress, learnerId);
   return {
     dayDate, weekday: new Intl.DateTimeFormat('en', { weekday: 'long' }).format(now),
     sunStage: sunStage(done), streak, streakStage: streakStage(streak),
@@ -46,7 +47,7 @@ export function buildTodayModel(progress: Progress, content: Content, now: Date,
     diamonds: Array.from({ length: dailyGoal }, (_, index) => index < done),
     goalText: met ? 'Goal met. Your streak is safe tonight.' : `${Math.min(done, dailyGoal)} of ${dailyGoal} quests keeps your streak alive`,
     bonusText: 'Finish all three today for +10 XP.',
-    currentCellTitle: buildCoursePath(content, progress, learnerId).current?.title ?? null,
+    currentCellTitle: path.current?.title ?? (import.meta.env.PROD ? path.cells[0]?.title : undefined) ?? null,
   };
 }
 

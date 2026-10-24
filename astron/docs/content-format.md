@@ -421,3 +421,19 @@ move to its right on desktop. The current cell's two-second pulse obeys both
 saved Reduce motion and the device preference.
 
 The Task 6 player uses this same prerequisite model and the supplied third art pack.
+
+## Production test edition (Task 10)
+
+`buildCoursePath(content, progress, learnerId?, unitId?, testRelease?)` defaults
+to the production build flag. In the online test it includes only cells linked
+to lessons whose `placeholder` is false. The sample therefore starts at cell 3,
+`star-lesson`. The completion and answer services validate against that same
+playable path, without writing prerequisite completions or awarding their XP.
+Development retains the full eleven-cell prerequisite path. Existing records
+and the database schema remain unchanged.
+
+After the sole authored lesson is complete, Today's Continue link still offers
+it for practice. Placeholder cell routes are unavailable in production. JSON,
+Markdown, SVG, local fonts and the application shell are precached on first
+installation; publishing changed content changes the service worker revision.
+The update bar asks for REFRESH before activating a waiting version.

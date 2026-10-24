@@ -1,0 +1,4 @@
+.update-notice { position: fixed; z-index: 10; inset: auto 0 0; display: flex; align-items: center; justify-content: center; gap: var(--space-14); min-height: 88px; padding: var(--space-12) var(--space-18) calc(var(--space-12) + env(safe-area-inset-bottom)); background: var(--panel); color: var(--ink); border-top: var(--border-ink); }
+.update-notice p { font-size: var(--type-small); }
+.update-notice .atlas-button { flex-shrink: 0; padding-inline: var(--space-14); }
+#root:has(.update-notice) .atlas-page { padding-bottom: calc(100px + env(safe-area-inset-bottom)); }

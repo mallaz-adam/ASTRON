@@ -42,6 +42,9 @@
 .today-tab svg { width: var(--space-24); height: var(--space-24); fill: none; stroke: currentColor; stroke-width: 1; }
 .today-tab--active { color: var(--vermilion); }
 .today-dev-link { display: inline-flex; align-self: start; align-items: center; min-height: var(--touch-min); font-size: var(--type-small); }
+.today-test-tools { display: grid; justify-items: center; gap: var(--space-4); grid-column: 1 / -1; grid-row: 9; }
+.test-version { font: 400 10px/1.5 var(--font-label); color: var(--soft-ink); }
+.test-erase { min-height: var(--touch-min); padding: var(--space-8); background: transparent; border: 0; color: var(--soft-ink); text-decoration: underline; text-underline-offset: 3px; font: inherit; font-size: var(--type-small); }
 
 /* The same screen opens out on a computer; the phone keeps its vertical order. */
 @media (min-width: 1024px) {

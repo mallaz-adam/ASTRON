@@ -169,3 +169,32 @@ The personality pass below supersedes the original sneeze and cheering checks.
   words. The saved 40 XP and original blue clue remain unchanged after practice.
 - Verification: 329 tests across 29 files pass, as do type checking, production
   build and PWA generation. The temporary test preview is stopped afterwards.
+
+## Private web test preparation (Task 10)
+
+- `src/pages/WebTest.test.tsx`: production developer routes and unknown routes
+  render not found; development routes remain; update notice is absent before
+  readiness; supplied update/version/erase copy; canceled erasure never calls
+  the service and confirmed erasure calls it once.
+- `src/pwa/updates.test.ts`: first installation has no notice; waiting updates
+  require an existing controller; activation waits for REFRESH; explicit refresh
+  reloads after controller change; another-tab activation; cleanup and offline
+  update-check errors.
+- `src/data/testRelease.test.ts`: the online path starts with the sole authored
+  lesson; development retains eleven cells; fresh completion writes only cell 3,
+  its real exercise/quest rewards and its clue; practice remains reachable.
+- `src/data/webAssets.test.ts`: noindex and robots; real locally served WOFF2
+  fonts with licenses; no Google Fonts runtime links; all required PNG sizes.
+- Browser: fresh production visit had no update notice; `/dev` and `/design`
+  showed not found; cell 3 opened without completing placeholders. After stopping
+  the preview server, a hard lesson reload retained fonts, art, content and working
+  exercises. A temporary comment added only to the generated service worker
+  triggered the real waiting-update bar; keyboard REFRESH removed it and retained
+  the completed lesson and Learn quest. The generated worker was restored after
+  this check. The tester erase action reset this isolated origin's progress.
+- Today and lesson controls were checked at phone width 390; Today also fit at
+  768 and 1280 without horizontal overflow. A physical phone install, hosted
+  HTTPS routing and a real Git-triggered deployment still require the live URL.
+- Verification: **352 tests across 33 files pass**. Type checking, production
+  build and PWA generation passed; **51 resources** are precached. The only test
+  change afterward normalized Windows line endings and its six asset tests passed.

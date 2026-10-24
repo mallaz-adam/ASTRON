@@ -6,6 +6,7 @@ import { useDesktopLayout } from '../hooks/useDesktopLayout';
 import { StreakCard } from './StreakCard';
 import { TodayHeader } from './TodayHeader';
 import { TodayTabs } from './TodayTabs';
+import { TestTools } from './TestTools';
 import './Today.css';
 
 export function TodayView({ model, showDevLink = false }: { model: TodayModel; showDevLink?: boolean }) {
@@ -30,6 +31,7 @@ export function TodayView({ model, showDevLink = false }: { model: TodayModel; s
         {model.currentCellTitle && <Link className="atlas-button atlas-button--primary today-continue" to="/learn">Continue: {model.currentCellTitle}</Link>}
         {showDevLink && <Link className="today-dev-link" to="/dev">/dev</Link>}
         {!desktop && <TodayTabs />}
+        <TestTools />
       </main>
     </Page>
   );
