@@ -437,3 +437,31 @@ it for practice. Placeholder cell routes are unavailable in production. JSON,
 Markdown, SVG, local fonts and the application shell are precached on first
 installation; publishing changed content changes the service worker revision.
 The update bar asks for REFRESH before activating a waiting version.
+
+## Orion first journey (25 October 2026)
+
+This section supersedes the Task 10 list of available readers. Authored tale
+cells with a local `reader` JSON path are now playable alongside authored
+lessons. Normal course/Today/cell screens use that authored-content path in
+both development and production; developer tools can still use the full model.
+
+`Tale.reader` is optional and must point to a local `/content/*.json` file.
+The original tale ID and star link remain stable. `Chapter` may additionally
+contain `glaux` text and `presentation`: `hunter`, `landscape`, `chart` or
+`guided-chart`. Text is plain paragraphs and is never inserted as HTML.
+`Article.sourceNote` is optional and adds source notes to the scientific reader.
+
+`public/content/orion.json` holds the authored welcome/ending lines, fact,
+activity prompt, hint, specific responses, candidate patterns and sources.
+Its chart contains unique star IDs, finite ICRS/J2000 degree coordinates and
+connections between known IDs. The belt group must contain Alnitak, Alnilam
+and Mintaka. Invalid fields, unsafe source schemes and broken chart links
+are rejected before rendering. The supplied hunter drawing is illustrative;
+scientific coordinates remain a separate layer of content.
+
+Version 3 keeps the eight progress tables and adds optional `welcome` and
+`taleVisit` data on `Learner`. Old progress is retained. Star/tale collection
+uses the existing reward services atomically; assistance adds no XP and
+cannot remove a star. Goal changes preserve past-day goal snapshots.
+See `orion-journey.md` for the exact checkpoints and navigation behaviour.
+WebP artwork is now included in the offline cache alongside JSON/fonts/SVG.

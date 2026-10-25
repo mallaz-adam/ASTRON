@@ -1,0 +1,35 @@
+.atlas-library { display: grid; gap: 24px; min-height: calc(100dvh - 96px); }
+.atlas-library > .tale-header { margin-bottom: 0; }
+.library-heading { display: grid; gap: 12px; }
+.atlas-library > .tale-glaux { max-width: 680px; }
+.library-story { display: grid; gap: 24px; padding-block: 24px; border-block: var(--border-line); }
+.library-story > img { max-height: 340px; object-position: center 48%; }
+.library-story > div { display: grid; align-content: center; gap: 18px; }
+.library-story .atlas-button { text-align: center; text-decoration: none; display: grid; align-items: center; }
+.sky-collection { display: grid; gap: 24px; }
+.sky-entry { display: flex; align-items: start; gap: 18px; border-top: var(--border-line); padding-top: 24px; }
+.sky-entry > img { flex-shrink: 0; }
+.sky-entry > div { display: grid; gap: 12px; min-width: 0; }
+.sky-entry a, .article-open, .article-connections a { min-height: 44px; display: flex; align-items: center; }
+.sky-tint { font-style: italic; color: var(--soft-ink); }
+.article-list { display: grid; gap: 24px; }
+.article-list article { display: grid; gap: 12px; border-block-start: var(--border-line); padding-top: 24px; }
+.article-list h2 a { color: var(--ink); }
+.article-list h2 a { display: inline-flex; align-items: center; min-height: 44px; }
+.article-reading { width: 100%; max-width: 680px; margin-inline: auto; display: grid; gap: 24px; }
+.article-reading h1 { line-height: 1.2; }
+.article-reading .tale-sources { overflow-wrap: anywhere; }
+.article-summary { font-size: 22px; font-style: italic; }
+.article-connections { display: grid; gap: 8px; border-top: var(--border-line); padding-top: 18px; }
+.settings-page { max-width: 680px; margin-inline: auto; }
+.settings-page > .daily-goal-choices { margin-block: 12px; }
+.today-quest-link { display: block; text-decoration: none; color: var(--ink); }
+.today-quest-link:focus-visible { outline-offset: 4px; }
+.today-discovery-link { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px 24px; padding-top: 18px; border-top: var(--border-line); }
+.today-discovery-link a { min-height: 44px; display: flex; align-items: center; font-size: 16px; }
+@media (min-width: 768px) {
+  .library-story { grid-template-columns: 1fr 1.1fr; gap: 36px; }
+  .library-story > img { max-height: 460px; }
+  .sky-collection { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; }
+  .article-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; }
+}

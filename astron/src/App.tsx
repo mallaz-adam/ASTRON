@@ -9,6 +9,12 @@ import { DesignCheck } from './pages/DesignCheck';
 import { Dev } from './pages/Dev';
 import { NotFound } from './pages/NotFound';
 import { UpdateNotice } from './pwa/UpdateNotice';
+import { FirstVisitGate } from './pages/FirstVisitGate';
+import { TaleExperience } from './pages/tales/TaleExperience';
+import { Stories } from './pages/Stories';
+import { MySky } from './pages/MySky';
+import { Articles, ArticleReader } from './pages/Articles';
+import { Settings } from './pages/Settings';
 
 export function AppRoutes({ development = import.meta.env.DEV }: { development?: boolean }) {
   const location = useLocation();
@@ -20,13 +26,27 @@ export function AppRoutes({ development = import.meta.env.DEV }: { development?:
       : location.pathname === '/sun' ? 'Your sun · ASTRON' : 'Today · ASTRON';
     if (location.pathname === '/learn') document.title = 'Course path · ASTRON';
     if (location.pathname.startsWith('/cell/')) document.title = 'Cell · ASTRON';
+    if (location.pathname === '/welcome') document.title = 'Welcome · ASTRON';
+    if (location.pathname.startsWith('/stories')) document.title = 'Stories · ASTRON';
+    if (location.pathname === '/sky') document.title = 'My sky · ASTRON';
+    if (location.pathname.startsWith('/articles')) document.title = 'Articles · ASTRON';
+    if (location.pathname === '/settings') document.title = 'Your preferences · ASTRON';
   }, [location.pathname, development]);
   return (
     <Routes>
-      <Route path="/" element={<Today />} />
-      <Route path="/sun" element={<YourSun />} />
-      <Route path="/learn" element={<CoursePath />} />
-      <Route path="/cell/:id" element={<Cell />} />
+      <Route path="/welcome" element={<TaleExperience welcome />} />
+      <Route element={<FirstVisitGate />}>
+        <Route path="/" element={<Today />} />
+        <Route path="/sun" element={<YourSun />} />
+        <Route path="/learn" element={<CoursePath />} />
+        <Route path="/cell/:id" element={<Cell />} />
+        <Route path="/stories" element={<Stories />} />
+        <Route path="/stories/:id" element={<TaleExperience />} />
+        <Route path="/sky" element={<MySky />} />
+        <Route path="/articles" element={<Articles />} />
+        <Route path="/articles/:id" element={<ArticleReader />} />
+        <Route path="/settings" element={<Settings />} />
+      </Route>
       {development && <Route path="/design" element={<DesignCheck />} />}
       {development && <Route path="/dev" element={<Dev />} />}
       <Route path="*" element={<NotFound />} />

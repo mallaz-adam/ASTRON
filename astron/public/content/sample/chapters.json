@@ -1,5 +1,51 @@
 [
-  { "taleId": "orion-shoulder", "number": 1, "title": "The quiet hunter", "text": "Orion rested his bow beside a stone. For once, there was nothing to chase.\n\nAbove him, the stars waited in their patient places. He wondered whether a story could travel farther than a hunter’s feet.", "marginNotes": ["This is an imagined scene, offered as a sample of the tone."] },
-  { "taleId": "orion-shoulder", "number": 2, "title": "A warm light", "text": "In the sky’s picture of Orion, a reddish light rests on his shoulder: **Betelgeuse**.\n\nGlaux might say, *a name is one way to begin looking*. The tale gives us a figure to remember; astronomy gives us a star to wonder about.", "marginNotes": ["Betelgeuse is a red supergiant. A constellation is a pattern as seen from Earth."] },
-  { "taleId": "pleiades-placeholder", "number": 1, "title": "The Pleiades", "text": "Placeholder.", "marginNotes": [] }
+  {
+    "taleId": "orion-shoulder",
+    "number": 1,
+    "title": "The Hunter",
+    "text": "Before his name belonged to the stars, Orion belonged to the wild places.\n\nHe crossed the hills without fear. He could wait quietly, notice a track,\nand follow it through the trees. Each successful hunt made his confidence grow.\n\nIn one old telling, that confidence became a boast. Orion believed no living\ncreature could stand against him. He spoke as though the whole Earth were his\nto conquer.\n\nBut the Earth held lives he had never noticed. Beneath leaves and stones,\nbeyond the reach of his gaze, something small was waiting.",
+    "marginNotes": [
+      "Keep this small pattern in mind. We will find it again."
+    ],
+    "glaux": "Watch closely. Great strength can overlook small things.",
+    "presentation": "hunter"
+  },
+  {
+    "taleId": "orion-shoulder",
+    "number": 2,
+    "title": "The Scorpion",
+    "text": "The Earth heard Orion's boast.\n\nShe held the roots of trees and the creatures beneath them. She held the\npaths he followed, and the lives that kept those paths alive.\n\nShe sent a scorpion.\n\nOrion found it at his feet, small beside the hunter. Its tail curved over its\nback. He faced it with the confidence that had carried him through every hunt.\n\nThe scorpion struck. Its sting ended Orion's life.\n\nFor once, his strength could take him no farther. The hunter's part in the\nstory on Earth was over. His place in the sky was still to come.",
+    "marginNotes": [
+      "Ancient writers gave Orion different endings. This telling follows the scorpion story."
+    ],
+    "glaux": "The smallest thing can change the whole story.",
+    "presentation": "landscape"
+  },
+  {
+    "taleId": "orion-shoulder",
+    "number": 3,
+    "title": "Among the Stars",
+    "text": "The tale did not end with the hunter's fall.\n\nZeus, ruler of the gods, placed the scorpion among the stars. Artemis, the\ngoddess of the hunt, asked him to remember Orion too.\n\nSo the hunter was given a place in the sky.\n\nThis is how one old telling explains the figure people imagined there.\nLook at the raised arm, the broad shoulders, the belt across his middle.\nThe hunter can be pictured again, traced through the lights.\n\nHis story has travelled far beyond the hills. Now it has reached the page\nyou are holding open.",
+    "marginNotes": [
+      "The hunter is an illustration. The star chart shows a pattern seen from Earth."
+    ],
+    "glaux": "People gave the lights a story. Now look for the pattern.",
+    "presentation": "chart"
+  },
+  {
+    "taleId": "orion-shoulder",
+    "number": 4,
+    "title": "Look Up",
+    "text": "The tale ends here. The stars are real.\n\nLook near the middle of the chart. Three bright points sit close together,\nin an almost-straight line. People picture them as the hunter's belt.\n\nBegin there. Then let your eyes follow the pattern towards his shoulders\nand feet. Near one shoulder, a reddish point has its own name: Betelgeuse.\n\nThe lines and the hunter belong to our picture of the sky. The stars are\nfaraway suns, seen from Earth.\n\nYou have followed the tale into a pattern you can recognise. Keep the belt\nin mind. It will help you find Orion again.",
+    "marginNotes": [],
+    "glaux": "Begin with the belt. Let the rest of Orion follow.",
+    "presentation": "guided-chart"
+  },
+  {
+    "taleId": "pleiades-placeholder",
+    "number": 1,
+    "title": "The Pleiades",
+    "text": "Placeholder.",
+    "marginNotes": []
+  }
 ]

@@ -27,6 +27,9 @@ export class AstronDb extends Dexie {
     // Tint is optional data, not an index. Existing stars and all other progress
     // stay untouched; older stars simply have no tint.
     this.version(2).stores({ litStars: '[learnerId+starId], learnerId' });
+    // Optional journey checkpoints live on the existing learner. No progress
+    // table is replaced, and older learners do not acquire invented completion.
+    this.version(3).stores({ learners: 'id' });
   }
 }
 

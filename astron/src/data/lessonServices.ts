@@ -10,7 +10,9 @@ async function availableLesson(database: AstronDb, content: Content, learnerId: 
   const lesson = content.lessons.find(row => row.id === lessonId && !row.placeholder);
   if (!lesson) throw new Error('Lesson is not available.');
   const cell = content.cells.find(row => row.id === lesson.cellId)!;
-  const path = buildCoursePath(content, await readProgress(database), learnerId, cell.unitId);
+  // Normal screens expose authored content in both builds. Use the identical
+  // path here so a local learner is not blocked by development-only placeholders.
+  const path = buildCoursePath(content, await readProgress(database), learnerId, cell.unitId, true);
   if (path.cells.find(row => row.id === cell.id)?.state === 'locked') throw new Error('Finish the cell before it to open this one.');
   return lesson;
 }

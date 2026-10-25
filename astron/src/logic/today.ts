@@ -35,7 +35,7 @@ export function buildTodayModel(progress: Progress, content: Content, now: Date,
   const week = weekDays(dayDate, days);
   const xpEarned = questRows.reduce((sum, row) => sum + row.earned, 0);
   const xpAvailable = questRows.reduce((sum, row) => sum + row.xp, 0);
-  const path = buildCoursePath(content, progress, learnerId);
+  const path = buildCoursePath(content, progress, learnerId, undefined, true);
   return {
     dayDate, weekday: new Intl.DateTimeFormat('en', { weekday: 'long' }).format(now),
     sunStage: sunStage(done), streak, streakStage: streakStage(streak),

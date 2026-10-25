@@ -1,0 +1,143 @@
+.atlas-page.tale-page { padding: 24px; }
+.tale-page .page-content { max-width: 1220px; }
+.tale-main { min-width: 0; }
+.tale-main h1:focus { outline: none; }
+.tale-eyebrow, .tale-wordmark, .tale-context, .tale-chapter-count { font-family: var(--font-label); font-weight: 400; }
+.tale-eyebrow { font-size: 12px; line-height: 1.7; letter-spacing: .14em; text-transform: uppercase; color: var(--soft-ink); }
+.tale-wordmark { color: var(--ink); text-decoration: none; letter-spacing: .22em; font-size: 22px; min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
+.tale-wordmark img { flex-shrink: 0; }
+.tale-header { display: flex; align-items: center; gap: 18px; border-bottom: var(--border-line); padding-bottom: 18px; margin-bottom: 36px; min-width: 0; }
+.tale-context { font-size: 11px; line-height: 1.6; letter-spacing: .1em; text-transform: uppercase; border-left: var(--border-line); padding-left: 18px; margin-left: auto; }
+.tale-close { display: grid; place-items: center; width: 44px; height: 44px; border: var(--border-line); flex-shrink: 0; color: var(--ink); }
+.tale-close svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1; }
+.tale-cover { display: grid; gap: 18px; }
+.cover-wordmark { padding-block: 8px 14px; border-bottom: var(--border-line); }
+.cover-heading { display: grid; gap: 8px; }
+.cover-heading h1 { font-size: clamp(36px, 10.8vw, 48px); line-height: 1.15; }
+.tale-cover-image { display: block; width: 100%; height: auto; object-fit: cover; }
+.cover-art { overflow: hidden; height: calc((100vw - 48px) * 1.06); max-height: 450px; }
+.cover-art .tale-cover-image { height: 100%; object-position: 48% 62%; transform: scale(1.2); transform-origin: 48% 65%; }
+.cover-invitation { display: grid; gap: 24px; }
+.cover-teaser { font-size: 20px; line-height: 1.5; }
+.tale-glaux { display: flex; align-items: center; gap: 12px; }
+.tale-glaux .inline-art { width: 60px; height: 60px; flex-shrink: 0; }
+.tale-glaux .speech-box { min-width: 0; flex: 1; margin-left: 0; padding: 14px 18px; font-size: 18px; line-height: 1.5; }
+.tale-glaux .speech-box::before { top: 20px; }
+.tale-sources { font-size: 15px; color: var(--soft-ink); }
+.tale-sources summary { color: var(--vermilion); text-decoration: underline; text-underline-offset: 4px; }
+.tale-sources summary, .tale-discovery summary { cursor: pointer; min-height: 44px; padding-block: 10px; }
+.tale-sources summary:focus-visible, .tale-discovery summary:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.tale-sources > div { padding: 18px; background: var(--card); border: var(--border-line); }
+.tale-sources p + p { margin-top: 12px; }
+.tale-sources ul { padding-left: 18px; }
+.tale-sources li + li { margin-top: 8px; }
+.tale-sources a { overflow-wrap: anywhere; }
+.tale-sources li a, .tale-sources .tale-prose a { display: inline-flex; align-items: center; min-height: 44px; }
+.tale-footer { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: 18px; border-top: var(--border-line); padding-top: 18px; margin-top: 36px; }
+.tale-footer > .tale-sources { flex: 1 1 180px; }
+.tale-footer .toggle-field { margin-left: auto; }
+.tale-footer .toggle-label, .tale-footer .toggle-state { font-size: 13px; }
+.tale-chapter { display: grid; gap: 24px; }
+.tale-chapter-heading { display: grid; gap: 8px; }
+.tale-chapter-copy { display: grid; align-content: start; gap: 24px; }
+.tale-prose { font-size: 18px; line-height: 1.7; max-width: 62ch; }
+.tale-prose p + p { margin-top: 18px; }
+.tale-illustration { display: grid; align-content: start; gap: 14px; min-width: 0; }
+.tale-plate { margin: 0; padding: 12px; background: var(--lapis); color: var(--card); border: 1px dotted #c9a44a99; }
+.tale-hunter-image { display: block; width: 100%; max-height: 480px; object-fit: contain; height: auto; }
+.tale-plate figcaption { font-size: 15px; text-align: center; color: var(--card); padding-top: 8px; }
+.tale-discovery { border-block: var(--border-line); font-size: 16px; }
+.tale-discovery > p { padding: 8px 0 18px; }
+.tale-discovery .orion-chart { background: var(--lapis); }
+.tale-landscape-image { width: 100%; height: 220px; object-position: 50% 0%; }
+.tale-picture-note { font-size: 15px; font-style: italic; color: var(--soft-ink); }
+.tale-feature-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tale-feature-controls button { font-size: 13px; padding-inline: 8px; }
+.tale-feature-controls [aria-pressed='true'] { color: var(--parchment); background: var(--ink); }
+.tale-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 12px; margin-top: 24px; }
+.tale-chapter-count { margin-right: auto; color: var(--soft-ink); font-size: 12px; }
+.tale-chapter-actions { padding-top: 18px; border-top: var(--border-line); }
+.tale-chapter-actions .atlas-button { padding-inline: 12px; }
+.tale-actions .atlas-button { flex: 1 1 auto; }
+.orion-chart { display: block; width: 100%; height: auto; max-height: 520px; background: var(--lapis); }
+.orion-connections { stroke: var(--card); stroke-width: .8; opacity: .6; }
+.orion-star { fill: var(--card); }
+.orion-star--red { fill: #e9b173; }
+.orion-point-halo { fill: var(--card); opacity: .12; }
+.orion-point-ring { fill: none; stroke: var(--card); stroke-width: 1.5; }
+.orion-point--selected .orion-point-halo { opacity: .28; }
+.orion-labels { fill: var(--card); font-family: var(--font-reading); font-style: italic; font-size: 15px; }
+.orion-group-labels { fill: var(--card); font-family: var(--font-label); font-size: 16px; text-anchor: middle; }
+.tale-star-scene { display: grid; gap: 24px; }
+.tale-star-copy { display: grid; align-content: start; gap: 18px; }
+.tale-star-heading { display: grid; gap: 8px; }
+.tale-star-heading h1 { font-size: 52px; }
+.tale-collected { font-style: italic; font-size: 20px; }
+.tale-origin { font-size: 15px; color: var(--soft-ink); }
+.tale-next-question { padding-top: 18px; border-top: var(--border-line); }
+.tale-next-question > p + p { margin-top: 8px; font-size: 23px; font-style: italic; }
+.tale-ending-actions > button { width: 100%; }
+.belt-activity { display: grid; gap: 24px; }
+.belt-intro { display: grid; gap: 12px; }
+.belt-intro h1 { font-size: 30px; line-height: 1.25; }
+.belt-controls { display: grid; gap: 18px; align-content: start; }
+.belt-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 0; margin: 0; border: 0; }
+.belt-choices legend { font-size: 15px; padding-bottom: 12px; }
+.belt-choice { min-height: 52px; display: flex; gap: 8px; justify-content: center; align-items: center; border: var(--border-ink); padding: 8px; cursor: pointer; font: 400 13px/1.5 var(--font-label); }
+.belt-choice:has(input:checked) { background: var(--ink); color: var(--parchment); }
+.belt-choice:has(input:focus-visible) { outline: var(--focus-ring); outline-offset: 4px; }
+.belt-choice input { width: 16px; height: 16px; margin: 0; accent-color: var(--vermilion); }
+.belt-help { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.belt-response { display: grid; gap: 18px; }
+.belt-response:empty { display: none; }
+.belt-descriptions { font-size: 15px; }
+.tale-preferences { max-width: 620px; margin: 36px auto; display: grid; gap: 24px; }
+.interest-choices { display: flex; flex-wrap: wrap; gap: 12px; }
+.daily-goal-choices { padding: 0; margin: 0; border: 0; display: grid; gap: 12px; }
+.daily-goal-choices legend { font-size: 15px; padding-bottom: 12px; }
+.daily-goal-choice { display: flex; align-items: center; gap: 14px; padding: 18px; min-height: 64px; border: var(--border-line); cursor: pointer; }
+.daily-goal-choice input { accent-color: var(--vermilion); width: 20px; height: 20px; }
+.daily-goal-choice span:last-child { margin-left: auto; color: var(--soft-ink); }
+.daily-goal-choice:has(input:checked) { background: var(--panel); border-color: var(--ink); }
+.tale-save-error { margin-top: 24px; padding: 18px; border: var(--border-ink); background: var(--card); }
+.tale-loading { padding-block: 36px; display: grid; gap: 24px; }
+@media (min-width: 768px) {
+  .atlas-page.tale-page { padding: 36px; }
+  .tale-chapter { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
+  .tale-chapter-heading { grid-column: 1; grid-row: 1; align-self: end; }
+  .tale-chapter-copy { grid-column: 1; grid-row: 2; }
+  .tale-illustration { grid-column: 2; grid-row: 1 / 3; }
+  .tale-star-scene { grid-template-columns: 1.1fr 1fr; gap: 24px 36px; align-items: start; }
+  .tale-star-heading { grid-column: 2; grid-row: 1; }
+  .tale-star-plate { grid-column: 1; grid-row: 1 / 3; }
+  .tale-star-copy { grid-column: 2; grid-row: 2; }
+  .tale-ending-actions { margin-left: calc(50% + 18px); }
+  .tale-actions .atlas-button { flex: 0 1 auto; min-width: 180px; }
+  .belt-activity { grid-template-columns: 1.1fr 1fr; gap: 24px 36px; }
+  .belt-intro { grid-column: 2; grid-row: 1; }
+  .belt-plate { grid-column: 1; grid-row: 1 / 3; }
+  .belt-controls { grid-column: 2; grid-row: 2; }
+}
+@media (min-width: 1000px) {
+  .atlas-page.tale-page { padding: 48px; }
+  .tale-cover { position: relative; grid-template-columns: minmax(0, .95fr) minmax(0, 1.1fr); grid-template-rows: auto auto 1fr; gap: 36px; min-height: min(850px, calc(100dvh - 96px)); }
+  .cover-wordmark { grid-column: 1; grid-row: 1; align-self: start; margin-top: 18px; padding-bottom: 36px; }
+  .cover-heading { grid-column: 1; grid-row: 2; align-content: start; gap: 18px; }
+  .cover-heading h1 { font-size: clamp(52px, 5.6vw, 76px); }
+  .cover-art { grid-column: 2; grid-row: 1 / 4; height: 100%; min-height: 680px; max-height: none; mask-image: linear-gradient(to right, transparent 0%, #000 10%); }
+  .cover-art .tale-cover-image { height: 100%; object-position: 44% 52%; transform: scale(1.2); transform-origin: 48% 65%; }
+  .cover-invitation { grid-column: 1; grid-row: 3; gap: 30px; padding-bottom: 24px; align-content: start; }
+  .cover-teaser { font-size: 30px; max-width: 30ch; }
+  .cover-invitation > .atlas-button { width: 100%; max-width: 420px; }
+  .tale-glaux .inline-art { width: 78px; height: 78px; }
+  .tale-glaux .speech-box { padding: 18px 24px; font-size: 24px; }
+  .tale-chapter { gap: 24px 48px; }
+  .tale-prose { font-size: 19px; }
+  .tale-plate { padding: 18px; }
+  .tale-hunter-image { max-height: 540px; }
+  .tale-landscape-image { height: 300px; }
+  .tale-chapter-heading h1 { font-size: 42px; }
+  .tale-star-heading h1 { font-size: 54px; }
+}
+@media (prefers-reduced-motion: reduce) { .tale-page *, .tale-page *::before, .tale-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+[data-reduce-motion='true'].tale-page *, [data-reduce-motion='true'].tale-page *::before, [data-reduce-motion='true'].tale-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

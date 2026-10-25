@@ -1,4 +1,4 @@
 [
-  { "id": "orion-shoulder", "title": "A light on Orion’s shoulder", "subtitle": "A small imagined tale", "minutes": 6, "teaser": "A hunter pauses beneath a sky that will hold his story.", "sourceNote": "An original fictional vignette inspired by the Greek figure of Orion, not a translation of an ancient source. Astronomy reference: https://science.nasa.gov/universe/what-is-betelgeuse-inside-the-strange-volatile-star/", "starId": "betelgeuse" },
+  { "id": "orion-shoulder", "title": "Orion, the Hunter", "subtitle": "A Greek myth, in one telling", "minutes": 6, "teaser": "Before his name belonged to the stars, Orion belonged to the wild places.", "sourceNote": "An original retelling following the scorpion account in Pseudo-Hyginus, Astronomica 2.26. Different ancient tellings exist. The landscape and narrative details are creative treatment, not historical evidence.", "starId": "betelgeuse", "reader": "/content/orion.json" },
   { "id": "pleiades-placeholder", "title": "The Pleiades", "subtitle": "Placeholder.", "minutes": 6, "teaser": "Placeholder.", "sourceNote": "Placeholder.", "starId": "alcyone" }
 ]

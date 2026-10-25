@@ -2,8 +2,8 @@
 export type Interest = { id: string; label: string };
 export type Constellation = { id: string; name: string; mythNote: string };
 export type Star = { id: string; name: string; greekLetter: string; factText: string; constellationId: string };
-export type Tale = { id: string; title: string; subtitle: string; minutes: number; teaser: string; sourceNote: string; starId: string };
-export type Chapter = { taleId: string; number: number; title: string; text: string; marginNotes: string[] };
+export type Tale = { id: string; title: string; subtitle: string; minutes: number; teaser: string; sourceNote: string; starId: string; reader?: string };
+export type Chapter = { taleId: string; number: number; title: string; text: string; marginNotes: string[]; glaux?: string; presentation?: 'hunter' | 'landscape' | 'chart' | 'guided-chart' };
 export type Unit = { id: string; title: string; summary: string; orderNo: number };
 export type CellKind = 'lesson' | 'tale' | 'quiz';
 type CellFields = { id: string; positionNo: number; title: string; minutes: number; unitId: string };
@@ -37,11 +37,13 @@ export type Exercise = {
 };
 export type QuestKind = 'learn' | 'story' | 'read';
 export type Quest = { id: string; kind: QuestKind; title: string; xpReward: number };
-export type Article = { id: string; title: string; summary: string; body: string; readingMin: number };
+export type Article = { id: string; title: string; summary: string; body: string; readingMin: number; sourceNote?: string };
 export type UnitArticle = { unitId: string; articleId: string };
 
 export type DailyGoal = 1 | 2 | 3;
-export type Learner = { id: string; displayName: string; dailyGoal: DailyGoal; language: string; reduceMotion: boolean; freezesLeft: number };
+export type TaleStage = 'cover' | 'story' | 'star' | 'activity' | 'sky' | 'preferences';
+export type TaleVisit = { taleId: string; stage: TaleStage; chapter: number; readThrough: boolean; beltOutcome?: 'independent' | 'assisted' };
+export type Learner = { id: string; displayName: string; dailyGoal: DailyGoal; language: string; reduceMotion: boolean; freezesLeft: number; welcome?: { startedOn: string; completedOn?: string }; taleVisit?: TaleVisit };
 export type LearnerInterest = { learnerId: string; interestId: string };
 // The goal is saved for the day, so later goal changes do not rewrite history.
 export type ActivityDay = { learnerId: string; dayDate: string; freezeUsed: boolean; dailyGoal: DailyGoal };

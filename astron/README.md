@@ -247,3 +247,20 @@ older on-device progress without replacing it; existing untinted stars still wor
 Check the ending at 390, 768 and 1280 px with Tab and Enter. At `/design`, turn
 on Reduce motion and finish again: the final star appears immediately, with all
 closing text and no owl blink. The device preference has the same effect.
+
+## Orion first experience
+
+New devices now start with the approved Orion story at `/welcome`. The full
+journey includes four chapters, optional discoveries, a separately checked
+star chart, Betelgeuse collection, the belt activity with immediate help,
+My sky, interests, a daily goal and Today. Existing learners keep their saved
+progress and usual home; they can enter Orion through `/stories`.
+
+The supplied unframed painting and hunter illustration ship as local WebP.
+Stories, My sky, Profile preferences and a sourced scientific article are
+connected. `/dev` and `/design` remain development-only. No new dependency,
+account, analytics or progress upload is introduced.
+
+Read `docs/orion-journey.md` for saving/reward behaviour, sources and the
+manual checks. Run `npm test` and `npm run build` before sharing a release.
+This milestone is prepared locally; publishing is a separate action.

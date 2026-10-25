@@ -91,7 +91,7 @@ describe('Version-one progress upgrade', () => {
     try { for (const [table, row] of Object.entries(rows)) await old.table(table).add(row); }
     finally { old.close(); }
     await database.open();
-    expect(database.verno).toBe(2);
+    expect(database.verno).toBe(3);
     expect(await readProgress(database)).toEqual(Object.fromEntries(Object.entries(rows).map(([table, row]) => [table, [row]])));
     await lightStar(database, content, 'one', 'star-clue-03', 'lesson', now, 'blue');
     expect(await database.litStars.count()).toBe(2);

@@ -8,6 +8,7 @@ import { TodayHeader } from './TodayHeader';
 import { TodayTabs } from './TodayTabs';
 import { TestTools } from './TestTools';
 import './Today.css';
+import './AtlasReaders.css';
 
 export function TodayView({ model, showDevLink = false }: { model: TodayModel; showDevLink?: boolean }) {
   const desktop = useDesktopLayout();
@@ -25,10 +26,11 @@ export function TodayView({ model, showDevLink = false }: { model: TodayModel; s
           <p>{model.goalText}</p>
         </div>
         <div className="today-quests">
-          {model.questRows.map(quest => <QuestRow key={quest.id} kind={quest.kind} title={quest.title} xp={quest.xp} done={quest.done} />)}
+          {model.questRows.map(quest => <Link key={quest.id} className="today-quest-link" to={quest.kind === 'Learn' ? '/learn' : quest.kind === 'Read' ? '/articles' : '/stories'}><QuestRow kind={quest.kind} title={quest.title} xp={quest.xp} done={quest.done} /></Link>)}
         </div>
         <p className="today-bonus">Finish all three today for <span className="lining-figures">+10 XP</span>.</p>
         {model.currentCellTitle && <Link className="atlas-button atlas-button--primary today-continue" to="/learn">Continue: {model.currentCellTitle}</Link>}
+        <aside className="today-discovery-link" aria-label="Keep exploring"><Link to="/articles/betelgeuse-colour">Why does Betelgeuse look red?</Link><Link to="/sky">My sky</Link></aside>
         {showDevLink && <Link className="today-dev-link" to="/dev">/dev</Link>}
         {!desktop && <TodayTabs />}
         <TestTools />

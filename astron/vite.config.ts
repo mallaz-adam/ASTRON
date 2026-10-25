@@ -29,7 +29,7 @@ export default defineConfig(({ mode }) => ({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,woff2,json,md}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,webp,woff2,json,md}'],
         cleanupOutdatedCaches: true,
         clientsClaim: true,
         skipWaiting: false,

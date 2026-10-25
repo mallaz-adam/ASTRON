@@ -28,9 +28,11 @@ async function xp() {
 function answer(id: string, correct: boolean, date = now) { return saveLessonAnswer(database, content, learner, lesson, id, correct, date); }
 
 describe('Lesson assessment and rewards', () => {
-  it('requires cells one and two before saving a lesson answer', async () => {
-    await expect(answer(order, true)).rejects.toThrow('Finish the cell before it');
-    expect(await database.answers.count()).toBe(0);
+  it('allows the first authored lesson locally without inventing placeholder prerequisites', async () => {
+    await answer(order, true);
+    expect(await database.answers.count()).toBe(1);
+    expect(await database.completions.count()).toBe(0);
+    expect(await database.questDone.count()).toBe(0);
   });
   it('finishes with two first-try answers, 40 total XP and cell four current', async () => {
     await prerequisites();

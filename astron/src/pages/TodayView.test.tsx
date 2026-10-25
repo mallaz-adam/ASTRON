@@ -19,14 +19,14 @@ describe('Today controls and art', () => {
     const html = render();
     expect(html).toContain('type="button" class="profile-control" aria-label="Profile"');
     expect(html).toContain('aria-current="page"');
-    expect(html).toContain('Continue: Scale of the cosmos');
+    expect(html).toContain('Continue: Why stars differ');
   });
-  it('marks all three future tabs disabled with no navigation action', () => {
+  it('opens the authored Stories and My sky pages and keeps Timeline unavailable', () => {
     const html = render();
-    expect(html.match(/disabled="" aria-disabled="true"/g)).toHaveLength(3);
-    expect(html).not.toContain('href="/stories"');
+    expect(html.match(/disabled="" aria-disabled="true"/g)).toHaveLength(1);
+    expect(html).toContain('href="/stories"');
     expect(html).not.toContain('href="/timeline"');
-    expect(html).not.toContain('href="/journal"');
+    expect(html).toContain('href="/sky"');
   });
   it('inlines the supplied sun and owl and exposes the motion preference', () => {
     const html = render(true);

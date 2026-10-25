@@ -8,6 +8,9 @@ export function buildCoursePath(content: Content, progress: Pick<Progress, 'comp
   // The online test exposes authored lessons only. No placeholder is completed
   // or rewarded to bypass prerequisites; development keeps the full course.
   const playableIds = new Set(content.lessons.filter(lesson => !lesson.placeholder).map(lesson => lesson.cellId));
+  for (const cell of content.cells) {
+    if (cell.kind === 'tale' && content.tales.some(tale => tale.id === cell.taleId && tale.reader)) playableIds.add(cell.id);
+  }
   const ordered = content.cells.filter(cell => cell.unitId === unit.id && (!testRelease || playableIds.has(cell.id))).sort((a, b) => a.positionNo - b.positionNo);
   const doneIds = new Set(progress.completions.filter(row => row.learnerId === learnerId).map(row => row.cellId));
   const currentId = ordered.find(cell => !doneIds.has(cell.id))?.id;

@@ -1,0 +1,149 @@
+{
+  "taleId": "orion-shoulder",
+  "welcomeLine": "Walk with me. We will begin with a story.",
+  "starLine": "A story brought you here. This star can help you remember it.",
+  "endingLine": "Your atlas has begun. This is a place you can return to.",
+  "endingQuestion": "Why does Betelgeuse look red?",
+  "fact": "Betelgeuse is a red supergiant: a star much larger than the Sun. On this chart, it marks one of Orion's shoulders.",
+  "activity": {
+    "prompt": "Find the three stars that form Orion's belt.",
+    "hint": "Look for three bright stars close together, almost in a line.",
+    "rightLine": "There it is. You can find the hunter by his belt.",
+    "showLine": "Begin with the belt. Let the rest of Orion follow.",
+    "explanation": "Those three bright points form Orion's belt in our picture of the sky.",
+    "groups": [
+      {
+        "id": "upper",
+        "label": "Group A",
+        "description": "Three widely spaced stars forming a triangle.",
+        "starIds": [
+          "betelgeuse",
+          "bellatrix",
+          "mintaka"
+        ],
+        "missedLine": "This group bends. Look for three stars almost in a line."
+      },
+      {
+        "id": "belt",
+        "label": "Group B",
+        "description": "Three close stars in an almost-straight line.",
+        "starIds": [
+          "alnitak",
+          "alnilam",
+          "mintaka"
+        ],
+        "missedLine": ""
+      },
+      {
+        "id": "lower",
+        "label": "Group C",
+        "description": "Two far-apart stars with a third above them.",
+        "starIds": [
+          "saiph",
+          "rigel",
+          "alnilam"
+        ],
+        "missedLine": "These stars are far apart. Look for three closer lights."
+      }
+    ]
+  },
+  "chart": {
+    "epoch": "ICRS J2000",
+    "stars": [
+      {
+        "id": "betelgeuse",
+        "name": "Betelgeuse",
+        "raDegrees": 88.792939,
+        "decDegrees": 7.407064
+      },
+      {
+        "id": "bellatrix",
+        "name": "Bellatrix",
+        "raDegrees": 81.28276354,
+        "decDegrees": 6.34970328
+      },
+      {
+        "id": "rigel",
+        "name": "Rigel",
+        "raDegrees": 78.63446708,
+        "decDegrees": -8.20163836
+      },
+      {
+        "id": "saiph",
+        "name": "Saiph",
+        "raDegrees": 86.93912042,
+        "decDegrees": -9.66960472
+      },
+      {
+        "id": "alnitak",
+        "name": "Alnitak",
+        "raDegrees": 85.18969442,
+        "decDegrees": -1.94257358
+      },
+      {
+        "id": "alnilam",
+        "name": "Alnilam",
+        "raDegrees": 84.05338896,
+        "decDegrees": -1.20191914
+      },
+      {
+        "id": "mintaka",
+        "name": "Mintaka",
+        "raDegrees": 83.00166704,
+        "decDegrees": -0.29909511
+      }
+    ],
+    "connections": [
+      [
+        "betelgeuse",
+        "bellatrix"
+      ],
+      [
+        "betelgeuse",
+        "alnitak"
+      ],
+      [
+        "bellatrix",
+        "mintaka"
+      ],
+      [
+        "alnitak",
+        "alnilam"
+      ],
+      [
+        "alnilam",
+        "mintaka"
+      ],
+      [
+        "alnitak",
+        "saiph"
+      ],
+      [
+        "mintaka",
+        "rigel"
+      ]
+    ]
+  },
+  "sources": [
+    {
+      "title": "The Orion telling — Pseudo-Hyginus, Astronomica 2.26",
+      "url": "https://www.theoi.com/Gigante/GiganteOrion.html"
+    },
+    {
+      "title": "NASA — Discovering the Universe Through Orion",
+      "url": "https://science.nasa.gov/universe/stories/quick-reads/discovering-the-universe-through-the-constellation-orion/"
+    },
+    {
+      "title": "NASA — What is Betelgeuse?",
+      "url": "https://science.nasa.gov/universe/what-is-betelgeuse-inside-the-strange-volatile-star/"
+    },
+    {
+      "title": "CDS SIMBAD — J2000 star positions",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Betelgeuse"
+    },
+    {
+      "title": "CDS — Saiph position",
+      "url": "https://aladin.cds.unistra.fr/simbad-thumbnails/thumbnails5.html"
+    }
+  ]
+}

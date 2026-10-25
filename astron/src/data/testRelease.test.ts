@@ -16,9 +16,9 @@ beforeEach(() => { database = new AstronDb(`astron-web-test-${number++}`); vi.st
 afterEach(async () => { vi.unstubAllEnvs(); await database.delete(); });
 
 describe('The approved lesson-three starting point', () => {
-  it('offers only real authored lessons online and the full eleven-cell course locally', () => {
+  it('offers the real lesson and authored Orion tale online and retains the full course model for tools', () => {
     const online = buildCoursePath(content, { completions: [] });
-    expect(online.cells.map(cell => cell.id)).toEqual(['star-lesson']);
+    expect(online.cells.map(cell => cell.id)).toEqual(['star-lesson', 'orion-tale']);
     expect(online.current?.state).toBe('current');
     expect(buildCoursePath(content, { completions: [] }, undefined, undefined, false).cells).toHaveLength(11);
   });
@@ -29,6 +29,6 @@ describe('The approved lesson-three starting point', () => {
     expect(progress.completions.map(row => row.cellId)).toEqual(['star-lesson']);
     expect(totalXp(progress.completions, progress.questDone, progress.answers, content.exercises)).toBe(40);
     expect(progress.litStars).toHaveLength(1);
-    expect(buildTodayModel(progress, content, now).currentCellTitle).toBe('Why stars differ');
+    expect(buildTodayModel(progress, content, now).currentCellTitle).toBe('Orion');
   });
 });

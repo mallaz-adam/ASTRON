@@ -43,6 +43,12 @@ export function checkRows(value: unknown, schema: Schema, file: string): Record<
     const fields = { ...schema };
     if (file.endsWith('cells.json') && record.kind === 'tale') fields.taleId = text;
     if (file.endsWith('lessons.json') && record.placeholder !== undefined) fields.placeholder = value => typeof value === 'boolean';
+    if (file.endsWith('tales.json') && record.reader !== undefined) fields.reader = value => typeof value === 'string' && /^\/content\/[a-zA-Z0-9/_-]+\.json$/.test(value);
+    if (file.endsWith('chapters.json')) {
+      if (record.glaux !== undefined) fields.glaux = text;
+      if (record.presentation !== undefined) fields.presentation = oneOf('hunter', 'landscape', 'chart', 'guided-chart');
+    }
+    if (file.endsWith('articles.json') && record.sourceNote !== undefined) fields.sourceNote = text;
     for (const [field, check] of Object.entries(fields)) {
       if (!check(record[field])) contentError(file, `[${index}].${field}`, 'missing or invalid value.');
     }
