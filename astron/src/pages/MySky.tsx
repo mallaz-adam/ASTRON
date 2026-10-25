@@ -12,7 +12,7 @@ export function MySky() {
   const stars = progress?.litStars.filter(row => row.learnerId === localLearnerId) ?? [];
   return <Page className="tale-page" reduceMotion={model?.reduceMotion} skipLabel="Skip to My sky"><main id="main-content" className="atlas-library" tabIndex={-1} aria-busy={!content && !error}>
     <TaleHeader context="My sky" /><header className="library-heading"><p className="tale-eyebrow">An atlas of your discoveries</p><h1>My sky</h1></header>
-    <TaleGlaux mood="proud">Your atlas has begun. This is a place you can return to.</TaleGlaux>
+    <TaleGlaux mood="proud">You can return to your stories and lessons here.</TaleGlaux>
     {!stars.length && <p>Your first story can light a star here. <Link to="/stories">Explore the stories.</Link></p>}
     <div className="sky-collection">{stars.map(saved => {
       const star = content?.stars.find(row => row.id === saved.starId);

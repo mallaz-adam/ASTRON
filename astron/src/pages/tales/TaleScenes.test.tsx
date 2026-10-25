@@ -24,7 +24,7 @@ describe('Orion reading and activity states', () => {
   it('retains the complete chapter prose and supplied hunter rather than replacing them with short speech cards', () => {
     const chapter = content.chapters.find(row => row.taleId === tale.id && row.number === 1)!;
     const html = render(<TaleChapter chapter={chapter} data={data} />);
-    expect(html).toContain('/art/orion/hunter.webp'); expect(html).toContain('Each successful hunt made his confidence grow.');
+    expect(html).toContain('/art/orion/hunter.webp'); expect(html).toContain('Each hunt made him more sure of his strength.');
     expect(html).toContain('A pattern to remember');
   });
   it('starts with three native radio choices and immediate help, without an enabled Check', () => {

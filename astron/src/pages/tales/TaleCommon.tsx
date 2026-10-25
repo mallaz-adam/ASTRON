@@ -27,7 +27,7 @@ export function SourceText({ text }: { text: string }) {
 
 export function TaleSources({ data }: { data: TaleExperienceData }) {
   return <details className="tale-sources"><summary>Sources</summary><div>
-    <p>This is one telling of the myth. The illustrations and the star chart have different roles.</p>
+    <p>This is one version of the myth. The drawings show the imagined hunter. The chart shows where the stars appear from Earth.</p>
     <ul>{data.sources.map(source => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></li>)}</ul>
     <p>Artwork adapted from images supplied for ASTRON. The welcome painting includes an AI-assisted edit. The hunter illustration retains the supplied linework.</p>
     <p>Essential story and source notes are saved with the app. External source pages need an internet connection.</p>

@@ -15,6 +15,7 @@ import { Stories } from './pages/Stories';
 import { MySky } from './pages/MySky';
 import { Articles, ArticleReader } from './pages/Articles';
 import { Settings } from './pages/Settings';
+import { StartupIntro } from './design/StartupIntro';
 
 export function AppRoutes({ development = import.meta.env.DEV }: { development?: boolean }) {
   const location = useLocation();
@@ -55,5 +56,5 @@ export function AppRoutes({ development = import.meta.env.DEV }: { development?:
 }
 
 export function App() {
-  return <ProgressProvider><BrowserRouter><AppRoutes /><UpdateNotice /></BrowserRouter></ProgressProvider>;
+  return <ProgressProvider><BrowserRouter><StartupIntro><AppRoutes /><UpdateNotice /></StartupIntro></BrowserRouter></ProgressProvider>;
 }

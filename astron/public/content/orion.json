@@ -1,16 +1,16 @@
 {
   "taleId": "orion-shoulder",
   "welcomeLine": "Walk with me. We will begin with a story.",
-  "starLine": "A story brought you here. This star can help you remember it.",
-  "endingLine": "Your atlas has begun. This is a place you can return to.",
+  "starLine": "You have found Betelgeuse. Keep it in My sky to remember where to look.",
+  "endingLine": "Your first star is in My sky. You can return to it whenever you like.",
   "endingQuestion": "Why does Betelgeuse look red?",
-  "fact": "Betelgeuse is a red supergiant: a star much larger than the Sun. On this chart, it marks one of Orion's shoulders.",
+  "fact": "Betelgeuse is a red supergiant: a reddish star much larger than the Sun. In Orion's star pattern, it marks one shoulder.",
   "activity": {
     "prompt": "Find the three stars that form Orion's belt.",
     "hint": "Look for three bright stars close together, almost in a line.",
-    "rightLine": "There it is. You can find the hunter by his belt.",
-    "showLine": "Begin with the belt. Let the rest of Orion follow.",
-    "explanation": "Those three bright points form Orion's belt in our picture of the sky.",
+    "rightLine": "You found the belt: three stars close together, almost in a line.",
+    "showLine": "Here is the belt. Look at these three close stars.",
+    "explanation": "These three stars form the belt in our picture of Orion.",
     "groups": [
       {
         "id": "upper",

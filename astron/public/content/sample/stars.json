@@ -1,5 +1,23 @@
 [
-  { "id": "betelgeuse", "name": "Betelgeuse", "greekLetter": "α", "factText": "Betelgeuse is a red supergiant in Orion. In the familiar outline of the hunter, it marks a shoulder.", "constellationId": "orion" },
-  { "id": "alcyone", "name": "Alcyone", "greekLetter": "Placeholder", "factText": "Placeholder.", "constellationId": "pleiades" },
-  { "id": "star-clue-03", "name": "The first clue", "greekLetter": "", "factText": "Blue stars are hotter than red stars.", "constellationId": "clues" }
+  {
+    "id": "betelgeuse",
+    "name": "Betelgeuse",
+    "greekLetter": "α",
+    "factText": "Betelgeuse is a red supergiant: a reddish star much larger than the Sun. In Orion's star pattern, it marks one shoulder.",
+    "constellationId": "orion"
+  },
+  {
+    "id": "alcyone",
+    "name": "Alcyone",
+    "greekLetter": "Placeholder",
+    "factText": "Placeholder.",
+    "constellationId": "pleiades"
+  },
+  {
+    "id": "star-clue-03",
+    "name": "The first clue",
+    "greekLetter": "",
+    "factText": "Blue stars are hotter than red stars.",
+    "constellationId": "clues"
+  }
 ]
