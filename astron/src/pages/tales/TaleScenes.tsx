@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import type { Chapter, Tale } from '../../data/types';
 import type { TaleExperienceData } from '../../data/taleExperience';
 import { Button } from '../../design/Button';
+import { DiscoveryDetails } from '../../design/DiscoveryDetails';
 import { CoverImage, ReadingText, TaleGlaux, TaleSources } from './TaleCommon';
 import { OrionChart } from './OrionChart';
 
@@ -32,8 +33,8 @@ export function TaleChapter({ chapter, data }: { chapter: Chapter; data: TaleExp
     <div className="tale-chapter-heading"><p className="tale-eyebrow">Chapter {['I', 'II', 'III', 'IV'][chapter.number - 1]}</p><h1 id="chapter-title">{chapter.title}</h1><ReadingText text={opening} /></div>
     <aside className="tale-illustration" aria-label="Explore the illustration">
       {type === 'hunter' && <><figure className="tale-plate"><HunterImage /><figcaption>The hunter, imagined</figcaption></figure>
-        <details className="tale-discovery"><summary>A pattern to remember</summary><p>{chapter.marginNotes[0]}</p><OrionChart data={data} highlight="belt" /></details></>}
-      {type === 'landscape' && <><CoverImage className="tale-landscape-image" description="A still painted valley beneath a starry sky." /><details className="tale-discovery"><summary>Another telling</summary><p>{chapter.marginNotes[0]}</p></details></>}
+        <DiscoveryDetails className="tale-discovery" detailId={`tale:${chapter.taleId}:chapter:${chapter.number}:extra`} label="A pattern to remember"><p>{chapter.marginNotes[0]}</p><OrionChart data={data} highlight="belt" /></DiscoveryDetails></>}
+      {type === 'landscape' && <><CoverImage className="tale-landscape-image" description="A still painted valley beneath a starry sky." /><DiscoveryDetails className="tale-discovery" detailId={`tale:${chapter.taleId}:chapter:${chapter.number}:extra`} label="Another telling"><p>{chapter.marginNotes[0]}</p></DiscoveryDetails></>}
       {type === 'chart' && <><figure className="tale-plate">{hunterVisible ? <HunterImage /> : <OrionChart data={data} labels />}
         <figcaption aria-live="polite">{hunterVisible ? 'The hunter, imagined' : 'Orion, seen from Earth'}</figcaption></figure>
         <Button variant="secondary" aria-pressed={hunterVisible} onClick={() => setHunterVisible(!hunterVisible)}>{hunterVisible ? 'Hide the hunter' : 'Show the hunter'}</Button>

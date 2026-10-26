@@ -465,3 +465,18 @@ uses the existing reward services atomically; assistance adds no XP and
 cannot remove a star. Goal changes preserve past-day goal snapshots.
 See `orion-journey.md` for the exact checkpoints and navigation behaviour.
 WebP artwork is now included in the offline cache alongside JSON/fonts/SVG.
+
+## Optional detail cues (26 October 2026)
+
+`Learner.exploredDetails` is an optional array of stable detail IDs, stored only
+on the device. Missing data means the details have not been opened. Opening an
+expandable note or its sources removes its decorative gold glow immediately;
+closing it or returning to the page does not reset that cue. This records an
+opening, not proof that the learner has read or understood the text.
+
+IDs identify the tale/chapter, tale sources, activity pattern descriptions or
+article sources. The existing eight tables and version 3 indexes are unchanged;
+the optional field needs no schema/index migration. Existing exports include it,
+and Erase my progress removes it. No XP, quests, daily records or completions are
+awarded by opening a detail. Reduced motion keeps a still marker instead of the
+fading circle. Gold remains decorative; labels are written in ink.

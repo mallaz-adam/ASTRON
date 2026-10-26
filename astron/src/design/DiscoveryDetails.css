@@ -1,0 +1,10 @@
+.discovery-detail > .discovery-summary { position: relative; min-height: 44px; padding: 10px 40px 10px 0; color: var(--ink); cursor: pointer; }
+.discovery-detail > .discovery-summary:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.discovery-detail[data-unseen='true']:not([open]) > summary .discovery-label { text-shadow: 0 0 8px var(--gold-light); }
+.discovery-indicator { position: absolute; right: 10px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: var(--gold-light); box-shadow: 0 0 8px 3px var(--gold-light); pointer-events: none; }
+.discovery-indicator::after { content: ''; position: absolute; inset: -7px; border: 1px solid var(--gold); border-radius: 50%; opacity: .7; animation: discovery-ripple 3s ease-in-out infinite; }
+.discovery-detail[open] .discovery-indicator, .discovery-detail[data-unseen='false'] .discovery-indicator { display: none; }
+.discovery-description { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@keyframes discovery-ripple { 0% { opacity: .75; transform: scale(.55); } 85%, 100% { opacity: 0; transform: scale(1.3); } }
+[data-reduce-motion='true'] .discovery-indicator::after { animation: none !important; }
+@media (prefers-reduced-motion: reduce) { .discovery-indicator::after { animation: none !important; } }

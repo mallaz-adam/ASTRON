@@ -43,7 +43,7 @@ export type UnitArticle = { unitId: string; articleId: string };
 export type DailyGoal = 1 | 2 | 3;
 export type TaleStage = 'cover' | 'story' | 'star' | 'activity' | 'sky' | 'preferences';
 export type TaleVisit = { taleId: string; stage: TaleStage; chapter: number; readThrough: boolean; beltOutcome?: 'independent' | 'assisted' };
-export type Learner = { id: string; displayName: string; dailyGoal: DailyGoal; language: string; reduceMotion: boolean; freezesLeft: number; welcome?: { startedOn: string; completedOn?: string }; taleVisit?: TaleVisit };
+export type Learner = { id: string; displayName: string; dailyGoal: DailyGoal; language: string; reduceMotion: boolean; freezesLeft: number; welcome?: { startedOn: string; completedOn?: string }; taleVisit?: TaleVisit; exploredDetails?: string[] };
 export type LearnerInterest = { learnerId: string; interestId: string };
 // The goal is saved for the day, so later goal changes do not rewrite history.
 export type ActivityDay = { learnerId: string; dayDate: string; freezeUsed: boolean; dailyGoal: DailyGoal };

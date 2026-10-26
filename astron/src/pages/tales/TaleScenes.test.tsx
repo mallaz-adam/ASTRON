@@ -8,11 +8,12 @@ import { BeltActivity } from './BeltActivity';
 import { TaleChapter, TaleCover, TaleStar } from './TaleScenes';
 import { ReadingText } from './TaleCommon';
 import { OrionChart } from './OrionChart';
+import { ProgressProvider } from '../../hooks/useProgress';
 
 const content = sampleContent();
 const data = validateTaleExperience(JSON.parse(readFileSync(new URL('../../../public/content/orion.json', import.meta.url), 'utf8')));
 const tale = content.tales.find(row => row.id === data.taleId)!;
-const render = (element: React.ReactNode) => renderToStaticMarkup(<MemoryRouter>{element}</MemoryRouter>);
+const render = (element: React.ReactNode) => renderToStaticMarkup(<ProgressProvider><MemoryRouter>{element}</MemoryRouter></ProgressProvider>);
 
 describe('Orion reading and activity states', () => {
   it('uses the approved responsive painting asset and a real start button', () => {

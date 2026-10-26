@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Page } from '../design/Page';
 import { Button } from '../design/Button';
+import { DiscoveryDetails } from '../design/DiscoveryDetails';
 import { db } from '../data/db';
 import { localLearnerId } from '../data/learner';
 import { markArticleRead } from '../data/services';
@@ -41,7 +42,7 @@ export function ArticleReader() {
   if (content && !article) return <NotFound />;
   return <Page className="tale-page" reduceMotion={model?.reduceMotion} skipLabel="Skip to article"><main id="main-content" className="atlas-library" tabIndex={-1} aria-busy={!article && !error}>
     <TaleHeader context="Read" closeTo="/articles" />{article && <article className="article-reading"><p className="tale-eyebrow">Scientific articles</p><h1>{article.title}</h1><p className="article-summary">{article.summary}</p><ReadingText text={article.body} />
-      {article.sourceNote && <details className="tale-sources"><summary>Sources</summary><SourceText text={article.sourceNote} /></details>}
+      {article.sourceNote && <DiscoveryDetails className="tale-sources" detailId={`article:${article.id}:sources`} label="Sources"><SourceText text={article.sourceNote} /></DiscoveryDetails>}
       <Button onClick={() => void finish()} disabled={saving || saved}>{saved ? 'Article read' : 'Mark as read'}</Button>{saved && <p role="status">Your reading is saved on this device.</p>}
       <aside className="article-connections"><p className="tale-eyebrow">Keep exploring</p><Link to="/stories/orion-shoulder?again">Meet Orion in the story</Link><Link to="/learn">Explore how stars live and die</Link></aside>
     </article>}{(error || saveError) && <p role="alert">{error || saveError}</p>}

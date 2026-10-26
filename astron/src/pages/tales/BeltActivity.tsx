@@ -3,6 +3,7 @@ import type { TaleExperienceData } from '../../data/taleExperience';
 import type { TaleVisit } from '../../data/types';
 import type { BeltChoice } from '../../logic/taleJourney';
 import { Button } from '../../design/Button';
+import { DiscoveryDetails } from '../../design/DiscoveryDetails';
 import { OrionChart } from './OrionChart';
 import { TaleGlaux } from './TaleCommon';
 
@@ -25,7 +26,7 @@ export function BeltActivity({ data, outcome, busy, onAnswer, onContinue }: {
     <div className="belt-controls"><fieldset className="belt-choices" disabled={busy || Boolean(outcome)}><legend>Choose a group</legend>
       {data.activity.groups.map(group => <label key={group.id} className="belt-choice"><input type="radio" name="belt-group" value={group.id} checked={(outcome ? 'belt' : choice) === group.id} aria-label={`${group.label}. ${group.description}`} onChange={() => { setChoice(group.id); setResponse(''); }} /><span>{group.label}</span></label>)}
     </fieldset>
-    <details className="tale-discovery belt-descriptions"><summary>Describe the patterns</summary>{data.activity.groups.map(group => <p key={group.id}>{group.label}: {group.description}</p>)}</details>
+    <DiscoveryDetails className="tale-discovery belt-descriptions" detailId={`tale:${data.taleId}:patterns`} label="Describe the patterns">{data.activity.groups.map(group => <p key={group.id}>{group.label}: {group.description}</p>)}</DiscoveryDetails>
     <div className="belt-help"><Button variant="secondary" disabled={busy || Boolean(outcome)} onClick={() => setHint(true)}>Hint</Button><Button variant="secondary" disabled={busy || Boolean(outcome)} onClick={() => void onAnswer('show-me')}>Show me</Button></div>
     <div className="belt-response" role="status" aria-live="polite" aria-atomic="true">{line && <TaleGlaux mood={outcome === 'independent' ? 'proud' : 'gentle'}>{line}</TaleGlaux>}{outcome && <p>{data.activity.explanation}</p>}</div>
     {outcome ? <Button onClick={onContinue} disabled={busy}>Continue</Button> : <Button onClick={() => void check()} disabled={busy || !choice}>Check</Button>}

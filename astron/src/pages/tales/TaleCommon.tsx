@@ -4,6 +4,7 @@ import type { GlauxMood } from '../../data/types';
 import type { TaleExperienceData } from '../../data/taleExperience';
 import { GlauxArt } from '../../design/InlineArt';
 import { SpeechBox } from '../../design/SpeechBox';
+import { DiscoveryDetails } from '../../design/DiscoveryDetails';
 
 export function TaleHeader({ context = 'Orion, the Hunter', closeTo }: { context?: string; closeTo?: string }) {
   return <header className="tale-header">
@@ -26,12 +27,12 @@ export function SourceText({ text }: { text: string }) {
 }
 
 export function TaleSources({ data }: { data: TaleExperienceData }) {
-  return <details className="tale-sources"><summary>Sources</summary><div>
+  return <DiscoveryDetails className="tale-sources" detailId={`tale:${data.taleId}:sources`} label="Sources"><div>
     <p>This is one version of the myth. The drawings show the imagined hunter. The chart shows where the stars appear from Earth.</p>
     <ul>{data.sources.map(source => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></li>)}</ul>
     <p>Artwork adapted from images supplied for ASTRON. The welcome painting includes an AI-assisted edit. The hunter illustration retains the supplied linework.</p>
     <p>Essential story and source notes are saved with the app. External source pages need an internet connection.</p>
-  </div></details>;
+  </div></DiscoveryDetails>;
 }
 
 export function CoverImage({ className = '', description = 'Two companions in a painted valley, one looking through a handheld telescope beneath the stars.' }: { className?: string; description?: string }) {
