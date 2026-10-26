@@ -4,7 +4,7 @@ import { useProgress } from '../hooks/useProgress';
 import { localLearnerId } from '../data/learner';
 import { GlauxArt } from './InlineArt';
 import { useReducedMotion } from './useReducedMotion';
-import { introDurationMs, introPhase } from './introState';
+import { introTimings, introPhase } from './introState';
 import './StartupIntro.css';
 
 function IntroPicture() {
@@ -22,6 +22,11 @@ export function StartupIntro({ children }: { children: ReactNode }) {
   const button = useRef<HTMLButtonElement>(null);
   const content = useRef<HTMLDivElement>(null);
   const visible = phase !== 'finished' && !reduceMotion;
+  const timingStyle = {
+    '--intro-name-duration': `${introTimings.revealing}ms`,
+    '--intro-wave-duration': `${introTimings.waving}ms`,
+    '--intro-entry-duration': `${introTimings.entering}ms`,
+  } as CSSProperties;
 
   useEffect(() => {
     // Wait for the saved preference before moving any part of Glaux.
@@ -30,8 +35,8 @@ export function StartupIntro({ children }: { children: ReactNode }) {
   }, [progress, error, reduceMotion]);
 
   useEffect(() => {
-    if (phase !== 'waving' || reduceMotion) return;
-    const timer = window.setTimeout(() => send({ type: 'finish' }), introDurationMs);
+    if (phase === 'waiting' || phase === 'finished' || reduceMotion) return;
+    const timer = window.setTimeout(() => send({ type: 'advance' }), introTimings[phase]);
     return () => window.clearTimeout(timer);
   }, [phase, reduceMotion]);
 
@@ -50,8 +55,8 @@ export function StartupIntro({ children }: { children: ReactNode }) {
   }, [phase]);
 
   return <>
-    <div className="startup-content" ref={content} inert={visible} aria-hidden={visible || undefined}>{children}</div>
-    {visible && <div className="startup-intro" data-phase={phase} style={{ '--intro-duration': `${introDurationMs}ms` } as CSSProperties}>
+    <div className="startup-content" data-intro-phase={reduceMotion ? 'finished' : phase} style={timingStyle} ref={content} inert={visible} aria-hidden={visible || undefined}>{children}</div>
+    {visible && <div className="startup-intro" data-phase={phase} style={timingStyle}>
       <button ref={button} type="button" className="startup-open" aria-label="Open ASTRON" onClick={() => send({ type: 'finish' })} onKeyDown={event => { if (event.key === 'Escape') send({ type: 'finish' }); }}>
         <IntroPicture />
       </button>

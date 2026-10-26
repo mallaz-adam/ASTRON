@@ -23,7 +23,7 @@ Times are approximate samples from the supplied videos. The desktop source lasts
 
 - Four complete, connected chapters remain. Events and causes are explicit, and the Earth goddess and star chart are explained.
 - Related star facts, feedback, the Betelgeuse article and first-visit guidance use simpler wording. Proper names, chart positions, answer rules and progress identifiers remain compatible.
-- One 1.8-second greeting on a document load: the existing Glaux SVG waves its right wing; ASTRON sits below. No new generated character or sound.
+- Opening refined on 26 October after review: ASTRON appears over 1.5 seconds, Glaux fades in and waves over 2.2 seconds, then a 1.2-second zoom and dissolve reveals the app. The full sequence is 4.9 seconds. ASTRON remains below the existing Glaux drawing; no new character or sound is added.
 - Tap/click, Enter, Space or Escape dismisses the greeting. Background content loads concurrently and is inert until the greeting ends. Focus then moves into the page.
 - The greeting waits for saved motion preferences before moving. Saved or device Reduce motion skips it; it never repeats on route changes or progress updates. A storage error also dismisses it. No welcome/progress records are written by the greeting.
 
@@ -109,6 +109,8 @@ You have two clues to keep: the belt shows where to look, and colour tells you a
 
 ## Verification
 
-Local browser checks cover Enter-to-skip, automatic completion, focus return, saved Reduce motion across reload, no replay on chapter changes, and layout at 390, 768 and 1280 px. Unit tests cover the intro state transitions. Final verification: 387 tests passed across 37 files; the production build passed. Offline precache still includes 55 entries, including the local fonts, art and revised JSON. This pass did not repeat a physical iPhone or airplane-mode test.
+Local browser checks cover Enter-to-skip, automatic completion, focus return, saved Reduce motion across reload, no replay on chapter changes, and layout at 390, 768 and 1280 px. The slower opening was checked at 390 and 1280 px, including the ordered name/wave/zoom stages and Enter-to-skip during the zoom. Unit tests cover stage order, dismissal, motion changes and progress updates that must not restart a stage. Final verification: 389 tests passed across 37 files; the production build passed. Offline precache still includes 55 entries, including the local fonts, art and revised JSON. This pass did not repeat a physical iPhone or airplane-mode test.
 
 This pass does not claim that the whole course has been rewritten or that the new copy has been tested with learners. A useful comprehension check is to ask a tester: Who is Orion? Why did the goddess send the scorpion? What do the three belt stars help you find?
+
+On 26 October the project owner tried and approved the revised language. That copy remains unchanged during the opening refinement.

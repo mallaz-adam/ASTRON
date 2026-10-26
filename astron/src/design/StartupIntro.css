@@ -1,18 +1,34 @@
-.startup-intro { position: fixed; inset: 0; z-index: 100; background: var(--parchment); }
+.startup-intro { position: fixed; inset: 0; z-index: 100; overflow: hidden; background: var(--parchment); }
 .startup-intro::before, .startup-intro::after { content: ''; position: absolute; inset: var(--frame-outer); border: var(--border-line); pointer-events: none; }
 .startup-intro::after { inset: var(--frame-inner); }
 .startup-open { display: grid; place-items: center; width: 100%; height: 100%; min-height: 100dvh; padding: 36px; background: transparent; color: var(--ink); border: 0; }
 .startup-open:focus-visible { outline: var(--focus-ring); outline-offset: -24px; }
 .startup-brand { display: grid; justify-items: center; gap: 24px; }
-.startup-glaux.inline-art { width: clamp(112px, 24vw, 152px); height: clamp(112px, 24vw, 152px); }
-.startup-wordmark { font: 400 clamp(26px, 6vw, 34px)/1.4 var(--font-label); letter-spacing: .24em; padding-left: .24em; }
+.startup-glaux.inline-art { width: clamp(112px, 24vw, 152px); height: clamp(112px, 24vw, 152px); opacity: 0; }
+.startup-wordmark { font: 400 clamp(26px, 6vw, 34px)/1.4 var(--font-label); letter-spacing: .24em; padding-left: .24em; opacity: 0; }
 .startup-content h1[tabindex='-1']:focus, .startup-content main[tabindex='-1']:focus { outline: none; }
-/* One greeting, using the supplied drawing. Nothing loops or plays sound. */
+/* Name first, then one greeting, then a gentle zoom through to the page. */
 .startup-glaux.inline-art * { animation: none; }
-[data-phase='waving'] .startup-glaux .wing-r { transform-box: view-box; transform-origin: 44px 34px; animation: startup-wave var(--intro-duration) ease-in-out both; }
+[data-phase='revealing'] .startup-wordmark { animation: startup-name var(--intro-name-duration) ease-out both; }
+[data-phase='waving'] .startup-wordmark, [data-phase='entering'] .startup-wordmark { opacity: 1; }
+[data-phase='waving'] .startup-glaux { animation: startup-owl 400ms ease-out both; }
+[data-phase='entering'] .startup-glaux { opacity: 1; }
+[data-phase='waving'] .startup-glaux .wing-r { transform-box: view-box; transform-origin: 44px 34px; animation: startup-wave var(--intro-wave-duration) ease-in-out both; }
+[data-phase='entering'].startup-intro { animation: startup-dissolve var(--intro-entry-duration) ease-in-out both; }
+[data-phase='entering'] .startup-brand { animation: startup-zoom var(--intro-entry-duration) cubic-bezier(.25, .1, .25, 1) both; }
+.startup-content[data-intro-phase='waiting'], .startup-content[data-intro-phase='revealing'], .startup-content[data-intro-phase='waving'] { opacity: 0; }
+.startup-content[data-intro-phase='entering'] { animation: startup-page var(--intro-entry-duration) ease-in-out both; }
+@keyframes startup-name { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes startup-owl { from { opacity: 0; } to { opacity: 1; } }
 @keyframes startup-wave {
-  0%, 10%, 100% { transform: rotate(0deg); }
-  30%, 62% { transform: rotate(-135deg); }
-  46%, 78% { transform: rotate(-100deg); }
+  0%, 20%, 100% { transform: rotate(0deg); }
+  40%, 70% { transform: rotate(-135deg); }
+  55%, 85% { transform: rotate(-100deg); }
 }
-@media (prefers-reduced-motion: reduce) { .startup-intro { display: none; } }
+@keyframes startup-zoom { from { transform: scale(1); } to { transform: scale(1.7); } }
+@keyframes startup-dissolve { 0%, 15% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes startup-page { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .startup-intro { display: none; }
+  .startup-content[data-intro-phase] { animation: none !important; opacity: 1; }
+}
