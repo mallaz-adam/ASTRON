@@ -39,6 +39,7 @@
 .tale-footer .toggle-label, .tale-footer .toggle-state { font-size: 13px; }
 .tale-chapter { display: grid; gap: 24px; }
 .tale-chapter-heading { display: grid; gap: 8px; }
+.tale-chapter-heading > .tale-prose { margin-top: 8px; }
 .tale-chapter-copy { display: grid; align-content: start; gap: 24px; }
 .tale-prose { font-size: 18px; line-height: 1.7; max-width: 62ch; }
 .tale-prose p + p { margin-top: 18px; }
@@ -101,10 +102,32 @@
 .daily-goal-choice:has(input:checked) { background: var(--panel); border-color: var(--ink); }
 .tale-save-error { margin-top: 24px; padding: 18px; border: var(--border-ink); background: var(--card); }
 .tale-loading { padding-block: 36px; display: grid; gap: 24px; }
+/* Phone reading: context before the picture, with less distance between ideas. */
+@media (max-width: 767px) {
+  .tale-header { gap: 12px; padding-bottom: 12px; margin-bottom: 24px; }
+  .tale-header .tale-wordmark { font-size: 18px; letter-spacing: .18em; gap: 6px; }
+  .tale-header .tale-wordmark img { width: 16px; height: 16px; }
+  .tale-context { font-size: 10px; padding-left: 12px; }
+  .cover-art { height: clamp(240px, 42svh, 360px); }
+  .tale-chapter, .tale-star-scene, .belt-activity { gap: 18px; }
+  .tale-chapter-copy { gap: 18px; }
+  .tale-chapter .tale-hunter-image { height: clamp(200px, 34svh, 260px); }
+  .tale-landscape-image { height: clamp(160px, 24svh, 200px); }
+  .tale-glaux { gap: 8px; }
+  .tale-glaux .inline-art { width: 48px; height: 48px; }
+  .tale-glaux .speech-box { padding: 14px; }
+  .tale-chapter-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .tale-chapter-count { grid-column: 1 / -1; grid-row: 1; margin: 0; text-align: center; }
+  .tale-chapter-actions .atlas-button { grid-row: 2; min-width: 0; width: 100%; padding-inline: 8px; font-size: 12px; letter-spacing: .1em; }
+  .tale-chapter-actions .atlas-button:only-of-type { grid-column: 1 / -1; }
+  .orion-labels { font-size: 18px; }
+  .belt-choice { min-width: 0; gap: 6px; padding-inline: 4px; font-size: 12px; }
+  .tale-footer { margin-top: 24px; }
+}
 @media (min-width: 768px) {
   .atlas-page.tale-page { padding: 36px; }
   .tale-chapter { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; }
-  .tale-chapter-heading { grid-column: 1; grid-row: 1; align-self: end; }
+  .tale-chapter-heading { grid-column: 1; grid-row: 1; align-self: start; }
   .tale-chapter-copy { grid-column: 1; grid-row: 2; }
   .tale-illustration { grid-column: 2; grid-row: 1 / 3; }
   .tale-star-scene { grid-template-columns: 1.1fr 1fr; gap: 24px 36px; align-items: start; }

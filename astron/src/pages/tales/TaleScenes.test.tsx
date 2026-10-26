@@ -27,6 +27,14 @@ describe('Orion reading and activity states', () => {
     expect(html).toContain('/art/orion/hunter.webp'); expect(html).toContain('Each hunt made him more sure of his strength.');
     expect(html).toContain('A pattern to remember');
   });
+  it('introduces every chapter before its picture without losing or repeating any approved paragraph', () => {
+    for (const chapter of content.chapters.filter(row => row.taleId === tale.id)) {
+      const html = render(<TaleChapter chapter={chapter} data={data} />);
+      const paragraphs = chapter.text.split(/\n\s*\n/).map(text => renderToStaticMarkup(<p>{text.replace(/\n/g, ' ')}</p>));
+      expect(html.indexOf(paragraphs[0])).toBeLessThan(html.indexOf('<aside'));
+      for (const paragraph of paragraphs) expect(html.split(paragraph)).toHaveLength(2);
+    }
+  });
   it('starts with three native radio choices and immediate help, without an enabled Check', () => {
     const html = render(<BeltActivity data={data} busy={false} onAnswer={async () => false} onContinue={() => undefined} />);
     expect(html.match(/type="radio"/g)).toHaveLength(3);
@@ -48,6 +56,9 @@ describe('Orion reading and activity states', () => {
   it('puts the collected star’s name before its chart in mobile reading order', () => {
     const html = render(<TaleStar tale={tale} data={data} collected ending />);
     expect(html.indexOf('id="star-title"')).toBeLessThan(html.indexOf('<figure'));
+    const fact = renderToStaticMarkup(<p>{data.fact}</p>);
+    expect(html.indexOf(fact)).toBeLessThan(html.indexOf('<figure'));
+    expect(html.split(fact)).toHaveLength(2);
     expect(html).toContain('Added to My sky'); expect(html).toContain(data.endingQuestion);
   });
   it('keeps the unassisted chart description neutral and provides a meaningful image description', () => {

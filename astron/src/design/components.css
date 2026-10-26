@@ -15,11 +15,11 @@ strong, b { font-weight: var(--font-weight); }
 
 .atlas-page { position: relative; isolation: isolate; min-height: 100dvh; padding: var(--space-36) var(--space-24); background: var(--parchment); }
 .atlas-page::before, .atlas-page::after { content: ''; position: absolute; z-index: -1; pointer-events: none; border: var(--border-line); }
-.atlas-page::before { inset: var(--frame-outer); }
-.atlas-page::after { inset: var(--frame-inner); }
+.atlas-page::before { inset: calc(var(--frame-outer) + env(safe-area-inset-top, 0px)) calc(var(--frame-outer) + env(safe-area-inset-right, 0px)) calc(var(--frame-outer) + env(safe-area-inset-bottom, 0px)) calc(var(--frame-outer) + env(safe-area-inset-left, 0px)); }
+.atlas-page::after { inset: calc(var(--frame-inner) + env(safe-area-inset-top, 0px)) calc(var(--frame-inner) + env(safe-area-inset-right, 0px)) calc(var(--frame-inner) + env(safe-area-inset-bottom, 0px)) calc(var(--frame-inner) + env(safe-area-inset-left, 0px)); }
 .paper-grain { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: var(--paper-grain-opacity); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%232A1C13' filter='url(%23grain)' d='M0 0h180v180H0z'/%3E%3C/svg%3E"); }
-.page-content { max-width: 1100px; margin-inline: auto; }
-.skip-link { position: absolute; top: var(--space-24); left: var(--space-24); z-index: 2; padding: var(--space-12); background: var(--card); border: var(--border-ink); transform: translateY(-180%); }
+.page-content { max-width: 1100px; margin-inline: auto; padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); }
+.skip-link { position: absolute; top: calc(var(--space-24) + env(safe-area-inset-top, 0px)); left: calc(var(--space-24) + env(safe-area-inset-left, 0px)); z-index: 2; padding: var(--space-12); background: var(--card); border: var(--border-ink); transform: translateY(-180%); }
 .skip-link:focus { transform: translateY(0); }
 
 .atlas-button, .atlas-chip { position: relative; border: var(--border-ink); padding: var(--space-14) var(--space-24); font: var(--font-weight) var(--type-label)/1.4 var(--font-label); letter-spacing: var(--label-spacing); text-transform: uppercase; }

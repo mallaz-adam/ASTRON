@@ -1,7 +1,7 @@
 .startup-intro { position: fixed; inset: 0; z-index: 100; overflow: hidden; background: var(--parchment); }
-.startup-intro::before, .startup-intro::after { content: ''; position: absolute; inset: var(--frame-outer); border: var(--border-line); pointer-events: none; }
-.startup-intro::after { inset: var(--frame-inner); }
-.startup-open { display: grid; place-items: center; width: 100%; height: 100%; min-height: 100dvh; padding: 36px; background: transparent; color: var(--ink); border: 0; }
+.startup-intro::before, .startup-intro::after { content: ''; position: absolute; --intro-frame: var(--frame-outer); inset: calc(var(--intro-frame) + env(safe-area-inset-top, 0px)) calc(var(--intro-frame) + env(safe-area-inset-right, 0px)) calc(var(--intro-frame) + env(safe-area-inset-bottom, 0px)) calc(var(--intro-frame) + env(safe-area-inset-left, 0px)); border: var(--border-line); pointer-events: none; }
+.startup-intro::after { --intro-frame: var(--frame-inner); }
+.startup-open { display: grid; place-items: center; width: 100%; height: 100%; min-height: 100dvh; padding: calc(36px + env(safe-area-inset-top, 0px)) calc(36px + env(safe-area-inset-right, 0px)) calc(36px + env(safe-area-inset-bottom, 0px)) calc(36px + env(safe-area-inset-left, 0px)); background: transparent; color: var(--ink); border: 0; }
 .startup-open:focus-visible { outline: var(--focus-ring); outline-offset: -24px; }
 .startup-brand { display: grid; justify-items: center; gap: 24px; }
 .startup-glaux.inline-art { width: clamp(112px, 24vw, 152px); height: clamp(112px, 24vw, 152px); opacity: 0; }
