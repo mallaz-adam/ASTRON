@@ -37,13 +37,14 @@ export type Exercise = {
 };
 export type QuestKind = 'learn' | 'story' | 'read';
 export type Quest = { id: string; kind: QuestKind; title: string; xpReward: number };
-export type Article = { id: string; title: string; summary: string; body: string; readingMin: number; sourceNote?: string };
+export type ArticleCover = { src: string; alt: string; caption: string; credit: string; source: string; license: string; licenseUrl: string };
+export type Article = { id: string; title: string; summary: string; body: string; readingMin: number; sourceNote?: string; category?: string; cover?: ArticleCover };
 export type UnitArticle = { unitId: string; articleId: string };
 
 export type DailyGoal = 1 | 2 | 3;
 export type TaleStage = 'cover' | 'story' | 'star' | 'activity' | 'sky' | 'preferences';
 export type TaleVisit = { taleId: string; stage: TaleStage; chapter: number; readThrough: boolean; beltOutcome?: 'independent' | 'assisted' };
-export type Learner = { id: string; displayName: string; dailyGoal: DailyGoal; language: string; reduceMotion: boolean; freezesLeft: number; welcome?: { startedOn: string; completedOn?: string }; taleVisit?: TaleVisit; exploredDetails?: string[] };
+export type Learner = { id: string; displayName: string; dailyGoal: DailyGoal; language: string; reduceMotion: boolean; freezesLeft: number; welcome?: { startedOn: string; introductionSeenOn?: string; completedOn?: string }; taleVisit?: TaleVisit; exploredDetails?: string[] };
 export type LearnerInterest = { learnerId: string; interestId: string };
 // The goal is saved for the day, so later goal changes do not rewrite history.
 export type ActivityDay = { learnerId: string; dayDate: string; freezeUsed: boolean; dailyGoal: DailyGoal };

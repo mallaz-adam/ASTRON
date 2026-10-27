@@ -1,4 +1,4 @@
-.atlas-library { display: grid; gap: 24px; min-height: calc(100dvh - 96px); }
+.atlas-library { display: flex; flex-direction: column; gap: 24px; min-height: calc(100dvh - 96px); }
 .atlas-library > .tale-header { margin-bottom: 0; }
 .library-heading { display: grid; gap: 12px; }
 .atlas-library > .tale-glaux { max-width: 680px; }
@@ -13,9 +13,24 @@
 .sky-entry a, .article-open, .article-connections a { min-height: 44px; display: flex; align-items: center; }
 .sky-tint { font-style: italic; color: var(--soft-ink); }
 .article-list { display: grid; gap: 24px; }
-.article-list article { display: grid; gap: 12px; border-block-start: var(--border-line); padding-top: 24px; }
-.article-list h2 a { color: var(--ink); }
-.article-list h2 a { display: inline-flex; align-items: center; min-height: 44px; }
+.article-card { position: relative; display: grid; border: var(--border-line); background: var(--card); min-width: 0; }
+.article-card-heading { display: grid; align-content: end; gap: 18px; padding: 24px; }
+.article-card-copy { display: grid; align-content: center; gap: 18px; padding: 24px; }
+.article-card h2 { font-size: clamp(28px, 3vw, 38px); line-height: 1.2; }
+.article-card-link { color: var(--ink); text-decoration: none; }
+.article-card-link::after { content: ''; position: absolute; inset: 0; }
+.article-card-link:focus-visible { outline: none; }
+.article-card:has(.article-card-link:focus-visible) { outline: var(--focus-ring); outline-offset: 4px; }
+.article-card-copy > p { font-size: 20px; line-height: 1.5; }
+.article-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; color: var(--soft-ink); font: 400 12px/1.5 var(--font-label); }
+.article-category { padding: 4px 8px; border: var(--border-line); letter-spacing: .1em; text-transform: uppercase; }
+.article-cover { margin: 0; min-width: 0; }
+.article-cover img { display: block; width: 100%; height: 260px; object-fit: contain; background: #000; }
+.article-cover figcaption { padding: 12px 14px; font-size: 13px; line-height: 1.5; color: var(--soft-ink); background: var(--card); border-bottom: var(--border-line); }
+.article-cover figcaption a { position: relative; z-index: 1; display: inline-flex; align-items: center; min-height: 44px; overflow-wrap: anywhere; color: inherit; }
+.article-open { gap: 12px; color: var(--vermilion); }
+.article-reading .article-cover { border: var(--border-line); }
+.article-reading .article-cover img { height: clamp(240px, 45vw, 380px); }
 .article-reading { width: 100%; max-width: 680px; margin-inline: auto; display: grid; gap: 24px; }
 .article-reading h1 { line-height: 1.2; }
 .article-reading .tale-sources { overflow-wrap: anywhere; }
@@ -31,5 +46,14 @@
   .library-story { grid-template-columns: 1fr 1.1fr; gap: 36px; }
   .library-story > img { max-height: 460px; }
   .sky-collection { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; }
-  .article-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; }
+  .article-list:has(.article-card:nth-child(2)) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; }
+  .article-card:only-child:has(.article-cover) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 1fr 1fr; }
+  .article-card:only-child:has(.article-cover) .article-cover { grid-column: 1; grid-row: 1 / 3; }
+  .article-card:only-child:has(.article-cover) .article-card-heading { grid-column: 2; grid-row: 1; padding-bottom: 0; }
+  .article-card:only-child:has(.article-cover) .article-card-copy { grid-column: 2; grid-row: 2; align-content: start; padding-top: 18px; }
+  .article-card:only-child .article-cover img { height: 300px; }
+}
+@media (min-width: 1024px) {
+  .atlas-library > .navigation-bar { order: -1; }
+  .atlas-library:has(> .navigation-bar) > .tale-header { display: none; }
 }

@@ -16,6 +16,7 @@ import { MySky } from './pages/MySky';
 import { Articles, ArticleReader } from './pages/Articles';
 import { Settings } from './pages/Settings';
 import { StartupIntro } from './design/StartupIntro';
+import { Welcome } from './pages/Welcome';
 
 export function AppRoutes({ development = import.meta.env.DEV }: { development?: boolean }) {
   const location = useLocation();
@@ -27,7 +28,7 @@ export function AppRoutes({ development = import.meta.env.DEV }: { development?:
       : location.pathname === '/sun' ? 'Your sun · ASTRON' : 'Today · ASTRON';
     if (location.pathname === '/learn') document.title = 'Course path · ASTRON';
     if (location.pathname.startsWith('/cell/')) document.title = 'Cell · ASTRON';
-    if (location.pathname === '/welcome') document.title = 'Welcome · ASTRON';
+    if (location.pathname === '/welcome' || location.pathname === '/guide') document.title = 'Welcome · ASTRON';
     if (location.pathname.startsWith('/stories')) document.title = 'Stories · ASTRON';
     if (location.pathname === '/sky') document.title = 'My sky · ASTRON';
     if (location.pathname.startsWith('/articles')) document.title = 'Articles · ASTRON';
@@ -35,7 +36,8 @@ export function AppRoutes({ development = import.meta.env.DEV }: { development?:
   }, [location.pathname, development]);
   return (
     <Routes>
-      <Route path="/welcome" element={<TaleExperience welcome />} />
+      <Route path="/welcome" element={<Welcome />} />
+      <Route path="/guide" element={<Welcome review />} />
       <Route element={<FirstVisitGate />}>
         <Route path="/" element={<Today />} />
         <Route path="/sun" element={<YourSun />} />

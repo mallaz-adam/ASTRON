@@ -17,6 +17,13 @@ export function readableTales(content: Content) {
   return content.tales.filter(tale => tale.reader && content.chapters.some(chapter => chapter.taleId === tale.id));
 }
 
+export function needsIntroduction(progress: Progress, learnerId = localLearnerId) {
+  const learner = progress.learners.find(row => row.id === learnerId);
+  // A returning reader keeps their place, including journeys started before
+  // the introduction existed. A default learner/day is still a first visit.
+  return needsWelcome(progress, learnerId) && !learner?.welcome?.introductionSeenOn && !learner?.taleVisit;
+}
+
 export type BeltChoice = 'upper' | 'belt' | 'lower';
 export function isBeltChoice(value: unknown): value is BeltChoice {
   return value === 'upper' || value === 'belt' || value === 'lower';

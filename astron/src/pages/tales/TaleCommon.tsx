@@ -6,9 +6,9 @@ import { GlauxArt } from '../../design/InlineArt';
 import { SpeechBox } from '../../design/SpeechBox';
 import { DiscoveryDetails } from '../../design/DiscoveryDetails';
 
-export function TaleHeader({ context = 'Orion, the Hunter', closeTo }: { context?: string; closeTo?: string }) {
+export function TaleHeader({ context = 'Orion, the Hunter', closeTo, closeLabel = 'Close story' }: { context?: string; closeTo?: string; closeLabel?: string }) {
   return <header className="tale-header">
-    {closeTo && <Link to={closeTo} className="tale-close" aria-label="Close story"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg></Link>}
+    {closeTo && <Link to={closeTo} className="tale-close" aria-label={closeLabel}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg></Link>}
     <Link to="/" className="tale-wordmark">ASTRON<img src="/art/star.svg" width="20" height="20" alt="" /></Link>
     <span className="tale-context">{context}</span>
   </header>;

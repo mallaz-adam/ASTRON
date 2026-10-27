@@ -48,7 +48,19 @@ export function checkRows(value: unknown, schema: Schema, file: string): Record<
       if (record.glaux !== undefined) fields.glaux = text;
       if (record.presentation !== undefined) fields.presentation = oneOf('hunter', 'landscape', 'chart', 'guided-chart');
     }
-    if (file.endsWith('articles.json') && record.sourceNote !== undefined) fields.sourceNote = text;
+    if (file.endsWith('articles.json')) {
+      if (record.sourceNote !== undefined) fields.sourceNote = text;
+      if (record.category !== undefined) fields.category = text;
+      if (record.cover !== undefined) fields.cover = value => {
+        if (!object(value)) return false;
+        const cover = value as Record<string, unknown>;
+        return typeof cover.src === 'string' && /^\/art\/[a-zA-Z0-9/_-]+\.(svg|png|webp|jpe?g)$/.test(cover.src)
+          && ['alt', 'caption', 'credit', 'license'].every(field => text(cover[field]))
+          && typeof cover.source === 'string' && /^https:\/\//.test(cover.source)
+          && typeof cover.licenseUrl === 'string' && /^https:\/\//.test(cover.licenseUrl)
+          && Object.keys(cover).every(field => ['src', 'alt', 'caption', 'credit', 'source', 'license', 'licenseUrl'].includes(field));
+      };
+    }
     for (const [field, check] of Object.entries(fields)) {
       if (!check(record[field])) contentError(file, `[${index}].${field}`, 'missing or invalid value.');
     }

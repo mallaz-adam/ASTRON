@@ -12,6 +12,16 @@
     "summary": "Its colour gives us a clue about how hot its surface is.",
     "readingMin": 2,
     "body": "Find Orion's belt on the chart. Then look towards the reddish star at one shoulder. That star is Betelgeuse.\n\nWhy does it look red? A star's colour tells us something about its surface, the outer part we see. Blue stars have hotter surfaces than red stars. A red star is still very hot. Cooler does not mean cold.\n\nBetelgeuse is a red supergiant. This means it is a reddish star much larger than the Sun. As it grew older, its outer layers spread out and cooled. It became larger, with a cooler surface.\n\nYou may remember that heavier stars are hotter. That rule describes the long, steady part of a star's life. Later, a star can change. Betelgeuse has already left that steady stage. This is why a very large star can look red.\n\nNow return to the chart. The three belt stars help you find Betelgeuse. The hunter and the lines are pictures people imagined. The stars are real, and stars that look close on the chart can be far apart in space.\n\nYou have two clues to keep: the belt shows where to look, and colour tells you about heat.",
-    "sourceNote": "NASA — Discovering the Universe Through the Constellation Orion\nhttps://science.nasa.gov/universe/stories/quick-reads/discovering-the-universe-through-the-constellation-orion/\n\nNASA — What is Betelgeuse? Inside the Strange, Volatile Star\nhttps://science.nasa.gov/universe/what-is-betelgeuse-inside-the-strange-volatile-star/\n\nOriginal wording for ASTRON. Sources checked 25 October 2026; wording simplified after the phone and desktop review."
+    "sourceNote": "NASA — Discovering the Universe Through the Constellation Orion\nhttps://science.nasa.gov/universe/stories/quick-reads/discovering-the-universe-through-the-constellation-orion/\n\nNASA — What is Betelgeuse? Inside the Strange, Volatile Star\nhttps://science.nasa.gov/universe/what-is-betelgeuse-inside-the-strange-volatile-star/\n\nOriginal wording for ASTRON. Sources checked 25 October 2026; wording simplified after the phone and desktop review.",
+    "category": "Stars",
+    "cover": {
+      "src": "/art/articles/betelgeuse-alma.jpg",
+      "alt": "ALMA observation of Betelgeuse, shown as an uneven orange disc against black.",
+      "caption": "Betelgeuse seen by ALMA. Colours represent invisible light, not its visible colour.",
+      "credit": "ALMA (ESO/NAOJ/NRAO)/E. O’Gorman/P. Kervella",
+      "source": "https://eso.org/public/images/potw1726a/",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+    }
   }
 ]

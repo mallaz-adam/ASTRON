@@ -11,14 +11,19 @@ import { useToday } from './useToday';
 import { TodayTabs } from './TodayTabs';
 import { TaleHeader, ReadingText, SourceText } from './tales/TaleCommon';
 import { NotFound } from './NotFound';
+import { ArticleCover } from './ArticleCover';
 import './tales/TaleExperience.css';
 import './AtlasReaders.css';
 
 export function Articles() {
   const { content, model, error } = useToday();
   return <Page className="tale-page" reduceMotion={model?.reduceMotion} skipLabel="Skip to articles"><main id="main-content" className="atlas-library" tabIndex={-1} aria-busy={!content && !error}>
-    <TaleHeader context="Articles" /><header className="library-heading"><p className="tale-eyebrow">Follow a question a little further</p><h1>Scientific articles</h1></header>
-    <div className="article-list">{content?.articles.filter(article => article.sourceNote).map(article => <article key={article.id}><p className="tale-eyebrow">Read</p><h2><Link to={`/articles/${article.id}`}>{article.title}</Link></h2><p>{article.summary}</p><Link className="article-open" to={`/articles/${article.id}`}>Read the article</Link></article>)}</div>
+    <TaleHeader context="Articles" /><header className="library-heading"><p className="tale-eyebrow">Follow a question a little further</p><h1>Scientific articles</h1><p>Explore the science behind the sky, one question at a time.</p></header>
+    <div className="article-list">{content?.articles.filter(article => article.sourceNote).map(article => <article className="article-card" key={article.id}>
+      <header className="article-card-heading"><div className="article-meta"><span className="article-category">{article.category ?? 'Astronomy'}</span><span>{article.readingMin} min read</span></div><h2><Link className="article-card-link" to={`/articles/${article.id}`}>{article.title}</Link></h2></header>
+      {article.cover && <ArticleCover cover={article.cover} />}
+      <div className="article-card-copy"><p>{article.summary}</p><span className="article-open" aria-hidden="true">Read the article <span>→</span></span></div>
+    </article>)}</div>
     {error && <p role="alert">{error}</p>}<TodayTabs />
   </main></Page>;
 }
@@ -41,7 +46,7 @@ export function ArticleReader() {
   }
   if (content && !article) return <NotFound />;
   return <Page className="tale-page" reduceMotion={model?.reduceMotion} skipLabel="Skip to article"><main id="main-content" className="atlas-library" tabIndex={-1} aria-busy={!article && !error}>
-    <TaleHeader context="Read" closeTo="/articles" />{article && <article className="article-reading"><p className="tale-eyebrow">Scientific articles</p><h1>{article.title}</h1><p className="article-summary">{article.summary}</p><ReadingText text={article.body} />
+    <TaleHeader context="Read" closeTo="/articles" closeLabel="Back to articles" />{article && <article className="article-reading"><div className="article-meta"><span className="article-category">{article.category ?? 'Astronomy'}</span><span>{article.readingMin} min read</span></div><h1>{article.title}</h1><p className="article-summary">{article.summary}</p>{article.cover && <ArticleCover cover={article.cover} />}<ReadingText text={article.body} />
       {article.sourceNote && <DiscoveryDetails className="tale-sources" detailId={`article:${article.id}:sources`} label="Sources"><SourceText text={article.sourceNote} /></DiscoveryDetails>}
       <Button onClick={() => void finish()} disabled={saving || saved}>{saved ? 'Article read' : 'Mark as read'}</Button>{saved && <p role="status">Your reading is saved on this device.</p>}
       <aside className="article-connections"><p className="tale-eyebrow">Keep exploring</p><Link to="/stories/orion-shoulder?again">Meet Orion in the story</Link><Link to="/learn">Explore how stars live and die</Link></aside>

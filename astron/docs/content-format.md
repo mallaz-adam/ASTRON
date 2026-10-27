@@ -480,3 +480,23 @@ the optional field needs no schema/index migration. Existing exports include it,
 and Erase my progress removes it. No XP, quests, daily records or completions are
 awarded by opening a detail. Reduced motion keeps a still marker instead of the
 fading circle. Gold remains decorative; labels are written in ink.
+
+## Welcome and article presentation (27 October 2026)
+
+`Learner.welcome.introductionSeenOn` is an optional ISO timestamp. New learners
+see one short introduction before Orion. Acknowledging it updates only the
+learner record and awards no XP, quests, stars or completions. Older learners
+with a saved tale visit resume their existing journey. `/guide` shows the same
+explanation without modifying progress; it is linked from Your preferences.
+No database table or index change is needed for this optional field.
+
+Articles may add `category` and `cover`; older articles remain valid without
+either. A cover has `src`, `alt`, `caption`, `credit`, `source`, `license` and
+`licenseUrl`. `src` must be a local `/art/` image path without path traversal.
+Text fields must be nonempty; source and licence links must use HTTPS.
+The cover is displayed in the library and reader with its credit and licence.
+JPG and JPEG images are precached alongside the existing offline assets.
+
+The Betelgeuse article uses category `Stars` and the real ALMA observation
+documented in `welcome-and-articles.md`. Its caption explains that the mapped
+colours represent invisible light, rather than the star's visible colour.

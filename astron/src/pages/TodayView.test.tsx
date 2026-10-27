@@ -15,15 +15,17 @@ function render(reduceMotion = false, showDevLink = false) {
 }
 
 describe('Today controls and art', () => {
-  it('has a native Profile button and one current Learn link', () => {
+  it('has a native Profile button and a current Today link', () => {
     const html = render();
     expect(html).toContain('type="button" class="profile-control" aria-label="Profile"');
     expect(html).toContain('aria-current="page"');
     expect(html).toContain('Continue: Why stars differ');
   });
-  it('opens the authored Stories and My sky pages and keeps Timeline unavailable', () => {
+  it('links all five working destinations without an unavailable placeholder', () => {
     const html = render();
-    expect(html.match(/disabled="" aria-disabled="true"/g)).toHaveLength(1);
+    expect(html).not.toContain('aria-disabled="true"');
+    expect(html).toContain('href="/learn"');
+    expect(html).toContain('href="/articles"');
     expect(html).toContain('href="/stories"');
     expect(html).not.toContain('href="/timeline"');
     expect(html).toContain('href="/sky"');
