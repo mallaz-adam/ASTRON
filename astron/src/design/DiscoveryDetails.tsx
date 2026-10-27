@@ -15,7 +15,8 @@ export function DiscoveryDetailsView({ label, children, className = '', explored
     onToggle={event => { if (event.currentTarget.open && !explored) onExplore(); }}>
     <summary className="discovery-summary">
       <span className="discovery-label">{label}</span>
-      <span className="discovery-indicator" aria-hidden="true" />
+      {!explored && <span className="discovery-hint">Tap to explore</span>}
+      <span className="discovery-indicator" aria-hidden="true"><svg viewBox="0 0 20 20" focusable="false"><path d="m10 2 2.2 5.8L18 10l-5.8 2.2L10 18l-2.2-5.8L2 10l5.8-2.2Z" /></svg></span>
       <span className="discovery-description">{explored ? ' Previously opened detail.' : ' Unopened detail.'}</span>
     </summary>
     {children}
