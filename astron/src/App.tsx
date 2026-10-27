@@ -28,7 +28,7 @@ export function AppRoutes({ development = import.meta.env.DEV }: { development?:
       : location.pathname === '/sun' ? 'Your sun · ASTRON' : 'Today · ASTRON';
     if (location.pathname === '/learn') document.title = 'Course path · ASTRON';
     if (location.pathname.startsWith('/cell/')) document.title = 'Cell · ASTRON';
-    if (location.pathname === '/welcome' || location.pathname === '/guide') document.title = 'Welcome · ASTRON';
+    if (['/welcome', '/guide', '/start'].includes(location.pathname)) document.title = 'Welcome · ASTRON';
     if (location.pathname.startsWith('/stories')) document.title = 'Stories · ASTRON';
     if (location.pathname === '/sky') document.title = 'My sky · ASTRON';
     if (location.pathname.startsWith('/articles')) document.title = 'Articles · ASTRON';
@@ -38,6 +38,7 @@ export function AppRoutes({ development = import.meta.env.DEV }: { development?:
     <Routes>
       <Route path="/welcome" element={<Welcome />} />
       <Route path="/guide" element={<Welcome review />} />
+      <Route path="/start" element={<Welcome />} />
       <Route element={<FirstVisitGate />}>
         <Route path="/" element={<Today />} />
         <Route path="/sun" element={<YourSun />} />

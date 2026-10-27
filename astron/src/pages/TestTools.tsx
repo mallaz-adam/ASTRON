@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { db } from '../data/db';
 import { eraseProgress } from '../data/services';
 import { confirmProgressErasure } from '../logic/testTools';
+import { temporaryProgress } from '../data/progressMode';
 
 export function TestTools() {
   const [busy, setBusy] = useState(false);
@@ -16,7 +17,7 @@ export function TestTools() {
   }
   return <footer className="today-test-tools">
     <p className="test-version">Test version 0.1</p>
-    <button type="button" className="test-erase" onClick={() => void erase()} disabled={busy}>Erase my progress on this device</button>
+    {temporaryProgress ? <><p>Development preview. Progress resets when you reopen or refresh.</p><a className="article-open" href="/start">Start from the beginning</a></> : <button type="button" className="test-erase" onClick={() => void erase()} disabled={busy}>Erase my progress on this device</button>}
     {error && <p role="alert">{error}</p>}
   </footer>;
 }

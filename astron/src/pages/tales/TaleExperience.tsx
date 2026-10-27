@@ -10,6 +10,7 @@ import { Page } from '../../design/Page';
 import { Button } from '../../design/Button';
 import { Toggle } from '../../design/Toggle';
 import { useReducedMotion } from '../../design/useReducedMotion';
+import { temporaryProgress } from '../../data/progressMode';
 import { useToday } from '../useToday';
 import { NotFound } from '../NotFound';
 import { TaleHeader, TaleSources } from './TaleCommon';
@@ -102,7 +103,7 @@ export function TaleExperience({ welcome = false }: { welcome?: boolean }) {
       {stage === 'sky' && <><TaleStar tale={tale} data={data} collected={collected} ending /><div className="tale-actions tale-ending-actions"><Button disabled={busy} onClick={advance}>Continue</Button></div></>}
       {stage === 'preferences' && (welcome ? <TalePreferences interests={content.interests} selected={progress.learnerInterests.filter(row => row.learnerId === localLearnerId).map(row => row.interestId)} dailyGoal={learner!.dailyGoal} reduceMotion={learner!.reduceMotion} busy={busy} onSave={(interests, goal, motion) => void save(() => finishWelcome(db, content, localLearnerId, interests, goal, motion, new Date()))} /> : <section className="tale-preferences"><h1>Your star is in My sky.</h1><Link to="/sky" className="atlas-button atlas-button--primary">My sky</Link></section>)}
       {(error || loadError) && <div className="tale-save-error" role="alert"><p>{error || loadError}</p><p>Your place is still here. Please try the action again.</p></div>}
-      <footer className="tale-footer">{stage !== 'cover' && <TaleSources data={data} />}<Toggle label="Reduce motion" checked={learner?.reduceMotion ?? false} onChange={value => void save(() => setReduceMotion(db, localLearnerId, value))} /></footer>
+      <footer className="tale-footer">{stage !== 'cover' && <TaleSources data={data} />}<Toggle label="Reduce motion" checked={learner?.reduceMotion ?? false} onChange={value => void save(() => setReduceMotion(db, localLearnerId, value))} />{temporaryProgress && <a className="article-open" href="/start">Start from the beginning</a>}</footer>
     </main>
   </Page>;
 }

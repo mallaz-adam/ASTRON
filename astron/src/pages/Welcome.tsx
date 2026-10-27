@@ -4,6 +4,7 @@ import { useProgress } from '../hooks/useProgress';
 import { db } from '../data/db';
 import { localLearnerId } from '../data/learner';
 import { acknowledgeIntroduction } from '../data/welcomeServices';
+import { temporaryProgress } from '../data/progressMode';
 import { needsIntroduction } from '../logic/taleJourney';
 import { Page } from '../design/Page';
 import { Button } from '../design/Button';
@@ -26,7 +27,8 @@ export function WelcomeView({ reduceMotion = false, busy = false, error = '', re
     ].map(([label, text]) => <section key={label}><NavigationIcon label={label} /><h2>{label}</h2><p>{text}</p></section>)}</div>
     <p className="welcome-orientation">Today keeps your daily activities together. My sky holds the stars you collect.</p>
     <section className="welcome-first"><img src="/art/orion/cover-640.webp" width="640" height="853" alt="A painted valley beneath a starry sky." /><div><p className="tale-eyebrow">Your first discovery</p><h2>Begin with Orion</h2><p>A story, a star, and a first pattern to find.</p>{review ? <Link to="/" className="atlas-button atlas-button--primary">Back to ASTRON</Link> : <Button disabled={busy} onClick={onBegin}>Meet Orion</Button>}</div></section>
-    <p className="welcome-privacy">Your progress stays on this device. No account is needed.</p>
+    {review && temporaryProgress && <a className="article-open" href="/start">Start from the beginning</a>}
+    <p className="welcome-privacy">{temporaryProgress ? 'Development preview. Progress is temporary. Refresh to start from the beginning. No account is needed.' : 'Your progress stays on this device. No account is needed.'}</p>
     {error && <p role="alert">{error}</p>}
   </main></Page>;
 }

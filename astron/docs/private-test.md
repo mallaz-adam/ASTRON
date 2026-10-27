@@ -6,8 +6,12 @@ them only on the provider's own sign-in page.
 
 ## Current state
 
-The app is prepared locally. Publishing and the real phone checks below are
-still pending. The chosen host is Cloudflare Pages, connected to GitHub.
+The app is published at https://astron-8aq.pages.dev/ using Cloudflare Pages,
+connected to GitHub. On 27 October 2026, development progress became temporary:
+a full page load starts a new practice journey. `/start` also restarts it.
+Earlier saved progress remains in a separate database. See
+`development-preview.md`; it supersedes the persistent-progress instructions
+below for this development phase. Physical phone checks remain manual.
 
 The link will be **unlisted, not secret**: anyone who gets it can open it.
 Noindex, robots.txt and the X-Robots-Tag ask search engines to leave it out;

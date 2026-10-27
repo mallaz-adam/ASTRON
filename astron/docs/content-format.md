@@ -483,6 +483,11 @@ fading circle. Gold remains decorative; labels are written in ink.
 
 ## Welcome and article presentation (27 October 2026)
 
+For the current development edition, progress is temporary and each full page
+load starts fresh. The earlier persistence descriptions apply to the future
+persistent build. See `development-preview.md` for the separate working database,
+preservation of older saved records, and the release flag that restores saving.
+
 `Learner.welcome.introductionSeenOn` is an optional ISO timestamp. New learners
 see one short introduction before Orion. Acknowledging it updates only the
 learner record and awards no XP, quests, stars or completions. Older learners

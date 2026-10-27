@@ -26,10 +26,17 @@ describe('The web test edition', () => {
     expect(html).toContain('A new version is ready.'); expect(html).toContain('>REFRESH</button>');
     expect(html).toContain('aria-live="polite"');
   });
-  it('uses a native erase control with the test version label', () => {
+  it('explains temporary progress and uses a full-page restart link', () => {
     const html = renderToStaticMarkup(<TestTools />);
-    expect(html).toContain('Test version 0.1'); expect(html).toContain('type="button"');
-    expect(html).toContain('Erase my progress on this device');
+    expect(html).toContain('Test version 0.1');
+    expect(html).toContain('Progress resets when you reopen or refresh.');
+    expect(html).toContain('href="/start"');
+    expect(html).toContain('Start from the beginning');
+    expect(html).not.toContain('Erase my progress on this device');
+  });
+  it('makes the restart address available without requiring earlier progress', () => {
+    expect(route('/start', false)).toContain('Opening the atlas');
+    expect(route('/start', false)).not.toContain('<h1>not found</h1>');
   });
   it('never erases after cancellation, and calls the service only after confirmation', async () => {
     const erase = vi.fn(async () => {});

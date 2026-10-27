@@ -1,5 +1,6 @@
 import { Dexie, type Table } from 'dexie';
 import type { ActivityDay, Answer, ArticleRead, Completion, Learner, LearnerInterest, LitStar, QuestDone } from './types';
+import { progressDatabaseName } from './progressMode';
 
 export class AstronDb extends Dexie {
   learners!: Table<Learner, string>;
@@ -33,4 +34,4 @@ export class AstronDb extends Dexie {
   }
 }
 
-export const db = new AstronDb();
+export const db = new AstronDb(progressDatabaseName);
