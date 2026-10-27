@@ -18,7 +18,8 @@ describe('Content files', () => {
     const content = sampleContent();
     expect(content.cells.map(cell => cell.kind)).toEqual(['lesson', 'lesson', 'lesson', 'tale', 'lesson', 'lesson', 'tale', 'lesson', 'lesson', 'lesson', 'quiz']);
     expect(content.chapters).toHaveLength(5);
-    expect(content.exercises).toHaveLength(4);
+    expect(content.exercises).toHaveLength(12);
+    expect(content.exercises.filter(e => e.cellId === 'orion-lesson')).toHaveLength(8);
     expect(Object.isFrozen(content.tales[0])).toBe(true);
   });
   it('names the file and field for a bad number', () => {

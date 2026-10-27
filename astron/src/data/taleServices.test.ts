@@ -8,7 +8,8 @@ import { advanceTaleVisit, answerBeltActivity, collectTaleStar, finishWelcome, p
 import { eraseProgress, readProgress, setReduceMotion } from './services';
 import { needsWelcome } from '../logic/taleJourney';
 import { totalXp } from '../logic/xp';
-import { finishLesson, saveLessonAnswer } from './lessonServices';
+import { finishLesson, saveLessonAnswer, submitLessonExam } from './lessonServices';
+import { correctSelection } from '../logic/lessonPlayer';
 
 const content = sampleContent();
 const now = new Date('2026-10-25T12:00:00');
@@ -116,10 +117,13 @@ describe('The shared Orion journey', () => {
     await advanceTaleVisit(database, content, learnerId, taleId);
     await advanceTaleVisit(database, content, learnerId, taleId);
     await finishWelcome(database, content, learnerId, [], 2, false, now);
+    const scale=content.lessons.find(l=>l.id==='patterns')!;
+    const answers=Object.fromEntries(scale.cards.flatMap(c=>c.kind==='exercise'?[[c.exerciseId,correctSelection(content.exercises.find(e=>e.id===c.exerciseId)!)]]:[]));
+    await submitLessonExam(database,content,learnerId,scale.id,answers,now);
     for (const exercise of ['ex-03-order', 'ex-03-choice']) await saveLessonAnswer(database, content, learnerId, 'lesson-03', exercise, true, now);
     await finishLesson(database, content, learnerId, 'lesson-03', [], now, 'blue');
     const saved = await readProgress(database);
-    expect(saved.completions.map(row => row.cellId).sort()).toEqual(['orion-tale', 'star-lesson']);
+    expect(saved.completions.map(row => row.cellId).sort()).toEqual(['orion-lesson','orion-tale', 'star-lesson']);
     expect(saved.litStars.map(row => row.starId).sort()).toEqual(['betelgeuse', 'star-clue-03']);
     expect(saved.questDone).toHaveLength(2);
     expect(await xp()).toBe(55);

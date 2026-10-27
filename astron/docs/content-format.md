@@ -505,3 +505,27 @@ JPG and JPEG images are precached alongside the existing offline assets.
 The Betelgeuse article uses category `Stars` and the real ALMA observation
 documented in `welcome-and-articles.md`. Its caption explains that the mapped
 colours represent invisible light, rather than the star's visible colour.
+
+## Substantial lessons with an ending exam (27 October 2026)
+
+`Lesson.reader` optionally names a local `/content/*.json` teaching file. The
+original lesson/cell IDs remain unchanged. Its `sections` contain unique IDs,
+titles, short Glaux lines, paragraph arrays and a supported diagram key.
+`topics` specify a title, review-section ID and feedback lines. `questions` map
+each canonical exercise ID to one topic. Every exercise in the lesson must be
+mapped exactly once; each topic needs at least two questions. Sources have
+titles and HTTPS URLs. Invalid links, unsafe reader paths and unknown diagram
+keys are rejected before rendering.
+
+The first reader is `/content/lesson-01.json`, linked to `patterns` /
+`orion-lesson`. Its eight exercises remain in the ordinary exercise table with
+zero extra XP. Canonical answer keys are still in that table, rather than the
+reader's display metadata. `submitLessonExam` validates a complete submission,
+records its answers, and completes the cell using existing quest rules in one
+transaction. Replays show fresh feedback without overwriting original results
+or duplicating rewards. There is no new pass-mark gate.
+
+See `scale-of-cosmos.md` for scientific sources, proportional-model calculations,
+reader behaviour and performance checks. Temporary development progress remains
+in effect. Lesson 2 is still a placeholder; the authored test path now begins
+with Scale of the cosmos, then lesson 3 and Orion.

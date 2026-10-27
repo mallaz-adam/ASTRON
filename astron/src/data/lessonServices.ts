@@ -5,6 +5,7 @@ import { readProgress } from './progressServices';
 import { buildCoursePath } from '../logic/coursePath';
 import { localDate } from '../logic/dates';
 import { hunchTint } from '../logic/stars';
+import { gradeLessonExam, type ExamAnswers } from '../logic/lessonExam';
 
 async function availableLesson(database: AstronDb, content: Content, learnerId: string, lessonId: string) {
   const lesson = content.lessons.find(row => row.id === lessonId && !row.placeholder);
@@ -15,6 +16,21 @@ async function availableLesson(database: AstronDb, content: Content, learnerId: 
   const path = buildCoursePath(content, await readProgress(database), learnerId, cell.unitId, true);
   if (path.cells.find(row => row.id === cell.id)?.state === 'locked') throw new Error('Finish the cell before it to open this one.');
   return lesson;
+}
+
+export function submitLessonExam(database: AstronDb, content: Content, learnerId: string, lessonId: string, answers: ExamAnswers, now: Date) {
+  return database.transaction('rw', database.tables, async () => {
+    const lesson = await availableLesson(database, content, learnerId, lessonId);
+    if (!lesson.reader) throw new Error('This lesson does not have an ending exam.');
+    const grade = gradeLessonExam(lesson, content, answers);
+    // Replays give fresh feedback, preserving the original completion/reward.
+    if (await database.completions.get([learnerId, lesson.cellId])) return { ...grade, learnQuestEarned: false };
+    for (const result of grade.results) await recordAnswer(database, content, learnerId, result.exerciseId, result.correct, now);
+    const learn = content.quests.find(q => q.kind === 'learn')!;
+    const learnQuestEarned = !await database.questDone.get([learnerId, localDate(now), learn.id]);
+    await completeCell(database, content, learnerId, lesson.cellId, now, { correctAnswers: grade.correct });
+    return { ...grade, learnQuestEarned };
+  });
 }
 
 export function saveLessonAnswer(database: AstronDb, content: Content, learnerId: string, lessonId: string, exerciseId: string, correct: boolean, now: Date) {

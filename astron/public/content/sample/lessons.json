@@ -3,14 +3,52 @@
     "id": "patterns",
     "title": "Scale of the cosmos",
     "cellId": "orion-lesson",
-    "placeholder": true,
+    "placeholder": false,
     "cards": [
       {
-        "kind": "say",
-        "mood": "happy",
-        "glaux": "Lessons arrive in the next step."
+        "kind": "exercise",
+        "exerciseId": "ex-01-address"
+      },
+      {
+        "kind": "exercise",
+        "exerciseId": "ex-01-other-system"
+      },
+      {
+        "kind": "exercise",
+        "exerciseId": "ex-01-double"
+      },
+      {
+        "kind": "exercise",
+        "exerciseId": "ex-01-faulty-model"
+      },
+      {
+        "kind": "exercise",
+        "exerciseId": "ex-01-caption"
+      },
+      {
+        "kind": "exercise",
+        "exerciseId": "ex-01-vanishing"
+      },
+      {
+        "kind": "exercise",
+        "exerciseId": "ex-01-next-star"
+      },
+      {
+        "kind": "exercise",
+        "exerciseId": "ex-01-traveller"
+      },
+      {
+        "kind": "recap",
+        "mood": "proud",
+        "glaux": "You now have an address in space.",
+        "items": [
+          "Earth belongs to our solar system.",
+          "Our solar system belongs to the Milky Way.",
+          "Sizes and distances both matter."
+        ]
       }
-    ]
+    ],
+    "reader": "/content/lesson-01.json"
   },
   {
     "id": "light-distance",
@@ -33,12 +71,27 @@
       {
         "kind": "hunch",
         "mood": "happy",
-        "glaux": ["Why do some stars glow blue, while others glow like embers?", "Which star seems hottest to you? A hunch is enough for now."],
+        "glaux": [
+          "Why do some stars glow blue, while others glow like embers?",
+          "Which star seems hottest to you? A hunch is enough for now."
+        ],
         "art": "lesson-03-hook",
         "options": [
-          { "id": "blue", "text": "Blue star", "colour": "#A9C4EE" },
-          { "id": "orange", "text": "Orange star", "colour": "#E9B173" },
-          { "id": "red", "text": "Red star", "colour": "#D9735A" }
+          {
+            "id": "blue",
+            "text": "Blue star",
+            "colour": "#A9C4EE"
+          },
+          {
+            "id": "orange",
+            "text": "Orange star",
+            "colour": "#E9B173"
+          },
+          {
+            "id": "red",
+            "text": "Red star",
+            "colour": "#D9735A"
+          }
         ],
         "skipLabel": "I'd rather not guess"
       },

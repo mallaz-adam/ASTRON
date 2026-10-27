@@ -28,7 +28,7 @@ export type LessonCard =
   | (SpokenCard & { kind: 'dial' | 'mass' | 'race' | 'gap'; text: string })
   | { kind: 'exercise'; exerciseId: string }
   | (SpokenCard & { kind: 'recap'; items: string[] });
-export type Lesson = { id: string; title: string; cards: LessonCard[]; cellId: string; placeholder?: boolean };
+export type Lesson = { id: string; title: string; cards: LessonCard[]; cellId: string; placeholder?: boolean; reader?: string };
 export type ExerciseType = 'choice' | 'connect' | 'order' | 'find' | 'estimate';
 export type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 export type Exercise = {

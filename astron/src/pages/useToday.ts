@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { db } from '../data/db';
-import { loadContent } from '../data/contentLoader';
+import { getContent } from '../data/sharedContent';
 import { localLearnerId } from '../data/learner';
 import { openDay } from '../data/services';
 import type { Content } from '../data/types';
@@ -20,7 +20,7 @@ export function useToday() {
 
   useEffect(() => {
     let active = true;
-    void loadContent().then(value => { if (active) setContent(value); }).catch(problem => { if (active) setError(String(problem.message)); });
+    void getContent().then(value => { if (active) setContent(value); }).catch(problem => { if (active) setError(String(problem.message)); });
     return () => { active = false; };
   }, []);
   useEffect(() => {

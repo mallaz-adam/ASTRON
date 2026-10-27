@@ -19,7 +19,7 @@ describe('Today controls and art', () => {
     const html = render();
     expect(html).toContain('type="button" class="profile-control" aria-label="Profile"');
     expect(html).toContain('aria-current="page"');
-    expect(html).toContain('Continue: Why stars differ');
+    expect(html).toContain('Continue: Scale of the cosmos');
   });
   it('links all five working destinations without an unavailable placeholder', () => {
     const html = render();

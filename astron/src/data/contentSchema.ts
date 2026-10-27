@@ -43,6 +43,7 @@ export function checkRows(value: unknown, schema: Schema, file: string): Record<
     const fields = { ...schema };
     if (file.endsWith('cells.json') && record.kind === 'tale') fields.taleId = text;
     if (file.endsWith('lessons.json') && record.placeholder !== undefined) fields.placeholder = value => typeof value === 'boolean';
+    if (file.endsWith('lessons.json') && record.reader !== undefined) fields.reader = value => typeof value === 'string' && /^\/content\/[a-zA-Z0-9/_-]+\.json$/.test(value);
     if (file.endsWith('tales.json') && record.reader !== undefined) fields.reader = value => typeof value === 'string' && /^\/content\/[a-zA-Z0-9/_-]+\.json$/.test(value);
     if (file.endsWith('chapters.json')) {
       if (record.glaux !== undefined) fields.glaux = text;

@@ -28,11 +28,13 @@ async function xp() {
 function answer(id: string, correct: boolean, date = now) { return saveLessonAnswer(database, content, learner, lesson, id, correct, date); }
 
 describe('Lesson assessment and rewards', () => {
-  it('allows the first authored lesson locally without inventing placeholder prerequisites', async () => {
+  it('requires the newly authored first lesson before lesson three, while skipping the unbuilt second lesson', async () => {
+    await expect(answer(order, true)).rejects.toThrow('Finish the cell before it');
+    expect(await database.answers.count()).toBe(0);
+    await completePathCell(database, content, learner, 'orion-lesson', now);
     await answer(order, true);
     expect(await database.answers.count()).toBe(1);
-    expect(await database.completions.count()).toBe(0);
-    expect(await database.questDone.count()).toBe(0);
+    expect((await database.completions.toArray()).map(row=>row.cellId)).toEqual(['orion-lesson']);
   });
   it('finishes with two first-try answers, 40 total XP and cell four current', async () => {
     await prerequisites();

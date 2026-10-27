@@ -6,8 +6,8 @@
 .lesson-topbar .progress-caption { font-family: var(--font-label); font-size: var(--type-label); font-variant-numeric: lining-nums; }
 .lesson-close { width: 44px; height: 44px; display: grid; place-items: center; padding: var(--space-8); background: transparent; border: var(--border-ink); color: var(--ink); }
 .lesson-close svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.5; fill: none; }
-.lesson-scroll { position: relative; flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-gutter: stable; scroll-snap-type: y mandatory; }
-.lesson-card { min-height: 100%; scroll-snap-align: start; scroll-snap-stop: always; display: flex; flex-direction: column; gap: var(--space-18); padding: var(--space-24) var(--space-8); }
+.lesson-scroll { position: relative; flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-gutter: stable; scroll-snap-type: y proximity; }
+.lesson-card { min-height: 100%; scroll-snap-align: start; display: flex; flex-direction: column; gap: var(--space-18); padding: var(--space-24) var(--space-8); }
 .lesson-picture { width: 100%; flex-shrink: 0; }
 .lesson-picture svg { display: block; width: 100%; height: auto; }
 .lesson-speech { display: flex; align-items: center; gap: var(--space-8); }

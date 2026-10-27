@@ -121,5 +121,246 @@
     "missedLine": "The heavier star uses fuel faster. Follow that clue.",
     "explanation": "Heavier stars use fuel faster. The heaviest shine for only millions of years; the Sun for about ten billion.",
     "xpValue": 10
+  },
+  {
+    "id": "ex-01-address",
+    "type": "order",
+    "prompt": "Arrange our address from our planet to the widest view.",
+    "contentData": {
+      "items": [
+        {
+          "id": "universe",
+          "text": "Universe"
+        },
+        {
+          "id": "solar",
+          "text": "Solar system"
+        },
+        {
+          "id": "earth",
+          "text": "Earth"
+        },
+        {
+          "id": "galaxy",
+          "text": "Milky Way"
+        }
+      ],
+      "correctOrder": [
+        "earth",
+        "solar",
+        "galaxy",
+        "universe"
+      ]
+    },
+    "xpValue": 0,
+    "cellId": "orion-lesson",
+    "glaux": "Take your time. Look for the relationship.",
+    "hint": "Return to the explanation and compare the relationships.",
+    "rightLine": "You have connected the ideas.",
+    "missedLine": "Let us look at the explanation together.",
+    "explanation": "Earth belongs to our solar system, which belongs to the Milky Way, one galaxy in the universe."
+  },
+  {
+    "id": "ex-01-other-system",
+    "type": "choice",
+    "prompt": "A planet orbits another star in the Milky Way. Which conclusion is supported?",
+    "contentData": {
+      "options": [
+        {
+          "id": "a",
+          "text": "It belongs to our solar system because it shares our galaxy."
+        },
+        {
+          "id": "b",
+          "text": "It belongs to another planetary system in our galaxy; it could still be far from Earth."
+        },
+        {
+          "id": "c",
+          "text": "It must be outside the Milky Way because it has another star."
+        }
+      ],
+      "correctOptionId": "b"
+    },
+    "xpValue": 0,
+    "cellId": "orion-lesson",
+    "glaux": "Take your time. Look for the relationship.",
+    "hint": "Return to the explanation and compare the relationships.",
+    "rightLine": "You have connected the ideas.",
+    "missedLine": "Let us look at the explanation together.",
+    "explanation": "A galaxy contains many stars. A planet around another star belongs to a different planetary system, and sharing a galaxy does not establish closeness."
+  },
+  {
+    "id": "ex-01-double",
+    "type": "choice",
+    "prompt": "A rounded model has a 10 cm Sun, a 1 mm Earth and an 11 m gap. Double the whole model. What changes?",
+    "contentData": {
+      "options": [
+        {
+          "id": "a",
+          "text": "The Sun becomes 20 cm, Earth stays 1 mm, and the gap stays 11 m."
+        },
+        {
+          "id": "b",
+          "text": "The Sun becomes 20 cm, Earth becomes 2 mm, and the gap stays 11 m."
+        },
+        {
+          "id": "c",
+          "text": "The Sun becomes 20 cm, Earth becomes 2 mm, and the gap becomes 22 m."
+        }
+      ],
+      "correctOptionId": "c"
+    },
+    "xpValue": 0,
+    "cellId": "orion-lesson",
+    "glaux": "Take your time. Look for the relationship.",
+    "hint": "Return to the explanation and compare the relationships.",
+    "rightLine": "You have connected the ideas.",
+    "missedLine": "Let us look at the explanation together.",
+    "explanation": "Doubling the whole model doubles every length: the objects’ widths and the gap between them."
+  },
+  {
+    "id": "ex-01-faulty-model",
+    "type": "choice",
+    "prompt": "A model has a 10 cm Sun, a 1 cm Earth and an 11 m gap. Compare it with our rounded model. What needs correcting?",
+    "contentData": {
+      "options": [
+        {
+          "id": "a",
+          "text": "Earth is drawn too large. The Sun’s width and the approximate gap match our model."
+        },
+        {
+          "id": "b",
+          "text": "Only the gap is incorrect; Earth should stay 1 cm wide."
+        },
+        {
+          "id": "c",
+          "text": "Nothing needs correcting because the Sun is bigger than Earth."
+        }
+      ],
+      "correctOptionId": "a"
+    },
+    "xpValue": 0,
+    "cellId": "orion-lesson",
+    "glaux": "Take your time. Look for the relationship.",
+    "hint": "Return to the explanation and compare the relationships.",
+    "rightLine": "You have connected the ideas.",
+    "missedLine": "Let us look at the explanation together.",
+    "explanation": "Our Earth is about 1 mm wide, not 1 cm. Being smaller than the Sun is not enough: the relative sizes must also match."
+  },
+  {
+    "id": "ex-01-caption",
+    "type": "choice",
+    "prompt": "An illustration shows large planets close together. What must you check before measuring a gap from it?",
+    "contentData": {
+      "options": [
+        {
+          "id": "a",
+          "text": "Whether the picture is attractive enough to be trusted."
+        },
+        {
+          "id": "b",
+          "text": "Whether its caption says distances share one consistent scale; sizes may use another scale."
+        },
+        {
+          "id": "c",
+          "text": "Only whether the planets appear in the correct order."
+        }
+      ],
+      "correctOptionId": "b"
+    },
+    "xpValue": 0,
+    "cellId": "orion-lesson",
+    "glaux": "Take your time. Look for the relationship.",
+    "hint": "Return to the explanation and compare the relationships.",
+    "rightLine": "You have connected the ideas.",
+    "missedLine": "Let us look at the explanation together.",
+    "explanation": "A picture can show the correct order while shortening gaps or enlarging planets. Its stated scale determines what we can measure."
+  },
+  {
+    "id": "ex-01-vanishing",
+    "type": "choice",
+    "prompt": "You widen the atlas view until Earth disappears. What happened?",
+    "contentData": {
+      "options": [
+        {
+          "id": "a",
+          "text": "Earth’s physical width became smaller."
+        },
+        {
+          "id": "b",
+          "text": "Earth stopped belonging to the solar system."
+        },
+        {
+          "id": "c",
+          "text": "The view’s scale changed. Earth still exists at its original physical size."
+        }
+      ],
+      "correctOptionId": "c"
+    },
+    "xpValue": 0,
+    "cellId": "orion-lesson",
+    "glaux": "Take your time. Look for the relationship.",
+    "hint": "Return to the explanation and compare the relationships.",
+    "rightLine": "You have connected the ideas.",
+    "missedLine": "Let us look at the explanation together.",
+    "explanation": "Zooming changes the view, not the physical object. An enlarged marker can show an object too small to draw at that scale."
+  },
+  {
+    "id": "ex-01-next-star",
+    "type": "choice",
+    "prompt": "Someone places the nearest other star just beyond model Neptune, a little over 320 m away. Why is this misleading?",
+    "contentData": {
+      "options": [
+        {
+          "id": "a",
+          "text": "At the same scale, that star is roughly 3,000 km away. The gap has been greatly shortened."
+        },
+        {
+          "id": "b",
+          "text": "It is misleading only because the star is drawn in another colour."
+        },
+        {
+          "id": "c",
+          "text": "It is accurate because the next star comes after the last planet."
+        }
+      ],
+      "correctOptionId": "a"
+    },
+    "xpValue": 0,
+    "cellId": "orion-lesson",
+    "glaux": "Take your time. Look for the relationship.",
+    "hint": "Return to the explanation and compare the relationships.",
+    "rightLine": "You have connected the ideas.",
+    "missedLine": "Let us look at the explanation together.",
+    "explanation": "Being the next star does not mean being just beyond the planets. The space between stars is enormous on this same model scale."
+  },
+  {
+    "id": "ex-01-traveller",
+    "type": "choice",
+    "prompt": "A traveller says: “I have left the solar system, so I have left the Milky Way.” Which correction explains the relationship?",
+    "contentData": {
+      "options": [
+        {
+          "id": "a",
+          "text": "Correct: the solar system and the Milky Way are two names for the same system."
+        },
+        {
+          "id": "b",
+          "text": "Leaving the solar system can still leave the traveller inside the Milky Way, which contains our whole solar system."
+        },
+        {
+          "id": "c",
+          "text": "Leaving the solar system means leaving the universe, but not the Milky Way."
+        }
+      ],
+      "correctOptionId": "b"
+    },
+    "xpValue": 0,
+    "cellId": "orion-lesson",
+    "glaux": "Take your time. Look for the relationship.",
+    "hint": "Return to the explanation and compare the relationships.",
+    "rightLine": "You have connected the ideas.",
+    "missedLine": "Let us look at the explanation together.",
+    "explanation": "Our solar system occupies a tiny part of the Milky Way. Crossing the boundary of the smaller system does not mean leaving the larger one."
   }
 ]
