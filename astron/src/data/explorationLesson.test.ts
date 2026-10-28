@@ -11,19 +11,24 @@ const raw = () => JSON.parse(readFileSync(new URL('../../public/content/lesson-0
 const correct = () => Object.fromEntries(lesson.cards.flatMap(card => card.kind === 'exercise' ? [[card.exerciseId, correctSelection(content.exercises.find(e=>e.id===card.exerciseId)!)]] : []));
 
 describe('The full scale lesson', () => {
-  it('has eight substantial sections, an eight-question exam and two questions per topic', () => {
+  it('has eight teaching sections, two optional practices and a retained question bank for future chapter work', () => {
     const data = validateExplorationLesson(raw(), lesson, content);
     expect(data.sections).toHaveLength(8);
     expect(data.sections.flatMap(s=>s.paragraphs).join(' ').split(/\s+/).length).toBeGreaterThan(600);
     expect(data.questions).toHaveLength(8);
+    expect(data.practice).toHaveLength(2);
+    expect(data.sections.at(-1)?.paragraphs.join(' ')).toContain('full evaluation comes at the end of the chapter');
+    expect(data.sections.at(-1)?.paragraphs.join(' ')).not.toContain('exam has eight questions');
     for (const t of data.topics) expect(data.questions.filter(q=>q.topicId===t.id)).toHaveLength(2);
   });
-  it.each(['unknown-exercise', 'unknown-topic', 'unknown-section', 'unsafe-source'])('rejects %s before showing a lesson', kind => {
+  it.each(['unknown-exercise', 'unknown-topic', 'unknown-section', 'unsafe-source', 'unknown-practice-section', 'unknown-practice-exercise'])('rejects %s before showing a lesson', kind => {
     const data = raw();
     if (kind==='unknown-exercise') data.questions[0].exerciseId='missing';
     if (kind==='unknown-topic') data.questions[0].topicId='missing';
     if (kind==='unknown-section') data.topics[0].reviewSection='missing';
     if (kind==='unsafe-source') data.sources[0].url='javascript:alert(1)';
+    if (kind==='unknown-practice-section') data.practice[0].sectionId='missing';
+    if (kind==='unknown-practice-exercise') data.practice[0].exerciseId='missing';
     expect(()=>validateExplorationLesson(data,lesson,content)).toThrow();
   });
   it('grades order and reasoning questions only after all answers are complete', () => {

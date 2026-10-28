@@ -17,6 +17,11 @@ describe('Course path accessible controls', () => {
     expect(html).toContain('aria-live="polite"');
     expect(html).toContain('Glaux the owl, thinking');
     expect(html).toContain('Each cell holds a small discovery. Begin with the open one.');
+    expect(html).toContain('CHAPTER 1');
+    expect(html).toContain('End of chapter');
+    expect(html).toContain('Chapter evaluation');
+    expect(html).toMatch(/<button[^>]*disabled[^>]*>Coming later<\/button>/);
+    expect(html.indexOf('class="chapter-evaluation"')).toBeGreaterThan(html.indexOf('class="course-layout"'));
   });
   it('passes Reduce motion through to the current-cell pulse', () => {
     const model = buildCoursePath(sampleContent(), { completions: [] });

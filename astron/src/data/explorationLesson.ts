@@ -3,7 +3,7 @@ import type { Content, Lesson } from './types';
 
 export type ExplorationSection = { id: string; title: string; glaux: string; paragraphs: string[]; diagram: 'address' | 'sun' | 'scale' | 'models' | 'neighbour' | 'galaxy' | 'universe' | 'recap' };
 export type ExamTopic = { id: string; title: string; reviewSection: string; secureLine: string; reviewLine: string };
-export type ExplorationLesson = { lessonId: string; introduction: string; sections: ExplorationSection[]; topics: ExamTopic[]; questions: { exerciseId: string; topicId: string }[]; sources: { title: string; url: string }[] };
+export type ExplorationLesson = { lessonId: string; introduction: string; sections: ExplorationSection[]; topics: ExamTopic[]; questions: { exerciseId: string; topicId: string }[]; practice: { sectionId: string; exerciseId: string }[]; sources: { title: string; url: string }[] };
 
 export function validateExplorationLesson(value: unknown, lesson: Lesson, content: Content): ExplorationLesson {
   function fail(message: string): never { throw new Error(`Lesson reader: ${message}`); }
@@ -14,11 +14,12 @@ export function validateExplorationLesson(value: unknown, lesson: Lesson, conten
   checkRows(row.sections, { id: text, title: text, glaux: text, paragraphs: v => Array.isArray(v) && v.length > 0 && v.every(text), diagram: v => diagrams.includes(String(v)) }, 'sections');
   checkRows(row.topics, { id: text, title: text, reviewSection: text, secureLine: text, reviewLine: text }, 'topics');
   checkRows(row.questions, { exerciseId: text, topicId: text }, 'questions');
+  checkRows(row.practice, { sectionId: text, exerciseId: text }, 'practice');
   checkRows(row.sources, { title: text, url: v => typeof v === 'string' && /^https:\/\//.test(v) }, 'sources');
   if (row.sections.length < 2 || new Set(row.sections.map(s => s.id)).size !== row.sections.length) fail('sections need unique IDs.');
   if (!row.topics.length || new Set(row.topics.map(t => t.id)).size !== row.topics.length) fail('topics need unique IDs.');
   const exerciseIds = lesson.cards.flatMap(card => card.kind === 'exercise' ? [card.exerciseId] : []);
-  if (row.questions.length !== exerciseIds.length || !row.questions.length || new Set(row.questions.map(q => q.exerciseId)).size !== exerciseIds.length) fail('exam must cover every exercise once.');
+  if (row.questions.length !== exerciseIds.length || !row.questions.length || new Set(row.questions.map(q => q.exerciseId)).size !== exerciseIds.length) fail('question bank must cover every exercise once.');
   for (const q of row.questions) {
     const exercise = content.exercises.find(e => e.id === q.exerciseId);
     if (!exerciseIds.includes(q.exerciseId) || exercise?.cellId !== lesson.cellId || !['choice', 'order'].includes(exercise.type)) fail('unknown exam exercise.');
@@ -27,6 +28,11 @@ export function validateExplorationLesson(value: unknown, lesson: Lesson, conten
   for (const t of row.topics) {
     if (!row.sections.some(s => s.id === t.reviewSection)) fail('unknown review section.');
     if (row.questions.filter(q => q.topicId === t.id).length < 2) fail('each topic needs at least two questions.');
+  }
+  if (new Set(row.practice.map(p => p.sectionId)).size !== row.practice.length) fail('only one optional practice per section.');
+  for (const p of row.practice) {
+    if (!row.sections.some(s => s.id === p.sectionId)) fail('unknown practice section.');
+    if (!row.questions.some(q => q.exerciseId === p.exerciseId) || content.exercises.find(e => e.id === p.exerciseId)?.type !== 'choice') fail('unknown practice choice.');
   }
   return row;
 }

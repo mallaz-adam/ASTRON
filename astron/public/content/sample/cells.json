@@ -1,5 +1,5 @@
 [
-  { "id": "orion-lesson", "positionNo": 1, "title": "Scale of the cosmos", "kind": "lesson", "minutes": 18, "unitId": "first-sky" },
+  { "id": "orion-lesson", "positionNo": 1, "title": "Scale of the cosmos", "kind": "lesson", "minutes": 12, "unitId": "first-sky" },
   { "id": "light-distance", "positionNo": 2, "title": "Light and distance", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
   { "id": "star-lesson", "positionNo": 3, "title": "Why stars differ", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
   { "id": "orion-tale", "positionNo": 4, "title": "Orion", "kind": "tale", "minutes": 6, "unitId": "first-sky", "taleId": "orion-shoulder" },
@@ -9,5 +9,5 @@
   { "id": "giants-dwarfs", "positionNo": 8, "title": "Giants and dwarfs", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
   { "id": "stars-explode", "positionNo": 9, "title": "When stars explode", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
   { "id": "what-left", "positionNo": 10, "title": "What is left", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
-  { "id": "orion-quiz", "positionNo": 11, "title": "Unit quiz", "kind": "quiz", "minutes": 5, "unitId": "first-sky" }
+  { "id": "orion-quiz", "positionNo": 11, "title": "Chapter evaluation", "kind": "quiz", "minutes": 5, "unitId": "first-sky" }
 ]

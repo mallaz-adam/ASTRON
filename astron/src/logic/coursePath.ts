@@ -25,9 +25,10 @@ export function buildCoursePath(content: Content, progress: Pick<Progress, 'comp
     };
   });
   const doneCount = cells.filter(cell => cell.state === 'done').length;
+  const showingPartOfChapter = testRelease && cells.length < content.cells.filter(cell => cell.unitId === unit.id).length;
   return {
     unit, cells, doneCount, current: cells.find(cell => cell.state === 'current') ?? null,
-    countText: `${doneCount} of ${cells.length} done`, unitLabel: `UNIT ${unit.orderNo}`,
+    countText: `${doneCount} of ${cells.length}${showingPartOfChapter ? ' available steps' : ''} done`, unitLabel: `CHAPTER ${unit.orderNo}`,
     glaux: glauxLine(content, doneCount === 0 ? 'pathBegin' : doneCount === cells.length ? 'pathComplete' : 'pathContinue'),
   };
 }

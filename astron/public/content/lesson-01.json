@@ -1,70 +1,194 @@
 {
   "lessonId": "patterns",
-  "introduction": "Where do we belong? Follow our place in space, build a small model, then test your understanding. Allow about 15–20 minutes, including the exam. There is no timer.",
+  "introduction": "Where do we belong? Follow our place in space and build a small model. Take your time: the full evaluation comes at the end of the chapter.",
   "sections": [
-    { "id": "home", "title": "Begin somewhere familiar", "diagram": "address", "glaux": "Let us begin with the world beneath your feet.", "paragraphs": [
-      "Earth feels enormous when we travel across it. Mountains, oceans and cities fill our view. Yet Earth is one planet travelling around the Sun. The Moon travels around Earth. Together, they belong to our solar system.",
-      "Our solar system belongs to the Milky Way galaxy. The Milky Way is one galaxy among many in the universe. These names describe different levels of our surroundings. Understanding them gives us an address in space.",
-      "Explore each level below. The views show where things belong; their sizes and gaps are simplified. When Earth becomes too small to draw, it is still there. We have changed our view."
-    ] },
-    { "id": "sun", "title": "Meet our neighbourhood star", "diagram": "sun", "glaux": "The Sun belongs among the stars you see at night.", "paragraphs": [
-      "The Sun is a star: a huge, glowing ball of extremely hot gas. Earth is a planet orbiting it. An orbit is a path around another object. The Sun’s gravity, its pull on other objects, helps keep the planets in their orbits.",
-      "Our solar system includes the Sun, planets, moons and smaller objects such as asteroids and comets. It has one star: the Sun. A galaxy is a much larger system containing an enormous population of stars.",
-      "Keep these two ideas separate. The Sun is an object, while the solar system is the wider system to which it belongs. The whole solar system occupies a tiny part of our galaxy."
-    ] },
-    { "id": "model", "title": "Shrink the Sun", "diagram": "scale", "glaux": "Let us make something enormous small enough to imagine.", "paragraphs": [
-      "A scale model shrinks real objects by a chosen amount. To preserve their relationships, we must shrink their sizes and the distances between them by the same factor.",
-      "Imagine a model Sun about 10 centimetres wide. Earth would be about 1 millimetre wide, roughly 11 metres away. Neptune would be about 320 metres from the Sun. These are rounded comparisons, using average orbital distances.",
-      "Earth would be a tiny speck, far from the model Sun. Most of the distance between them would contain neither object. Try changing the model Sun’s width. Watch Earth’s size and the gaps change together."
-    ] },
-    { "id": "pictures", "title": "Read a space picture carefully", "diagram": "models", "glaux": "A good picture tells you what it has changed.", "paragraphs": [
-      "A page showing every planet as a large, colourful disc helps us recognise them. But it can give a misleading impression of their spacing. If we fitted their distances onto a small screen at one consistent scale, the planets themselves would become extremely difficult to see.",
-      "An illustration may therefore enlarge the planets or shorten the gaps. Its caption should explain those choices. A useful picture can simplify reality while helping us understand it.",
-      "Compare the two views below. One compares the Sun’s and Earth’s widths, with the gap shortened. The other compares average distances to Earth and Neptune, with enlarged location markers. Planets orbit the Sun; this line is a comparison of distances."
-    ] },
-    { "id": "neighbour", "title": "Reach the next star", "diagram": "neighbour", "glaux": "Beyond the planets, the next star is still a long journey away.", "paragraphs": [
-      "Keep our model Sun at 10 centimetres wide. The nearest other star would be roughly 3,000 kilometres away. We have kept the same scale as our tiny Earth and its 11-metre gap. We have simply continued farther outward.",
-      "The space between stars is enormous compared with the sizes of the stars themselves. Placing another star just beyond Neptune would badly misrepresent our neighbourhood.",
-      "Stars can share a galaxy while remaining far apart. Finding a planet around another star in the Milky Way would not make it part of our solar system, or tell us that it is close to Earth."
-    ] },
-    { "id": "galaxy", "title": "Find our galaxy", "diagram": "galaxy", "glaux": "Our whole neighbourhood fits inside a much larger one.", "paragraphs": [
-      "Our Sun is one of the billions of stars in the Milky Way. A galaxy is a vast system containing stars, gas, dust and other matter, held together by gravity.",
-      "Our solar system occupies a tiny part of this galaxy. Moving beyond the planets would still leave us inside the Milky Way. Leaving our solar system and leaving our galaxy are very different journeys.",
-      "As we widen our view, Earth becomes too small to draw. Earth has not physically shrunk. The scale of our view has changed. The marker below points to our solar system; it is enlarged so we can find it."
-    ] },
-    { "id": "universe", "title": "Look beyond the Milky Way", "diagram": "universe", "glaux": "One galaxy is only part of the wider view.", "paragraphs": [
-      "The Milky Way is one galaxy among many. Other galaxies contain their own populations of stars. A picture of our galaxy therefore shows one part of the universe, rather than the whole universe.",
-      "Our address has several levels: Earth, our solar system, the Milky Way, and the universe that includes these galaxies. This diagram shows relationships, not the actual sizes or spacing of galaxies.",
-      "We can now ask better questions. Are we comparing the sizes of objects, the gaps between them, or the larger systems they belong to? Those are different comparisons, and each needs a suitable view."
-    ] },
-    { "id": "recap", "title": "Bring the view together", "diagram": "recap", "glaux": "You now have an address. Let us see how you use it.", "paragraphs": [
-      "Earth belongs to our solar system. Our solar system belongs to the Milky Way. The Milky Way is one galaxy among many in the universe.",
-      "Sizes and distances are different. A scale model preserves both only when we change them by the same factor. A scientific illustration may simplify them, so read its caption before measuring anything from it.",
-      "The exam has eight questions. Some ask you to judge a new model or explain another traveller’s claim. You can move between questions and change your answers before submitting. Afterwards, you will see an explanation for each answer and the ideas to revisit."
-    ] }
+    {
+      "id": "home",
+      "title": "Begin somewhere familiar",
+      "diagram": "address",
+      "glaux": "Let us begin with the world beneath your feet.",
+      "paragraphs": [
+        "Earth feels enormous when we travel across it. Mountains, oceans and cities fill our view. Yet Earth is one planet travelling around the Sun. The Moon travels around Earth. Together, they belong to our solar system.",
+        "Our solar system belongs to the Milky Way galaxy. The Milky Way is one galaxy among many in the universe. These names describe different levels of our surroundings. Understanding them gives us an address in space.",
+        "Explore each level below. The views show where things belong; their sizes and gaps are simplified. When Earth becomes too small to draw, it is still there. We have changed our view."
+      ]
+    },
+    {
+      "id": "sun",
+      "title": "Meet our neighbourhood star",
+      "diagram": "sun",
+      "glaux": "The Sun belongs among the stars you see at night.",
+      "paragraphs": [
+        "The Sun is a star: a huge, glowing ball of extremely hot gas. Earth is a planet orbiting it. An orbit is a path around another object. The Sun’s gravity, its pull on other objects, helps keep the planets in their orbits.",
+        "Our solar system includes the Sun, planets, moons and smaller objects such as asteroids and comets. It has one star: the Sun. A galaxy is a much larger system containing an enormous population of stars.",
+        "Keep these two ideas separate. The Sun is an object, while the solar system is the wider system to which it belongs. The whole solar system occupies a tiny part of our galaxy."
+      ]
+    },
+    {
+      "id": "model",
+      "title": "Shrink the Sun",
+      "diagram": "scale",
+      "glaux": "Let us make something enormous small enough to imagine.",
+      "paragraphs": [
+        "A scale model shrinks real objects by a chosen amount. To preserve their relationships, we must shrink their sizes and the distances between them by the same factor.",
+        "Imagine a model Sun about 10 centimetres wide. Earth would be about 1 millimetre wide, roughly 11 metres away. Neptune would be about 320 metres from the Sun. These are rounded comparisons, using average orbital distances.",
+        "Earth would be a tiny speck, far from the model Sun. Most of the distance between them would contain neither object. Try changing the model Sun’s width. Watch Earth’s size and the gaps change together."
+      ]
+    },
+    {
+      "id": "pictures",
+      "title": "Read a space picture carefully",
+      "diagram": "models",
+      "glaux": "A good picture tells you what it has changed.",
+      "paragraphs": [
+        "A page showing every planet as a large, colourful disc helps us recognise them. But it can give a misleading impression of their spacing. If we fitted their distances onto a small screen at one consistent scale, the planets themselves would become extremely difficult to see.",
+        "An illustration may therefore enlarge the planets or shorten the gaps. Its caption should explain those choices. A useful picture can simplify reality while helping us understand it.",
+        "Compare the two views below. One compares the Sun’s and Earth’s widths, with the gap shortened. The other compares average distances to Earth and Neptune, with enlarged location markers. Planets orbit the Sun; this line is a comparison of distances."
+      ]
+    },
+    {
+      "id": "neighbour",
+      "title": "Reach the next star",
+      "diagram": "neighbour",
+      "glaux": "Beyond the planets, the next star is still a long journey away.",
+      "paragraphs": [
+        "Keep our model Sun at 10 centimetres wide. The nearest other star would be roughly 3,000 kilometres away. We have kept the same scale as our tiny Earth and its 11-metre gap. We have simply continued farther outward.",
+        "The space between stars is enormous compared with the sizes of the stars themselves. Placing another star just beyond Neptune would badly misrepresent our neighbourhood.",
+        "Stars can share a galaxy while remaining far apart. Finding a planet around another star in the Milky Way would not make it part of our solar system, or tell us that it is close to Earth."
+      ]
+    },
+    {
+      "id": "galaxy",
+      "title": "Find our galaxy",
+      "diagram": "galaxy",
+      "glaux": "Our whole neighbourhood fits inside a much larger one.",
+      "paragraphs": [
+        "Our Sun is one of the billions of stars in the Milky Way. A galaxy is a vast system containing stars, gas, dust and other matter, held together by gravity.",
+        "Our solar system occupies a tiny part of this galaxy. Moving beyond the planets would still leave us inside the Milky Way. Leaving our solar system and leaving our galaxy are very different journeys.",
+        "As we widen our view, Earth becomes too small to draw. Earth has not physically shrunk. The scale of our view has changed. The marker below points to our solar system; it is enlarged so we can find it."
+      ]
+    },
+    {
+      "id": "universe",
+      "title": "Look beyond the Milky Way",
+      "diagram": "universe",
+      "glaux": "One galaxy is only part of the wider view.",
+      "paragraphs": [
+        "The Milky Way is one galaxy among many. Other galaxies contain their own populations of stars. A picture of our galaxy therefore shows one part of the universe, rather than the whole universe.",
+        "Our address has several levels: Earth, our solar system, the Milky Way, and the universe that includes these galaxies. This diagram shows relationships, not the actual sizes or spacing of galaxies.",
+        "We can now ask better questions. Are we comparing the sizes of objects, the gaps between them, or the larger systems they belong to? Those are different comparisons, and each needs a suitable view."
+      ]
+    },
+    {
+      "id": "recap",
+      "title": "Bring the view together",
+      "diagram": "recap",
+      "glaux": "You now have an address. Keep these ideas as we explore further.",
+      "paragraphs": [
+        "Earth belongs to our solar system. Our solar system belongs to the Milky Way. The Milky Way is one galaxy among many in the universe.",
+        "Sizes and distances are different. A scale model preserves both only when we change them by the same factor. A scientific illustration may simplify them, so read its caption before measuring anything from it.",
+        "You can finish this lesson when you are ready. The full evaluation comes at the end of the chapter, How stars live and die. It will connect ideas from all the lessons. The small practice moments here help you explore, and you can continue without answering them."
+      ]
+    }
   ],
   "topics": [
-    { "id": "address", "title": "Our place in space", "reviewSection": "galaxy", "secureLine": "You can connect our solar system to the larger galaxy.", "reviewLine": "Look again at how our cosmic address fits together." },
-    { "id": "scale", "title": "Sizes and scale models", "reviewSection": "model", "secureLine": "You can change a model while preserving its relationships.", "reviewLine": "Explore how sizes and gaps must change together." },
-    { "id": "pictures", "title": "Reading scientific pictures", "reviewSection": "pictures", "secureLine": "You can explain what a picture shows and simplifies.", "reviewLine": "Compare what each view preserves and what it changes." },
-    { "id": "distances", "title": "Distances between stars", "reviewSection": "neighbour", "secureLine": "You recognise that sharing a galaxy does not mean being close.", "reviewLine": "Return to the long gap between our Sun and the next star." }
+    {
+      "id": "address",
+      "title": "Our place in space",
+      "reviewSection": "galaxy",
+      "secureLine": "You can connect our solar system to the larger galaxy.",
+      "reviewLine": "Look again at how our cosmic address fits together."
+    },
+    {
+      "id": "scale",
+      "title": "Sizes and scale models",
+      "reviewSection": "model",
+      "secureLine": "You can change a model while preserving its relationships.",
+      "reviewLine": "Explore how sizes and gaps must change together."
+    },
+    {
+      "id": "pictures",
+      "title": "Reading scientific pictures",
+      "reviewSection": "pictures",
+      "secureLine": "You can explain what a picture shows and simplifies.",
+      "reviewLine": "Compare what each view preserves and what it changes."
+    },
+    {
+      "id": "distances",
+      "title": "Distances between stars",
+      "reviewSection": "neighbour",
+      "secureLine": "You recognise that sharing a galaxy does not mean being close.",
+      "reviewLine": "Return to the long gap between our Sun and the next star."
+    }
   ],
   "questions": [
-    { "exerciseId": "ex-01-address", "topicId": "address" },
-    { "exerciseId": "ex-01-other-system", "topicId": "distances" },
-    { "exerciseId": "ex-01-double", "topicId": "scale" },
-    { "exerciseId": "ex-01-faulty-model", "topicId": "scale" },
-    { "exerciseId": "ex-01-caption", "topicId": "pictures" },
-    { "exerciseId": "ex-01-vanishing", "topicId": "pictures" },
-    { "exerciseId": "ex-01-next-star", "topicId": "distances" },
-    { "exerciseId": "ex-01-traveller", "topicId": "address" }
+    {
+      "exerciseId": "ex-01-address",
+      "topicId": "address"
+    },
+    {
+      "exerciseId": "ex-01-other-system",
+      "topicId": "distances"
+    },
+    {
+      "exerciseId": "ex-01-double",
+      "topicId": "scale"
+    },
+    {
+      "exerciseId": "ex-01-faulty-model",
+      "topicId": "scale"
+    },
+    {
+      "exerciseId": "ex-01-caption",
+      "topicId": "pictures"
+    },
+    {
+      "exerciseId": "ex-01-vanishing",
+      "topicId": "pictures"
+    },
+    {
+      "exerciseId": "ex-01-next-star",
+      "topicId": "distances"
+    },
+    {
+      "exerciseId": "ex-01-traveller",
+      "topicId": "address"
+    }
   ],
   "sources": [
-    { "title": "NASA: Solar system, galaxy and universe", "url": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/solar-system-galaxy-universe-whats-the-difference/" },
-    { "title": "NASA: Sun facts", "url": "https://science.nasa.gov/sun/facts/" },
-    { "title": "NASA: Solar system size and distance data", "url": "https://science.nasa.gov/resource/the-voyage-scale-model-solar-system/" },
-    { "title": "NASA JPL: Create a solar system scale model", "url": "https://www.jpl.nasa.gov/edu/resources/lesson-plan/create-a-solar-system-scale-model-with-spreadsheets/" },
-    { "title": "NASA: Distances beyond the solar system", "url": "https://science.nasa.gov/learn/basics-of-space-flight/chapter1-1/" },
-    { "title": "NASA: Galaxies", "url": "https://science.nasa.gov/universe/galaxies/" }
+    {
+      "title": "NASA: Solar system, galaxy and universe",
+      "url": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/solar-system-galaxy-universe-whats-the-difference/"
+    },
+    {
+      "title": "NASA: Sun facts",
+      "url": "https://science.nasa.gov/sun/facts/"
+    },
+    {
+      "title": "NASA: Solar system size and distance data",
+      "url": "https://science.nasa.gov/resource/the-voyage-scale-model-solar-system/"
+    },
+    {
+      "title": "NASA JPL: Create a solar system scale model",
+      "url": "https://www.jpl.nasa.gov/edu/resources/lesson-plan/create-a-solar-system-scale-model-with-spreadsheets/"
+    },
+    {
+      "title": "NASA: Distances beyond the solar system",
+      "url": "https://science.nasa.gov/learn/basics-of-space-flight/chapter1-1/"
+    },
+    {
+      "title": "NASA: Galaxies",
+      "url": "https://science.nasa.gov/universe/galaxies/"
+    }
+  ],
+  "practice": [
+    {
+      "sectionId": "model",
+      "exerciseId": "ex-01-double"
+    },
+    {
+      "sectionId": "galaxy",
+      "exerciseId": "ex-01-traveller"
+    }
   ]
 }

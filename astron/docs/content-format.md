@@ -506,26 +506,30 @@ The Betelgeuse article uses category `Stars` and the real ALMA observation
 documented in `welcome-and-articles.md`. Its caption explains that the mapped
 colours represent invisible light, rather than the star's visible colour.
 
-## Substantial lessons with an ending exam (27 October 2026)
+## Reading lessons and chapter evaluations (28 October 2026)
 
-`Lesson.reader` optionally names a local `/content/*.json` teaching file. The
-original lesson/cell IDs remain unchanged. Its `sections` contain unique IDs,
-titles, short Glaux lines, paragraph arrays and a supported diagram key.
-`topics` specify a title, review-section ID and feedback lines. `questions` map
-each canonical exercise ID to one topic. Every exercise in the lesson must be
-mapped exactly once; each topic needs at least two questions. Sources have
-titles and HTTPS URLs. Invalid links, unsafe reader paths and unknown diagram
-keys are rejected before rendering.
+A chapter is the collection stored as a `Unit`; a lesson is a learning `Cell`,
+and a part is a section within a lesson. Full evaluations belong at the end
+of chapters. See `learning-structure.md` for the confirmed product structure.
+
+`Lesson.reader` names a local `/content/*.json` teaching file. Its sections
+have unique IDs, titles, short Glaux lines, paragraph arrays and a supported
+diagram key. The `questions` and `topics` arrays retain a canonical question
+bank and topic-to-review mappings for authoring. They do not require an exam
+at the end of the individual lesson.
+
+`practice` maps a section ID to one choice exercise ID from that bank. It may
+contain at most one optional practice per section. Referenced sections and
+exercises must exist; practice choices must belong to this lesson. Sources
+have titles and HTTPS URLs. Invalid paths, IDs and diagram keys are rejected.
 
 The first reader is `/content/lesson-01.json`, linked to `patterns` /
-`orion-lesson`. Its eight exercises remain in the ordinary exercise table with
-zero extra XP. Canonical answer keys are still in that table, rather than the
-reader's display metadata. `submitLessonExam` validates a complete submission,
-records its answers, and completes the cell using existing quest rules in one
-transaction. Replays show fresh feedback without overwriting original results
-or duplicating rewards. There is no new pass-mark gate.
+`orion-lesson`. Two optional practices reveal explanations without scores,
+answer records or extra XP. `finishReadingLesson` completes the lesson through
+the existing Learn quest rules. Replays preserve earlier completions and
+answers and do not duplicate rewards.
 
-See `scale-of-cosmos.md` for scientific sources, proportional-model calculations,
-reader behaviour and performance checks. Temporary development progress remains
-in effect. Lesson 2 is still a placeholder; the authored test path now begins
-with Scale of the cosmos, then lesson 3 and Orion.
+The chapter evaluation remains Coming later while the rest of the chapter is
+being written. `orion-quiz` at position 11 is reserved for that final evaluation.
+The scale-only bank is not presented as a comprehensive chapter assessment.
+Temporary development progress remains in effect; lesson 2 is still unbuilt.

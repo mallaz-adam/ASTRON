@@ -16,6 +16,10 @@
 .temporary-cell { max-width: 640px; margin-inline: auto; display: grid; justify-items: start; gap: var(--space-24); }
 .temporary-cell h1 { font-size: var(--type-heading-large); }
 .course-return { display: inline-flex; align-items: center; min-height: var(--touch-min); }
+.chapter-evaluation { display: grid; gap: 14px; padding: 24px; border: var(--border-line); background: var(--card); }
+.chapter-evaluation h2 { font-size: 27px; }
+.chapter-evaluation p { max-width: 68ch; }
+.chapter-evaluation .atlas-button { justify-self: start; }
 @media (min-width: 1024px) {
   .atlas-page.course-page { padding: calc(var(--space-36) * 2); }
   .course-main { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 1fr; min-height: calc(100dvh - var(--space-36) * 4); gap: var(--space-36); }

@@ -33,6 +33,13 @@ export function CoursePathView({ model, reduceMotion }: { model: CoursePathModel
             : <Link className="atlas-button atlas-button--primary course-action" to={`/cell/${selected.id}`}>{selected.action}</Link>}
         </section>
       </div>}
+      <section className="chapter-evaluation" aria-labelledby="chapter-evaluation-title">
+        <p className="course-label">End of chapter</p>
+        <h2 id="chapter-evaluation-title">Chapter evaluation</h2>
+        <p>Bring together what you have learned throughout {model.unit.title}.</p>
+        <p>This chapter is still being written. Its full evaluation will appear here when the remaining lessons are ready.</p>
+        <Button disabled>Coming later</Button>
+      </section>
       {!desktop && <TodayTabs />}
     </main>
   </Page>;

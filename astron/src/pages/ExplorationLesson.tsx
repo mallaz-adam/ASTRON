@@ -4,84 +4,136 @@ import type { Content, Exercise, Lesson } from '../data/types';
 import { loadExplorationLesson, type ExplorationLesson as LessonData } from '../data/explorationLesson';
 import { db } from '../data/db';
 import { localLearnerId } from '../data/learner';
-import { submitLessonExam } from '../data/lessonServices';
+import { finishReadingLesson } from '../data/lessonServices';
 import { Page } from '../design/Page';
 import { Button } from '../design/Button';
 import { DiscoveryDetails } from '../design/DiscoveryDetails';
 import { GlauxArt } from '../design/InlineArt';
 import { correctSelection, exerciseItems } from '../logic/lessonPlayer';
-import type { ExamAnswers } from '../logic/lessonExam';
 import { ExplorationDiagram } from './ExplorationDiagrams';
 import './ExplorationLesson.css';
 
-type Report = Awaited<ReturnType<typeof submitLessonExam>>;
-
-function ExamControl({ exercise, selection, change, disabled }: { exercise: Exercise; selection: string[]; change: (value: string[]) => void; disabled: boolean }) {
-  const items = exerciseItems(exercise);
-  if (exercise.type==='order') return <div className="exploration-order"><p>Choose the items in order. Use Undo to change your sequence.</p><ol>{items.map((_,i)=><li key={i}>{items.find(item=>item.id===selection[i])?.text ?? 'Choose the next item'}</li>)}</ol><div className="exploration-levels">{items.map(item=><button key={item.id} type="button" disabled={disabled||selection.includes(item.id)} onClick={()=>change([...selection,item.id])}>{item.text}</button>)}</div><Button variant="secondary" disabled={disabled||!selection.length} onClick={()=>change(selection.slice(0,-1))}>Undo</Button></div>;
-  return <fieldset className="exploration-options" disabled={disabled}><legend>Choose the answer and explanation that fit best.</legend>{items.map((item,i)=><label key={item.id}><input type="radio" name={exercise.id} value={item.id} checked={selection[0]===item.id} onChange={()=>change([item.id])} /><span><span className="exploration-letter">{String.fromCharCode(65+i)}.</span> {item.text}</span></label>)}</fieldset>;
+export function GuidedPractice({ exercise }: { exercise: Exercise }) {
+  const [choice, setChoice] = useState('');
+  const [revealed, setRevealed] = useState(false);
+  const correct = correctSelection(exercise)[0];
+  return <div className="exploration-practice">
+    <p>This is optional practice. Take your time; you can continue with the lesson.</p>
+    <fieldset className="exploration-options">
+      <legend>{exercise.prompt}</legend>
+      {exerciseItems(exercise).map(item => <label key={item.id}>
+        <input type="radio" name={exercise.id} value={item.id} checked={choice === item.id}
+          onChange={() => { setChoice(item.id); setRevealed(false); }} />
+        <span>{item.text}</span>
+      </label>)}
+    </fieldset>
+    <Button variant="secondary" disabled={!choice} onClick={() => setRevealed(true)}>Explore the answer</Button>
+    {revealed && <div className="exploration-practice-feedback" role="status">
+      <p>{choice === correct ? exercise.rightLine : exercise.missedLine}</p>
+      <p>{exercise.explanation}</p>
+    </div>}
+  </div>;
 }
 
-export function ExplorationReader({ data, lesson, content, reduceMotion }: { data: LessonData; lesson: Lesson; content: Content; reduceMotion: boolean }) {
+export function ExplorationReader({ data, lesson, content, reduceMotion }: {
+  data: LessonData; lesson: Lesson; content: Content; reduceMotion: boolean;
+}) {
   const [section, setSection] = useState(0);
-  const [view, setView] = useState<'read'|'exam'|'report'>('read');
-  const [question, setQuestion] = useState(0);
-  const [answers, setAnswers] = useState<ExamAnswers>({});
-  const [report, setReport] = useState<Report>();
+  const [finished, setFinished] = useState(false);
+  const [learnQuestEarned, setLearnQuestEarned] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const writing = useRef(false);
   const heading = useRef<HTMLHeadingElement>(null);
   const current = data.sections[section];
-  const exercise = content.exercises.find(e=>e.id===data.questions[question].exerciseId)!;
-  const filled = (e: Exercise) => (answers[e.id]?.length ?? 0)===(e.type==='order'?exerciseItems(e).length:1);
-  const answered = data.questions.filter(q=>filled(content.exercises.find(e=>e.id===q.exerciseId)!)).length;
+  const practice = data.practice.find(item => item.sectionId === current.id);
+  const exercise = practice && content.exercises.find(item => item.id === practice.exerciseId);
 
-  useEffect(()=>{ document.title=`${lesson.title} · ASTRON`; },[lesson.title]);
-  useEffect(()=>{ heading.current?.focus({preventScroll:true}); window.scrollTo({top:0,behavior:'instant'}); },[section,view,question]);
-  function beginExam() { setAnswers({}); setQuestion(0); setReport(undefined); setError(''); setView('exam'); }
-  async function submit() {
+  useEffect(() => { document.title = `${lesson.title} · ASTRON`; }, [lesson.title]);
+  useEffect(() => {
+    heading.current?.focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [section, finished]);
+
+  async function finish() {
     if (writing.current) return;
-    writing.current=true; setBusy(true); setError('');
-    try { setReport(await submitLessonExam(db,content,localLearnerId,lesson.id,answers,new Date())); setView('report'); }
-    catch(problem) { setError(problem instanceof Error?problem.message:String(problem)); }
-    finally { writing.current=false; setBusy(false); }
+    writing.current = true;
+    setBusy(true); setError('');
+    try {
+      const result = await finishReadingLesson(db, content, localLearnerId, lesson.id, new Date());
+      setLearnQuestEarned(result.learnQuestEarned);
+      setFinished(true);
+    } catch (problem) {
+      setError(problem instanceof Error ? problem.message : String(problem));
+    } finally {
+      writing.current = false; setBusy(false);
+    }
   }
-  function review(id: string) { setSection(data.sections.findIndex(s=>s.id===id)); setView('read'); }
 
-  return <Page className="exploration-page" reduceMotion={reduceMotion} skipLabel="Skip to lesson"><main id="main-content" className="exploration-main" data-view={view} tabIndex={-1} aria-busy={busy}>
-    <header className="exploration-header"><Link to="/learn">Back to the path</Link><span>Scale of the cosmos</span></header>
-    {view==='read' && <>
-      <p className="exploration-eyebrow">Lesson 1 · Part {section+1} of {data.sections.length}</p><h1 ref={heading} tabIndex={-1}>{current.title}</h1>
-      {section===0 && <p className="exploration-introduction">{data.introduction}</p>}
-      <label className="exploration-contents">Lesson contents<select value={section} onChange={e=>setSection(Number(e.target.value))}>{data.sections.map((s,i)=><option key={s.id} value={i}>{i+1}. {s.title}</option>)}</select></label>
-      <div className="exploration-layout"><div className="exploration-prose">{current.paragraphs.map((p,i)=><p key={i}>{p}</p>)}</div><aside className="exploration-visual" aria-label="Explore the idea"><ExplorationDiagram key={current.id} kind={current.diagram} /></aside></div>
-      <div className="exploration-glaux"><GlauxArt mood="gentle" /><p>{current.glaux}</p></div>
-      <nav className="exploration-actions" aria-label="Lesson sections"><Button variant="secondary" disabled={section===0} onClick={()=>setSection(section-1)}>Previous</Button>{section<data.sections.length-1?<Button onClick={()=>setSection(section+1)}>Continue</Button>:<Button onClick={beginExam}>{report?'Try the exam again':'Start the exam'}</Button>}</nav>
-      {report && <Button variant="secondary" onClick={()=>setView('report')}>Back to results</Button>}
-      <DiscoveryDetails detailId={`lesson:${lesson.id}:sources`} label="Sources"><ul className="exploration-sources">{data.sources.map(source=><li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></li>)}</ul></DiscoveryDetails>
-    </>}
-    {view==='exam' && <>
-      <p className="exploration-eyebrow">Understanding exam · Question {question+1} of {data.questions.length}</p><h1 ref={heading} tabIndex={-1}>{exercise.prompt}</h1><p>There is no timer. Change any answer before submitting. Explanations follow the complete exam.</p>
-      <nav className="exploration-question-nav" aria-label="Exam questions">{data.questions.map((q,i)=>{const done=filled(content.exercises.find(e=>e.id===q.exerciseId)!);return <button key={q.exerciseId} type="button" aria-current={question===i?'step':undefined} aria-label={`Question ${i+1}, ${done?'answered':'unanswered'}`} onClick={()=>setQuestion(i)} disabled={busy}>{i+1}{done&&<span aria-hidden="true"> ✓</span>}</button>;})}</nav>
-      <ExamControl key={exercise.id} exercise={exercise} selection={answers[exercise.id]??[]} disabled={busy} change={value=>setAnswers(old=>({...old,[exercise.id]:value}))} />
-      <p role="status">{answered} of {data.questions.length} questions answered.</p><nav className="exploration-actions" aria-label="Exam controls"><Button variant="secondary" disabled={question===0||busy} onClick={()=>setQuestion(question-1)}>Previous question</Button>{question<data.questions.length-1?<Button disabled={!filled(exercise)||busy} onClick={()=>setQuestion(question+1)}>Next question</Button>:<Button disabled={answered!==data.questions.length||busy} onClick={()=>void submit()}>Submit exam</Button>}</nav>
-    </>}
-    {view==='report' && report && <>
-      <p className="exploration-eyebrow">Your understanding · This attempt</p><h1 ref={heading} tabIndex={-1}>{report.correct} of {report.total} answered correctly</h1>
-      <div className="exploration-glaux"><GlauxArt mood={report.correct===report.total?'proud':'gentle'} /><p>{report.correct===report.total?'You have connected the ideas. Your cosmic address is clear.':'Your answers show us which ideas to explore once more.'}</p></div>
-      <div className="exploration-topics">{data.topics.map(topic=>{const ids=data.questions.filter(q=>q.topicId===topic.id).map(q=>q.exerciseId);const count=report.results.filter(r=>ids.includes(r.exerciseId)&&r.correct).length;return <section key={topic.id}><h2>{topic.title}</h2><p>{count} of {ids.length} answered correctly · {count===ids.length?'Secure':count?'Developing':'Revisit'}</p><p>{count===ids.length?topic.secureLine:topic.reviewLine}</p><button type="button" onClick={()=>review(topic.reviewSection)}>Review this idea</button></section>;})}</div>
-      <section className="exploration-answer-review"><h2>Your answers, explained</h2>{report.results.map((result,i)=>{const e=content.exercises.find(e=>e.id===result.exerciseId)!;const text=(ids:string[])=>ids.map(id=>exerciseItems(e).find(item=>item.id===id)!.text).join(' → ');return <section key={e.id}><h3>{i+1}. {e.prompt}</h3><p className="exploration-result">{result.correct?'Answered correctly':'An idea to revisit'}</p><p><span className="exploration-review-label">Your answer:</span> {text(result.selection)}</p>{!result.correct&&<p><span className="exploration-review-label">Expected answer:</span> {text(correctSelection(e))}</p>}<p>{e.explanation}</p></section>;})}</section>
-      {report.learnQuestEarned&&<p>Learn quest done: +20 XP.</p>}<p>Lesson complete. You can review any idea and try the exam again.</p><nav className="exploration-actions" aria-label="After the exam"><Link className="atlas-button atlas-button--primary" to="/learn">Back to the path</Link><Button variant="secondary" onClick={beginExam}>Try the exam again</Button></nav>
-    </>}
-    {error&&<p role="alert">{error}</p>}
-  </main></Page>;
+  return <Page className="exploration-page" reduceMotion={reduceMotion} skipLabel="Skip to lesson">
+    <main id="main-content" className="exploration-main" tabIndex={-1} aria-busy={busy}>
+      <header className="exploration-header"><Link to="/learn">Back to the path</Link><span>Scale of the cosmos</span></header>
+      {finished ? <>
+        <p className="exploration-eyebrow">Lesson complete</p>
+        <h1 ref={heading} tabIndex={-1}>Your place in the cosmos</h1>
+        <div className="exploration-glaux"><GlauxArt mood="proud" /><p>You have found our place. Let us carry these ideas a little further.</p></div>
+        <div className="exploration-prose">
+          <p>Earth belongs to our solar system. Our solar system belongs to the Milky Way.</p>
+          <p>Sizes and distances are different comparisons. A good model tells you what it preserves.</p>
+          <p>The full evaluation comes at the end of the chapter, How stars live and die.</p>
+        </div>
+        {learnQuestEarned && <p>Learn quest done: +20 XP.</p>}
+        <nav className="exploration-actions" aria-label="After the lesson">
+          <Link className="atlas-button atlas-button--primary" to="/learn">Back to the path</Link>
+          <Button variant="secondary" onClick={() => { setSection(0); setFinished(false); }}>Read again</Button>
+        </nav>
+      </> : <>
+        <p className="exploration-eyebrow">Lesson 1 · Part {section + 1} of {data.sections.length}</p>
+        <h1 ref={heading} tabIndex={-1}>{current.title}</h1>
+        {section === 0 && <p className="exploration-introduction">{data.introduction}</p>}
+        <label className="exploration-contents">Lesson contents
+          <select value={section} onChange={event => setSection(Number(event.target.value))}>
+            {data.sections.map((item, index) => <option key={item.id} value={index}>{index + 1}. {item.title}</option>)}
+          </select>
+        </label>
+        <div className="exploration-layout">
+          <div className="exploration-prose">{current.paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div>
+          <aside className="exploration-visual" aria-label="Explore the idea"><ExplorationDiagram key={current.id} kind={current.diagram} /></aside>
+        </div>
+        <div className="exploration-glaux"><GlauxArt mood="gentle" /><p>{current.glaux}</p></div>
+        {exercise && <DiscoveryDetails key={exercise.id} detailId={`lesson:${lesson.id}:practice:${exercise.id}`} label="Try this idea (optional)">
+          <GuidedPractice exercise={exercise} />
+        </DiscoveryDetails>}
+        <nav className="exploration-actions" aria-label="Lesson sections">
+          <Button variant="secondary" disabled={section === 0 || busy} onClick={() => setSection(section - 1)}>Previous</Button>
+          {section < data.sections.length - 1
+            ? <Button onClick={() => setSection(section + 1)}>Continue</Button>
+            : <Button disabled={busy} onClick={() => void finish()}>Finish lesson</Button>}
+        </nav>
+        <DiscoveryDetails detailId={`lesson:${lesson.id}:sources`} label="Sources">
+          <ul className="exploration-sources">{data.sources.map(source => <li key={source.url}>
+            <a href={source.url} target="_blank" rel="noreferrer">{source.title}</a>
+          </li>)}</ul>
+        </DiscoveryDetails>
+      </>}
+      {error && <p role="alert">{error}</p>}
+    </main>
+  </Page>;
 }
 
 export function ExplorationLesson({ lesson, content, reduceMotion }: { lesson: Lesson; content: Content; reduceMotion: boolean }) {
-  const [data,setData]=useState<LessonData>();
-  const [error,setError]=useState('');
-  useEffect(()=>{let active=true;void loadExplorationLesson(lesson,content).then(value=>{if(active)setData(value);}).catch(problem=>{if(active)setError(String(problem.message));});return()=>{active=false;};},[lesson,content]);
-  if(!data)return <Page className="exploration-page" reduceMotion={reduceMotion} skipLabel="Skip to lesson"><main id="main-content" aria-busy={!error}><h1>Opening the lesson…</h1>{error&&<><p role="alert">{error}</p><Button onClick={()=>window.location.reload()}>Try again</Button></>}</main></Page>;
+  const [data, setData] = useState<LessonData>();
+  const [error, setError] = useState('');
+  useEffect(() => {
+    let active = true;
+    void loadExplorationLesson(lesson, content).then(value => { if (active) setData(value); })
+      .catch(problem => { if (active) setError(String(problem.message)); });
+    return () => { active = false; };
+  }, [lesson, content]);
+  if (!data) return <Page className="exploration-page" reduceMotion={reduceMotion} skipLabel="Skip to lesson">
+    <main id="main-content" aria-busy={!error}><h1>Opening the lesson…</h1>{error && <>
+      <p role="alert">{error}</p><Button onClick={() => window.location.reload()}>Try again</Button>
+    </>}</main>
+  </Page>;
   return <ExplorationReader data={data} lesson={lesson} content={content} reduceMotion={reduceMotion} />;
 }
