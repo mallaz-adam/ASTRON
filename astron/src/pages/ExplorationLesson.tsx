@@ -10,6 +10,8 @@ import { Button } from '../design/Button';
 import { DiscoveryDetails } from '../design/DiscoveryDetails';
 import { GlauxArt } from '../design/InlineArt';
 import { correctSelection, exerciseItems } from '../logic/lessonPlayer';
+import { nextReadingDestination, readingSteps, type ReadingStep } from '../logic/readingFlow';
+import { useProgress } from '../hooks/useProgress';
 import { ExplorationDiagram } from './ExplorationDiagrams';
 import './ExplorationLesson.css';
 
@@ -35,25 +37,41 @@ export function GuidedPractice({ exercise }: { exercise: Exercise }) {
   </div>;
 }
 
+export function ReadingStepContent({ step }: { step: ReadingStep }) {
+  const showPicture = step.explore && step.section.diagram !== 'recap';
+  return <>
+    <div className={`exploration-layout${showPicture ? ' exploration-layout--picture' : ''}`}>
+      <div className="exploration-prose">{step.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
+      {showPicture && <aside className="exploration-visual" aria-label="Explore the idea">
+        <ExplorationDiagram kind={step.section.diagram} />
+      </aside>}
+    </div>
+    {!step.explore && <div className="exploration-glaux"><GlauxArt mood="gentle" /><p>{step.section.glaux}</p></div>}
+  </>;
+}
+
 export function ExplorationReader({ data, lesson, content, reduceMotion }: {
   data: LessonData; lesson: Lesson; content: Content; reduceMotion: boolean;
 }) {
-  const [section, setSection] = useState(0);
+  const [stepIndex, setStepIndex] = useState(0);
   const [finished, setFinished] = useState(false);
   const [learnQuestEarned, setLearnQuestEarned] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const writing = useRef(false);
   const heading = useRef<HTMLHeadingElement>(null);
-  const current = data.sections[section];
-  const practice = data.practice.find(item => item.sectionId === current.id);
+  const { progress, error: progressError } = useProgress();
+  const steps = readingSteps(data);
+  const current = steps[stepIndex];
+  const practice = current.explore && data.practice.find(item => item.sectionId === current.section.id);
   const exercise = practice && content.exercises.find(item => item.id === practice.exerciseId);
+  const destination = nextReadingDestination(content, progress, localLearnerId, lesson.cellId);
 
   useEffect(() => { document.title = `${lesson.title} · ASTRON`; }, [lesson.title]);
   useEffect(() => {
     heading.current?.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [section, finished]);
+  }, [stepIndex, finished]);
 
   async function finish() {
     if (writing.current) return;
@@ -71,52 +89,41 @@ export function ExplorationReader({ data, lesson, content, reduceMotion }: {
   }
 
   return <Page className="exploration-page" reduceMotion={reduceMotion} skipLabel="Skip to lesson">
-    <main id="main-content" className="exploration-main" tabIndex={-1} aria-busy={busy}>
-      <header className="exploration-header"><Link to="/learn">Back to the path</Link><span>Scale of the cosmos</span></header>
+    <main id="main-content" className={`exploration-main${!finished && current.explore ? ' exploration-main--explore' : ''}`} tabIndex={-1} aria-busy={busy}>
+      <header className="exploration-header"><Link to="/learn">Back to the path</Link><span>{lesson.title}</span></header>
       {finished ? <>
         <p className="exploration-eyebrow">Lesson complete</p>
         <h1 ref={heading} tabIndex={-1}>Your place in the cosmos</h1>
         <div className="exploration-glaux"><GlauxArt mood="proud" /><p>You have found our place. Let us carry these ideas a little further.</p></div>
-        <div className="exploration-prose">
-          <p>Earth belongs to our solar system. Our solar system belongs to the Milky Way.</p>
-          <p>Sizes and distances are different comparisons. A good model tells you what it preserves.</p>
-          <p>The full evaluation comes at the end of the chapter, How stars live and die.</p>
-        </div>
+        <p className="exploration-note">The full evaluation comes at the end of the chapter, How stars live and die.</p>
         {learnQuestEarned && <p>Learn quest done: +20 XP.</p>}
+        {destination && destination.to !== '/learn' && <p className="exploration-note">Next: {destination.title}</p>}
         <nav className="exploration-actions" aria-label="After the lesson">
-          <Link className="atlas-button atlas-button--primary" to="/learn">Back to the path</Link>
-          <Button variant="secondary" onClick={() => { setSection(0); setFinished(false); }}>Read again</Button>
+          {destination ? <Link className="atlas-button atlas-button--primary" to={destination.to}>Continue</Link> : <Button disabled>Continue</Button>}
+          <button type="button" className="exploration-previous" onClick={() => { setStepIndex(0); setFinished(false); }}>Read again</button>
         </nav>
       </> : <>
-        <p className="exploration-eyebrow">Lesson 1 · Part {section + 1} of {data.sections.length}</p>
-        <h1 ref={heading} tabIndex={-1}>{current.title}</h1>
-        {section === 0 && <p className="exploration-introduction">{data.introduction}</p>}
-        <label className="exploration-contents">Lesson contents
-          <select value={section} onChange={event => setSection(Number(event.target.value))}>
-            {data.sections.map((item, index) => <option key={item.id} value={index}>{index + 1}. {item.title}</option>)}
-          </select>
-        </label>
-        <div className="exploration-layout">
-          <div className="exploration-prose">{current.paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div>
-          <aside className="exploration-visual" aria-label="Explore the idea"><ExplorationDiagram key={current.id} kind={current.diagram} /></aside>
+        <div className="exploration-progress">
+          <p className="exploration-eyebrow">Step {stepIndex + 1} of {steps.length}</p>
+          <progress aria-label="Lesson progress" value={stepIndex + 1} max={steps.length} />
         </div>
-        <div className="exploration-glaux"><GlauxArt mood="gentle" /><p>{current.glaux}</p></div>
+        <h1 ref={heading} tabIndex={-1}>{current.section.title}</h1>
+        <ReadingStepContent key={current.id} step={current} />
         {exercise && <DiscoveryDetails key={exercise.id} detailId={`lesson:${lesson.id}:practice:${exercise.id}`} label="Try this idea (optional)">
           <GuidedPractice exercise={exercise} />
         </DiscoveryDetails>}
-        <nav className="exploration-actions" aria-label="Lesson sections">
-          <Button variant="secondary" disabled={section === 0 || busy} onClick={() => setSection(section - 1)}>Previous</Button>
-          {section < data.sections.length - 1
-            ? <Button onClick={() => setSection(section + 1)}>Continue</Button>
-            : <Button disabled={busy} onClick={() => void finish()}>Finish lesson</Button>}
+        <nav className="exploration-actions" aria-label="Lesson steps">
+          <Button disabled={busy} onClick={() => stepIndex < steps.length - 1 ? setStepIndex(stepIndex + 1) : void finish()}>Continue</Button>
+          {stepIndex > 0 && <button type="button" className="exploration-previous" disabled={busy} onClick={() => setStepIndex(stepIndex - 1)}>Previous</button>}
         </nav>
-        <DiscoveryDetails detailId={`lesson:${lesson.id}:sources`} label="Sources">
+      </>}
+      {(finished || stepIndex === steps.length - 1) && <DiscoveryDetails detailId={`lesson:${lesson.id}:sources`} label="Sources">
           <ul className="exploration-sources">{data.sources.map(source => <li key={source.url}>
             <a href={source.url} target="_blank" rel="noreferrer">{source.title}</a>
           </li>)}</ul>
-        </DiscoveryDetails>
-      </>}
+        </DiscoveryDetails>}
       {error && <p role="alert">{error}</p>}
+      {progressError && <p role="alert">{progressError}</p>}
     </main>
   </Page>;
 }

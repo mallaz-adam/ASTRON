@@ -27,8 +27,10 @@ preserved; the new flow does not erase past progress.
 
 Scale of the cosmos retains its eight teaching parts and interactive diagrams.
 It has two optional practice moments, in the scale-model and galaxy sections.
-It finishes with a recap and **Finish lesson**, rather than an eight-question
-exam. Normal course navigation labels the collection **CHAPTER 1**.
+Its explanations and explorations occupy separate short steps, with one primary
+**Continue** and no contents dropdown. It finishes with a recap, rather than an
+eight-question exam. Continue then offers the next authored lesson. Normal course
+navigation labels the collection **CHAPTER 1**.
 The preview count describes available steps, so finishing the currently authored
 material is not presented as finishing all eleven planned chapter cells.
 
@@ -47,7 +49,7 @@ decided once the remaining chapter content is ready.
 Development progress remains temporary. The separate permanent database is
 unchanged. No new account, server, analytics or progress upload is introduced.
 
-Verification: 441 tests in 47 files pass. The browser allowed continuing after
+Verification: 447 tests in 48 files pass. The browser allowed continuing after
 a missed optional practice answer and finishing the lesson without submitting
 an exam. The recap stated where the full evaluation belongs. The course's final
 evaluation panel was disabled and clearly marked Coming later. There was no

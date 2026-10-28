@@ -64,7 +64,9 @@ lesson or part.** Smaller practice moments help learners explore an idea and
 understand the explanation. They are not separate exams.
 
 Scale of the cosmos contains eight teaching parts and two optional, unscored
-practices. It ends with a recap and **Finish lesson**. The course path marks
+practices. Its eight parts unfold across sixteen short reading/exploration steps,
+with **Continue** leading through the recap and on to the next authored lesson.
+There is no contents dropdown. The course path marks
 the full chapter evaluation as **Coming later**, because several lessons are
 still unwritten. Its complete question set and pass-mark rules will be decided
 when that chapter's teaching is ready.

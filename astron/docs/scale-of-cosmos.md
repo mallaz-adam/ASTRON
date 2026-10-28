@@ -17,16 +17,22 @@ wider universe. Code-drawn diagrams explicitly describe their simplifications.
 They are not presented as photographs or maps of observed positions. The
 learner controls diagram changes, and Reduce motion stops Glaux's animation.
 
-The reader renders one section at a time in normal document flow, with no
-inner scroll viewport or snapping. Previous/Continue and a native contents
-selector provide navigation. Intentional navigation focuses the section heading.
-The recap finishes with **Finish lesson** rather than an individual exam.
+The eight teaching sections are paced across sixteen short steps. Each explanation
+comes first, then its final paragraph and picture/activity have a separate step.
+Every teaching paragraph is preserved exactly once, in authored order. The recap
+does not repeat an unrelated diagram. Glaux speaks once per section.
+
+There is no contents dropdown. One primary **Continue** moves forward; a quiet
+Previous control allows review. The page uses normal document flow, without an
+inner scroll viewport, snapping or timed advancement. Navigation focuses the
+heading and returns to the top. A small progress bar shows the current step.
+Sources remain available at the end rather than competing on every screen.
 
 ## Practice and completion
 
 The model and galaxy sections each offer **Try this idea (optional)**.
 A native radio choice and Explore the answer button reveal a kind response
-and explanation. Practice is not scored, never blocks Continue/Finish, writes
+and explanation. Practice is not scored, never blocks Continue, writes
 no assessment answers and awards no extra XP.
 
 `finishReadingLesson` completes the individual lesson and can meet the existing
@@ -41,8 +47,11 @@ practice. There is no full evaluation or diagnostic score after this lesson.
 The chapter-wide evaluation is reserved for the end of How stars live and die
 and stays marked Coming later while the chapter's other lessons are unwritten.
 
-Normal course navigation proceeds to the next authored lesson after reading.
-Lesson 2 is still unavailable; the current authored path proceeds to lesson 3.
+After the recap, Continue completes the reading. The brief completion screen's
+Continue opens the next available authored lesson directly, once the real saved
+completion is observed. Lesson 2 is still unavailable; the current authored path
+proceeds to lesson 3. Replaying a completed lesson also permits this navigation.
+If there is no next available content in the chapter, Continue returns to the path.
 Development progress still resets on a full page load, using the separate
 working database described in development-preview.md.
 
@@ -80,3 +89,10 @@ Those checks describe the shared reader/diagrams, not a physical iPhone test.
 The revised chapter-level flow passes automated completion/reward tests,
 optional-practice validation, and accessible structure checks. The final
 chapter evaluation is deliberately not enabled before its teaching exists.
+
+The shorter-step revision passes 447 tests in 48 files and the production build.
+Browser checks covered reading/exploration steps at 390, 768 and 1280 px without
+horizontal overflow. Keyboard Continue/Previous worked, and completion opened
+Why stars differ directly without submitting practice answers. The first reading
+and its Continue fitted inside a 390-by-800 viewport. These are browser viewport
+checks, not a physical iPhone test.
