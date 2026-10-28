@@ -1,5 +1,6 @@
 .inline-art { display: inline-flex; flex-shrink: 0; }
 .inline-art svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.inline-art[data-motion-active='false'], .inline-art[data-motion-active='false'] * { animation-play-state: paused !important; }
 .inline-art .rays { transform-box: view-box; transform-origin: center; animation: atlas-rays var(--motion-orbit) linear infinite; }
 .inline-art .halo { transform-box: view-box; transform-origin: center; animation: atlas-halo var(--motion-pulse) ease-in-out infinite; }
 .inline-art .twinkle { animation: atlas-twinkle var(--motion-pulse) ease-in-out infinite; }

@@ -38,6 +38,7 @@ technical details and the future setting that restores permanent saving.
 - A sourced Betelgeuse article with a real ALMA cover, category and reading time.
 - Collectible stars in My sky and gold discovery cues for unopened details.
 - Phone and desktop layouts, keyboard controls and saved/device Reduce motion support.
+- Clearer first actions and reachable phone reading controls; Sources stay quieter than discoveries.
 - An installable PWA that caches the app, authored content, art and local fonts.
 
 The course contains eleven planned cells. Only authored content is offered in
@@ -187,6 +188,7 @@ service worker offers **REFRESH** when its files are ready.
 - [Welcome, navigation and article image credit](astron/docs/welcome-and-articles.md)
 - [Orion artwork provenance and limitations](astron/docs/orion-assets.md)
 - [Phone reading checks](astron/docs/phone-reading.md)
+- [Reading clarity and performance refinements](astron/docs/reading-polish.md)
 - [Hosting and phone testing](astron/docs/private-test.md)
 
 Scientific observations, illustrative artwork and schematic diagrams have

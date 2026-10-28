@@ -11,17 +11,17 @@ export function TaleCover({ tale, data, resume, busy, onBegin }: { tale: Tale; d
   return <section className="tale-cover" aria-labelledby="tale-title">
     <Link to="/" className="tale-wordmark cover-wordmark">ASTRON<img src="/art/star.svg" width="20" height="20" alt="" /></Link>
     <div className="cover-heading"><p className="tale-eyebrow">{tale.subtitle}</p><h1 id="tale-title">{tale.title}</h1></div>
-    <div className="cover-art"><CoverImage /></div>
+    <div className="cover-art"><CoverImage priority /></div>
     <div className="cover-invitation"><p className="cover-teaser">{tale.teaser}</p>
-      <TaleGlaux mood="gentle">{data.welcomeLine}</TaleGlaux>
       <Button onClick={onBegin} disabled={busy}>{resume ? 'Resume the story' : 'Begin the story'}</Button>
+      <TaleGlaux mood="gentle">{data.welcomeLine}</TaleGlaux>
       <TaleSources data={data} />
     </div>
   </section>;
 }
 
 function HunterImage() {
-  return <img className="tale-hunter-image" src="/art/orion/hunter.webp" width="403" height="530" alt="The supplied illustration of Orion, raising a club and holding an animal skin, with a pattern of stars." />;
+  return <img className="tale-hunter-image" src="/art/orion/hunter.webp" width="403" height="530" decoding="async" alt="The supplied illustration of Orion, raising a club and holding an animal skin, with a pattern of stars." />;
 }
 
 export function TaleChapter({ chapter, data }: { chapter: Chapter; data: TaleExperienceData }) {

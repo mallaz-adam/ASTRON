@@ -20,6 +20,9 @@ describe('Orion reading and activity states', () => {
     const html = render(<TaleCover tale={tale} data={data} resume={false} busy={false} onBegin={() => undefined} />);
     expect(html).toContain('/art/orion/cover-640.webp'); expect(html).toContain('1086w');
     expect(html).toContain('Begin the story'); expect(html).toContain('Walk with me. We will begin with a story.');
+    expect(html.indexOf('>Begin the story</button>')).toBeLessThan(html.indexOf('class="tale-glaux"'));
+    expect(html).toContain('fetchPriority="high"'); expect(html).toContain('decoding="async"');
+    expect(html).toContain('data-emphasis="quiet"');
     expect(html).not.toContain('TEMPORARY');
   });
   it('retains the complete chapter prose and supplied hunter rather than replacing them with short speech cards', () => {

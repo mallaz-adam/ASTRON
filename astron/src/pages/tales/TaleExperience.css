@@ -7,7 +7,7 @@
 .tale-wordmark { color: var(--ink); text-decoration: none; letter-spacing: .22em; font-size: 22px; min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
 .tale-wordmark img { flex-shrink: 0; }
 .tale-header { display: flex; align-items: center; gap: 18px; border-bottom: var(--border-line); padding-bottom: 18px; margin-bottom: 36px; min-width: 0; }
-.tale-context { font-size: 11px; line-height: 1.6; letter-spacing: .1em; text-transform: uppercase; border-left: var(--border-line); padding-left: 18px; margin-left: auto; }
+.tale-context { font-family: var(--font-reading); font-size: 15px; line-height: 1.5; border-left: var(--border-line); padding-left: 18px; margin-left: auto; }
 .tale-close { display: grid; place-items: center; width: 44px; height: 44px; border: var(--border-line); flex-shrink: 0; color: var(--ink); }
 .tale-close svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1; }
 .tale-cover { display: grid; gap: 18px; }
@@ -17,7 +17,7 @@
 .tale-cover-image { display: block; width: 100%; height: auto; object-fit: cover; }
 .cover-art { overflow: hidden; height: calc((100vw - 48px) * 1.06); max-height: 450px; }
 .cover-art .tale-cover-image { height: 100%; object-position: 48% 62%; transform: scale(1.2); transform-origin: 48% 65%; }
-.cover-invitation { display: grid; gap: 24px; }
+.cover-invitation { display: grid; gap: 18px; }
 .cover-teaser { font-size: 20px; line-height: 1.5; }
 .tale-glaux { display: flex; align-items: center; gap: 12px; }
 .tale-glaux .inline-art { width: 60px; height: 60px; flex-shrink: 0; }
@@ -107,11 +107,13 @@
   .tale-header { gap: 12px; padding-bottom: 12px; margin-bottom: 24px; }
   .tale-header .tale-wordmark { font-size: 18px; letter-spacing: .18em; gap: 6px; }
   .tale-header .tale-wordmark img { width: 16px; height: 16px; }
-  .tale-context { font-size: 10px; padding-left: 12px; }
-  .cover-art { height: clamp(240px, 42svh, 360px); }
+  .tale-context { font-size: 14px; padding-left: 12px; }
+  .cover-art { height: clamp(220px, 32svh, 280px); }
+  .cover-art .tale-cover-image { object-fit: contain; object-position: center; transform: none; }
+  .tale-page--cover .tale-eyebrow { font-family: var(--font-reading); font-size: 15px; line-height: 1.5; letter-spacing: normal; text-transform: none; }
   .tale-chapter, .tale-star-scene, .belt-activity { gap: 18px; }
   .tale-chapter-copy { gap: 18px; }
-  .tale-chapter .tale-hunter-image { height: clamp(200px, 34svh, 260px); }
+  .tale-chapter .tale-hunter-image { height: clamp(180px, 28svh, 240px); }
   .tale-landscape-image { height: clamp(160px, 24svh, 200px); }
   .tale-glaux { gap: 8px; }
   .tale-glaux .inline-art { width: 48px; height: 48px; }

@@ -27,7 +27,7 @@ export function SourceText({ text }: { text: string }) {
 }
 
 export function TaleSources({ data }: { data: TaleExperienceData }) {
-  return <DiscoveryDetails className="tale-sources" detailId={`tale:${data.taleId}:sources`} label="Sources"><div>
+  return <DiscoveryDetails emphasis="quiet" className="tale-sources" detailId={`tale:${data.taleId}:sources`} label="Sources"><div>
     <p>This is one version of the myth. The drawings show the imagined hunter. The chart shows where the stars appear from Earth.</p>
     <ul>{data.sources.map(source => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></li>)}</ul>
     <p>Artwork adapted from images supplied for ASTRON. The welcome painting includes an AI-assisted edit. The hunter illustration retains the supplied linework.</p>
@@ -35,6 +35,6 @@ export function TaleSources({ data }: { data: TaleExperienceData }) {
   </div></DiscoveryDetails>;
 }
 
-export function CoverImage({ className = '', description = 'Two companions in a painted valley, one looking through a handheld telescope beneath the stars.' }: { className?: string; description?: string }) {
-  return <img className={`tale-cover-image ${className}`} src="/art/orion/cover-640.webp" srcSet="/art/orion/cover-640.webp 640w, /art/orion/cover-1280.webp 1086w" sizes="(min-width: 900px) 56vw, calc(100vw - 48px)" width="1086" height="1448" alt={description} fetchPriority="high" />;
+export function CoverImage({ className = '', description = 'Two companions in a painted valley, one looking through a handheld telescope beneath the stars.', priority = false }: { className?: string; description?: string; priority?: boolean }) {
+  return <img className={`tale-cover-image ${className}`} src="/art/orion/cover-640.webp" srcSet="/art/orion/cover-640.webp 640w, /art/orion/cover-1280.webp 1086w" sizes="(min-width: 1280px) 640px, (min-width: 1000px) 52vw, calc(100vw - 48px)" width="1086" height="1448" alt={description} loading={priority ? 'eager' : 'lazy'} decoding="async" fetchPriority={priority ? 'high' : 'auto'} />;
 }

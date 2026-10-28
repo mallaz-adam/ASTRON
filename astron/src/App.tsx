@@ -1,12 +1,11 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { ProgressProvider } from './hooks/useProgress';
 import { Today } from './pages/Today';
 import { YourSun } from './pages/YourSun';
 import { CoursePath } from './pages/CoursePath';
 import { Cell } from './pages/Cell';
-import { DesignCheck } from './pages/DesignCheck';
-import { Dev } from './pages/Dev';
+import { Page } from './design/Page';
 import { NotFound } from './pages/NotFound';
 import { UpdateNotice } from './pwa/UpdateNotice';
 import { FirstVisitGate } from './pages/FirstVisitGate';
@@ -17,6 +16,11 @@ import { Articles, ArticleReader } from './pages/Articles';
 import { Settings } from './pages/Settings';
 import { StartupIntro } from './design/StartupIntro';
 import { Welcome } from './pages/Welcome';
+
+// Developer tools and their imports are absent from the production entry bundle.
+const DesignCheck = import.meta.env.DEV ? lazy(() => import('./pages/DesignCheck').then(module => ({ default: module.DesignCheck }))) : null;
+const Dev = import.meta.env.DEV ? lazy(() => import('./pages/Dev').then(module => ({ default: module.Dev }))) : null;
+const openingTools = <Page skipLabel="Skip to page"><main id="main-content" aria-busy="true"><h1>Opening the atlas…</h1></main></Page>;
 
 export function AppRoutes({ development = import.meta.env.DEV }: { development?: boolean }) {
   const location = useLocation();
@@ -51,8 +55,8 @@ export function AppRoutes({ development = import.meta.env.DEV }: { development?:
         <Route path="/articles/:id" element={<ArticleReader />} />
         <Route path="/settings" element={<Settings />} />
       </Route>
-      {development && <Route path="/design" element={<DesignCheck />} />}
-      {development && <Route path="/dev" element={<Dev />} />}
+      {development && DesignCheck && <Route path="/design" element={<Suspense fallback={openingTools}><DesignCheck /></Suspense>} />}
+      {development && Dev && <Route path="/dev" element={<Suspense fallback={openingTools}><Dev /></Suspense>} />}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

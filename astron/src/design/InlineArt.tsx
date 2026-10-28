@@ -14,20 +14,24 @@ import morning from '/art/tier-morning.svg?raw';
 import noon from '/art/tier-noon.svg?raw';
 import corona from '/art/tier-corona.svg?raw';
 import './art.css';
+import { useVisibleMotion } from './useVisibleMotion';
 
 const suns = [sun0, sun1, sun2, sun3];
 
 // Only these supplied, static SVG files are inserted. Content JSON never becomes HTML.
 export function SunArt({ stage }: { stage: 0 | 1 | 2 | 3 }) {
-  return <span className="inline-art today-sun" dangerouslySetInnerHTML={{ __html: suns[stage] }} />;
+  const motion = useVisibleMotion<HTMLSpanElement>();
+  return <span ref={motion.ref} data-motion-active={motion.active} className="inline-art today-sun" dangerouslySetInnerHTML={{ __html: suns[stage] }} />;
 }
 
 export function GlauxArt({ mood = 'happy', className = '' }: { mood?: GlauxMood; className?: string }) {
+  const motion = useVisibleMotion<HTMLSpanElement>();
   const owl = { happy: happyOwl, proud: proudOwl, thinking: thinkingOwl, cheering: cheeringOwl, gentle: gentleOwl, sleepy: sleepyOwl }[mood];
-  return <span className={`inline-art ${mood === 'proud' ? 'sun-glaux' : 'today-glaux'} ${className}`.trim()} dangerouslySetInnerHTML={{ __html: owl }} />;
+  return <span ref={motion.ref} data-motion-active={motion.active} className={`inline-art ${mood === 'proud' ? 'sun-glaux' : 'today-glaux'} ${className}`.trim()} dangerouslySetInnerHTML={{ __html: owl }} />;
 }
 
 const tiers = { dawn, morning, noon, corona };
 export function TierArt({ stage }: { stage: keyof typeof tiers }) {
-  return <span className="inline-art tier-art" dangerouslySetInnerHTML={{ __html: tiers[stage] }} />;
+  const motion = useVisibleMotion<HTMLSpanElement>();
+  return <span ref={motion.ref} data-motion-active={motion.active} className="inline-art tier-art" dangerouslySetInnerHTML={{ __html: tiers[stage] }} />;
 }

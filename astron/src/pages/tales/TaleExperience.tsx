@@ -8,6 +8,7 @@ import { setReduceMotion } from '../../data/services';
 import { firstTaleId, type BeltChoice } from '../../logic/taleJourney';
 import { Page } from '../../design/Page';
 import { Button } from '../../design/Button';
+import { ReadingActions } from '../../design/ReadingActions';
 import { Toggle } from '../../design/Toggle';
 import { useReducedMotion } from '../../design/useReducedMotion';
 import { temporaryProgress } from '../../data/progressMode';
@@ -95,9 +96,10 @@ export function TaleExperience({ welcome = false }: { welcome?: boolean }) {
     <main id="main-content" ref={main} className="tale-main" tabIndex={-1} aria-busy={busy}>
       {stage !== 'cover' && <TaleHeader context={stage === 'sky' ? 'My sky' : tale.title} closeTo={welcome ? '/welcome?cover' : '/stories'} />}
       {stage === 'cover' && <TaleCover tale={tale} data={data} busy={busy} resume={Boolean(visit && !search.has('again') && !learner?.welcome?.completedOn)} onBegin={() => void save(() => startTaleVisit(db, content, localLearnerId, tale.id, new Date(), { welcome: welcome && !learner?.welcome?.completedOn, restart: search.has('again') || Boolean(welcome && learner?.welcome?.completedOn) }), () => navigate(welcome && !learner?.welcome?.completedOn ? '/welcome' : `/stories/${tale.id}`, { replace: true }))} />}
-      {stage === 'story' && <><TaleChapter key={chapter.number} chapter={chapter} data={data} /><nav className="tale-actions tale-chapter-actions" aria-label="Story chapters">
-        {chapter.number > 1 && <Button variant="secondary" disabled={busy} onClick={() => void save(() => previousTaleChapter(db, localLearnerId, tale.id))}>Previous chapter</Button>}
-        <p className="tale-chapter-count">{chapter.number} of {chapters.length}</p><Button disabled={busy} onClick={advance}>{chapter.number === chapters.length ? 'Discover your star' : 'Continue'}</Button></nav></>}
+      {stage === 'story' && <><TaleChapter key={chapter.number} chapter={chapter} data={data} /><ReadingActions label="Story chapters">
+        <Button disabled={busy} onClick={advance}>{chapter.number === chapters.length ? 'Discover your star' : 'Continue'}</Button>
+        {chapter.number > 1 && <button type="button" className="reading-previous" disabled={busy} onClick={() => void save(() => previousTaleChapter(db, localLearnerId, tale.id))}>Previous</button>}
+        <p className="reading-count">{chapter.number} of {chapters.length}</p></ReadingActions></>}
       {stage === 'star' && <><TaleStar tale={tale} data={data} collected={collected} /><div className="tale-actions tale-ending-actions"><Button disabled={busy} onClick={() => void save(() => collectTaleStar(db, content, localLearnerId, tale.id, new Date()))}>{collected ? 'Continue' : 'Light this star'}</Button></div></>}
       {stage === 'activity' && <BeltActivity data={data} outcome={visit?.beltOutcome} busy={busy} onAnswer={answer} onContinue={advance} />}
       {stage === 'sky' && <><TaleStar tale={tale} data={data} collected={collected} ending /><div className="tale-actions tale-ending-actions"><Button disabled={busy} onClick={advance}>Continue</Button></div></>}

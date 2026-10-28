@@ -1,4 +1,5 @@
-import { renderToStaticMarkup } from 'react-dom/server';
+import { renderToPipeableStream, renderToStaticMarkup } from 'react-dom/server';
+import { PassThrough } from 'node:stream';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { AppRoutes } from '../App';
@@ -16,9 +17,19 @@ describe('The web test edition', () => {
     expect(html).toContain('<h1>not found</h1>');
     expect(html).not.toContain('Rules under a small sky'); expect(html).not.toContain('FIELD SHEET');
   });
-  it('keeps the local developer pages available in development', () => {
-    expect(route('/dev', true)).toContain('Rules under a small sky');
-    expect(route('/design', true)).toContain('Design check');
+  it('keeps the lazily loaded local developer pages available in development', async () => {
+    async function renderTools(path: string) {
+      return new Promise<string>((resolve, reject) => {
+        const output = new PassThrough(); let html = '';
+        output.on('data', chunk => { html += String(chunk); });
+        output.on('end', () => resolve(html)); output.on('error', reject);
+        const stream = renderToPipeableStream(<ProgressProvider><MemoryRouter initialEntries={[path]}><AppRoutes development /></MemoryRouter></ProgressProvider>, {
+          onAllReady() { stream.pipe(output); }, onError: reject,
+        });
+      });
+    }
+    expect(await renderTools('/dev')).toContain('Rules under a small sky');
+    expect(await renderTools('/design')).toContain('Design check');
   });
   it('shows only the supplied update words when an update is actually ready', () => {
     expect(renderToStaticMarkup(<UpdateNoticeView />)).toBe('');

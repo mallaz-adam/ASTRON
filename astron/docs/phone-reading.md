@@ -1,5 +1,9 @@
 # Phone reading improvements
 
+Current refinement: [clearer reading and lighter visual hierarchy](reading-polish.md),
+28 October 2026. The notes below describe the earlier 26 October baseline; the
+current shared action bar and compact cover supersede its equal-button layout.
+
 26 October 2026.
 
 The approved wording and the 4.9-second name, Glaux wave and entry sequence remain unchanged.

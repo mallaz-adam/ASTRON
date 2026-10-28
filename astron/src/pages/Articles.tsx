@@ -48,7 +48,7 @@ export function ArticleReader() {
   if (content && !article) return <NotFound />;
   return <Page className="tale-page" reduceMotion={model?.reduceMotion} skipLabel="Skip to article"><main id="main-content" className="atlas-library" tabIndex={-1} aria-busy={!article && !error}>
     <TaleHeader context="Read" closeTo="/articles" closeLabel="Back to articles" />{article && <article className="article-reading"><div className="article-meta"><span className="article-category">{article.category ?? 'Astronomy'}</span><span>{article.readingMin} min read</span></div><h1>{article.title}</h1><p className="article-summary">{article.summary}</p>{article.cover && <ArticleCover cover={article.cover} />}<ReadingText text={article.body} />
-      {article.sourceNote && <DiscoveryDetails className="tale-sources" detailId={`article:${article.id}:sources`} label="Sources"><SourceText text={article.sourceNote} /></DiscoveryDetails>}
+      {article.sourceNote && <DiscoveryDetails emphasis="quiet" className="tale-sources" detailId={`article:${article.id}:sources`} label="Sources"><SourceText text={article.sourceNote} /></DiscoveryDetails>}
       <Button onClick={() => void finish()} disabled={saving || saved}>{saved ? 'Article read' : 'Mark as read'}</Button>{saved && <p role="status">{temporaryProgress ? 'Article read for this visit.' : 'Your reading is saved on this device.'}</p>}
       <aside className="article-connections"><p className="tale-eyebrow">Keep exploring</p><Link to="/stories/orion-shoulder?again">Meet Orion in the story</Link><Link to="/learn">Explore how stars live and die</Link></aside>
     </article>}{(error || saveError) && <p role="alert">{error || saveError}</p>}

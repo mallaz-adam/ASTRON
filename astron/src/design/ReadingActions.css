@@ -1,0 +1,11 @@
+.reading-actions { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 8px 18px; width: 100%; max-width: 680px; margin: 24px auto 0; border-top: var(--border-line); padding-top: 18px; }
+.reading-actions > .atlas-button { grid-column: 1 / -1; width: 100%; text-align: center; text-decoration: none; display: grid; place-items: center; white-space: normal; }
+.reading-actions > .reading-previous { grid-column: 1; grid-row: 2; min-height: 44px; padding: 8px 4px; color: var(--soft-ink); background: transparent; border: 0; font: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.reading-actions > .reading-count { grid-column: 2; grid-row: 2; text-align: right; color: var(--soft-ink); font-size: 15px; }
+@media (max-width: 767px) and (min-height: 481px) {
+  .reading-actions { position: fixed; inset: auto 0 0; z-index: 5; max-width: none; margin: 0; padding: 12px calc(24px + env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) calc(24px + env(safe-area-inset-left, 0px)); background: var(--parchment); }
+  .atlas-page.atlas-page:has(.reading-actions) { padding-bottom: calc(var(--reading-action-height, 148px) + 36px); }
+  .atlas-page:has(.reading-actions) :is(a, button, input, summary, [tabindex]) { scroll-margin-block: 18px calc(var(--reading-action-height, 148px) + 18px); }
+  /* An update already owns the bottom edge; keep reading actions in the page. */
+  #root:has(.update-notice) .reading-actions { position: static; padding-inline: 0; padding-bottom: 0; }
+}

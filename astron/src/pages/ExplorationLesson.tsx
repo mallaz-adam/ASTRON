@@ -7,6 +7,7 @@ import { localLearnerId } from '../data/learner';
 import { finishReadingLesson } from '../data/lessonServices';
 import { Page } from '../design/Page';
 import { Button } from '../design/Button';
+import { ReadingActions } from '../design/ReadingActions';
 import { DiscoveryDetails } from '../design/DiscoveryDetails';
 import { GlauxArt } from '../design/InlineArt';
 import { correctSelection, exerciseItems } from '../logic/lessonPlayer';
@@ -98,10 +99,10 @@ export function ExplorationReader({ data, lesson, content, reduceMotion }: {
         <p className="exploration-note">The full evaluation comes at the end of the chapter, How stars live and die.</p>
         {learnQuestEarned && <p>Learn quest done: +20 XP.</p>}
         {destination && destination.to !== '/learn' && <p className="exploration-note">Next: {destination.title}</p>}
-        <nav className="exploration-actions" aria-label="After the lesson">
+        <ReadingActions label="After the lesson">
           {destination ? <Link className="atlas-button atlas-button--primary" to={destination.to}>Continue</Link> : <Button disabled>Continue</Button>}
-          <button type="button" className="exploration-previous" onClick={() => { setStepIndex(0); setFinished(false); }}>Read again</button>
-        </nav>
+          <button type="button" className="reading-previous" onClick={() => { setStepIndex(0); setFinished(false); }}>Read again</button>
+        </ReadingActions>
       </> : <>
         <div className="exploration-progress">
           <p className="exploration-eyebrow">Step {stepIndex + 1} of {steps.length}</p>
@@ -112,12 +113,12 @@ export function ExplorationReader({ data, lesson, content, reduceMotion }: {
         {exercise && <DiscoveryDetails key={exercise.id} detailId={`lesson:${lesson.id}:practice:${exercise.id}`} label="Try this idea (optional)">
           <GuidedPractice exercise={exercise} />
         </DiscoveryDetails>}
-        <nav className="exploration-actions" aria-label="Lesson steps">
+        <ReadingActions label="Lesson steps">
           <Button disabled={busy} onClick={() => stepIndex < steps.length - 1 ? setStepIndex(stepIndex + 1) : void finish()}>Continue</Button>
-          {stepIndex > 0 && <button type="button" className="exploration-previous" disabled={busy} onClick={() => setStepIndex(stepIndex - 1)}>Previous</button>}
-        </nav>
+          {stepIndex > 0 && <button type="button" className="reading-previous" disabled={busy} onClick={() => setStepIndex(stepIndex - 1)}>Previous</button>}
+        </ReadingActions>
       </>}
-      {(finished || stepIndex === steps.length - 1) && <DiscoveryDetails detailId={`lesson:${lesson.id}:sources`} label="Sources">
+      {(finished || stepIndex === steps.length - 1) && <DiscoveryDetails emphasis="quiet" detailId={`lesson:${lesson.id}:sources`} label="Sources">
           <ul className="exploration-sources">{data.sources.map(source => <li key={source.url}>
             <a href={source.url} target="_blank" rel="noreferrer">{source.title}</a>
           </li>)}</ul>

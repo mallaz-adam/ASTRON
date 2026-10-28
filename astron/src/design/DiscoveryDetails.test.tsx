@@ -16,4 +16,11 @@ describe('Discoverable optional information', () => {
     expect(html).toContain('Previously opened detail.'); expect(html).toContain('<p>A story note.</p>');
     expect(html).not.toContain('Tap to explore');
   });
+  it('keeps sources as an accessible disclosure without competing gold cues', () => {
+    const html = renderToStaticMarkup(<DiscoveryDetailsView label="Sources" emphasis="quiet" explored={false} onExplore={() => undefined}><a href="https://science.nasa.gov/">NASA</a></DiscoveryDetailsView>);
+    expect(html).toContain('<details'); expect(html).toContain('<summary');
+    expect(html).toContain('data-emphasis="quiet"'); expect(html).toContain('Unopened detail.');
+    expect(html).toContain('NASA'); expect(html).not.toContain('discovery-indicator');
+    expect(html).not.toContain('Tap to explore');
+  });
 });
