@@ -5,10 +5,13 @@ import { WelcomeView } from './Welcome';
 import { TodayTabs } from './TodayTabs';
 
 describe('Orientation and main navigation', () => {
-  it('offers the first action before the optional orientation without dropping any learning area', () => {
+  it('explains every learning area and daily orientation before inviting the learner into Orion', () => {
     const html = renderToStaticMarkup(<MemoryRouter><WelcomeView onBegin={() => undefined} /></MemoryRouter>);
-    for (const label of ['Learn', 'Stories', 'Articles']) expect(html).toContain(`<h2>${label}</h2>`);
-    expect(html.indexOf('>Meet Orion</button>')).toBeLessThan(html.indexOf('<h2>Learn</h2>'));
+    for (const label of ['Learn', 'Stories', 'Articles']) {
+      expect(html).toContain(`<h2>${label}</h2>`);
+      expect(html.indexOf(`<h2>${label}</h2>`)).toBeLessThan(html.indexOf('class="welcome-first"'));
+    }
+    expect(html.indexOf('Today keeps your daily activities together.')).toBeLessThan(html.indexOf('class="welcome-first"'));
     expect(html).toContain('No account is needed.');
     expect(html).toContain('Progress is temporary. Refresh to start from the beginning.');
   });

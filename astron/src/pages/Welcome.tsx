@@ -20,13 +20,13 @@ export function WelcomeView({ reduceMotion = false, busy = false, error = '', re
     <p className="welcome-wordmark">ASTRON <img src="/art/star.svg" width="20" height="20" alt="" /></p>
     <header className="welcome-heading"><h1>Welcome to ASTRON</h1><p>Explore the sky through small lessons, Greek stories and scientific articles.</p></header>
     <div className="welcome-guide"><GlauxArt mood="gentle" /><p>I am Glaux. Let us find our way through the sky.</p></div>
-    <section className="welcome-first"><img src="/art/orion/cover-640.webp" width="640" height="853" decoding="async" alt="A painted valley beneath a starry sky." /><div><h2>Begin with Orion</h2><p>A story, a star, and a first pattern to find.</p></div>{review ? <Link to="/" className="atlas-button atlas-button--primary">Back to ASTRON</Link> : <Button disabled={busy} onClick={onBegin}>Meet Orion</Button>}</section>
     <div className="welcome-ways">{[
       ['Learn', 'Try a small idea, move a star, and see what changes.'],
       ['Stories', 'Follow a Greek myth, then find its pattern in the sky.'],
       ['Articles', 'Follow a question and discover the science behind it.'],
     ].map(([label, text]) => <section key={label}><NavigationIcon label={label} /><h2>{label}</h2><p>{text}</p></section>)}</div>
     <p className="welcome-orientation">Today keeps your daily activities together. My sky holds the stars you collect.</p>
+    <section className="welcome-first"><img src="/art/orion/cover-640.webp" width="640" height="853" decoding="async" alt="A painted valley beneath a starry sky." /><div><h2>Begin with Orion</h2><p>A story, a star, and a first pattern to find.</p></div>{review ? <Link to="/" className="atlas-button atlas-button--primary">Back to ASTRON</Link> : <Button disabled={busy} onClick={onBegin}>Meet Orion</Button>}</section>
     {review && temporaryProgress && <a className="article-open" href="/start">Start from the beginning</a>}
     <p className="welcome-privacy">{temporaryProgress ? 'Development preview. Progress is temporary. Refresh to start from the beginning. No account is needed.' : 'Your progress stays on this device. No account is needed.'}</p>
     {error && <p role="alert">{error}</p>}

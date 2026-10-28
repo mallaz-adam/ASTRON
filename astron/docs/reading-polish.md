@@ -5,10 +5,10 @@ learning content, accounts, dependencies or progress rules.
 
 ## What changed
 
-- Welcome puts the Orion invitation and its single primary action before the
-  longer orientation. Learn, Stories and Articles use simple rows rather than
-  three competing bordered cards. On desktop the invitation sits beside the
-  welcome text. All three learning areas and the privacy explanation remain.
+- Welcome explains Learn, Stories, Articles, Today and My sky before the Orion
+  invitation, following the owner's final preference. Learn, Stories and Articles
+  use simple rows rather than three competing bordered cards. Phone and desktop
+  keep this same reading order, with one Orion action after the explanation.
 - The story cover offers Begin/Resume before Glaux's extra guidance. Its phone
   image is shorter and shows the full painting rather than cropping out its sky.
   Full illustrations, descriptions and artwork credits are retained.
@@ -44,7 +44,7 @@ and the service worker still precaches the complete app and authored content.
 Development tools load only in development and have separate chunks. They and
 their dedicated styles are excluded from the production entry. The preceding
 production entry was 470.86 kB JavaScript and 50.30 kB CSS; the final revised build
-is 454.82 kB and 46.65 kB respectively. These are bundle sizes, not measured
+is 454.82 kB and 46.55 kB respectively. These are bundle sizes, not measured
 improvements in loading time or scrolling frame rate on a physical phone.
 
 ## Verification
@@ -62,8 +62,9 @@ checks also covered 320 px and a 390-by-480 short viewport. Native keyboard
 activation and focus clearance above the phone action bar worked. Saved Reduce
 motion stopped the visible SVG animations and discovery cues.
 
-The 390-by-800 welcome placed Meet Orion at approximately 413-465 px from the
-top. Source-link focus remained above the action bar. Decorative Glaux/Sources
+The earlier action-first iteration was checked at 390 by 800; the final welcome
+puts the platform explanation before Orion. Source-link focus remained above
+the reading action bar. Decorative Glaux/Sources
 elements offscreen reported inactive while the visible discovery remained active.
 
 The real PWA update notice appeared after publishing a second local build. While
@@ -79,7 +80,8 @@ Light and distance manuscript remains a review document rather than a live lesso
 
 ## Phone check
 
-1. Start a fresh visit. Meet Orion should be easy to find before the longer guide.
+1. Start a fresh visit. Learn, Stories, Articles and the daily orientation should
+   appear before the Orion invitation on both phone and desktop.
 2. Open the story. Its start button should appear before Glaux's guidance.
 3. Read a chapter, scroll to its end and open Sources. Every final line and link
    should be reachable above Continue, with room for the home indicator.

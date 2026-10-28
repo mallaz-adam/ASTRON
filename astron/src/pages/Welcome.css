@@ -22,10 +22,8 @@
 .welcome-privacy { color: var(--soft-ink); font-size: 15px; }
 @media (min-width: 768px) {
   .atlas-page.welcome-page { padding: 48px; }
-  .welcome-main { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px 36px; }
-  .welcome-main > * { grid-column: 1 / -1; }
-  .welcome-heading { grid-column: 1; grid-row: 2; }
-  .welcome-guide { grid-column: 1; grid-row: 3; align-self: start; }
-  .welcome-first { grid-column: 2; grid-row: 2 / 4; align-content: center; padding: 18px; }
+  .welcome-main { gap: 24px; }
+  .welcome-first { grid-template-columns: 64px minmax(0, 1fr) minmax(180px, 240px); padding: 18px; }
+  .welcome-first .atlas-button { grid-column: 3; grid-row: 1; }
   .welcome-ways { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }

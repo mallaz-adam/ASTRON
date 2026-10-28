@@ -6,8 +6,8 @@ Today (`/`), Learn (`/learn`), Stories (`/stories`), Articles (`/articles`) and
 My sky (`/sky`). Native links indicate the current destination. No Timeline
 placeholder remains in the main navigation.
 
-The introduction invites the learner to meet Orion, with explanations of Learn,
-Stories and Articles below that first action. Returning readers keep their checkpoint. Your preferences links
+The introduction explains Learn, Stories, Articles, Today and My sky before
+inviting the learner to meet Orion. Returning readers keep their checkpoint. Your preferences links
 to `/guide`, a read-only way to revisit the introduction without erasing progress.
 The existing opening animation and reduced-motion preferences are unchanged.
 
