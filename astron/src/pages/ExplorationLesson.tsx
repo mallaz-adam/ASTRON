@@ -54,6 +54,7 @@ export function ReadingStepContent({ step }: { step: ReadingStep }) {
 export function ExplorationReader({ data, lesson, content, reduceMotion }: {
   data: LessonData; lesson: Lesson; content: Content; reduceMotion: boolean;
 }) {
+  const [started, setStarted] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
   const [finished, setFinished] = useState(false);
   const [learnQuestEarned, setLearnQuestEarned] = useState(false);
@@ -72,7 +73,7 @@ export function ExplorationReader({ data, lesson, content, reduceMotion }: {
   useEffect(() => {
     heading.current?.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [stepIndex, finished]);
+  }, [stepIndex, finished, started]);
 
   async function finish() {
     if (writing.current) return;
@@ -90,9 +91,14 @@ export function ExplorationReader({ data, lesson, content, reduceMotion }: {
   }
 
   return <Page className="exploration-page" reduceMotion={reduceMotion} skipLabel="Skip to lesson">
-    <main id="main-content" className={`exploration-main${!finished && current.explore ? ' exploration-main--explore' : ''}`} tabIndex={-1} aria-busy={busy}>
-      <header className="exploration-header"><Link to="/learn">Back to the path</Link><span>{lesson.title}</span></header>
-      {finished ? <>
+    <main id="main-content" className={`exploration-main${started && !finished && current.explore ? ' exploration-main--explore' : ''}`} tabIndex={-1} aria-busy={busy}>
+      <header className="exploration-header"><Link to="/learn">Back to the path</Link>{started && <span>{lesson.title}</span>}</header>
+      {!started ? <>
+        <p className="exploration-eyebrow">Before we begin</p>
+        <h1 ref={heading} tabIndex={-1}>{lesson.title}</h1>
+        <div className="exploration-prose"><p>{data.introduction}</p></div>
+        <ReadingActions label="Begin the lesson"><Button onClick={() => setStarted(true)}>Continue</Button></ReadingActions>
+      </> : finished ? <>
         <p className="exploration-eyebrow">Lesson complete</p>
         <h1 ref={heading} tabIndex={-1}>Your place in the cosmos</h1>
         <div className="exploration-glaux"><GlauxArt mood="proud" /><p>You have found our place. Let us carry these ideas a little further.</p></div>
@@ -101,7 +107,7 @@ export function ExplorationReader({ data, lesson, content, reduceMotion }: {
         {destination && destination.to !== '/learn' && <p className="exploration-note">Next: {destination.title}</p>}
         <ReadingActions label="After the lesson">
           {destination ? <Link className="atlas-button atlas-button--primary" to={destination.to}>Continue</Link> : <Button disabled>Continue</Button>}
-          <button type="button" className="reading-previous" onClick={() => { setStepIndex(0); setFinished(false); }}>Read again</button>
+          <button type="button" className="reading-previous" onClick={() => { setStepIndex(0); setFinished(false); setStarted(false); }}>Read again</button>
         </ReadingActions>
       </> : <>
         <div className="exploration-progress">
@@ -115,10 +121,10 @@ export function ExplorationReader({ data, lesson, content, reduceMotion }: {
         </DiscoveryDetails>}
         <ReadingActions label="Lesson steps">
           <Button disabled={busy} onClick={() => stepIndex < steps.length - 1 ? setStepIndex(stepIndex + 1) : void finish()}>Continue</Button>
-          {stepIndex > 0 && <button type="button" className="reading-previous" disabled={busy} onClick={() => setStepIndex(stepIndex - 1)}>Previous</button>}
+          <button type="button" className="reading-previous" disabled={busy} onClick={() => stepIndex > 0 ? setStepIndex(stepIndex - 1) : setStarted(false)}>Previous</button>
         </ReadingActions>
       </>}
-      {(finished || stepIndex === steps.length - 1) && <DiscoveryDetails emphasis="quiet" detailId={`lesson:${lesson.id}:sources`} label="Sources">
+      {started && (finished || stepIndex === steps.length - 1) && <DiscoveryDetails emphasis="quiet" detailId={`lesson:${lesson.id}:sources`} label="Sources">
           <ul className="exploration-sources">{data.sources.map(source => <li key={source.url}>
             <a href={source.url} target="_blank" rel="noreferrer">{source.title}</a>
           </li>)}</ul>

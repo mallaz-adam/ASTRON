@@ -15,12 +15,15 @@ function render(){
   return renderToStaticMarkup(<ProgressProvider><MemoryRouter><ExplorationReader data={data} lesson={lesson} content={content} reduceMotion /></MemoryRouter></ProgressProvider>);
 }
 describe('A comfortable, accessible lesson reader',()=>{
-  it('starts with teaching and navigation, with no individual exam or score',()=>{
+  it('opens with a brief introduction and one learner-controlled Continue before the first teaching step',()=>{
     const html=render();
-    expect(html).toContain('Earth feels enormous');
+    expect(html).toContain('Before we begin');
+    expect(html).toContain(data.introduction);
+    expect(html).toContain(lesson.title);
+    expect(html).not.toContain('Earth feels enormous');
     expect(html).not.toContain('<select');
     expect(html).not.toContain('Lesson contents');
-    expect(html).toContain('Step 1 of 16');
+    expect(html).not.toContain('Step 1 of 16');
     expect(html.match(/>Continue<\/button>/g)).toHaveLength(1);
     expect(html).not.toContain('Explore each level below');
     expect(html).not.toContain('aria-label="Explore the idea"');
@@ -28,6 +31,12 @@ describe('A comfortable, accessible lesson reader',()=>{
     expect(html).not.toContain('Your answers, explained');
     expect(html).not.toContain('Start the exam');
     expect(html).not.toContain('class="lesson-scroll"');
+  });
+  it('retains the first teaching step as a separate reading after the introduction',()=>{
+    const html=renderToStaticMarkup(<ReadingStepContent step={readingSteps(data)[0]} />);
+    expect(html).toContain('Earth feels enormous');
+    expect(html).not.toContain(data.introduction);
+    expect(html).not.toContain('Explore each level below');
   });
   it('labels guided practice as optional and presents choices without a score',()=>{
     const exercise=content.exercises.find(e=>e.id==='ex-01-double')!;

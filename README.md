@@ -65,7 +65,7 @@ lesson or part.** Smaller practice moments help learners explore an idea and
 understand the explanation. They are not separate exams.
 
 Scale of the cosmos contains eight teaching parts and two optional, unscored
-practices. Its eight parts unfold across sixteen short reading/exploration steps,
+practices. A short introduction leads into sixteen reading/exploration steps,
 with **Continue** leading through the recap and on to the next authored lesson.
 There is no contents dropdown. The course path marks
 the full chapter evaluation as **Coming later**, because several lessons are

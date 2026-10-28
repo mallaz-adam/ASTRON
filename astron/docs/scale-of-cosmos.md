@@ -17,6 +17,14 @@ wider universe. Code-drawn diagrams explicitly describe their simplifications.
 They are not presented as photographs or maps of observed positions. The
 learner controls diagram changes, and Reduce motion stops Glaux's animation.
 
+A short introduction opens the lesson before Step 1, naming its purpose and
+inviting the learner to Continue. It is separate from the teaching-step count,
+awards no progress or XP, and makes no completion write. Previous from the first
+teaching step returns to it; Read again also begins with the introduction.
+The introduction revision passes 451 tests and the production build. Browser
+checks at 390, 768 and 1280 px found no horizontal overflow; keyboard Continue
+opened Step 1 and Previous returned to the introduction with heading focus.
+
 The eight teaching sections are paced across sixteen short steps. Each explanation
 comes first, then its final paragraph and picture/activity have a separate step.
 Every teaching paragraph is preserved exactly once, in authored order. The recap
