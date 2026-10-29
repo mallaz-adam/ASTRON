@@ -9,6 +9,7 @@ import { localLearnerId } from '../data/learner';
 
 const LessonPlayer = lazy(() => import('./LessonPlayer').then(module => ({ default: module.LessonPlayer })));
 const ExplorationLesson = lazy(() => import('./ExplorationLesson').then(module => ({ default: module.ExplorationLesson })));
+const VisualUnit = lazy(() => import('./VisualUnit').then(module => ({ default: module.VisualUnit })));
 class LessonBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
@@ -39,7 +40,8 @@ export function Cell() {
     const path = buildCoursePath(content, progress, undefined, cell.unitId, true);
     if (path.cells.find(row => row.id === id)?.state === 'locked') return <TemporaryCell />;
     return <LessonBoundary key={lesson.id}><Suspense fallback={<Page skipLabel="Skip to lesson"><main id="main-content" aria-busy="true"><h1>Opening the lesson…</h1></main></Page>}>
-      {lesson.reader ? <ExplorationLesson lesson={lesson} content={content} reduceMotion={model.reduceMotion} /> : <LessonPlayer lesson={lesson} content={content} reduceMotion={model.reduceMotion} />}
+      {lesson.readerType === 'visual-unit' ? <VisualUnit lesson={lesson} content={content} reduceMotion={model.reduceMotion} />
+        : lesson.reader ? <ExplorationLesson lesson={lesson} content={content} reduceMotion={model.reduceMotion} /> : <LessonPlayer lesson={lesson} content={content} reduceMotion={model.reduceMotion} />}
     </Suspense></LessonBoundary>;
   }
   return <Page skipLabel="Cell"><main id="main-content" tabIndex={-1} aria-busy={!error}>{error && <p role="alert">{error}</p>}</main></Page>;

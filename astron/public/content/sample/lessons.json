@@ -203,5 +203,85 @@
         "glaux": "Lessons arrive in the next step."
       }
     ]
+  },
+  {
+    "id": "unit-earth-sun-moon",
+    "title": "Earth, the Sun and the Moon",
+    "cellId": "earth-sun-moon",
+    "placeholder": false,
+    "cards": [
+      {
+        "kind": "say",
+        "mood": "gentle",
+        "glaux": "Keep this small map of space in your mind."
+      }
+    ],
+    "reader": "/content/earth-sun-moon.json",
+    "readerType": "visual-unit"
+  },
+  {
+    "id": "unit-our-solar-system",
+    "title": "Our solar system",
+    "cellId": "our-solar-system",
+    "placeholder": true,
+    "cards": [
+      {
+        "kind": "say",
+        "mood": "gentle",
+        "glaux": "This part of the atlas is still being written."
+      }
+    ]
+  },
+  {
+    "id": "unit-stars-milky-way",
+    "title": "Stars and the Milky Way",
+    "cellId": "stars-milky-way",
+    "placeholder": true,
+    "cards": [
+      {
+        "kind": "say",
+        "mood": "gentle",
+        "glaux": "This part of the atlas is still being written."
+      }
+    ]
+  },
+  {
+    "id": "unit-galaxies-universe",
+    "title": "Galaxies and the universe",
+    "cellId": "galaxies-universe",
+    "placeholder": true,
+    "cards": [
+      {
+        "kind": "say",
+        "mood": "gentle",
+        "glaux": "This part of the atlas is still being written."
+      }
+    ]
+  },
+  {
+    "id": "unit-sizes-distances",
+    "title": "Understanding sizes and distances",
+    "cellId": "sizes-distances",
+    "placeholder": true,
+    "cards": [
+      {
+        "kind": "say",
+        "mood": "gentle",
+        "glaux": "This part of the atlas is still being written."
+      }
+    ]
+  },
+  {
+    "id": "unit-light-travel-time",
+    "title": "Light takes time to travel",
+    "cellId": "light-travel-time",
+    "placeholder": true,
+    "cards": [
+      {
+        "kind": "say",
+        "mood": "gentle",
+        "glaux": "This part of the atlas is still being written."
+      }
+    ]
   }
 ]

@@ -1,0 +1,302 @@
+{
+  "lessonId": "unit-earth-sun-moon",
+  "chapter": "Our place in space",
+  "title": "Earth, the Sun and the Moon",
+  "introduction": [
+    "Look around. Earth feels like our whole world.",
+    "Yet it belongs to a larger space family.",
+    "We will meet Earth, the Sun, and the Moon.",
+    "We will discover why the Moon shines."
+  ],
+  "steps": [
+    {
+      "id": "familiar",
+      "title": "Three familiar objects",
+      "scene": "gallery",
+      "paragraphs": [
+        "Earth is the world beneath our feet.",
+        "The Sun warms and lights our days.",
+        "The Moon often appears in our sky.",
+        "They are connected, but they are not the same kind of object."
+      ],
+      "terms": []
+    },
+    {
+      "id": "sun",
+      "title": "The Sun is a star",
+      "scene": "sun",
+      "paragraphs": [
+        "The Sun is a star, not a planet.",
+        "A star is a huge, very hot ball of gas.",
+        "Energy made deep inside the Sun powers its light.",
+        "That is why the Sun gives us daylight."
+      ],
+      "terms": [
+        "star"
+      ],
+      "glaux": "A star does more than look bright. It makes light."
+    },
+    {
+      "id": "earth",
+      "title": "Earth is a planet",
+      "scene": "earth",
+      "paragraphs": [
+        "A planet is a large, nearly round world moving around a star.",
+        "Earth is our home planet.",
+        "It has land, oceans, and air.",
+        "Earth travels around the Sun."
+      ],
+      "terms": [
+        "planet"
+      ]
+    },
+    {
+      "id": "orbit",
+      "title": "Earth's path around the Sun",
+      "scene": "orbit",
+      "paragraphs": [
+        "Earth moves around the Sun.",
+        "This movement is called orbiting.",
+        "An orbit is the path one object follows around another.",
+        "Earth is one of several planets orbiting our Sun.",
+        "The Sun and its orbiting objects form our solar system."
+      ],
+      "terms": [
+        "orbit",
+        "solar system"
+      ],
+      "glaux": "A path can tell a story without showing its true size."
+    },
+    {
+      "id": "moon",
+      "title": "Meet the Moon",
+      "scene": "moon",
+      "paragraphs": [
+        "The Moon is a natural satellite of Earth.",
+        "A satellite travels around another object in space.",
+        "Natural means people did not build it.",
+        "Our Moon travels around Earth.",
+        "It is not a star or a planet."
+      ],
+      "terms": [
+        "natural satellite"
+      ]
+    },
+    {
+      "id": "paths",
+      "title": "A family with different paths",
+      "scene": "paths",
+      "paragraphs": [
+        "Earth travels around the Sun.",
+        "The Moon travels around Earth.",
+        "So, the Moon also journeys through space alongside Earth.",
+        "These movements help explain their different names."
+      ],
+      "terms": [],
+      "glaux": "The Moon follows Earth while travelling around Earth."
+    },
+    {
+      "id": "sunlight",
+      "title": "Where sunlight starts",
+      "scene": "sunlight",
+      "paragraphs": [
+        "The Sun makes its own light.",
+        "That light travels through space.",
+        "Light coming from the Sun is called sunlight.",
+        "Sunlight reaches Earth and the Moon."
+      ],
+      "terms": [
+        "sunlight"
+      ]
+    },
+    {
+      "id": "reflection",
+      "title": "Why the Moon shines",
+      "scene": "reflection",
+      "paragraphs": [
+        "The Moon does not make the visible light we see.",
+        "Sunlight hits the Moon's rocky surface.",
+        "Some light bounces away.",
+        "This bouncing is called reflection.",
+        "Some reflected light reaches our eyes.",
+        "That is why we see a bright Moon."
+      ],
+      "terms": [
+        "reflection",
+        "reflected light"
+      ],
+      "glaux": "The brightest clue is sometimes borrowed light."
+    },
+    {
+      "id": "comparison",
+      "title": "An everyday clue",
+      "scene": "comparison",
+      "paragraphs": [
+        "Imagine a lamp shining on a pale wall.",
+        "The lamp produces light.",
+        "The wall looks bright because light bounces from it.",
+        "The Sun acts like the lamp.",
+        "The Moon acts like the wall."
+      ],
+      "terms": []
+    },
+    {
+      "id": "recap",
+      "title": "Three objects, one story",
+      "scene": "recap",
+      "paragraphs": [
+        "Earth is our planet. It orbits the Sun.",
+        "The Sun is our star and makes its own light.",
+        "The Moon is Earth's natural satellite. It orbits Earth.",
+        "Moonlight is sunlight reflected from the Moon's surface."
+      ],
+      "terms": [],
+      "glaux": "Keep this small map of space in your mind."
+    }
+  ],
+  "objects": [
+    {
+      "id": "earth",
+      "name": "Earth",
+      "kind": "planet",
+      "clue": "Our home",
+      "src": "/art/earth-sun-moon/earth.webp",
+      "alt": "Earth photographed by the Apollo 17 crew, with oceans, clouds and Africa visible.",
+      "caption": "Apollo 17 photograph",
+      "credit": "NASA Johnson Space Center",
+      "source": "https://science.nasa.gov/resource/the-blue-marble/"
+    },
+    {
+      "id": "sun",
+      "name": "Sun",
+      "kind": "star",
+      "clue": "Makes its own light",
+      "src": "/art/earth-sun-moon/sun.webp",
+      "alt": "A processed spacecraft observation showing the bright disc and surface detail of the Sun.",
+      "caption": "Processed spacecraft observation; colours are processed.",
+      "credit": "NASA/GSFC/Solar Dynamics Observatory",
+      "source": "https://science.nasa.gov/photojournal/image-of-sun-from-nasas-solar-dynamics-observatory/"
+    },
+    {
+      "id": "moon",
+      "name": "Moon",
+      "kind": "natural satellite",
+      "clue": "Moves around Earth",
+      "src": "/art/earth-sun-moon/moon.webp",
+      "alt": "The Moon's near side, with dark plains and bright craters, assembled from spacecraft camera data.",
+      "caption": "Image from spacecraft camera data",
+      "credit": "NASA/Goddard Space Flight Center/Arizona State University",
+      "source": "https://science.nasa.gov/resource/lunar-near-side/"
+    }
+  ],
+  "glossary": [
+    {
+      "term": "star",
+      "definition": "A huge, very hot ball of gas that makes its own light.",
+      "example": "The Sun is a star."
+    },
+    {
+      "term": "planet",
+      "definition": "A large, nearly round world that travels around a star.",
+      "example": "Earth is a planet."
+    },
+    {
+      "term": "orbit",
+      "definition": "The path an object follows around another in space.",
+      "example": "Earth follows an orbit around the Sun."
+    },
+    {
+      "term": "solar system",
+      "definition": "The Sun and the objects travelling around it.",
+      "example": "Earth belongs to our solar system."
+    },
+    {
+      "term": "natural satellite",
+      "definition": "An object, not built by people, that travels around another object in space.",
+      "example": "The Moon is Earth's natural satellite."
+    },
+    {
+      "term": "sunlight",
+      "definition": "Light coming from the Sun.",
+      "example": "Sunlight reaches the Moon."
+    },
+    {
+      "term": "reflection",
+      "definition": "Light bouncing off a surface.",
+      "example": "Sunlight reflects from the Moon."
+    },
+    {
+      "term": "reflected light",
+      "definition": "Light that has bounced off something.",
+      "example": "The Moon sends reflected light toward Earth."
+    }
+  ],
+  "matching": {
+    "prompt": "Match Earth, Sun, and Moon with planet, star, and natural satellite.",
+    "hint": "Ask which object makes its own light. Then follow their paths.",
+    "right": "Yes. Earth is a planet, the Sun is a star, and the Moon is a natural satellite.",
+    "feedback": {
+      "earth": {
+        "star": "Stars make their own light. Earth is our planet.",
+        "natural satellite": "Earth is our planet. The Moon is the natural satellite that orbits it."
+      },
+      "sun": {
+        "planet": "The Sun makes its own light. It is a star, not a planet.",
+        "natural satellite": "The Sun is our star. The Moon is Earth's natural satellite."
+      },
+      "moon": {
+        "star": "The Moon reflects sunlight. It does not make the visible light we see.",
+        "planet": "The Moon travels around Earth. It is Earth's natural satellite."
+      }
+    }
+  },
+  "choice": {
+    "prompt": "Why can we see the Moon shining?",
+    "hint": "Think about the lamp and wall. Which one makes the light?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The Moon makes the visible light we see.",
+        "feedback": "The Moon appears bright, but it does not produce this visible light. Follow sunlight from the Sun."
+      },
+      {
+        "id": "B",
+        "text": "Sunlight bounces off the Moon and reaches our eyes.",
+        "feedback": "Exactly. The Sun makes light. The Moon reflects some of it toward us."
+      },
+      {
+        "id": "C",
+        "text": "The Moon saves sunlight and releases it at night.",
+        "feedback": "It is not stored sunlight. Some light reflects as sunlight hits the Moon's surface."
+      }
+    ],
+    "correct": "B",
+    "explanation": "The Sun produces sunlight. Some reaches the Moon and reflects toward Earth. Moonlight is that reflected sunlight."
+  },
+  "sources": [
+    {
+      "title": "NASA Earth Facts",
+      "url": "https://science.nasa.gov/earth/facts/"
+    },
+    {
+      "title": "NASA Sun Facts",
+      "url": "https://science.nasa.gov/sun/facts/"
+    },
+    {
+      "title": "NASA Moon Facts",
+      "url": "https://science.nasa.gov/moon/facts/"
+    },
+    {
+      "title": "NASA Moonlight",
+      "url": "https://science.nasa.gov/moon/moonlight/"
+    },
+    {
+      "title": "NASA Universe Glossary",
+      "url": "https://science.nasa.gov/universe/glossary/"
+    },
+    {
+      "title": "NASA media usage guidelines",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+    }
+  ]
+}

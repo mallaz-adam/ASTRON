@@ -5,9 +5,14 @@ import './Honeycomb.css';
 
 export function Honeycomb({ cells, selectedId, onSelect }: { cells: PathCell[]; selectedId: string; onSelect: (id: string) => void }) {
   const [focusId, setFocusId] = useState('');
-  const { radius, width, height } = honeycombSize;
+  const radius = honeycombSize.radius;
+  // One authored unit should fill its own small map, rather than one corner
+  // of the older eleven-cell map. Its position and hit area use the same scale.
+  const single = cells.length === 1;
+  const width = single ? radius * Math.sqrt(3) + 16 : honeycombSize.width;
+  const height = single ? radius * 2 + 16 : honeycombSize.height;
   const buttonWidth = radius * Math.sqrt(3);
-  return <div className="honeycomb" style={{ aspectRatio: `${width} / ${height}` }}>
+  return <div className={`honeycomb${single ? ' honeycomb--single' : ''}`} style={{ aspectRatio: `${width} / ${height}` }}>
     <svg className="honeycomb-drawing" viewBox={`0 0 ${width} ${height}`} aria-hidden="true">
       {cells.map((cell, index) => {
         const { x, y } = hexPosition(index);

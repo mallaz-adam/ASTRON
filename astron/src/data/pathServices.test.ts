@@ -23,7 +23,7 @@ describe('Temporary path completion', () => {
   it('marks a lesson done, grants Learn, and opens the next cell', async () => {
     await completePathCell(database, content, learner, content.cells[0].id, now);
     const saved = await readProgress(database);
-    expect(buildCoursePath(content, saved, learner).current?.positionNo).toBe(2);
+    expect(buildCoursePath(content, saved, learner, 'first-sky').current?.positionNo).toBe(2);
     expect(saved.questDone.map(row => row.questId)).toEqual(['daily-learn']);
     expect(totalXp(saved.completions, saved.questDone, saved.answers, content.exercises)).toBe(20);
   });
@@ -34,7 +34,7 @@ describe('Temporary path completion', () => {
     expect(saved.completions).toHaveLength(4);
     expect(saved.questDone.map(row => row.questId).sort()).toEqual(['daily-learn', 'daily-story']);
     expect(saved.litStars).toMatchObject([{ starId: 'betelgeuse', how: 'tale' }]);
-    expect(buildCoursePath(content, saved, learner).current?.positionNo).toBe(5);
+    expect(buildCoursePath(content, saved, learner, 'first-sky').current?.positionNo).toBe(5);
     expect(totalXp(saved.completions, saved.questDone, saved.answers, content.exercises)).toBe(35);
   });
   it('links the second tale to Alcyone and keeps the sample content complete', async () => {
@@ -47,6 +47,6 @@ describe('Temporary path completion', () => {
     await Promise.all(Array.from({ length: 3 }, () => completePathCell(database, content, learner, content.cells[0].id, now)));
     database.close(); await database.open();
     expect(await database.completions.count()).toBe(1);
-    expect(buildCoursePath(content, await readProgress(database), learner).current?.positionNo).toBe(2);
+    expect(buildCoursePath(content, await readProgress(database), learner, 'first-sky').current?.positionNo).toBe(2);
   });
 });

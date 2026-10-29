@@ -43,7 +43,7 @@ describe('Lesson assessment and rewards', () => {
     expect(await xp()).toBe(40);
     const progress = await readProgress(database);
     expect(progress.completions.find(row => row.cellId === 'star-lesson')?.correctAnswers).toBe(2);
-    expect(buildCoursePath(content, progress, learner).current?.positionNo).toBe(4);
+    expect(buildCoursePath(content, progress, learner, 'first-sky').current?.positionNo).toBe(4);
     database.close(); await database.open();
     expect(await xp()).toBe(40);
   });

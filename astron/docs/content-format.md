@@ -533,3 +533,22 @@ The chapter evaluation remains Coming later while the rest of the chapter is
 being written. `orion-quiz` at position 11 is reserved for that final evaluation.
 The scale-only bank is not presented as a comprehensive chapter assessment.
 Temporary development progress remains in effect; lesson 2 is still unbuilt.
+
+## Illustrated beginner units (29 October 2026)
+
+`Lesson.readerType` optionally accepts `"visual-unit"`, requiring a local `reader`
+JSON path. Omitting it keeps the existing exploration reader unchanged. This is
+content metadata, with no progress-table or database migration.
+
+The first visual unit is `/content/earth-sun-moon.json`. It has a lesson ID, title,
+chapter, introduction paragraphs, ten uniquely identified `steps`, `objects`,
+`glossary`, `matching`, `choice` and `sources`. Step scenes follow the validated
+teaching order: gallery, sun, earth, orbit, moon, paths, sunlight, reflection,
+comparison, recap. Each step has paragraphs and at most two known glossary terms;
+Glaux's line is optional. Object pictures require local WebP paths, identities,
+descriptions, observation captions, credits and HTTPS source pages.
+
+Both practice formats require targeted feedback; the choice answer must name an
+existing option. Invalid content is rejected before display. Practice is local
+view state and never writes an `Answer`. Completion goes through the existing
+`finishReadingLesson` service. See `earth-sun-moon.md` for media and visual notes.

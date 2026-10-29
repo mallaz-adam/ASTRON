@@ -33,6 +33,7 @@ technical details and the future setting that restores permanent saving.
 - A first-visit welcome followed by the illustrated Orion story and belt activity.
 - Five destinations: **Today, Learn, Stories, Articles and My sky**.
 - Today’s quests, sun, streak and freeze views.
+- Chapter 1, **Our place in space**, begins with **Earth, the Sun and the Moon**: ten illustrated steps, tappable definitions and two optional practices.
 - The authored **Scale of the cosmos** and **Why stars differ** lessons, with guided practice.
 - Interactive cosmic-address views, scale models, star colours, mass and fuel comparisons.
 - A sourced Betelgeuse article with a real ALMA cover, category and reading time.
@@ -41,9 +42,27 @@ technical details and the future setting that restores permanent saving.
 - Clearer first actions and reachable phone reading controls; Sources stay quieter than discoveries.
 - An installable PWA that caches the app, authored content, art and local fonts.
 
-The course contains eleven planned cells. Only authored content is offered in
-the normal preview path; unfinished lessons remain unavailable. The optional
-developer tools retain the complete course model.
+The beginner chapter has six planned units and a final ten-question evaluation.
+Unit 1 is playable; the five remaining units are visibly marked as being prepared.
+The earlier eleven-cell **How stars live and die** chapter remains available through
+the chapter links for development testing. This is not a chapter-exam unlock: the
+passing threshold and retry policy are still to be decided.
+Only authored content is offered in the normal preview path. Developer tools
+retain the complete course model.
+
+### Try the new first unit locally
+
+Run `npm start` inside `astron`, complete the welcome, then choose **Learn**,
+**Our place in space**, **Earth, the Sun and the Moon**, and **Begin**.
+The lesson starts with an introduction. Continue moves through one idea at a time;
+Previous returns to the preceding step. Underlined words reveal a definition and
+example; Escape closes it and returns keyboard focus. Pictures, sources and credits
+are available at the bottom. Both practices are optional and ungraded.
+
+The three NASA pictures are stored locally as small WebP files. The painted-style
+orbit, light and lamp diagrams are original SVG drawn in code. Everything needed
+for this unit is included in the offline app cache. No new libraries were added.
+See [the unit's implementation notes](astron/docs/earth-sun-moon.md).
 
 ## Chapters, lessons and evaluation
 

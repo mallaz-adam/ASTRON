@@ -16,7 +16,7 @@ describe('Content files', () => {
   });
   it('loads the complete authoring sample', () => {
     const content = sampleContent();
-    expect(content.cells.map(cell => cell.kind)).toEqual(['lesson', 'lesson', 'lesson', 'tale', 'lesson', 'lesson', 'tale', 'lesson', 'lesson', 'lesson', 'quiz']);
+    expect(content.cells.filter(cell => cell.unitId === 'first-sky').map(cell => cell.kind)).toEqual(['lesson', 'lesson', 'lesson', 'tale', 'lesson', 'lesson', 'tale', 'lesson', 'lesson', 'lesson', 'quiz']);
     expect(content.chapters).toHaveLength(5);
     expect(content.exercises).toHaveLength(12);
     expect(content.exercises.filter(e => e.cellId === 'orion-lesson')).toHaveLength(8);
@@ -69,7 +69,7 @@ describe('Content files', () => {
   it('loads all files through the supplied reader', async () => {
     const files = sampleFiles();
     const read = vi.fn(async (path: string | URL | Request) => new Response(JSON.stringify(files[String(path).split('/').at(-1)!.replace('.json', '').replace('glaux-lines', 'glauxLines')])));
-    expect((await loadContent('/content/sample/', read)).units).toHaveLength(1);
+    expect((await loadContent('/content/sample/', read)).units).toHaveLength(2);
     expect(read).toHaveBeenCalledTimes(13);
   });
   it('reports invalid JSON clearly', async () => {

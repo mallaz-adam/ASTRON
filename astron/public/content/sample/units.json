@@ -1,3 +1,14 @@
 [
-  { "id": "first-sky", "title": "How stars live and die", "summary": "The life of a star, from birth to its last glow.", "orderNo": 1 }
+  {
+    "id": "first-sky",
+    "title": "How stars live and die",
+    "summary": "The life of a star, from birth to its last glow.",
+    "orderNo": 2
+  },
+  {
+    "id": "our-place",
+    "title": "Our place in space",
+    "summary": "Meet our neighbours, then discover the wider universe.",
+    "orderNo": 1
+  }
 ]

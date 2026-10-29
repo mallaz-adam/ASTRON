@@ -21,14 +21,16 @@ export function buildCoursePath(content: Content, progress: Pick<Progress, 'comp
       : cell.kind === 'quiz' ? `${cell.minutes} min · a mix of everything` : `${cell.minutes} min`;
     return {
       ...cell, state, line, action: state === 'done' ? 'AGAIN' : 'BEGIN',
-      label: `Cell ${cell.positionNo}, ${cell.title}, ${state} ${cell.kind}`,
+      label: `${unit.id === 'our-place' ? 'Unit' : 'Cell'} ${cell.positionNo}, ${cell.title}, ${state} ${cell.kind}`,
     };
   });
   const doneCount = cells.filter(cell => cell.state === 'done').length;
   const showingPartOfChapter = testRelease && cells.length < content.cells.filter(cell => cell.unitId === unit.id).length;
   return {
     unit, cells, doneCount, current: cells.find(cell => cell.state === 'current') ?? null,
-    countText: `${doneCount} of ${cells.length}${showingPartOfChapter ? ' available steps' : ''} done`, unitLabel: `CHAPTER ${unit.orderNo}`,
+    upcoming: testRelease ? content.cells.filter(cell => cell.unitId === unit.id && cell.kind !== 'quiz' && !playableIds.has(cell.id)).sort((a, b) => a.positionNo - b.positionNo) : [],
+    countText: unit.id === 'our-place' ? `${doneCount} of ${content.cells.filter(cell => cell.unitId === unit.id && cell.kind === 'lesson').length} units done`
+      : `${doneCount} of ${cells.length}${showingPartOfChapter ? ' available steps' : ''} done`, unitLabel: `CHAPTER ${unit.orderNo}`,
     glaux: glauxLine(content, doneCount === 0 ? 'pathBegin' : doneCount === cells.length ? 'pathComplete' : 'pathContinue'),
   };
 }

@@ -30,3 +30,11 @@
   .course-action:hover { background: var(--ink); }
   .course-return:hover { color: var(--ink); }
 }
+.course-chapters { display: flex; flex-wrap: wrap; gap: 8px 18px; padding-bottom: 12px; border-bottom: var(--border-line); }
+.course-chapters a { min-height: 44px; padding: 8px 12px; display: flex; align-items: center; color: var(--soft-ink); }
+.course-chapters a[aria-current='page'] { border: var(--border-line); background: var(--card); color: var(--ink); text-decoration: none; }
+.course-upcoming { margin-top: 24px; display: grid; gap: 18px; }
+.course-upcoming ol { list-style-position: inside; padding: 0; display: grid; gap: 12px; }
+.course-upcoming li { border-bottom: var(--border-line); padding-bottom: 12px; }
+.course-upcoming li span:last-child { display: block; font-size: 15px; color: var(--soft-ink); }
+@media (min-width: 1024px) { .course-main:has(.course-chapters) { display: flex; } }

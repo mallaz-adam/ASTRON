@@ -1,13 +1,148 @@
 [
-  { "id": "orion-lesson", "positionNo": 1, "title": "Scale of the cosmos", "kind": "lesson", "minutes": 12, "unitId": "first-sky" },
-  { "id": "light-distance", "positionNo": 2, "title": "Light and distance", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
-  { "id": "star-lesson", "positionNo": 3, "title": "Why stars differ", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
-  { "id": "orion-tale", "positionNo": 4, "title": "Orion", "kind": "tale", "minutes": 6, "unitId": "first-sky", "taleId": "orion-shoulder" },
-  { "id": "birth-star", "positionNo": 5, "title": "Birth of a star", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
-  { "id": "long-middle", "positionNo": 6, "title": "The long middle", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
-  { "id": "pleiades-tale", "positionNo": 7, "title": "The Pleiades", "kind": "tale", "minutes": 6, "unitId": "first-sky", "taleId": "pleiades-placeholder" },
-  { "id": "giants-dwarfs", "positionNo": 8, "title": "Giants and dwarfs", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
-  { "id": "stars-explode", "positionNo": 9, "title": "When stars explode", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
-  { "id": "what-left", "positionNo": 10, "title": "What is left", "kind": "lesson", "minutes": 5, "unitId": "first-sky" },
-  { "id": "orion-quiz", "positionNo": 11, "title": "Chapter evaluation", "kind": "quiz", "minutes": 5, "unitId": "first-sky" }
+  {
+    "id": "orion-lesson",
+    "positionNo": 1,
+    "title": "Scale of the cosmos",
+    "kind": "lesson",
+    "minutes": 12,
+    "unitId": "first-sky"
+  },
+  {
+    "id": "light-distance",
+    "positionNo": 2,
+    "title": "Light and distance",
+    "kind": "lesson",
+    "minutes": 5,
+    "unitId": "first-sky"
+  },
+  {
+    "id": "star-lesson",
+    "positionNo": 3,
+    "title": "Why stars differ",
+    "kind": "lesson",
+    "minutes": 5,
+    "unitId": "first-sky"
+  },
+  {
+    "id": "orion-tale",
+    "positionNo": 4,
+    "title": "Orion",
+    "kind": "tale",
+    "minutes": 6,
+    "unitId": "first-sky",
+    "taleId": "orion-shoulder"
+  },
+  {
+    "id": "birth-star",
+    "positionNo": 5,
+    "title": "Birth of a star",
+    "kind": "lesson",
+    "minutes": 5,
+    "unitId": "first-sky"
+  },
+  {
+    "id": "long-middle",
+    "positionNo": 6,
+    "title": "The long middle",
+    "kind": "lesson",
+    "minutes": 5,
+    "unitId": "first-sky"
+  },
+  {
+    "id": "pleiades-tale",
+    "positionNo": 7,
+    "title": "The Pleiades",
+    "kind": "tale",
+    "minutes": 6,
+    "unitId": "first-sky",
+    "taleId": "pleiades-placeholder"
+  },
+  {
+    "id": "giants-dwarfs",
+    "positionNo": 8,
+    "title": "Giants and dwarfs",
+    "kind": "lesson",
+    "minutes": 5,
+    "unitId": "first-sky"
+  },
+  {
+    "id": "stars-explode",
+    "positionNo": 9,
+    "title": "When stars explode",
+    "kind": "lesson",
+    "minutes": 5,
+    "unitId": "first-sky"
+  },
+  {
+    "id": "what-left",
+    "positionNo": 10,
+    "title": "What is left",
+    "kind": "lesson",
+    "minutes": 5,
+    "unitId": "first-sky"
+  },
+  {
+    "id": "orion-quiz",
+    "positionNo": 11,
+    "title": "Chapter evaluation",
+    "kind": "quiz",
+    "minutes": 5,
+    "unitId": "first-sky"
+  },
+  {
+    "id": "earth-sun-moon",
+    "positionNo": 1,
+    "title": "Earth, the Sun and the Moon",
+    "kind": "lesson",
+    "minutes": 5,
+    "unitId": "our-place"
+  },
+  {
+    "id": "our-solar-system",
+    "positionNo": 2,
+    "title": "Our solar system",
+    "kind": "lesson",
+    "minutes": 5,
+    "unitId": "our-place"
+  },
+  {
+    "id": "stars-milky-way",
+    "positionNo": 3,
+    "title": "Stars and the Milky Way",
+    "kind": "lesson",
+    "minutes": 5,
+    "unitId": "our-place"
+  },
+  {
+    "id": "galaxies-universe",
+    "positionNo": 4,
+    "title": "Galaxies and the universe",
+    "kind": "lesson",
+    "minutes": 5,
+    "unitId": "our-place"
+  },
+  {
+    "id": "sizes-distances",
+    "positionNo": 5,
+    "title": "Understanding sizes and distances",
+    "kind": "lesson",
+    "minutes": 5,
+    "unitId": "our-place"
+  },
+  {
+    "id": "light-travel-time",
+    "positionNo": 6,
+    "title": "Light takes time to travel",
+    "kind": "lesson",
+    "minutes": 5,
+    "unitId": "our-place"
+  },
+  {
+    "id": "our-place-evaluation",
+    "positionNo": 7,
+    "title": "Chapter evaluation",
+    "kind": "quiz",
+    "minutes": 5,
+    "unitId": "our-place"
+  }
 ]

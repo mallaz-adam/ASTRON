@@ -1,4 +1,5 @@
 .honeycomb { position: relative; width: 100%; max-width: 520px; margin-inline: auto; }
+.honeycomb--single { max-width: 200px; }
 .honeycomb-drawing { width: 100%; height: 100%; display: block; pointer-events: none; overflow: visible; }
 .hex { fill: var(--ink); }
 .hex-face { fill: var(--gold); stroke: var(--ink); stroke-width: 1.5; }

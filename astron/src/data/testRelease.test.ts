@@ -17,11 +17,11 @@ afterEach(async () => { vi.unstubAllEnvs(); await database.delete(); });
 
 describe('The growing authored course', () => {
   it('offers the real lesson and authored Orion tale online and retains the full course model for tools', () => {
-    const online = buildCoursePath(content, { completions: [] });
+    const online = buildCoursePath(content, { completions: [] }, undefined, 'first-sky');
     expect(online.cells.map(cell => cell.id)).toEqual(['orion-lesson', 'star-lesson', 'orion-tale']);
     expect(online.current?.state).toBe('current');
     expect(online.countText).toBe('0 of 3 available steps done');
-    expect(buildCoursePath(content, { completions: [] }, undefined, undefined, false).cells).toHaveLength(11);
+    expect(buildCoursePath(content, { completions: [] }, undefined, 'first-sky', false).cells).toHaveLength(11);
   });
   it('opens lesson three after reading the scale lesson without requiring an individual exam or inventing lesson two', async () => {
     const scale=content.lessons.find(l=>l.id==='patterns')!;
@@ -32,6 +32,6 @@ describe('The growing authored course', () => {
     expect(progress.completions.map(row => row.cellId).sort()).toEqual(['orion-lesson','star-lesson']);
     expect(totalXp(progress.completions, progress.questDone, progress.answers, content.exercises)).toBe(40);
     expect(progress.litStars).toHaveLength(1);
-    expect(buildTodayModel(progress, content, now).currentCellTitle).toBe('Orion');
+    expect(buildTodayModel(progress, content, now).currentCellTitle).toBe('Earth, the Sun and the Moon');
   });
 });
