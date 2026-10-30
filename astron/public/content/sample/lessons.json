@@ -238,14 +238,16 @@
     "id": "unit-stars-milky-way",
     "title": "Stars and the Milky Way",
     "cellId": "stars-milky-way",
-    "placeholder": true,
+    "placeholder": false,
     "cards": [
       {
         "kind": "say",
         "mood": "gentle",
-        "glaux": "This part of the atlas is still being written."
+        "glaux": "Two views. One home."
       }
-    ]
+    ],
+    "reader": "/content/stars-milky-way.json",
+    "readerType": "visual-unit"
   },
   {
     "id": "unit-galaxies-universe",

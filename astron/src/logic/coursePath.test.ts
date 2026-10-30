@@ -87,5 +87,6 @@ describe('Honeycomb geometry', () => {
   });
   it('wraps the long first-unit title away from the hexagon edges', () => {
     expect(titleLines('Earth, the Sun and the Moon')).toEqual(['Earth, the', 'Sun and the', 'Moon']);
+    expect(titleLines('Stars and the Milky Way')).toEqual(['Stars', 'and the', 'Milky Way']);
   });
 });

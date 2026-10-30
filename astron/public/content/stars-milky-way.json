@@ -1,0 +1,158 @@
+{
+  "lessonId": "unit-stars-milky-way",
+  "unitNumber": 3,
+  "chapter": "Our place in space",
+  "title": "Stars and the Milky Way",
+  "introduction": [
+    "Look up on a clear, dark night. Many small lights shine above us.",
+    "You already know one star well: our Sun.",
+    "We will connect those stars with our home inside the Milky Way.",
+    "We will compare what cameras see with pictures scientists build from evidence.",
+    "Start with what you can see. Then discover what lies beyond that view."
+  ],
+  "steps": [
+    {
+      "id": "night-sky", "scene": "night-sky", "title": "Begin with the night sky",
+      "paragraphs": ["Look at the night sky. Many points of light are stars.", "Each star produces its own light.", "Some bright points are planets, reflecting sunlight.", "This view comes from Earth, but it hides how far apart objects are."],
+      "terms": ["star"]
+    },
+    {
+      "id": "sun-star", "scene": "sun-star", "title": "Our Sun is one of the stars",
+      "paragraphs": ["Our Sun is also a star.", "We see it as a bright circle during daytime.", "Most other stars appear as tiny points at night.", "These different appearances do not make them different kinds of objects."],
+      "terms": []
+    },
+    {
+      "id": "brightness", "scene": "brightness", "title": "Why the Sun stands out",
+      "paragraphs": ["Why does our Sun look so different?", "It is much closer to Earth than any other star.", "How bright a star looks depends on its distance and light output.", "That means brightness alone cannot tell us which star is nearer."],
+      "terms": ["how bright a star looks"]
+    },
+    {
+      "id": "star-depth", "scene": "star-depth", "title": "A sky picture hides depth",
+      "paragraphs": ["A night-sky picture looks flat, like dots on paper.", "Real stars are spread through space at different distances.", "Two stars may appear close together from Earth.", "They may actually be far apart in space.", "Your viewpoint is simply the place you look from."],
+      "terms": ["viewpoint"], "glaux": "The sky has depth, even when the picture does not."
+    },
+    {
+      "id": "solar-group", "scene": "solar-group", "title": "Our solar system is one small group",
+      "paragraphs": ["Our solar system includes the Sun, planets, moons, and smaller objects.", "The Sun is the only star in our solar system.", "Other stars lie beyond it.", "Seeing many stars in one sky does not place them in one solar system."],
+      "terms": ["solar system"]
+    },
+    {
+      "id": "galactic-home", "scene": "galactic-home", "title": "A galaxy is a larger home",
+      "paragraphs": ["Now consider a much larger home.", "A galaxy is a huge collection of stars, gas, and dust.", "Gravity, the pull between objects, helps hold the galaxy together.", "Our solar system is one small part of our galaxy.", "A galaxy contains many stars, not just our Sun."],
+      "terms": ["galaxy", "gravity"]
+    },
+    {
+      "id": "galaxy-views", "scene": "galaxy-views", "title": "The Milky Way has a broad disk",
+      "paragraphs": ["Our galaxy is called the Milky Way.", "Many of its stars form a wide disk, like a flattened plate.", "Scientists create a scientific model: a picture built from evidence.", "From above, this model shows curved, star-filled patterns.", "From the side, the disk looks much thinner.", "These reconstructions use measurements; they are not outside photographs."],
+      "terms": ["disk", "scientific model"]
+    },
+    {
+      "id": "our-location", "scene": "our-location", "title": "Find our place inside it",
+      "paragraphs": ["Our solar system lies inside the Milky Way’s disk, away from its center.", "Scientists estimate its place using observations.", "A model marks that approximate location.", "The region is sometimes called the Orion Spur.", "You do not need to remember that name."],
+      "terms": ["orion spur"], "glaux": "Home is a tiny mark on a much larger map."
+    },
+    {
+      "id": "sky-band", "scene": "sky-band", "title": "The pale band overhead",
+      "paragraphs": ["Sometimes the Milky Way looks like a pale band in the night sky.", "We see many distant stars while looking through its disk.", "Their light can blend into a faint glow.", "The band is easier to see under dark skies.", "A long exposure collects light over time and can reveal extra detail in a photograph."],
+      "terms": ["band", "long exposure"]
+    },
+    {
+      "id": "two-views", "scene": "two-views", "title": "Two pictures of the same home",
+      "paragraphs": ["Now compare two pictures of the Milky Way.", "A photograph shows the galaxy from our place on Earth.", "A reconstruction shows a possible outside view, built from measurements.", "Both show our home galaxy in different ways.", "We have no photograph of the entire Milky Way taken from outside."],
+      "terms": ["reconstruction"], "glaux": "Two views. One home."
+    }
+  ],
+  "recap": {
+    "title": "Three things to remember",
+    "paragraphs": ["The Sun is a star; the night sky shows many others at different distances.", "Our solar system is a small part of the Milky Way galaxy.", "The Milky Way’s sky band is an inside view; outside pictures are reconstructions."],
+    "glaux": "Two views. One home."
+  },
+  "objects": [
+    {
+      "id": "sky", "name": "Night sky from Earth", "src": "/art/milky-way/sky.webp", "width": 1200, "height": 486,
+      "alt": "The Milky Way’s star-rich band above an observatory telescope and a dark horizon at Paranal.",
+      "caption": "A dark-sky photograph above Paranal. Exposure and processing may reveal more detail than our eyes see.",
+      "credit": "A. Trigo/ESO", "source": "https://www.eso.org/public/images/potw2607a/",
+      "mediaType": "Photograph · from Earth", "license": "CC BY 4.0", "licenseUrl": "https://creativecommons.org/licenses/by/4.0/", "changes": "Resized and compressed as WebP."
+    },
+    {
+      "id": "sun-visible", "name": "Our Sun — a star", "src": "/art/milky-way/sun-visible.webp", "width": 900, "height": 900,
+      "alt": "A visible-light mosaic of the Sun from Solar Orbiter, with dark sunspots on its bright circle.",
+      "caption": "Solar Orbiter measured the Sun in visible light. Multiple frames form this processed solar mosaic.",
+      "credit": "ESA & NASA/Solar Orbiter/PHI Team; image processing by PHI Team members at MPS",
+      "source": "https://www.esa.int/ESA_Multimedia/Images/2024/11/PHI_s_view_of_the_Sun_in_visible_light",
+      "mediaType": "Processed observation · visible-light mosaic", "license": "CC BY-SA 3.0 IGO", "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/igo/", "changes": "Resized and compressed as WebP; colour unchanged."
+    },
+    {
+      "id": "galaxy-above", "name": "From above — model", "src": "/art/milky-way/galaxy-above.webp", "width": 900, "height": 900,
+      "alt": "A Gaia-informed reconstruction of the Milky Way seen from above, with curved star patterns around a bright middle.",
+      "caption": "An artist’s impression based on Gaia measurements. This is a scientific reconstruction, not an outside photograph.",
+      "credit": "ESA/Gaia/DPAC, Stefan Payne-Wardenaar", "source": "https://www.esa.int/ESA_Multimedia/Images/2025/01/The_best_Milky_Way_map_by_Gaia",
+      "mediaType": "Scientific reconstruction · artist’s impression", "license": "CC BY-SA 3.0 IGO", "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/igo/", "changes": "Resized and compressed as WebP; colour unchanged."
+    },
+    {
+      "id": "galaxy-side", "name": "From the side — model", "src": "/art/milky-way/galaxy-side.webp", "width": 900, "height": 300,
+      "alt": "A Gaia-informed side-on reconstruction of the Milky Way showing a thin disk and a brighter central bulge.",
+      "caption": "The companion side view shows the same galaxy’s broad, flattened disk. It is a model, not a photograph.",
+      "credit": "ESA/Gaia/DPAC, Stefan Payne-Wardenaar", "source": "https://www.esa.int/ESA_Multimedia/Images/2025/01/The_best_Milky_Way_map_by_Gaia_edge-on",
+      "mediaType": "Scientific reconstruction · artist’s impression", "license": "CC BY-SA 3.0 IGO", "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/igo/", "changes": "Cropped vertically, resized and compressed as WebP; colour unchanged."
+    },
+    {
+      "id": "galaxy-location", "name": "Our solar system (approx.)", "src": "/art/milky-way/galaxy-location.webp", "width": 900, "height": 900,
+      "alt": "ESA’s labelled Milky Way reconstruction. Its original arrow marks the approximate solar-system region away from the galaxy’s center.",
+      "caption": "The original ESA arrow identifies our approximate region inside the Milky Way. It is not a pinpoint photograph of our solar system.",
+      "credit": "ESA/Gaia/DPAC, Stefan Payne-Wardenaar", "source": "https://www.esa.int/ESA_Multimedia/Images/2025/01/Milky_Way_map_by_Gaia_labelled",
+      "mediaType": "Scientific reconstruction · original location arrow", "license": "CC BY-SA 3.0 IGO", "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/igo/", "changes": "Resized and compressed as WebP; original arrow retained."
+    },
+    {
+      "id": "panorama", "name": "Milky Way seen from Earth", "src": "/art/milky-way/panorama.webp", "width": 1200, "height": 364,
+      "alt": "The pale Milky Way band arches over Paranal in a panorama photographed from Earth, assembled from long exposures.",
+      "caption": "Seven photographic frames, each exposed for two minutes, form this panorama. It is not a single instant or a promise of naked-eye colours.",
+      "credit": "Bruno Gilli/ ESO", "source": "https://www.eso.org/public/images/milkyway/",
+      "mediaType": "Photographic panorama · stitched long exposures", "license": "CC BY 4.0", "licenseUrl": "https://creativecommons.org/licenses/by/4.0/", "changes": "Resized and compressed as WebP."
+    }
+  ],
+  "glossary": [
+    { "term": "star", "definition": "An object in space that makes its own light.", "example": "The Sun is the star closest to Earth." },
+    { "term": "how bright a star looks", "definition": "Astronomers call this apparent brightness: how bright a star looks to us.", "example": "A nearby lamp may look brighter than the same lamp far away." },
+    { "term": "solar system", "definition": "Our Sun and the planets, moons, and smaller objects associated with it.", "example": "Earth and its Moon belong to our solar system." },
+    { "term": "galaxy", "definition": "A huge gathering of stars, gas, and dust held together by gravity.", "example": "The Milky Way is our galaxy." },
+    { "term": "gravity", "definition": "The pull between objects.", "example": "Gravity helps keep Earth orbiting the Sun." },
+    { "term": "viewpoint", "definition": "The place you look from.", "example": "A tree looks different from a window and from the street." },
+    { "term": "disk", "definition": "A wide, rather flat shape.", "example": "A dinner plate helps us imagine a disk." },
+    { "term": "scientific model", "definition": "A useful picture or explanation built from evidence.", "example": "A weather map models conditions across a region." },
+    { "term": "reconstruction", "definition": "A picture rebuilt from evidence, not photographed from that view.", "example": "An artist can reconstruct an old building using plans and remains." },
+    { "term": "orion spur", "definition": "A smaller region of the Milky Way’s spiral pattern near our Sun.", "example": "A model may label our region ‘Orion Spur’. This name is optional." },
+    { "term": "long exposure", "definition": "A photograph recorded while a camera gathers light over time.", "example": "A night photograph can show stars too faint for our eyes." },
+    { "term": "band", "definition": "A long, strip-like shape.", "example": "The Milky Way can form a pale band overhead." }
+  ],
+  "choice": {
+    "prompt": "Which statement correctly connects the Sun, solar system, and Milky Way?",
+    "hint": "Start with the Sun. Which group includes its planets? Which larger group contains many stars?",
+    "correct": "A", "explanation": "Our solar system includes the Sun and its orbiting objects. That entire system lies within the Milky Way.",
+    "options": [
+      { "id": "A", "text": "Our Sun is the star of our solar system, which lies inside the Milky Way.", "feedback": "Yes. You connected the Sun, our solar system, and our galaxy in the right order." },
+      { "id": "B", "text": "The Milky Way is a bright star inside our solar system.", "feedback": "The Milky Way is not a single star. It contains many stars, including our Sun." },
+      { "id": "C", "text": "All the stars we see belong to our solar system.", "feedback": "Our solar system has one star: the Sun. The other stars lie beyond it." },
+      { "id": "D", "text": "Our Sun is a planet, and the Milky Way is another solar system.", "feedback": "The Sun is a star, not a planet. The Milky Way is a galaxy, not another solar system." }
+    ]
+  },
+  "matching": {
+    "prompt": "Place each description under ‘Seen from Earth’ or ‘Outside reconstruction’.",
+    "hint": "Could a camera on Earth record this view? Or must scientists build the view?",
+    "right": "Exactly. You separated the view cameras record from the view scientists reconstruct.",
+    "groups": [{ "id": "earth", "label": "Seen from Earth" }, { "id": "outside", "label": "Outside reconstruction" }],
+    "cards": [
+      { "id": "band", "text": "A pale band across a real night-sky photograph.", "group": "earth", "feedback": "A pale band photographed overhead is our view from within the galaxy. Put this under Earth." },
+      { "id": "marker", "text": "A spiral-shaped map with an approximate solar-system marker.", "group": "outside", "feedback": "A spiral-shaped outside map with a marker is made from measurements. Put it under reconstruction." },
+      { "id": "panorama", "text": "A panorama made from camera exposures taken on Earth.", "group": "earth", "feedback": "Stitching Earth photographs makes a panorama, not an outside model. Put this under Earth." },
+      { "id": "side", "text": "A side-on galaxy view built from scientific measurements.", "group": "outside", "feedback": "A side-on view of the whole Milky Way is a reconstruction, not an Earth photograph." }
+    ]
+  },
+  "sources": [
+    { "title": "NASA: Sun facts", "url": "https://science.nasa.gov/sun/facts/" },
+    { "title": "NASA Goddard: The Milky Way, brightness and distance", "url": "https://imagine.gsfc.nasa.gov/features/cosmic/milkyway_info.html" },
+    { "title": "NASA: Galaxies", "url": "https://science.nasa.gov/universe/galaxies/" },
+    { "title": "ESA: The best Milky Way map, by Gaia", "url": "https://www.esa.int/ESA_Multimedia/Images/2025/01/The_best_Milky_Way_map_by_Gaia" }
+  ]
+}

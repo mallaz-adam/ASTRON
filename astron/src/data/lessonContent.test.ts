@@ -19,7 +19,7 @@ describe('Authored lesson files', () => {
     expect(lesson.cards[6]).toMatchObject({ mood: 'happy', glaux: 'Look at the space between these lifetimes.', text: 'A very heavy star may shine for only a few million years. The Sun shines for about ten billion. Slide along the line and feel the gap.' });
     expect(lesson.cards[7]).toMatchObject({ mood: 'proud', glaux: 'Keep these three small clues. We will meet them again.', items: ['Blue stars are hotter than red stars.', 'Heavier stars are usually bigger and hotter.', 'Heavier stars use fuel faster and live shorter lives.'] });
     expect(content.lessons.find(row => row.id === 'patterns')).toMatchObject({ placeholder: false, reader: '/content/lesson-01.json' });
-    expect(content.lessons.filter(row => ![lesson.id, 'patterns', 'unit-earth-sun-moon', 'unit-our-solar-system'].includes(row.id)).every(row => row.placeholder && row.cards.length === 1)).toBe(true);
+    expect(content.lessons.filter(row => ![lesson.id, 'patterns', 'unit-earth-sun-moon', 'unit-our-solar-system', 'unit-stars-milky-way'].includes(row.id)).every(row => row.placeholder && row.cards.length === 1)).toBe(true);
   });
   it('validates every exercise reference, every feedback line and each answer among its items', () => {
     const content = sampleContent();

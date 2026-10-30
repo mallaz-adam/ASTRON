@@ -77,10 +77,10 @@ describe('Our solar system: authored unit and progression', () => {
     expect(progress.answers).toEqual([]);
     expect(progress.litStars).toEqual([]);
     expect(totalXp(progress.completions, progress.questDone, progress.answers, content.exercises)).toBe(20);
-    expect(nextReadingDestination(content, progress, learner, lesson.cellId)).toEqual({ to: '/learn', title: 'Back to the path' });
+    expect(nextReadingDestination(content, progress, learner, lesson.cellId)).toEqual({ to: '/cell/stars-milky-way', title: 'Stars and the Milky Way' });
     await finishReadingLesson(database, content, learner, lesson.id, new Date('2026-10-31T12:00:00'));
     expect(await readProgress(database)).toEqual(progress);
     expect(buildCoursePath(content, progress, learner, undefined, true).countText).toBe('2 of 6 units done');
-    expect(buildCoursePath(content, progress, learner, undefined, true).upcoming).toHaveLength(4);
+    expect(buildCoursePath(content, progress, learner, undefined, true).upcoming).toHaveLength(3);
   });
 });

@@ -33,7 +33,7 @@ technical details and the future setting that restores permanent saving.
 - A first-visit welcome followed by the illustrated Orion story and belt activity.
 - Five destinations: **Today, Learn, Stories, Articles and My sky**.
 - Today’s quests, sun, streak and freeze views.
-- Chapter 1, **Our place in space**, has two playable units: **Earth, the Sun and the Moon** and **Our solar system**. Each has ten illustrated steps, tappable definitions and optional practice.
+- Chapter 1, **Our place in space**, has three playable units: **Earth, the Sun and the Moon**, **Our solar system** and **Stars and the Milky Way**, with illustrated steps, tappable definitions and optional practice.
 - The authored **Scale of the cosmos** and **Why stars differ** lessons, with guided practice.
 - Interactive cosmic-address views, scale models, star colours, mass and fuel comparisons.
 - A sourced Betelgeuse article with a real ALMA cover, category and reading time.
@@ -43,7 +43,7 @@ technical details and the future setting that restores permanent saving.
 - An installable PWA that caches the app, authored content, art and local fonts.
 
 The beginner chapter has six planned units and a final ten-question evaluation.
-Units 1 and 2 are playable; the four remaining units are visibly marked as being prepared.
+Units 1–3 are playable; the three remaining units are visibly marked as being prepared.
 The earlier eleven-cell **How stars live and die** chapter remains available through
 the chapter links for development testing. This is not a chapter-exam unlock: the
 passing threshold and retry policy are still to be decided.
@@ -69,6 +69,12 @@ Unit 2 combines local NASA observations, labelled atlas diagrams, a visible
 inner-planet order reference and optional family sorting. Pluto's classification
 detail stays optional. Its practices have no score or extra XP. See
 [Unit 2 implementation and checks](astron/docs/our-solar-system.md).
+
+Finishing Unit 2 unlocks **Stars and the Milky Way**. Unit 3 has ten teaching
+steps and a separate recap, real sky photographs, clearly labelled galaxy
+reconstructions, and diagrams explaining brightness and stellar depth.
+Its two optional practices use radio buttons and labelled selectors; correct
+viewpoint matches are kept. See [Unit 3 notes](astron/docs/stars-milky-way.md).
 
 ## Chapters, lessons and evaluation
 
@@ -130,7 +136,7 @@ Run these from the `astron` folder:
 | `npm run build` | Check TypeScript and create the production files in `dist`. |
 | `npm run preview` | Open the built production app locally. Build it first. |
 
-The latest chapter/lesson update passed **492 tests in 55 files** and the
+The latest chapter/lesson update passed **517 tests in 58 files** and the
 production build. The preceding lesson milestone also passed responsive
 browser checks and an offline cold-start check. These are
 recorded results, not a substitute for rerunning checks after future changes.

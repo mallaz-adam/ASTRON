@@ -1,0 +1,81 @@
+[
+  {
+    "url": "https://cdn.eso.org/images/publicationjpg/potw2607a.jpg",
+    "id": "sky",
+    "originalDimensions": [
+      4000,
+      1619
+    ],
+    "savedDimensions": [
+      1200,
+      486
+    ],
+    "bytes": 74332
+  },
+  {
+    "url": "https://cdn.eso.org/images/publicationjpg/milkyway.jpg",
+    "id": "panorama",
+    "originalDimensions": [
+      4000,
+      1212
+    ],
+    "savedDimensions": [
+      1200,
+      364
+    ],
+    "bytes": 41412
+  },
+  {
+    "url": "https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2024/11/phi_s_view_of_the_sun_in_visible_light/26451845-1-eng-GB/PHI_s_view_of_the_Sun_in_visible_light_pillars.jpg",
+    "id": "sun-visible",
+    "originalDimensions": [
+      1920,
+      1920
+    ],
+    "savedDimensions": [
+      900,
+      900
+    ],
+    "bytes": 49156
+  },
+  {
+    "url": "https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2025/01/the_best_milky_way_map_by_gaia/26530987-1-eng-GB/The_best_Milky_Way_map_by_Gaia.jpg",
+    "id": "galaxy-above",
+    "originalDimensions": [
+      2100,
+      2100
+    ],
+    "savedDimensions": [
+      900,
+      900
+    ],
+    "bytes": 43790
+  },
+  {
+    "url": "https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2025/01/the_best_milky_way_map_by_gaia_edge-on/26531727-1-eng-GB/The_best_Milky_Way_map_by_Gaia_edge-on_pillars.jpg",
+    "id": "galaxy-side",
+    "originalDimensions": [
+      1920,
+      1920
+    ],
+    "savedDimensions": [
+      900,
+      300
+    ],
+    "bytes": 5416,
+    "crop": "Vertical crop of resized image: (0, 300, 900, 600)."
+  },
+  {
+    "url": "https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2025/01/milky_way_map_by_gaia_labelled/26557664-2-eng-GB/Milky_Way_map_by_Gaia_labelled_pillars.jpg",
+    "id": "galaxy-location",
+    "originalDimensions": [
+      1920,
+      1920
+    ],
+    "savedDimensions": [
+      900,
+      900
+    ],
+    "bytes": 42728
+  }
+]

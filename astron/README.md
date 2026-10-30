@@ -44,6 +44,7 @@ are separate from earlier permanent progress. See
 | `/learn` | The authored course path. |
 | `/cell/earth-sun-moon` | Chapter 1, Unit 1: Earth, the Sun and the Moon. |
 | `/cell/our-solar-system` | Chapter 1, Unit 2: Our solar system, unlocked by Unit 1. |
+| `/cell/stars-milky-way` | Chapter 1, Unit 3: Stars and the Milky Way, unlocked by Unit 2. |
 | `/cell/orion-lesson` | Scale of the cosmos, with optional practice and a recap. |
 | `/cell/star-lesson` | Why stars differ, after its authored prerequisite. |
 | `/stories` | Greek stories. |
@@ -60,6 +61,7 @@ First visits enter the welcome before the normal learning pages.
 - [Chapters, lessons and evaluation](docs/learning-structure.md)
 - [Earth, the Sun and the Moon](docs/earth-sun-moon.md)
 - [Our solar system](docs/our-solar-system.md)
+- [Stars and the Milky Way](docs/stars-milky-way.md)
 - [Scale lesson, practice and performance](docs/scale-of-cosmos.md)
 - [Glaux's character](docs/glaux-character.md)
 - [Orion journey](docs/orion-journey.md)

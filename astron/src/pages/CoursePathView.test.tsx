@@ -6,15 +6,15 @@ import { buildCoursePath } from '../logic/coursePath';
 import { CoursePathView } from './CoursePathView';
 
 describe('Course path accessible controls', () => {
-  it('shows the new first unit at a readable map size, with four forthcoming units and the chapter evaluation', () => {
+  it('shows three authored units, with three forthcoming units and the chapter evaluation', () => {
     const model = buildCoursePath(sampleContent(), { completions: [] }, undefined, undefined, true);
     const html = renderToStaticMarkup(<MemoryRouter><CoursePathView model={model} reduceMotion /></MemoryRouter>);
-    expect(html.match(/class="hex-button"/g)).toHaveLength(2);
+    expect(html.match(/class="hex-button"/g)).toHaveLength(3);
     expect(html).toContain('0 of 6 units done');
     expect(html).toContain('Unit 1, Earth, the Sun and the Moon');
     expect(html).toContain('Ten questions covering all six units');
-    expect(html).toContain('<ol start="3">');
-    expect(html.match(/Still being prepared/g)).toHaveLength(4);
+    expect(html).toContain('<ol start="4">');
+    expect(html.match(/Still being prepared/g)).toHaveLength(3);
   });
   it('uses eleven real selectable buttons and a link to begin the current cell', () => {
     const model = buildCoursePath(sampleContent(), { completions: [] }, undefined, 'first-sky');

@@ -36,5 +36,18 @@ export function titleLines(title: string): string[] {
     if (Math.max(words.slice(0, i).join(' ').length, words.slice(i).join(' ').length)
       < Math.max(words.slice(0, split).join(' ').length, words.slice(split).join(' ').length)) split = i;
   }
-  return [words.slice(0, split).join(' '), words.slice(split).join(' ')];
+  const pair = [words.slice(0, split).join(' '), words.slice(split).join(' ')];
+  if (pair.every(line => line.length <= 12) || words.length < 3) return pair;
+  // A third line also helps medium-length names with long individual phrases.
+  let best = pair;
+  let bestScore = Infinity;
+  for (let first = 1; first < words.length - 1; first++) {
+    for (let second = first + 1; second < words.length; second++) {
+      const lines = [words.slice(0, first).join(' '), words.slice(first, second).join(' '), words.slice(second).join(' ')];
+      const lengths = lines.map(line => line.length);
+      const score = Math.max(...lengths) * 100 + Math.max(...lengths) - Math.min(...lengths);
+      if (score < bestScore) { best = lines; bestScore = score; }
+    }
+  }
+  return best;
 }

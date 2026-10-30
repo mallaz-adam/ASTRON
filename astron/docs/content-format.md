@@ -552,3 +552,31 @@ Both practice formats require targeted feedback; the choice answer must name an
 existing option. Invalid content is rejected before display. Practice is local
 view state and never writes an `Answer`. Completion goes through the existing
 `finishReadingLesson` service. See `earth-sun-moon.md` for media and visual notes.
+
+## Stars and the Milky Way (30 October 2026)
+
+`unit-stars-milky-way` / `stars-milky-way` uses `readerType: "visual-unit"`
+and `/content/stars-milky-way.json`. It retains ten teaching `steps` and adds
+a separate `recap` object with a title, three paragraphs and a short Glaux line.
+The shared reader completes it only after the recap's Continue. Its separate
+validator checks scene order, local media, practice feedback and text integrity.
+
+Scenes are `night-sky`, `sun-star`, `brightness`, `star-depth`, `solar-group`,
+`galactic-home`, `galaxy-views`, `our-location`, `sky-band` and `two-views`.
+Each step links at most two glossary phrases that must occur in its visible text.
+The plain phrase `how bright a star looks` defines apparent brightness without
+adding a new technical term to the main sentence. PDF-export NULs, replacement
+characters and formatting tags are rejected.
+
+The six `objects` contain local WebP paths, dimensions, alt text, captions,
+media types, exact credits, source URLs, licence names/URLs and change notices.
+Galaxy models must identify themselves as reconstructions; Earth photographs
+must identify their photographic media type. Attribution appears next to each
+image as well as in Pictures and sources. The ESA derivative images retain
+their selected CC BY-SA 3.0 IGO licence. No database migration is needed.
+
+`choice` supplies four radio options with answer-specific feedback; `matching`
+supplies four descriptions, the Earth/outside groups and per-card explanations.
+Both practices are optional and unscored. Correct viewpoint matches are kept;
+no Answer records or additional XP are written. Unit 3 unlocks after Unit 2.
+See `stars-milky-way.md` and `public/art/milky-way/README.md`.

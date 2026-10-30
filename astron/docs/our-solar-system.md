@@ -25,7 +25,8 @@ available. Practice writes no scores or answers and grants no extra XP.
 Finishing uses the existing reading-completion transaction, Learn quest and
 replay protection. Temporary progress still resets on a full reload.
 
-Unit 3 remains explicitly unprepared. The full ten-question evaluation belongs
+Unit 3, Stars and the Milky Way, is now playable and opens through Continue
+after Unit 2 completion. The full ten-question evaluation belongs
 after all six units. A pass mark and retry policy have not been invented.
 
 ## Visual and scientific choices
