@@ -6,11 +6,12 @@ import './Honeycomb.css';
 export function Honeycomb({ cells, selectedId, onSelect }: { cells: PathCell[]; selectedId: string; onSelect: (id: string) => void }) {
   const [focusId, setFocusId] = useState('');
   const radius = honeycombSize.radius;
-  // One authored unit should fill its own small map, rather than one corner
-  // of the older eleven-cell map. Its position and hit area use the same scale.
+  // A short authored row fills its map. Positions and hit areas use the same
+  // scale; longer chapters retain the original eleven-cell honeycomb geometry.
   const single = cells.length === 1;
-  const width = single ? radius * Math.sqrt(3) + 16 : honeycombSize.width;
-  const height = single ? radius * 2 + 16 : honeycombSize.height;
+  const short = cells.length > 0 && cells.length <= 4;
+  const width = short ? radius * Math.sqrt(3) * cells.length + 16 : honeycombSize.width;
+  const height = short ? radius * 2 + 16 : honeycombSize.height;
   const buttonWidth = radius * Math.sqrt(3);
   return <div className={`honeycomb${single ? ' honeycomb--single' : ''}`} style={{ aspectRatio: `${width} / ${height}` }}>
     <svg className="honeycomb-drawing" viewBox={`0 0 ${width} ${height}`} aria-hidden="true">
@@ -21,7 +22,7 @@ export function Honeycomb({ cells, selectedId, onSelect }: { cells: PathCell[]; 
           <polygon className="hex-face" points={hexPoints(x, y)} />
           {cell.state === 'current' && <polygon className="hex-pulse" points={hexPoints(x, y, radius - 1)} />}
           <text className="hex-label" x={x} y={y - 27} textAnchor="middle">{cell.kind === 'tale' ? 'TALE' : cell.kind === 'quiz' ? 'FINAL' : cell.positionNo}</text>
-          <text className="hex-title" textAnchor="middle">{lines.map((line, row) => <tspan key={line} x={x} y={y + (lines.length === 1 ? 2 : -5 + row * 15)}>{line}</tspan>)}</text>
+          <text className="hex-title" textAnchor="middle">{lines.map((line, row) => <tspan key={line} x={x} y={y + 2 + (row - (lines.length - 1) / 2) * 14}>{line}</tspan>)}</text>
           {cell.state === 'locked' ? <g className="hex-lock" transform={`translate(${x - 4} ${y + 21})`}><path d="M1 4V2a3 3 0 0 1 6 0v2" /><rect x="0" y="4" width="8" height="7" /></g>
             : <text className={`hex-status${cell.state === 'current' ? ' hex-begin' : ''}`} x={x} y={y + 29} textAnchor="middle">{cell.state === 'done' ? '✓' : 'BEGIN'}</text>}
           {selectedId === cell.id && <polygon className="hex-selection" points={hexPoints(x, y, radius - 1)} />}

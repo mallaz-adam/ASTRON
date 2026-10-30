@@ -78,11 +78,14 @@ describe('Honeycomb geometry', () => {
       }
     }
   });
-  it('uses no more than two lines and loses none of a cell title', () => {
+  it('fits authored titles into at most three lines without losing words', () => {
     for (const cell of content.cells) {
       const lines = titleLines(cell.title);
-      expect(lines.length).toBeLessThanOrEqual(2);
+      expect(lines.length).toBeLessThanOrEqual(3);
       expect(lines.join(' ')).toBe(cell.title);
     }
+  });
+  it('wraps the long first-unit title away from the hexagon edges', () => {
+    expect(titleLines('Earth, the Sun and the Moon')).toEqual(['Earth, the', 'Sun and the', 'Moon']);
   });
 });

@@ -12,8 +12,9 @@ The shared lesson metadata uses `readerType: "visual-unit"`. The reader and its
 styles are lazy-loaded by the existing `/cell/:id` route.
 
 Chapter metadata remains in the legacy `Unit` table. The first chapter is now
-`our-place`; its first lesson cell is `earth-sun-moon`. Its five remaining units
-are placeholders, explicitly described as being prepared, not functioning lessons.
+`our-place`; its first lesson cell is `earth-sun-moon`. Unit 2, Our solar system,
+is now playable and unlocks after Unit 1. The four remaining units are
+placeholders, explicitly described as being prepared, not functioning lessons.
 The final evaluation is reserved for ten questions across all six units. No pass
 mark, retry policy or cross-chapter exam unlock has been invented. Earlier authored
 lessons remain accessible at `/learn?chapter=first-sky` for development testing.

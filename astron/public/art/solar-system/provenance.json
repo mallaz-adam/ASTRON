@@ -1,0 +1,142 @@
+[
+  {
+    "id": "mercury",
+    "source": "https://science.nasa.gov/photojournal/mercury-globe-0n-0e/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia15/pia15160/PIA15160.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+    "originalDimensions": [
+      1280,
+      1280
+    ],
+    "savedDimensions": [
+      600,
+      600
+    ],
+    "bytes": 63132
+  },
+  {
+    "id": "venus",
+    "source": "https://science.nasa.gov/photojournal/venus-from-mariner-10/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia23/pia23791/figures/PIA23791_fig1_thumb.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+    "originalDimensions": [
+      200,
+      200
+    ],
+    "savedDimensions": [
+      200,
+      200
+    ],
+    "bytes": 1636
+  },
+  {
+    "id": "mars",
+    "source": "https://science.nasa.gov/resource/mosaic-of-mars/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/mars/resources/detail_files/5396_Mars_globe_1840x1840-full2.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+    "originalDimensions": [
+      1280,
+      1280
+    ],
+    "savedDimensions": [
+      600,
+      600
+    ],
+    "bytes": 34238
+  },
+  {
+    "id": "jupiter",
+    "source": "https://science.nasa.gov/photojournal/junocam-captures-jupiter-on-62nd-flyby/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia26/pia26350/PIA26350.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+    "originalDimensions": [
+      1280,
+      720
+    ],
+    "savedDimensions": [
+      600,
+      338
+    ],
+    "bytes": 16776
+  },
+  {
+    "id": "saturn",
+    "source": "https://science.nasa.gov/resource/saturn-planet-six/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/p/i/a/1/PIA12567-800w.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+    "originalDimensions": [
+      800,
+      472
+    ],
+    "savedDimensions": [
+      600,
+      354
+    ],
+    "bytes": 5574
+  },
+  {
+    "id": "uranus",
+    "source": "https://science.nasa.gov/asset/webb/uranus-voyager-2/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/missions/webb/science/2020/02/STScI-01EVSTT9CQYZ9K7ZTZHQXRSPRC.png/jcr:content/renditions/cq5dam.web.1280.1280.png",
+    "originalDimensions": [
+      1280,
+      1280
+    ],
+    "savedDimensions": [
+      600,
+      600
+    ],
+    "bytes": 4706
+  },
+  {
+    "id": "neptune",
+    "source": "https://science.nasa.gov/asset/webb/neptune-voyager-2/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/missions/webb/science/2020/02/STScI-01EVSTT4S1TW8QH9QCE3YPGF6T.png/jcr:content/renditions/cq5dam.web.1280.1280.png",
+    "originalDimensions": [
+      1280,
+      1278
+    ],
+    "savedDimensions": [
+      600,
+      599
+    ],
+    "bytes": 10138
+  },
+  {
+    "id": "asteroid",
+    "source": "https://science.nasa.gov/resource/bennu-mosaic/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/b/bennu_dec10.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+    "originalDimensions": [
+      1024,
+      968
+    ],
+    "savedDimensions": [
+      600,
+      567
+    ],
+    "bytes": 75922
+  },
+  {
+    "id": "comet",
+    "source": "https://science.nasa.gov/photojournal/face-to-face-with-a-comet/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia02/pia02120/PIA02120.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+    "originalDimensions": [
+      247,
+      240
+    ],
+    "savedDimensions": [
+      247,
+      240
+    ],
+    "bytes": 4274
+  },
+  {
+    "id": "pluto",
+    "source": "https://science.nasa.gov/resource/the-rich-color-variations-of-pluto/",
+    "download": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/c/crop_p_color2_enhanced_release_detail.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg",
+    "originalDimensions": [
+      1200,
+      1200
+    ],
+    "savedDimensions": [
+      600,
+      600
+    ],
+    "bytes": 46822
+  }
+]

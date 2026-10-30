@@ -19,6 +19,16 @@ export function hexPoints(x: number, y: number, r = radius - 3): string {
 }
 
 export function titleLines(title: string): string[] {
+  // Longer titles need three short lines to stay inside the sloping sides.
+  if (title.length > 26) {
+    const lines: string[] = [];
+    for (const word of title.split(' ')) {
+      const last = lines.length - 1;
+      if (last >= 0 && `${lines[last]} ${word}`.length <= 12) lines[last] += ` ${word}`;
+      else lines.push(word);
+    }
+    return lines;
+  }
   if (title.length <= 12) return [title];
   const words = title.split(' ');
   let split = 1;

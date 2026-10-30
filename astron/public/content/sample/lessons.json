@@ -223,14 +223,16 @@
     "id": "unit-our-solar-system",
     "title": "Our solar system",
     "cellId": "our-solar-system",
-    "placeholder": true,
+    "placeholder": false,
     "cards": [
       {
         "kind": "say",
         "mood": "gentle",
-        "glaux": "This part of the atlas is still being written."
+        "glaux": "Different worlds, connected by gravity."
       }
-    ]
+    ],
+    "reader": "/content/our-solar-system.json",
+    "readerType": "visual-unit"
   },
   {
     "id": "unit-stars-milky-way",

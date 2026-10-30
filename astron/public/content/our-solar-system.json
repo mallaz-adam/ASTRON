@@ -1,0 +1,529 @@
+{
+  "lessonId": "unit-our-solar-system",
+  "unitNumber": 2,
+  "chapter": "Our place in space",
+  "title": "Our solar system",
+  "introduction": [
+    "You already know Earth travels around the Sun.",
+    "But Earth has neighbours, and the Sun has a whole family.",
+    "We will meet its eight planets and some smaller travellers.",
+    "We will discover what makes them part of one solar system."
+  ],
+  "steps": [
+    {
+      "id": "family",
+      "title": "The Sun’s family",
+      "scene": "family",
+      "paragraphs": [
+        "Our solar system includes the Sun, planets, moons, and many smaller objects.",
+        "Gravity is the pull that objects have on one another.",
+        "The Sun’s gravity helps keep the planets travelling around it.",
+        "These objects form a connected family in space."
+      ],
+      "terms": [
+        "solar system",
+        "gravity"
+      ],
+      "glaux": "Different worlds, connected by gravity."
+    },
+    {
+      "id": "light-maker",
+      "title": "One star, many planets",
+      "scene": "light-maker",
+      "paragraphs": [
+        "The Sun is our solar system’s only star.",
+        "It makes the light reaching its planets.",
+        "Planets move around the Sun, but they are not stars.",
+        "We usually see planets because they reflect sunlight."
+      ],
+      "terms": [
+        "star",
+        "planets"
+      ]
+    },
+    {
+      "id": "order",
+      "title": "The eight in order",
+      "scene": "planet-order",
+      "paragraphs": [
+        "First come Mercury, Venus, Earth, and Mars.",
+        "Then come Jupiter, Saturn, Uranus, and Neptune.",
+        "This order describes their paths around the Sun.",
+        "It does not mean they stand in one straight line."
+      ],
+      "terms": [],
+      "glaux": "An order map is not a picture of tonight."
+    },
+    {
+      "id": "rocky",
+      "title": "The four rocky worlds",
+      "scene": "rocky-worlds",
+      "paragraphs": [
+        "Mercury, Venus, Earth, and Mars are the inner planets.",
+        "Scientists also call them rocky planets.",
+        "They have solid, rocky surfaces.",
+        "They still look different from one another.",
+        "Earth’s oceans are visible from space. Mars looks reddish in many images."
+      ],
+      "terms": [
+        "inner planets",
+        "rocky planets"
+      ]
+    },
+    {
+      "id": "giants",
+      "title": "The four giant worlds",
+      "scene": "giant-worlds",
+      "paragraphs": [
+        "Jupiter, Saturn, Uranus, and Neptune are the outer planets.",
+        "All four are giant planets with deep layers of gases.",
+        "They lack solid ground like the surface of Earth.",
+        "Jupiter and Saturn are gas giants.",
+        "Uranus and Neptune are ice giants.",
+        "These names describe different materials inside, not icy ground to walk on."
+      ],
+      "terms": [
+        "gas giants",
+        "ice giants"
+      ]
+    },
+    {
+      "id": "details",
+      "title": "Different faces of giant planets",
+      "scene": "giant-details",
+      "paragraphs": [
+        "Jupiter shows wide bands of clouds.",
+        "Saturn’s rings contain mostly icy pieces.",
+        "Uranus and Neptune look bluish in many pictures.",
+        "Scientists sometimes adjust pictures to reveal details. These are called processed images.",
+        "A picture may not show natural colours exactly."
+      ],
+      "terms": [
+        "rings",
+        "processed images"
+      ],
+      "glaux": "An image is evidence. Its colours can also tell a story."
+    },
+    {
+      "id": "moons",
+      "title": "Other planets have moons",
+      "scene": "other-moons",
+      "paragraphs": [
+        "Earth’s Moon is not alone.",
+        "Many other planets have natural satellites, also called moons.",
+        "Mercury and Venus have none.",
+        "These moons orbit their planets. Those planets travel around the Sun.",
+        "The moons still belong to our solar system."
+      ],
+      "terms": [
+        "natural satellites"
+      ]
+    },
+    {
+      "id": "small",
+      "title": "Small travellers",
+      "scene": "small-worlds",
+      "paragraphs": [
+        "The solar system contains smaller travellers, too.",
+        "Asteroids are mainly rocky objects orbiting the Sun.",
+        "Comets contain ice, dust, and rock. They also orbit the Sun.",
+        "Some comets form bright tails when they approach the Sun.",
+        "Their tails generally point away from the Sun."
+      ],
+      "terms": [
+        "asteroids",
+        "comets"
+      ],
+      "glaux": "Not every traveller is a planet."
+    },
+    {
+      "id": "pluto",
+      "title": "Pluto still belongs",
+      "scene": "pluto",
+      "paragraphs": [
+        "Pluto belongs to our solar system.",
+        "It is a dwarf planet, rather than one of the eight planets.",
+        "Dwarf planets orbit the Sun and are nearly round.",
+        "Scientists use more than shape to decide these groups."
+      ],
+      "terms": [
+        "dwarf planet"
+      ],
+      "glaux": "A different name does not mean a world has disappeared."
+    },
+    {
+      "id": "recap",
+      "title": "Our little neighbourhood",
+      "scene": "solar-recap",
+      "paragraphs": [
+        "Our solar system has one star: the Sun.",
+        "Eight planets orbit it in a known order.",
+        "Four are rocky worlds; four are giant worlds.",
+        "Many planets have moons.",
+        "Asteroids, comets, and dwarf planets belong here too."
+      ],
+      "terms": [],
+      "glaux": "One star, many worlds. Keep their connections in mind."
+    }
+  ],
+  "objects": [
+    {
+      "id": "earth",
+      "name": "Earth",
+      "src": "/art/earth-sun-moon/earth.webp",
+      "alt": "Earth photographed by the Apollo 17 crew, with oceans, clouds and Africa visible.",
+      "caption": "Apollo 17 photograph",
+      "credit": "NASA Johnson Space Center",
+      "source": "https://science.nasa.gov/resource/the-blue-marble/",
+      "clue": "Our home",
+      "group": "rocky"
+    },
+    {
+      "id": "sun",
+      "name": "Sun",
+      "src": "/art/earth-sun-moon/sun.webp",
+      "alt": "A processed spacecraft observation showing the bright disc and surface detail of the Sun.",
+      "caption": "Processed spacecraft observation; colours are processed.",
+      "credit": "NASA/GSFC/Solar Dynamics Observatory",
+      "source": "https://science.nasa.gov/photojournal/image-of-sun-from-nasas-solar-dynamics-observatory/",
+      "clue": "Makes its own light",
+      "group": "star"
+    },
+    {
+      "id": "moon",
+      "name": "Moon",
+      "src": "/art/earth-sun-moon/moon.webp",
+      "alt": "The Moon's near side, with dark plains and bright craters, assembled from spacecraft camera data.",
+      "caption": "Image from spacecraft camera data",
+      "credit": "NASA/Goddard Space Flight Center/Arizona State University",
+      "source": "https://science.nasa.gov/resource/lunar-near-side/",
+      "clue": "Moves around Earth",
+      "group": "moon"
+    },
+    {
+      "id": "mercury",
+      "name": "Mercury",
+      "group": "rocky",
+      "caption": "MESSENGER mosaic projected into a globe view.",
+      "alt": "A grey, cratered globe of Mercury assembled from spacecraft images.",
+      "credit": "NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington",
+      "source": "https://science.nasa.gov/photojournal/mercury-globe-0n-0e/",
+      "clue": "The first planet from the Sun.",
+      "src": "/art/solar-system/mercury.webp"
+    },
+    {
+      "id": "venus",
+      "name": "Venus",
+      "group": "rocky",
+      "caption": "Processed Mariner 10 view of cloud-covered Venus.",
+      "alt": "A processed spacecraft image of Venus wrapped in clouds, hiding its rocky surface.",
+      "credit": "NASA/JPL-Caltech",
+      "source": "https://science.nasa.gov/photojournal/venus-from-mariner-10/",
+      "clue": "Clouds hide Venus’s rocky ground.",
+      "src": "/art/solar-system/venus.webp"
+    },
+    {
+      "id": "mars",
+      "name": "Mars",
+      "group": "rocky",
+      "caption": "Mosaic assembled from Viking Orbiter images.",
+      "alt": "A reddish globe of Mars assembled from spacecraft images.",
+      "credit": "NASA/JPL-Caltech/USGS",
+      "source": "https://science.nasa.gov/resource/mosaic-of-mars/",
+      "clue": "Mars has a reddish, rocky surface.",
+      "src": "/art/solar-system/mars.webp"
+    },
+    {
+      "id": "jupiter",
+      "name": "Jupiter",
+      "group": "gas",
+      "caption": "Processed JunoCam close-up; colours are processed.",
+      "alt": "A processed spacecraft close-up of Jupiter showing broad bands and swirling clouds.",
+      "credit": "Image data: NASA/JPL-Caltech/SwRI/MSSS; image processing: Jackie Branc (CC BY)",
+      "source": "https://science.nasa.gov/photojournal/junocam-captures-jupiter-on-62nd-flyby/",
+      "clue": "Jupiter shows wide bands of clouds.",
+      "src": "/art/solar-system/jupiter.webp",
+      "license": "CC BY, as credited on the NASA source page. Image processing: Jackie Branc."
+    },
+    {
+      "id": "saturn",
+      "name": "Saturn",
+      "group": "gas",
+      "caption": "Cassini natural-colour composite; dark-side rings brightened.",
+      "alt": "A Cassini composite shows Saturn and its broad ring system against dark space.",
+      "credit": "NASA/JPL-Caltech/Space Science Institute",
+      "source": "https://science.nasa.gov/resource/saturn-planet-six/",
+      "clue": "Saturn’s rings contain mostly icy pieces.",
+      "src": "/art/solar-system/saturn.webp"
+    },
+    {
+      "id": "uranus",
+      "name": "Uranus",
+      "group": "ice",
+      "caption": "Voyager 2 observation; processed colours.",
+      "alt": "A Voyager 2 view of Uranus as a pale bluish globe.",
+      "credit": "NASA, Caltech",
+      "source": "https://science.nasa.gov/asset/webb/uranus-voyager-2/",
+      "clue": "An ice giant, not a world with icy ground to walk on.",
+      "src": "/art/solar-system/uranus.webp"
+    },
+    {
+      "id": "neptune",
+      "name": "Neptune",
+      "group": "ice",
+      "caption": "Voyager 2 observation; processed colour and contrast.",
+      "alt": "A Voyager 2 view of Neptune with blue bands and cloud features.",
+      "credit": "NASA, Caltech",
+      "source": "https://science.nasa.gov/asset/webb/neptune-voyager-2/",
+      "clue": "Another ice giant; image processing affects its blue appearance.",
+      "src": "/art/solar-system/neptune.webp"
+    },
+    {
+      "id": "asteroid",
+      "name": "Asteroid Bennu",
+      "group": "small",
+      "caption": "Mosaic assembled from OSIRIS-REx images.",
+      "alt": "A spacecraft mosaic of the rough, boulder-covered asteroid Bennu.",
+      "credit": "NASA/Goddard/University of Arizona",
+      "source": "https://science.nasa.gov/resource/bennu-mosaic/",
+      "clue": "Asteroids are mainly rocky objects.",
+      "src": "/art/solar-system/asteroid.webp"
+    },
+    {
+      "id": "comet",
+      "name": "Comet Tempel 1",
+      "group": "small",
+      "caption": "Deep Impact image of a comet’s solid centre, called its nucleus.",
+      "alt": "A spacecraft image of the irregular nucleus of comet Tempel 1, without an added tail.",
+      "credit": "NASA/JPL-Caltech/UMD",
+      "source": "https://science.nasa.gov/photojournal/face-to-face-with-a-comet/",
+      "clue": "Comets contain ice, dust and rock. A tail is not always visible.",
+      "src": "/art/solar-system/comet.webp"
+    },
+    {
+      "id": "pluto",
+      "name": "Pluto",
+      "group": "dwarf",
+      "caption": "New Horizons enhanced-colour composite.",
+      "alt": "An enhanced-colour spacecraft composite of Pluto showing varied surface colours.",
+      "credit": "NASA/JHUAPL/SwRI",
+      "source": "https://science.nasa.gov/resource/the-rich-color-variations-of-pluto/",
+      "clue": "A dwarf planet that still belongs to our solar system.",
+      "src": "/art/solar-system/pluto.webp"
+    }
+  ],
+  "glossary": [
+    {
+      "term": "solar system",
+      "definition": "The Sun and the objects connected to it by gravity.",
+      "example": "Earth belongs to our solar system."
+    },
+    {
+      "term": "gravity",
+      "definition": "The pull that objects have on one another.",
+      "example": "Gravity pulls a dropped ball towards Earth."
+    },
+    {
+      "term": "star",
+      "definition": "A very hot object in space that produces its own light.",
+      "example": "Our Sun is a star."
+    },
+    {
+      "term": "planets",
+      "definition": "Large, nearly round worlds that orbit a star. Scientists also use other classification rules.",
+      "example": "Earth and Saturn are planets."
+    },
+    {
+      "term": "orbit",
+      "definition": "The path an object follows around another in space.",
+      "example": "Mars follows an orbit around the Sun."
+    },
+    {
+      "term": "inner planets",
+      "definition": "The first four planets from our Sun.",
+      "example": "Venus is an inner planet."
+    },
+    {
+      "term": "rocky planets",
+      "definition": "Planets with solid, rocky surfaces.",
+      "example": "Mars is a rocky planet."
+    },
+    {
+      "term": "gas giants",
+      "definition": "Giant planets made mostly of two light gases: hydrogen and helium.",
+      "example": "Jupiter and Saturn are gas giants."
+    },
+    {
+      "term": "ice giants",
+      "definition": "Giant planets with a greater share of heavier materials inside than gas giants.",
+      "example": "Uranus is an ice giant. This does not mean icy ground."
+    },
+    {
+      "term": "rings",
+      "definition": "Bands of many small pieces travelling around a planet.",
+      "example": "Saturn has bright rings."
+    },
+    {
+      "term": "processed images",
+      "definition": "Pictures adjusted or combined to make details easier to see.",
+      "example": "A planet picture may use adjusted colours."
+    },
+    {
+      "term": "natural satellites",
+      "definition": "Objects not built by people that orbit larger objects in space.",
+      "example": "Our Moon is Earth’s natural satellite."
+    },
+    {
+      "term": "asteroids",
+      "definition": "Relatively small, mainly rocky bodies travelling around the Sun.",
+      "example": "Bennu is an asteroid."
+    },
+    {
+      "term": "comets",
+      "definition": "Small bodies containing ice, dust and rock that travel around the Sun.",
+      "example": "Some comets develop bright tails near the Sun."
+    },
+    {
+      "term": "dwarf planet",
+      "definition": "A nearly round world orbiting the Sun, in a different group from the eight planets.",
+      "example": "Pluto is a dwarf planet."
+    }
+  ],
+  "orderPractice": {
+    "prompt": "Place the four inner planets in order, moving away from the Sun.",
+    "reference": "Use the atlas above. This is practice, not a memory test.",
+    "hint": "Start with Mercury. Earth is third, between Venus and Mars.",
+    "right": "Yes. Mercury, Venus, Earth, then Mars. You have followed the inner planets outward.",
+    "positions": [
+      "First from the Sun",
+      "Second from the Sun",
+      "Third from the Sun",
+      "Fourth from the Sun"
+    ],
+    "correctOrder": [
+      "mercury",
+      "venus",
+      "earth",
+      "mars"
+    ],
+    "feedback": [
+      "Mercury is first. Start at the Sun and follow the numbered atlas.",
+      "Venus comes after Mercury, before Earth.",
+      "Earth is third, between Venus and Mars.",
+      "Mars is fourth, after Earth."
+    ]
+  },
+  "sorting": {
+    "prompt": "Choose the best group for each object.",
+    "hint": "Ask what each object is. A moon belongs here even though it orbits a planet.",
+    "right": "You sorted the objects by what they are, not just how they look.",
+    "groups": [
+      {
+        "id": "star",
+        "label": "Star"
+      },
+      {
+        "id": "planet",
+        "label": "Planet"
+      },
+      {
+        "id": "moon",
+        "label": "Natural satellite (moon)"
+      },
+      {
+        "id": "small",
+        "label": "Small solar-system object"
+      },
+      {
+        "id": "dwarf",
+        "label": "Dwarf planet"
+      }
+    ],
+    "cards": [
+      {
+        "id": "sun",
+        "imageId": "sun",
+        "title": "Sun",
+        "group": "star",
+        "feedback": "The Sun produces its own light. It is our solar system’s star."
+      },
+      {
+        "id": "mars",
+        "imageId": "mars",
+        "title": "Mars",
+        "group": "planet",
+        "feedback": "Mars is the fourth planet orbiting the Sun."
+      },
+      {
+        "id": "saturn",
+        "imageId": "saturn",
+        "title": "Saturn",
+        "group": "planet",
+        "feedback": "Saturn is a planet. Its rings do not make it a star."
+      },
+      {
+        "id": "moon",
+        "imageId": "moon",
+        "title": "Earth’s Moon",
+        "group": "moon",
+        "feedback": "Our Moon orbits Earth. It is Earth’s natural satellite."
+      },
+      {
+        "id": "asteroid",
+        "imageId": "asteroid",
+        "title": "Asteroid",
+        "group": "small",
+        "feedback": "An asteroid is a small, mainly rocky body. Orbiting the Sun alone does not make a planet."
+      },
+      {
+        "id": "comet",
+        "imageId": "comet",
+        "title": "Comet",
+        "group": "small",
+        "feedback": "A comet is a small body containing ice, dust and rock. It does not produce sunlight."
+      },
+      {
+        "id": "pluto",
+        "imageId": "pluto",
+        "title": "Pluto",
+        "group": "dwarf",
+        "feedback": "Pluto is a dwarf planet. It still belongs to our solar system."
+      }
+    ]
+  },
+  "plutoDetail": [
+    "Astronomers also consider whether a world dominates its orbital region through gravity.",
+    "Pluto has not cleared its orbital neighbourhood: the region around its path.",
+    "“Cleared” does not mean a planet’s path is completely empty."
+  ],
+  "sources": [
+    {
+      "title": "NASA Solar System Facts",
+      "url": "https://science.nasa.gov/solar-system/solar-system-facts/"
+    },
+    {
+      "title": "NASA About the Planets",
+      "url": "https://science.nasa.gov/solar-system/planets/"
+    },
+    {
+      "title": "NASA Moon Facts",
+      "url": "https://science.nasa.gov/solar-system/moons/facts/"
+    },
+    {
+      "title": "NASA Asteroid Facts",
+      "url": "https://science.nasa.gov/solar-system/asteroids/facts/"
+    },
+    {
+      "title": "NASA Comet Facts",
+      "url": "https://science.nasa.gov/solar-system/comets/facts/"
+    },
+    {
+      "title": "IAU planet classification",
+      "url": "https://www.iau.org/IAU/Iau/News/PR2006/iau-2006-general-assembly-resolution-votes.aspx"
+    },
+    {
+      "title": "NASA media usage guidelines",
+      "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+    }
+  ]
+}

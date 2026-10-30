@@ -33,7 +33,7 @@ technical details and the future setting that restores permanent saving.
 - A first-visit welcome followed by the illustrated Orion story and belt activity.
 - Five destinations: **Today, Learn, Stories, Articles and My sky**.
 - Today’s quests, sun, streak and freeze views.
-- Chapter 1, **Our place in space**, begins with **Earth, the Sun and the Moon**: ten illustrated steps, tappable definitions and two optional practices.
+- Chapter 1, **Our place in space**, has two playable units: **Earth, the Sun and the Moon** and **Our solar system**. Each has ten illustrated steps, tappable definitions and optional practice.
 - The authored **Scale of the cosmos** and **Why stars differ** lessons, with guided practice.
 - Interactive cosmic-address views, scale models, star colours, mass and fuel comparisons.
 - A sourced Betelgeuse article with a real ALMA cover, category and reading time.
@@ -43,7 +43,7 @@ technical details and the future setting that restores permanent saving.
 - An installable PWA that caches the app, authored content, art and local fonts.
 
 The beginner chapter has six planned units and a final ten-question evaluation.
-Unit 1 is playable; the five remaining units are visibly marked as being prepared.
+Units 1 and 2 are playable; the four remaining units are visibly marked as being prepared.
 The earlier eleven-cell **How stars live and die** chapter remains available through
 the chapter links for development testing. This is not a chapter-exam unlock: the
 passing threshold and retry policy are still to be decided.
@@ -63,6 +63,12 @@ The three NASA pictures are stored locally as small WebP files. The painted-styl
 orbit, light and lamp diagrams are original SVG drawn in code. Everything needed
 for this unit is included in the offline app cache. No new libraries were added.
 See [the unit's implementation notes](astron/docs/earth-sun-moon.md).
+
+Finishing Unit 1 unlocks **Our solar system**, with Continue opening it directly.
+Unit 2 combines local NASA observations, labelled atlas diagrams, a visible
+inner-planet order reference and optional family sorting. Pluto's classification
+detail stays optional. Its practices have no score or extra XP. See
+[Unit 2 implementation and checks](astron/docs/our-solar-system.md).
 
 ## Chapters, lessons and evaluation
 
@@ -124,7 +130,7 @@ Run these from the `astron` folder:
 | `npm run build` | Check TypeScript and create the production files in `dist`. |
 | `npm run preview` | Open the built production app locally. Build it first. |
 
-The latest chapter/lesson update passed **441 tests in 47 files** and the
+The latest chapter/lesson update passed **492 tests in 55 files** and the
 production build. The preceding lesson milestone also passed responsive
 browser checks and an offline cold-start check. These are
 recorded results, not a substitute for rerunning checks after future changes.

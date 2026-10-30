@@ -6,7 +6,7 @@ const names = { earth: 'Earth', sun: 'Sun', moon: 'Moon' };
 
 // Gradients and a few irregular strokes give the diagrams a painted atlas finish.
 // There are no canvas loops, filters, remote requests or automatic animations.
-function Plate({ description, children, className = '' }: { description: string; children: ReactNode; className?: string }) {
+export function Plate({ description, children, className = '' }: { description: string; children: ReactNode; className?: string }) {
   const id = useId().replace(/:/g, '');
   return <svg className={`unit-plate ${className}`} viewBox="0 0 420 300" role="img" aria-label={description}>
     <defs>
