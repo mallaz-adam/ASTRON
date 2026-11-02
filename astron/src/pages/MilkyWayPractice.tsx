@@ -3,18 +3,19 @@ import type { MilkyWayUnitData } from '../data/milkyWayUnit';
 import { milkyChoiceFeedback, milkyMatchingFeedback } from '../logic/milkyWay';
 import { GlauxArt } from '../design/InlineArt';
 import { Button } from '../design/Button';
+import { practiceAttempted } from '../logic/unitPractice';
 
-export function MilkyChoicePractice({ data }: { data: MilkyWayUnitData }) {
+export function MilkyChoicePractice({ data, onAttempt }: { data: MilkyWayUnitData; onAttempt?: () => void }) {
   const [answer, setAnswer] = useState('');
   const feedback = milkyChoiceFeedback(data, answer);
   return <div className="unit-practice-content"><fieldset className="unit-choices"><legend>{data.choice.prompt}</legend>
-    {data.choice.options.map(option => <label key={option.id}><input type="radio" name="milky-connected-explanation" value={option.id} checked={answer === option.id} onChange={() => setAnswer(option.id)} /><span>{option.id}. {option.text}</span></label>)}
+    {data.choice.options.map(option => <label key={option.id}><input type="radio" name="milky-connected-explanation" value={option.id} checked={answer === option.id} onChange={() => { setAnswer(option.id); onAttempt?.(); }} /><span>{option.id}. {option.text}</span></label>)}
   </fieldset><details className="unit-hint"><summary>Hint from Glaux</summary><p>{data.choice.hint}</p></details>
     {feedback && <div className="unit-feedback milky-choice-feedback" role="status"><GlauxArt mood={feedback.correct ? 'proud' : 'gentle'} /><p>{feedback.text}</p>{feedback.correct && <p>{data.choice.explanation}</p>}</div>}
   </div>;
 }
 
-export function MilkyMatchingPractice({ data }: { data: MilkyWayUnitData }) {
+export function MilkyMatchingPractice({ data, onAttempt }: { data: MilkyWayUnitData; onAttempt?: () => void }) {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [kept, setKept] = useState<string[]>([]);
   const [checked, setChecked] = useState(false);
@@ -28,14 +29,7 @@ export function MilkyMatchingPractice({ data }: { data: MilkyWayUnitData }) {
       {checked && !feedback[index].correct && <p id={`milky-feedback-${card.id}`} className="milky-match-feedback">{feedback[index].text}</p>}
     </div>)}
   </fieldset><details className="unit-hint"><summary>Hint from Glaux</summary><p>{data.matching.hint}</p></details>
-    <Button variant="secondary" onClick={() => { setChecked(true); setKept(feedback.filter(f => f.correct).map(f => f.id)); }}>Check the views</Button>
+    <Button variant="secondary" onClick={() => { setChecked(true); setKept(feedback.filter(f => f.correct).map(f => f.id)); if (practiceAttempted(data.matching.cards.map(c => answers[c.id]), true)) onAttempt?.(); }}>Check the views</Button>
     {checked && <div className="unit-feedback" role="status"><GlauxArt mood={complete ? 'proud' : 'gentle'} /><p>{complete ? data.matching.right : 'Correct matches are kept. You can try the remaining descriptions again.'}</p></div>}
   </div>;
-}
-
-export function MilkyPractice({ data, kind }: { data: MilkyWayUnitData; kind: 'choice' | 'matching' }) {
-  const [open, setOpen] = useState(false);
-  return <section className="unit-practice"><button type="button" className="unit-small-button" aria-expanded={open} aria-controls={`milky-practice-${kind}`} onClick={() => setOpen(!open)}>{kind === 'choice' ? 'Try the connected explanation (optional)' : 'Try matching the views (optional)'}</button>
-    {open && <div id={`milky-practice-${kind}`}><p className="unit-caption">Optional, ungraded practice. No score or timer. You can continue whenever you like.</p>{kind === 'choice' ? <MilkyChoicePractice data={data} /> : <MilkyMatchingPractice data={data} />}</div>}
-  </section>;
 }

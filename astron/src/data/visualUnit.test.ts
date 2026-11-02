@@ -20,8 +20,8 @@ describe('Earth, the Sun and the Moon: authored unit', () => {
   it('starts the beginner chapter, retaining older lessons and marking unwritten units as forthcoming', () => {
     const path = buildCoursePath(content, { completions: [] }, 'reader', undefined, true);
     expect(path.unit).toMatchObject({ title: 'Our place in space', orderNo: 1 });
-    expect(path.cells.map(cell => cell.id)).toEqual(['earth-sun-moon', 'our-solar-system', 'stars-milky-way']);
-    expect(path.upcoming.map(cell => cell.title)).toEqual(['Galaxies and the universe', 'Understanding sizes and distances', 'Light takes time to travel']);
+    expect(path.cells.map(cell => cell.id)).toEqual(['earth-sun-moon', 'our-solar-system', 'stars-milky-way', 'galaxies-universe']);
+    expect(path.upcoming.map(cell => cell.title)).toEqual(['Understanding sizes and distances', 'Light takes time to travel']);
     expect(buildCoursePath(content, { completions: [] }, 'reader', 'first-sky', true).cells.map(cell => cell.id)).toEqual(['orion-lesson', 'star-lesson', 'orion-tale']);
   });
   it('has ten connected teaching steps, eight definitions and two ungraded practices', () => {

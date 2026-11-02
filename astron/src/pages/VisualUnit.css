@@ -51,6 +51,11 @@
 .unit-slider { display: grid; gap: 4px; font-size: 16px; }
 .unit-slider input { width: 100%; min-height: 44px; margin: 0; accent-color: var(--vermilion); }
 .unit-practice { display: grid; gap: 14px; padding-top: 18px; border-top: var(--border-line); }
+.unit-practice-stage { display: grid; gap: 24px; width: 100%; max-width: 780px; min-width: 0; margin-inline: auto; }
+.unit-practice-stage[hidden] { display: none; }
+.unit-practice-heading { display: grid; gap: 18px; width: 100%; max-width: 780px; min-width: 0; margin-inline: auto; }
+.unit-practice-status { padding: 12px 14px; border-left: 2px solid var(--line); color: var(--soft-ink); font-size: 17px; line-height: 1.5; }
+.unit-practice-stage .reading-actions { max-width: none; }
 .unit-practice > div { display: grid; gap: 14px; }
 .unit-practice-content { display: grid; gap: 18px; font-size: 18px; line-height: 1.5; }
 .unit-matches, .unit-choices { border: 0; padding: 0; display: grid; gap: 12px; min-width: 0; }

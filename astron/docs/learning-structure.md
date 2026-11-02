@@ -2,6 +2,20 @@
 
 Confirmed with the project owner on 28 October 2026.
 
+## Updated practice decision — 2 November 2026
+
+The owner requested distinct practice phases for important concepts rather
+than optional activities beneath the teaching. In the shared illustrated reader,
+Units 1–4 now have two dedicated practice steps each. Continue opens the practice
+after the relevant teaching part. Each question needs an answer and its feedback
+shown; correctness is not a requirement to continue. Going back preserves the
+answers and feedback. Practice has no separate XP, score, timer or persisted
+assessment answers. The ten-question chapter evaluation remains separate.
+
+This supersedes the earlier optional-practice interface described below for
+these four units. Other readers, including the existing star-colour lesson's
+exercise cards, are unchanged by this interface change.
+
 A **chapter** is the full collection, for example *How stars live and die*.
 A **lesson**, such as *Scale of the cosmos*, teaches one connected topic.
 A **part**, such as *Shrink the Sun*, is a section within that lesson.
@@ -43,8 +57,18 @@ unauthored placeholder and unavailable in the normal production path.
 The initial scale question bank and its pure grading helper are retained as
 authoring material for later chapter work. Two questions supply optional
 practice. The bank is not itself the full evaluation of the entire chapter.
-The full chapter question set, mastery threshold and retry policy need to be
-decided once the remaining chapter content is ready.
+The full chapter question set and optional retake behaviour need to be designed
+once the remaining chapter content is ready.
+
+## Chapter progression decision — 2 November 2026
+
+Each chapter is a separate collection with its own units. Finish those units,
+then complete and submit its ten-question evaluation to unlock the next chapter.
+Completion, rather than a minimum score, is the unlock requirement. Merely
+opening the evaluation does not complete it. Completed chapters stay available
+to revisit; unauthored chapters remain marked as being prepared. This records
+the owner's decision for implementation and does not claim the current app
+already enforces the new chapter gate.
 
 Development progress remains temporary. The separate permanent database is
 unchanged. No new account, server, analytics or progress upload is introduced.

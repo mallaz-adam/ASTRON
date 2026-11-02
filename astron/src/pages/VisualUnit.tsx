@@ -4,6 +4,7 @@ import type { Content, Lesson } from '../data/types';
 import { loadVisualUnit, type ObjectId, type ObjectKind, type UnitStep, type VisualUnitData } from '../data/visualUnit';
 import { isSolarSystemUnit, loadSolarSystemUnit, type SolarSystemUnitData } from '../data/solarSystemUnit';
 import { isMilkyWayUnit, loadMilkyWayUnit, type MilkyWayUnitData } from '../data/milkyWayUnit';
+import { isGalaxiesUnit, loadGalaxiesUnit, type GalaxiesUnitData } from '../data/galaxiesUnit';
 import { db } from '../data/db';
 import { localLearnerId } from '../data/learner';
 import { finishReadingLesson } from '../data/lessonServices';
@@ -15,12 +16,16 @@ import { GlauxArt } from '../design/InlineArt';
 import { useReducedMotion } from '../design/useReducedMotion';
 import { ObjectGallery, UnitPicture } from './UnitPictures';
 import { SolarFamily, SolarSystemPicture } from './SolarSystemPictures';
-import { SolarPractice } from './SolarSystemPractice';
+import { SolarOrderPractice, SolarSortingPractice } from './SolarSystemPractice';
 import { MilkyPhoto, MilkyViewComparison, MilkyWayPicture } from './MilkyWayPictures';
-import { MilkyPractice } from './MilkyWayPractice';
+import { MilkyChoicePractice, MilkyMatchingPractice } from './MilkyWayPractice';
+import { GalaxyHomeMap, GalaxyPhoto, GalaxiesPicture, GalaxyUniverse } from './GalaxiesPictures';
+import { GalaxiesPractice } from './GalaxiesPractice';
 import { useProgress } from '../hooks/useProgress';
 import { nextReadingDestination } from '../logic/readingFlow';
 import { milkyReadingPosition } from '../logic/milkyWay';
+import { galaxyReadingPosition } from '../logic/galaxies';
+import { practiceAfterScene, practiceAttempted } from '../logic/unitPractice';
 import './VisualUnit.css';
 
 export function UnitWords({ step, data }: { step: Pick<UnitStep, 'paragraphs' | 'terms'>; data: Pick<VisualUnitData, 'glossary'> }) {
@@ -54,7 +59,7 @@ export function UnitWords({ step, data }: { step: Pick<UnitStep, 'paragraphs' | 
   </div>;
 }
 
-export function UnitMatching({ data }: { data: VisualUnitData }) {
+export function UnitMatching({ data, onAttempt }: { data: VisualUnitData; onAttempt?: () => void }) {
   const [answers, setAnswers] = useState<Partial<Record<ObjectId, ObjectKind>>>({});
   const [checked, setChecked] = useState(false);
   const feedback = matchingFeedback(data, answers);
@@ -67,12 +72,12 @@ export function UnitMatching({ data }: { data: VisualUnitData }) {
       </select>
     </label>)}</fieldset>
     <details className="unit-hint"><summary>Hint from Glaux</summary><p>{data.matching.hint}</p></details>
-    <Button variant="secondary" onClick={() => setChecked(true)}>Check the matches</Button>
+    <Button variant="secondary" onClick={() => { setChecked(true); if (practiceAttempted(data.objects.map(o => answers[o.id]), true)) onAttempt?.(); }}>Check the matches</Button>
     {checked && <div className="unit-feedback" role="status"><GlauxArt mood={complete ? 'proud' : 'gentle'} />{complete ? <p>{data.matching.right}</p> : feedback.map(item => <p key={item.id}><span aria-hidden="true">{item.correct ? '✓ ' : '↳ '}</span>{item.text}</p>)}</div>}
   </div>;
 }
 
-export function UnitChoice({ data }: { data: VisualUnitData }) {
+export function UnitChoice({ data, onAttempt }: { data: VisualUnitData; onAttempt?: () => void }) {
   const [choice, setChoice] = useState('');
   const [checked, setChecked] = useState(false);
   const option = data.choice.options.find(item => item.id === choice);
@@ -80,19 +85,19 @@ export function UnitChoice({ data }: { data: VisualUnitData }) {
     <input type="radio" name="unit-moonlight" value={item.id} checked={item.id === choice} onChange={() => { setChoice(item.id); setChecked(false); }} /><span>{item.id}. {item.text}</span>
   </label>)}</fieldset>
     <details className="unit-hint"><summary>Hint from Glaux</summary><p>{data.choice.hint}</p></details>
-    <Button variant="secondary" disabled={!choice} onClick={() => setChecked(true)}>Explore the answer</Button>
+    <Button variant="secondary" disabled={!choice} onClick={() => { setChecked(true); if (option) onAttempt?.(); }}>Explore the answer</Button>
     {checked && option && <div className="unit-feedback" role="status"><GlauxArt mood={choice === data.choice.correct ? 'proud' : 'gentle'} /><p>{option.feedback}</p>{choice === data.choice.correct && <p>{data.choice.explanation}</p>}</div>}
   </div>;
 }
 
-function OptionalPractice({ data, kind }: { data: VisualUnitData; kind: 'matching' | 'choice' }) {
-  const [open, setOpen] = useState(false);
-  return <section className="unit-practice"><button type="button" className="unit-small-button" aria-expanded={open} aria-controls={`practice-${kind}`} onClick={() => setOpen(!open)}>
-    {kind === 'matching' ? 'Try matching (optional)' : 'Try the moonlight mystery (optional)'}
-  </button>{open && <div id={`practice-${kind}`}><p className="unit-caption">Take your time. This practice has no score; you can continue whenever you like.</p>{kind === 'matching' ? <UnitMatching data={data} /> : <UnitChoice data={data} />}</div>}</section>;
-}
+type IllustratedUnit = VisualUnitData | SolarSystemUnitData | MilkyWayUnitData | GalaxiesUnitData;
 
-type IllustratedUnit = VisualUnitData | SolarSystemUnitData | MilkyWayUnitData;
+function PracticeBody({ data, kind, questionIndex, onAttempt }: { data: IllustratedUnit; kind: string; questionIndex: number; onAttempt: () => void }) {
+  if (isGalaxiesUnit(data)) return <GalaxiesPractice data={data} kind={kind === 'choice' ? 'choice' : 'evidence'} questionIndex={questionIndex} onAttempt={onAttempt} />;
+  if (isMilkyWayUnit(data)) return kind === 'choice' ? <MilkyChoicePractice data={data} onAttempt={onAttempt} /> : <MilkyMatchingPractice data={data} onAttempt={onAttempt} />;
+  if (isSolarSystemUnit(data)) return kind === 'order' ? <SolarOrderPractice data={data} onAttempt={onAttempt} /> : <SolarSortingPractice data={data} onAttempt={onAttempt} />;
+  return kind === 'matching' ? <UnitMatching data={data} onAttempt={onAttempt} /> : <UnitChoice data={data} onAttempt={onAttempt} />;
+}
 
 function Credits({ data }: { data: IllustratedUnit }) {
   return <details className="unit-credits"><summary>Pictures and sources</summary>
@@ -102,11 +107,13 @@ function Credits({ data }: { data: IllustratedUnit }) {
 }
 
 function UnitOpeningPicture({ data }: { data: IllustratedUnit }) {
+  if (isGalaxiesUnit(data)) return <div className="galaxy-opening"><GalaxyHomeMap interactive={false} /></div>;
   if (isMilkyWayUnit(data)) return <MilkyPhoto data={data} id="sky" />;
   return isSolarSystemUnit(data) ? <SolarFamily data={data} interactive={false} /> : <ObjectGallery objects={data.objects} interactive={false} />;
 }
 
 function TeachingPicture({ data, index }: { data: IllustratedUnit; index: number }) {
+  if (isGalaxiesUnit(data)) return <GalaxiesPicture scene={data.steps[index].scene} data={data} />;
   if (isMilkyWayUnit(data)) return <MilkyWayPicture scene={data.steps[index].scene} data={data} />;
   return isSolarSystemUnit(data) ? <SolarSystemPicture scene={data.steps[index].scene} data={data} /> : <UnitPicture scene={data.steps[index].scene} data={data} />;
 }
@@ -127,14 +134,22 @@ export function VisualUnitReader({ lesson, content, data, reduceMotion }: { less
   const [busy, setBusy] = useState(false);
   const [earned, setEarned] = useState(false);
   const [error, setError] = useState('');
+  const [practicing, setPracticing] = useState(false);
+  const [visitedPractices, setVisitedPractices] = useState<number[]>([]);
+  const [attemptedPractices, setAttemptedPractices] = useState<string[]>([]);
+  const [practiceQuestions, setPracticeQuestions] = useState<Record<number, number>>({});
   const saving = useRef(false);
   const heading = useRef<HTMLHeadingElement>(null);
   const step = data.steps[index];
+  const practice = practiceAfterScene(data.lessonId, step?.scene ?? '');
+  const questionIndex = practiceQuestions[index] ?? 0;
   const reduced = useReducedMotion(reduceMotion);
   const milky = isMilkyWayUnit(data);
-  const onRecap = milky && milkyReadingPosition(index, data.steps.length) === 'recap';
-  const lastReadingIndex = data.steps.length - 1 + (milky ? 1 : 0);
-  const unitNumber = isSolarSystemUnit(data) || milky ? data.unitNumber : 1;
+  const galaxies = isGalaxiesUnit(data);
+  const recap = milky || galaxies ? data.recap : undefined;
+  const onRecap = !!recap && (galaxies ? galaxyReadingPosition : milkyReadingPosition)(index, data.steps.length) === 'recap';
+  const lastReadingIndex = data.steps.length - 1 + (recap ? 1 : 0);
+  const unitNumber = isSolarSystemUnit(data) || milky || galaxies ? data.unitNumber : 1;
   const cell = content.cells.find(row => row.id === lesson.cellId)!;
   const nextCell = content.cells.filter(row => row.unitId === cell.unitId && row.positionNo > cell.positionNo).sort((a, b) => a.positionNo - b.positionNo)[0];
   const nextReady = nextCell && content.lessons.some(row => row.cellId === nextCell.id && !row.placeholder);
@@ -142,9 +157,31 @@ export function VisualUnitReader({ lesson, content, data, reduceMotion }: { less
   useEffect(() => {
     heading.current?.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [index, finished]);
+  }, [index, finished, practicing, questionIndex]);
+  function enterPractice(at: number) {
+    setIndex(at); setPracticing(true);
+    setVisitedPractices(previous => previous.includes(at) ? previous : [...previous, at]);
+  }
+  function previous() {
+    if (practicing) {
+      if (questionIndex > 0) setPracticeQuestions(previous => ({ ...previous, [index]: questionIndex - 1 }));
+      else setPracticing(false);
+      return;
+    }
+    const at = index - 1;
+    if (practiceAfterScene(data.lessonId, data.steps[at]?.scene ?? '')) enterPractice(at);
+    else setIndex(at);
+  }
   async function advance() {
     if (saving.current) return;
+    if (practicing) {
+      if (!attemptedPractices.includes(`${index}:${questionIndex}`)) return;
+      if (galaxies && practice?.kind === 'evidence' && questionIndex < data.evidence.questions.length - 1) {
+        setPracticeQuestions(previous => ({ ...previous, [index]: questionIndex + 1 })); return;
+      }
+      setPracticing(false); setIndex(index + 1); return;
+    }
+    if (practice) { enterPractice(index); return; }
     if (index < lastReadingIndex) { setIndex(index + 1); return; }
     saving.current = true; setBusy(true); setError('');
     try {
@@ -153,38 +190,54 @@ export function VisualUnitReader({ lesson, content, data, reduceMotion }: { less
     } catch (problem) { setError(problem instanceof Error ? problem.message : String(problem)); }
     finally { saving.current = false; setBusy(false); }
   }
-  return <Page className={`unit-page${unitNumber === 2 ? ' solar-unit' : ''}${milky ? ' milky-unit' : ''}`} reduceMotion={reduced} skipLabel="Skip to lesson"><main id="main-content" className="unit-main" aria-busy={busy}>
+  return <Page className={`unit-page${unitNumber === 2 ? ' solar-unit' : ''}${milky ? ' milky-unit' : ''}${galaxies ? ' galaxy-unit' : ''}`} reduceMotion={reduced} skipLabel="Skip to lesson"><main id="main-content" className="unit-main" aria-busy={busy}>
     <header className="unit-header"><Link to="/learn">Back to the path</Link><span>{data.chapter}</span></header>
     {finished ? <section className="unit-finished">
-      <p className="unit-eyebrow">Unit {unitNumber} complete</p><h1 ref={heading} tabIndex={-1}>{milky ? data.title : data.steps.at(-1)!.title}</h1>
-      {milky ? <MilkyPhoto data={data} id="panorama" /> : <UnitOpeningPicture data={data} />}
-      <div className="unit-glaux"><GlauxArt mood="proud" /><p>{milky ? data.recap.glaux : data.steps.at(-1)!.glaux}</p></div>
+      <p className="unit-eyebrow">Unit {unitNumber} complete</p><h1 ref={heading} tabIndex={-1}>{recap ? data.title : data.steps.at(-1)!.title}</h1>
+      {galaxies ? <GalaxyPhoto data={data} id="deep-field" /> : milky ? <MilkyPhoto data={data} id="panorama" /> : <UnitOpeningPicture data={data} />}
+      <div className="unit-glaux"><GlauxArt mood="proud" /><p>{recap ? recap.glaux : data.steps.at(-1)!.glaux}</p></div>
       {nextCell && nextCell.kind !== 'quiz' && <p>Next in this chapter: {nextCell.title}.</p>}
       <p className="unit-caption">{!nextReady && 'The next unit is still being prepared. '}Your chapter evaluation will have ten questions after all six units.</p>
       {earned && <p>Learn quest done: +20 XP.</p>}
-      <AfterUnitActions content={content} lesson={lesson} onAgain={() => { setFinished(false); setIndex(-1); }} />
+      <AfterUnitActions content={content} lesson={lesson} onAgain={() => { setFinished(false); setIndex(-1); setPracticing(false); setVisitedPractices([]); setAttemptedPractices([]); setPracticeQuestions({}); }} />
     </section> : index < 0 ? <>
       <p className="unit-eyebrow">Chapter 1 · Unit {unitNumber}</p><h1 ref={heading} tabIndex={-1}>{data.title}</h1>
-      <div className="unit-introduction"><UnitOpeningPicture data={data} /><div className="unit-prose">{data.introduction.map((p, i) => <p key={i}>{p}</p>)}</div></div>
+      <div className="unit-introduction">{galaxies ? <><div className="unit-prose">{data.introduction.map((p, i) => <p key={i}>{p}</p>)}</div><UnitOpeningPicture data={data} /></>
+        : <><UnitOpeningPicture data={data} /><div className="unit-prose">{data.introduction.map((p, i) => <p key={i}>{p}</p>)}</div></>}</div>
       <p className="unit-caption">Underlined words open a short definition. Move through the lesson at your own pace.</p>
       <ReadingActions label="Begin the unit"><Button onClick={() => void advance()}>Continue</Button></ReadingActions>
-    </> : onRecap ? <>
-      <p className="unit-eyebrow">Unit {unitNumber} · Recap</p><h1 ref={heading} tabIndex={-1}>{data.recap.title}</h1>
-      <section className="milky-recap"><ol className="milky-recap-points">{data.recap.paragraphs.map(p => <li key={p}>{p}</li>)}</ol><MilkyViewComparison data={data} interactive={false} /></section>
-      <div className="unit-glaux"><GlauxArt mood="proud" /><p>{data.recap.glaux}</p></div>
-      <ReadingActions label="Unit recap"><Button disabled={busy} onClick={() => void advance()}>Continue</Button><button type="button" className="reading-previous" disabled={busy} onClick={() => setIndex(index - 1)}>Previous</button><span className="reading-count">Recap</span></ReadingActions>
+    </> : practicing && practice ? <>
+      <header className="unit-practice-heading"><p className="unit-eyebrow">Unit {unitNumber} · Practice {practice.number} of {practice.total}</p>
+      <h1 ref={heading} tabIndex={-1}>{practice.title}</h1></header>
+    </> : onRecap && recap ? <>
+      <p className="unit-eyebrow">Unit {unitNumber} · Recap</p><h1 ref={heading} tabIndex={-1}>{recap.title}</h1>
+      {galaxies ? <section className="galaxy-recap"><ol>{recap.paragraphs.map(p => <li key={p}>{p}</li>)}</ol><GalaxyUniverse /></section>
+        : milky && <section className="milky-recap"><ol className="milky-recap-points">{recap.paragraphs.map(p => <li key={p}>{p}</li>)}</ol><MilkyViewComparison data={data} interactive={false} /></section>}
+      <div className="unit-glaux"><GlauxArt mood="proud" /><p>{recap.glaux}</p></div>
+      <ReadingActions label="Unit recap"><Button disabled={busy} onClick={() => void advance()}>Continue</Button><button type="button" className="reading-previous" disabled={busy} onClick={previous}>Previous</button><span className="reading-count">Recap</span></ReadingActions>
     </> : <>
       <div className="unit-progress"><p className="unit-eyebrow">Unit {unitNumber} · Step {index + 1} of {data.steps.length}</p><progress aria-label="Unit progress" value={index + 1} max={data.steps.length} /></div>
       <h1 ref={heading} tabIndex={-1}>{step.title}</h1>
       <div className="unit-teaching" key={step.id}>
-        <div className="unit-teaching-copy"><UnitWords step={step} data={data} />{step.glaux && <div className="unit-glaux"><GlauxArt mood={['recap', 'solar-recap'].includes(step.scene) ? 'proud' : 'gentle'} /><p>{step.glaux}</p></div>}</div>
+        <div className="unit-teaching-copy"><UnitWords step={step} data={data} />{step.glaux && <div className="unit-glaux"><GlauxArt mood={['recap', 'solar-recap'].includes(step.scene) ? 'proud' : 'gentle'} /><p>{step.glaux}</p></div>}{galaxies && <p className="galaxy-invitation">{data.steps[index].invitation}</p>}</div>
         <section className="unit-visual" aria-label="Picture and exploration"><TeachingPicture data={data} index={index} /></section>
       </div>
-      {milky ? (step.scene === 'galactic-home' || step.scene === 'two-views') && <MilkyPractice key={`practice:${step.id}`} data={data} kind={step.scene === 'galactic-home' ? 'choice' : 'matching'} />
-        : isSolarSystemUnit(data) ? (step.scene === 'planet-order' || step.scene === 'pluto') && <SolarPractice key={`practice:${step.id}`} data={data} kind={step.scene === 'planet-order' ? 'order' : 'sorting'} />
-        : (step.scene === 'paths' || step.scene === 'comparison') && <OptionalPractice key={`practice:${step.id}`} data={data} kind={step.scene === 'paths' ? 'matching' : 'choice'} />}
-      <ReadingActions label="Unit steps"><Button disabled={busy} onClick={() => void advance()}>Continue</Button><button type="button" className="reading-previous" disabled={busy} onClick={() => setIndex(index - 1)}>Previous</button><span className="reading-count">{index + 1} / {data.steps.length}</span></ReadingActions>
+      <ReadingActions label="Unit steps"><Button disabled={busy} onClick={() => void advance()}>Continue</Button><button type="button" className="reading-previous" disabled={busy} onClick={previous}>Previous</button><span className="reading-count">{index + 1} / {data.steps.length}</span></ReadingActions>
     </>}
+    {!finished && visitedPractices.map(at => {
+      const item = practiceAfterScene(data.lessonId, data.steps[at].scene)!;
+      const active = practicing && index === at;
+      const position = practiceQuestions[at] ?? 0;
+      const attemptKey = `${at}:${position}`;
+      const attempted = attemptedPractices.includes(attemptKey);
+      // Keep visited forms mounted so Previous preserves answers and feedback.
+      return <section key={at} className="unit-practice-stage" hidden={!active} aria-label={item.title}>
+        <p id={`practice-guidance-${at}`} className="unit-caption">Try each question, then read the feedback. You can continue after an attempt, even if your answer needs another look.</p>
+        <PracticeBody data={data} kind={item.kind} questionIndex={position} onAttempt={() => setAttemptedPractices(previous => previous.includes(attemptKey) ? previous : [...previous, attemptKey])} />
+        <p className="unit-practice-status" role="status">{attempted ? 'You have explored the feedback. Continue when you are ready.' : 'Answer each question and explore the feedback to continue.'}</p>
+        <ReadingActions label="Practice steps"><Button disabled={!attempted} aria-describedby={`practice-guidance-${at}`} onClick={() => void advance()}>Continue</Button><button type="button" className="reading-previous" onClick={previous}>Previous</button><span className="reading-count">Practice {item.number} / {item.total}</span></ReadingActions>
+      </section>;
+    })}
     {error && <p role="alert">{error}</p>}<Credits data={data} />
   </main></Page>;
 }
@@ -194,7 +247,7 @@ export function VisualUnit({ lesson, content, reduceMotion }: { lesson: Lesson; 
   const [error, setError] = useState('');
   useEffect(() => {
     let active = true;
-    const load = lesson.id === 'unit-stars-milky-way' ? loadMilkyWayUnit : lesson.id === 'unit-our-solar-system' ? loadSolarSystemUnit : loadVisualUnit;
+    const load = lesson.id === 'unit-galaxies-universe' ? loadGalaxiesUnit : lesson.id === 'unit-stars-milky-way' ? loadMilkyWayUnit : lesson.id === 'unit-our-solar-system' ? loadSolarSystemUnit : loadVisualUnit;
     void load(lesson).then(value => { if (active) setData(value); }).catch(problem => { if (active) setError(problem instanceof Error ? problem.message : String(problem)); });
     return () => { active = false; };
   }, [lesson]);

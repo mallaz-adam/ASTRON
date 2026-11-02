@@ -1,0 +1,35 @@
+.galaxy-photo, .galaxy-model { margin: 0; min-width: 0; display: grid; gap: 8px; align-content: start; }
+.galaxy-unit .galaxy-photo h2, .galaxy-unit .galaxy-model h2, .galaxy-unit .galaxy-home-map h2, .galaxy-unit .galaxy-universe h2 { font-size: 21px; line-height: 1.3; }
+.galaxy-media-type { color: var(--soft-ink); font-size: 14px; line-height: 1.5; }
+.galaxy-photo-frame { position: relative; background: #10131c; border: var(--border-ink); outline: 1px dotted #c9a44a99; outline-offset: -6px; }
+.galaxy-photo-frame > img { display: block; width: 100%; height: auto; }
+.galaxy-photo figcaption, .galaxy-model figcaption { display: grid; gap: 4px; color: var(--soft-ink); font-size: 14px; line-height: 1.45; overflow-wrap: anywhere; }
+.galaxy-photo figcaption a { display: inline-flex; align-items: center; min-height: 44px; }
+.galaxy-license { display: flex; flex-wrap: wrap; gap: 0 12px; align-items: center; }
+.galaxy-plate { display: block; width: 100%; height: auto; border: var(--border-ink); }
+.galaxy-pair { display: grid; gap: 24px; min-width: 0; align-items: start; }
+.galaxy-pair--compared .galaxy-photo-frame { outline: 2px solid var(--ink); outline-offset: 3px; }
+.galaxy-feature-overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; fill: none; stroke: #E8C46A; stroke-width: 4; }
+.galaxy-homes { display: grid; gap: 12px; padding: 0 0 0 18px; list-style: none; border-left: 1px solid var(--line); }
+.galaxy-homes li { position: relative; min-width: 0; }
+.galaxy-homes li::before { content: ''; position: absolute; width: 18px; height: 1px; background: var(--line); left: -18px; top: 24px; }
+.galaxy-homes li > :is(button, div) { display: grid; gap: 4px; width: 100%; padding: 12px 14px; border: var(--border-line); background: var(--card); color: var(--ink); text-align: left; font: inherit; }
+.galaxy-homes button { cursor: pointer; min-height: 52px; }
+.galaxy-homes button[aria-pressed='true'] { background: var(--ink); color: var(--parchment); border-width: 2px; }
+.galaxy-homes span { font-size: 19px; }
+.galaxy-homes small { font-size: 15px; line-height: 1.45; }
+.galaxy-unit button:disabled { cursor: default; opacity: .55; }
+.galaxy-invitation { border-left: 2px solid var(--line); padding-left: 12px; font-size: 17px; line-height: 1.5; color: var(--soft-ink); }
+.galaxy-recap { display: grid; gap: 24px; }
+.galaxy-recap ol { display: grid; gap: 18px; padding-left: 24px; font-size: 19px; line-height: 1.6; }
+.galaxy-universe { display: grid; gap: 18px; background: var(--lapis); color: var(--card); padding: 18px; border: var(--border-ink); outline: 1px dotted #c9a44a99; outline-offset: -6px; }
+.galaxy-examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; text-align: center; }
+.galaxy-examples svg { display: block; width: 100%; height: auto; }
+.galaxy-examples p { font-size: 18px; line-height: 1.4; }
+.galaxy-opening { min-width: 0; }
+.galaxy-unit .unit-introduction { gap: 24px; }
+@media (min-width: 768px) {
+  .galaxy-opening { grid-column: 2; grid-row: 1; }
+  .galaxy-recap { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 36px; }
+}
+@media (min-width: 1100px) { .galaxy-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

@@ -88,10 +88,11 @@ describe('Stars and the Milky Way content and progression', () => {
     expect(progress.completions.every(c => c.correctAnswers === 0 && c.xpEarned === 0)).toBe(true);
     expect(progress.answers).toEqual([]); expect(progress.litStars).toEqual([]);
     expect(totalXp(progress.completions, progress.questDone, progress.answers, content.exercises)).toBe(20);
-    expect(nextReadingDestination(content, progress, learner, lesson.cellId)).toEqual({ to: '/learn', title: 'Back to the path' });
+    expect(nextReadingDestination(content, progress, learner, lesson.cellId)).toEqual({ to: '/cell/galaxies-universe', title: 'Galaxies and the universe' });
     const model = buildCoursePath(content, progress, learner, undefined, true);
-    expect(model.countText).toBe('3 of 6 units done'); expect(model.upcoming).toHaveLength(3);
-    expect(model.upcoming[0].id).toBe('galaxies-universe');
+    expect(model.countText).toBe('3 of 6 units done'); expect(model.upcoming).toHaveLength(2);
+    expect(model.current?.id).toBe('galaxies-universe');
+    expect(model.upcoming[0].id).toBe('sizes-distances');
     await finishReadingLesson(db, content, learner, lesson.id, new Date('2026-10-31T12:00:00'));
     expect(await readProgress(db)).toEqual(progress);
   });

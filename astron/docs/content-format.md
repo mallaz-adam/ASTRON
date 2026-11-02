@@ -577,6 +577,37 @@ their selected CC BY-SA 3.0 IGO licence. No database migration is needed.
 
 `choice` supplies four radio options with answer-specific feedback; `matching`
 supplies four descriptions, the Earth/outside groups and per-card explanations.
-Both practices are optional and unscored. Correct viewpoint matches are kept;
+Both practices are unscored. Since 2 November, they have dedicated steps that
+require an attempt and feedback before Continue, without a correct-answer gate.
+Correct viewpoint matches are kept;
 no Answer records or additional XP are written. Unit 3 unlocks after Unit 2.
 See `stars-milky-way.md` and `public/art/milky-way/README.md`.
+
+## Galaxies and the universe (2 November 2026)
+
+`unit-galaxies-universe` / `galaxies-universe` uses `readerType: "visual-unit"`
+and `/content/galaxies-universe.json`. The manuscript contains an introduction,
+ten ordered teaching scenes and a separate three-point recap. Each teaching step
+has an `invitation` alongside its paragraphs and at most two linked glossary terms.
+
+Scenes: `home`, `contents`, `gravity`, `beyond`, `andromeda`, `shapes`,
+`observation`, `reconstruction`, `universe`, `observable`.
+
+The five `objects` have local paths, measured pixel dimensions, alt text, captions,
+media types, full credits, HTTPS source/licence URLs and change notices. Four are
+new observations in `/art/galaxies/`; one reuses the existing Gaia reconstruction.
+The validator rejects remote media paths, missing provenance, false media labels,
+scene/identity errors, incomplete practice feedback and PDF export artefacts.
+
+`choice` contains a prompt, valid correct option, hint, explanation and per-option
+feedback. `evidence.questions` contains three independently identified questions,
+each with options, a correct option and specific feedback. They appear one at a
+time within the evidence practice, with Continue and Previous preserving answers.
+
+The shared reader gives Units 1–4 two distinct practice phases at their authored
+concept points. The phase definitions are in `logic/unitPractice.ts`. Every
+required field/question must be attempted and feedback displayed; correctness
+does not control Continue. Form/attempt state is local to the reader session,
+with no Answer writes, separate XP, new progress schema or database migration.
+Completion still uses `finishReadingLesson` after the recap. See
+`galaxies-universe.md` and `public/art/galaxies/README.md`.

@@ -210,6 +210,7 @@ service worker offers **REFRESH** when its files are ready.
 
 ## Guides and credits
 
+- [Platform and learning roadmap](astron/docs/platform-roadmap.md)
 - [Content format and validation](astron/docs/content-format.md)
 - [Learning structure and chapter evaluations](astron/docs/learning-structure.md)
 - [Scale of the cosmos: teaching, practice and performance](astron/docs/scale-of-cosmos.md)

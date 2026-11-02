@@ -81,6 +81,6 @@ describe('Our solar system: authored unit and progression', () => {
     await finishReadingLesson(database, content, learner, lesson.id, new Date('2026-10-31T12:00:00'));
     expect(await readProgress(database)).toEqual(progress);
     expect(buildCoursePath(content, progress, learner, undefined, true).countText).toBe('2 of 6 units done');
-    expect(buildCoursePath(content, progress, learner, undefined, true).upcoming).toHaveLength(3);
+    expect(buildCoursePath(content, progress, learner, undefined, true).upcoming).toHaveLength(2);
   });
 });

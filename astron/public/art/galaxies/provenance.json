@@ -1,0 +1,70 @@
+[
+  {
+    "file": "m51.webp",
+    "source": "https://esahubble.org/images/heic0506a/",
+    "download": "https://cdn.esahubble.org/archives/images/screen/heic0506a.jpg",
+    "retrieved": "2026-11-02",
+    "originalDimensions": [
+      1280,
+      888
+    ],
+    "dimensions": [
+      1000,
+      694
+    ],
+    "bytes": 71190,
+    "changes": "Resized and compressed as WebP. No recolouring or crop.",
+    "sha256": "626f7d6ba30d186a87b834c089b449e3b77c8defce4fe85ab7edf2078e3633e2"
+  },
+  {
+    "file": "ic-2006.webp",
+    "source": "https://esahubble.org/images/heic1508a/",
+    "download": "https://cdn.esahubble.org/archives/images/screen/heic1508a.jpg",
+    "retrieved": "2026-11-02",
+    "originalDimensions": [
+      1280,
+      904
+    ],
+    "dimensions": [
+      1000,
+      706
+    ],
+    "bytes": 18854,
+    "changes": "Resized and compressed as WebP. No recolouring or crop.",
+    "sha256": "407c0906cd5a81a1c5c7ca09aa06906e3190f44ad0126818bb0adaa63cdcc205"
+  },
+  {
+    "file": "deep-field.webp",
+    "source": "https://esahubble.org/images/heic0611b/",
+    "download": "https://cdn.esahubble.org/archives/images/screen/heic0611b.jpg",
+    "retrieved": "2026-11-02",
+    "originalDimensions": [
+      1280,
+      1280
+    ],
+    "dimensions": [
+      1000,
+      1000
+    ],
+    "bytes": 94256,
+    "changes": "Resized and compressed as WebP. No recolouring or crop.",
+    "sha256": "0411989cfab25239ea46087a38d4dc64d1c0bc71624900b654693c4ce9548411"
+  },
+  {
+    "file": "andromeda.webp",
+    "source": "https://esahubble.org/images/heic1112f/",
+    "download": "https://cdn.esahubble.org/archives/images/screen/heic1112f.jpg",
+    "retrieved": "2026-11-02",
+    "originalDimensions": [
+      1280,
+      828
+    ],
+    "dimensions": [
+      1000,
+      647
+    ],
+    "bytes": 91962,
+    "changes": "Resized and compressed as WebP. No recolouring or crop.",
+    "sha256": "1e63b3eae70a86c53a3911e4497dcb8c20af207e3a240828b82ea43630e01896"
+  }
+]

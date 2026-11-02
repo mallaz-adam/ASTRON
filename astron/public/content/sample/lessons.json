@@ -253,14 +253,16 @@
     "id": "unit-galaxies-universe",
     "title": "Galaxies and the universe",
     "cellId": "galaxies-universe",
-    "placeholder": true,
+    "placeholder": false,
     "cards": [
       {
         "kind": "say",
         "mood": "gentle",
-        "glaux": "This part of the atlas is still being written."
+        "glaux": "Our home is one part of a much wider sky."
       }
-    ]
+    ],
+    "reader": "/content/galaxies-universe.json",
+    "readerType": "visual-unit"
   },
   {
     "id": "unit-sizes-distances",

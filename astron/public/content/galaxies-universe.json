@@ -1,0 +1,438 @@
+{
+  "lessonId": "unit-galaxies-universe",
+  "unitNumber": 4,
+  "chapter": "Our place in space",
+  "title": "Galaxies and the universe",
+  "introduction": [
+    "You already know our solar system belongs to the Milky Way. But does everything belong to that one galaxy?",
+    "We will look beyond our home galaxy and meet other galaxies.",
+    "Along the way, we will learn what different space pictures can really tell us."
+  ],
+  "steps": [
+    {
+      "id": "home",
+      "scene": "home",
+      "title": "Remember our place",
+      "paragraphs": [
+        "Earth travels around the Sun.",
+        "Our solar system includes the Sun, planets, moons, and smaller objects.",
+        "This whole family belongs to the Milky Way.",
+        "The Milky Way contains many stars beyond our Sun.",
+        "Knowing our home helps us ask a bigger question: what lies outside it?"
+      ],
+      "terms": [
+        "solar system"
+      ],
+      "invitation": "Follow our place from Earth to the universe.",
+      "glaux": "A home can belong to a much wider neighborhood."
+    },
+    {
+      "id": "contents",
+      "scene": "contents",
+      "title": "What fills a galaxy?",
+      "paragraphs": [
+        "A galaxy is a huge gathering of stars and other material.",
+        "Many stars have planets.",
+        "Between stars, there is gas and dust.",
+        "Gas is material like air, often spread very thinly.",
+        "Space dust means tiny grains, not household dirt.",
+        "We see much of this material through the light it gives off, blocks, or reflects."
+      ],
+      "terms": [
+        "gas",
+        "space dust"
+      ],
+      "invitation": "Choose stars, gas or dust to explore the model."
+    },
+    {
+      "id": "gravity",
+      "scene": "gravity",
+      "title": "Why is it one galaxy?",
+      "paragraphs": [
+        "Gravity is the pull that objects have on one another.",
+        "It helps hold stars and other material together within a galaxy.",
+        "The Milky Way is more than a picture of crowded lights.",
+        "It is a connected system.",
+        "Our solar system is one small part of it, not a second galaxy."
+      ],
+      "terms": [
+        "gravity"
+      ],
+      "invitation": "Look at how our small solar system belongs to a galaxy."
+    },
+    {
+      "id": "beyond",
+      "scene": "beyond",
+      "title": "Beyond our Milky Way",
+      "paragraphs": [
+        "Astronomers use telescopes to observe galaxies outside our own.",
+        "Each is a separate gathering of stars and other material.",
+        "A distant galaxy may look like one soft patch.",
+        "That does not mean it is one star.",
+        "A telescope can reveal more of the galaxy's shape and detail."
+      ],
+      "terms": [
+        "galaxy"
+      ],
+      "invitation": "Explore an observed field containing many galaxies.",
+      "glaux": "One faint patch may contain countless individual lights."
+    },
+    {
+      "id": "andromeda",
+      "scene": "andromeda",
+      "title": "Meet Andromeda",
+      "paragraphs": [
+        "Andromeda is another galaxy, separate from the Milky Way.",
+        "In a wide picture, its many stars blend into a gentle glow.",
+        "Darker patches mark dust that blocks some starlight.",
+        "This is a view of Andromeda from our part of space.",
+        "It is not an outside photograph of our Milky Way."
+      ],
+      "terms": [],
+      "invitation": "Look for the bright middle and dark dust lanes."
+    },
+    {
+      "id": "shapes",
+      "scene": "shapes",
+      "title": "Different shapes",
+      "paragraphs": [
+        "Galaxies do not all look alike.",
+        "Some have curving arms and are called spiral galaxies.",
+        "Others look smooth and rounded or oval. These are called elliptical galaxies.",
+        "Some have less regular shapes. A galaxy can also look different from another viewing angle.",
+        "These descriptions help us compare appearances; they do not put every galaxy into a perfect box."
+      ],
+      "terms": [
+        "spiral galaxies",
+        "elliptical galaxies"
+      ],
+      "invitation": "Compare the spiral and the smooth oval. Equal panels do not mean equal sizes."
+    },
+    {
+      "id": "observation",
+      "scene": "observation",
+      "title": "What does a telescope picture show?",
+      "paragraphs": [
+        "A telescope records light coming from real objects.",
+        "Scientists may join several observations into one image.",
+        "They may also choose colours to reveal details.",
+        "Such an image still uses real measurements.",
+        "Yet its colours may differ from what our eyes would see.",
+        "A telescope picture is evidence, not always an ordinary snapshot."
+      ],
+      "terms": [
+        "telescope"
+      ],
+      "invitation": "Choose a feature to compare the observation and diagram."
+    },
+    {
+      "id": "reconstruction",
+      "scene": "reconstruction",
+      "title": "What does a drawing show?",
+      "paragraphs": [
+        "You have already compared two views of our Milky Way. Now ask how each picture was made.",
+        "A diagram simplifies something to explain a relationship.",
+        "An artist's reconstruction pictures a scene we cannot photograph directly. Observations guide it, but some details may be uncertain.",
+        "We cannot photograph our whole Milky Way from far outside it. An outside drawing helps explain its structure without becoming a photograph."
+      ],
+      "terms": [
+        "diagram",
+        "reconstruction"
+      ],
+      "invitation": "Compare the observation with an evidence-guided outside view.",
+      "glaux": "Ask what a picture knows, and what it only suggests."
+    },
+    {
+      "id": "universe",
+      "scene": "universe",
+      "title": "What is the universe?",
+      "paragraphs": [
+        "The Milky Way is one galaxy.",
+        "Andromeda is another.",
+        "Both belong to the universe.",
+        "The universe means all space and everything in it.",
+        "That includes stars, galaxies, and the space between them.",
+        "A picture showing several galaxies still shows only a tiny portion of this larger whole."
+      ],
+      "terms": [
+        "universe"
+      ],
+      "invitation": "Follow the relationships again, now including other galaxies."
+    },
+    {
+      "id": "observable",
+      "scene": "observable",
+      "title": "Does our view have an edge?",
+      "paragraphs": [
+        "Light needs time to travel. Some regions are too far away for their light to have reached us.",
+        "Astronomers call the region from which light has had time to reach us the observable universe.",
+        "That limit does not mean the whole universe ends there. We do not know its full extent.",
+        "A limit to our view is not a solid wall in space. There is still much to discover."
+      ],
+      "terms": [
+        "observable universe"
+      ],
+      "invitation": "Explore what a picture can and cannot tell us."
+    }
+  ],
+  "recap": {
+    "title": "Three things to keep",
+    "paragraphs": [
+      "Our solar system lies in the Milky Way, one of many galaxies.",
+      "The universe includes all space and everything in it.",
+      "Telescope images, diagrams and reconstructions provide different kinds of information."
+    ],
+    "glaux": "Our home is one part of a much wider sky."
+  },
+  "objects": [
+    {
+      "id": "m51",
+      "name": "Whirlpool Galaxy · M51",
+      "src": "/art/galaxies/m51.webp",
+      "width": 1000,
+      "height": 694,
+      "alt": "A processed Hubble observation of M51 with curved star-filled arms, dark dust lanes and a smaller companion galaxy.",
+      "caption": "Curving arms surround M51's bright centre. The smaller glow to the right is a companion galaxy.",
+      "credit": "NASA, ESA, S. Beckwith (STScI), and The Hubble Heritage Team (STScI/AURA)",
+      "source": "https://esahubble.org/images/heic0506a/",
+      "mediaType": "Telescope observation · processed colour",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Resized and compressed as WebP. No recolouring or crop."
+    },
+    {
+      "id": "ic-2006",
+      "name": "Smooth oval · IC 2006",
+      "src": "/art/galaxies/ic-2006.webp",
+      "width": 1000,
+      "height": 706,
+      "alt": "A processed Hubble observation shows a smooth, softly glowing oval galaxy against a dark field.",
+      "caption": "IC 2006 has a smoother appearance than the spiral M51.",
+      "credit": "ESA/Hubble & NASA. Image acknowledgement: Judy Schmidt and J. Blakeslee (Dominion Astrophysical Observatory).",
+      "source": "https://esahubble.org/images/heic1508a/",
+      "mediaType": "Telescope observation · processed colour",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Resized and compressed as WebP. No recolouring or crop."
+    },
+    {
+      "id": "deep-field",
+      "name": "A small field, many galaxies",
+      "src": "/art/galaxies/deep-field.webp",
+      "width": 1000,
+      "height": 1000,
+      "alt": "The Hubble Ultra Deep Field contains many small galaxies with varied shapes and colours, with a few foreground stars.",
+      "caption": "Many exposures were combined to reveal galaxies in this small field. It is not a picture of the entire universe.",
+      "credit": "NASA, ESA, and S. Beckwith (STScI) and the HUDF Team",
+      "source": "https://esahubble.org/images/heic0611b/",
+      "mediaType": "Telescope observation · processed colour",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Resized and compressed as WebP. No recolouring or crop."
+    },
+    {
+      "id": "andromeda",
+      "name": "Meet Andromeda",
+      "src": "/art/galaxies/andromeda.webp",
+      "width": 1000,
+      "height": 647,
+      "alt": "A ground-based observed image of Andromeda shows its long bright disk, a brighter middle and darker dust lanes.",
+      "caption": "A wide-field view of Andromeda from ground-based survey observations. Displayed colours may differ from unaided-eye vision.",
+      "credit": "ESA/Hubble & Digitized Sky Survey 2. Acknowledgment: Davide De Martin (ESA/Hubble)",
+      "source": "https://esahubble.org/images/heic1112f/",
+      "mediaType": "Ground-based observation · processed colour",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Resized and compressed as WebP. No recolouring or crop."
+    },
+    {
+      "id": "milky-model",
+      "name": "Our Milky Way · outside reconstruction",
+      "src": "/art/milky-way/galaxy-above.webp",
+      "width": 900,
+      "height": 900,
+      "alt": "A Gaia-informed reconstruction of the Milky Way seen from above, with curved star patterns around a bright middle.",
+      "caption": "An artist’s impression based on Gaia measurements. This is a scientific reconstruction, not an outside photograph.",
+      "credit": "ESA/Gaia/DPAC, Stefan Payne-Wardenaar",
+      "source": "https://www.esa.int/ESA_Multimedia/Images/2025/01/The_best_Milky_Way_map_by_Gaia",
+      "mediaType": "Scientific reconstruction · artist’s impression",
+      "license": "CC BY-SA 3.0 IGO",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/igo/",
+      "changes": "Resized and compressed as WebP; colour unchanged."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "solar system",
+      "definition": "Our Sun and the objects linked to it by gravity.",
+      "example": "Earth and its Moon are part of our solar system."
+    },
+    {
+      "term": "galaxy",
+      "definition": "A vast gathering of stars, gas and dust, held together by gravity.",
+      "example": "The Milky Way is a galaxy."
+    },
+    {
+      "term": "gas",
+      "definition": "Material that spreads to fill its surroundings.",
+      "example": "Air is a gas; space also has very thin gas."
+    },
+    {
+      "term": "space dust",
+      "definition": "Very small solid grains scattered through space.",
+      "example": "Dust can block light from stars."
+    },
+    {
+      "term": "gravity",
+      "definition": "The pull between objects with mass.",
+      "example": "Gravity keeps Earth moving around the Sun."
+    },
+    {
+      "term": "spiral galaxies",
+      "definition": "Galaxies with curved, arm-like patterns.",
+      "example": "M51 has visible spiral arms."
+    },
+    {
+      "term": "elliptical galaxies",
+      "definition": "Galaxies that look mostly smooth and round or oval.",
+      "example": "IC 2006 has a smooth, roughly oval appearance."
+    },
+    {
+      "term": "telescope",
+      "definition": "An instrument that collects light to help us study distant objects.",
+      "example": "A telescope records light coming from Andromeda."
+    },
+    {
+      "term": "diagram",
+      "definition": "A simplified drawing that explains a relationship.",
+      "example": "A relationship map shows our solar system within the Milky Way."
+    },
+    {
+      "term": "reconstruction",
+      "definition": "An evidence-guided picture of a view we cannot photograph directly.",
+      "example": "An artist pictures our Milky Way from outside."
+    },
+    {
+      "term": "universe",
+      "definition": "All space and everything in it.",
+      "example": "The Milky Way and Andromeda both belong to the universe."
+    },
+    {
+      "term": "observable universe",
+      "definition": "The region from which light has had time to reach us.",
+      "example": "Its observational limit is not a wall around the whole universe."
+    }
+  ],
+  "choice": {
+    "id": "our-place",
+    "prompt": "Which path moves from our familiar home toward the widest idea?",
+    "hint": "A solar system belongs inside a galaxy, not the other way around.",
+    "explanation": "Earth belongs to our solar system. Our solar system lies inside the Milky Way. Our galaxy belongs to the universe.",
+    "correct": "A",
+    "options": [
+      {
+        "id": "A",
+        "text": "Earth → solar system → Milky Way → universe",
+        "feedback": "You kept each smaller home inside the wider one."
+      },
+      {
+        "id": "B",
+        "text": "Earth → Milky Way → solar system → universe",
+        "feedback": "You found the groups. Try placing our solar system inside the Milky Way."
+      },
+      {
+        "id": "C",
+        "text": "Earth → solar system → universe → Milky Way",
+        "feedback": "The Milky Way belongs inside the universe. Try those last two again."
+      },
+      {
+        "id": "D",
+        "text": "Earth → Sun → Andromeda → universe",
+        "feedback": "Earth travels around the Sun, not inside it. Andromeda is a different galaxy."
+      }
+    ]
+  },
+  "evidence": {
+    "prompt": "What can these pictures tell us?",
+    "hint": "Look at how each picture was made and what its caption says.",
+    "questions": [
+      {
+        "id": "panel-size",
+        "prompt": "The two galaxy pictures used equal-sized panels. Does that prove equal galaxy sizes?",
+        "correct": "no",
+        "options": [
+          {
+            "id": "yes",
+            "text": "Yes, the galaxies must be equally large.",
+            "feedback": "The panels belong to the page layout. They do not compare the galaxies' real sizes."
+          },
+          {
+            "id": "no",
+            "text": "No, the panels do not compare real sizes.",
+            "feedback": "You separated the picture's size from the galaxy's size."
+          }
+        ]
+      },
+      {
+        "id": "colour",
+        "prompt": "Can a telescope observation use colours different from what our eyes would see?",
+        "correct": "yes",
+        "options": [
+          {
+            "id": "yes",
+            "text": "Yes, colours can help display measured light.",
+            "feedback": "Real observations can use processed colours to reveal details."
+          },
+          {
+            "id": "no",
+            "text": "No, every observation must match unaided-eye vision.",
+            "feedback": "Measured light can be combined and assigned display colours. It is still an observation."
+          }
+        ]
+      },
+      {
+        "id": "outside-photo",
+        "prompt": "Does the Gaia reconstruction mean a camera photographed our entire galaxy from outside?",
+        "correct": "no",
+        "options": [
+          {
+            "id": "yes",
+            "text": "Yes, it is a direct outside photograph.",
+            "feedback": "Gaia collected measurements. An artist used evidence to picture this outside view."
+          },
+          {
+            "id": "no",
+            "text": "No, measurements guide an artist's reconstruction.",
+            "feedback": "You recognised a view built from evidence, rather than an outside photograph."
+          }
+        ]
+      }
+    ]
+  },
+  "sources": [
+    {
+      "title": "NASA · Galaxies",
+      "url": "https://science.nasa.gov/universe/galaxies/"
+    },
+    {
+      "title": "NASA · What is the universe?",
+      "url": "https://science.nasa.gov/exoplanets/what-is-the-universe/"
+    },
+    {
+      "title": "NASA · Universe glossary",
+      "url": "https://science.nasa.gov/universe/glossary/"
+    },
+    {
+      "title": "NASA · How Webb sees back in time",
+      "url": "https://science.nasa.gov/mission/webb/science-overview/science-explainers/how-does-webb-see-back-in-time/"
+    },
+    {
+      "title": "AMNH · Observable universe",
+      "url": "https://www.amnh.org/exhibitions/permanent/scales-of-the-universe/observable"
+    },
+    {
+      "title": "ESA/Hubble · Image usage",
+      "url": "https://esahubble.org/copyright/"
+    }
+  ]
+}
