@@ -4,7 +4,8 @@ Draft for the owner to review, 2 November 2026.
 Grounded in the local app at commit `f7dc2fe` and a fresh browser walkthrough.
 This is a working plan, not a claim that the proposed features already exist.
 Status updated after Unit 4 and dedicated practice phases were implemented on
-2 November. The linked initial audit still documents the earlier app state.
+2 November, and the Pleiades story on 3 November. The linked initial audit still
+documents the earlier app state.
 
 ## The result we are working towards
 
@@ -25,9 +26,9 @@ sections. It does not require an encyclopaedia of astronomy or an account system
 | Today | Quests, XP, sun, streak, freeze and next-unit link | The next learning action is below the phone's opening view |
 | Learn | Chapter 1 Units 1–4 are playable, with prerequisites, definitions, pictures and dedicated ungraded practice | Units 5–6, the final evaluation, and a consistent whole-course roadmap |
 | Earlier chapter | Scale of the cosmos, Why stars differ and Orion are available as development material | Its place in the final sequence and its mixed numbering need review |
-| Stories | One authored Orion experience, linked to a collected star | A small coherent collection and easier browsing as it grows |
+| Stories | Orion and The Pleiades, each linked to a collected star | A small coherent collection and easier browsing as it grows |
 | Articles | One sourced Betelgeuse article, with cover, category and reading time | A curated collection connected to the learning topics |
-| My sky | Collected Betelgeuse links back to its story and article | A fuller, meaningful record of discoveries and revisits |
+| My sky | Betelgeuse links to its story/article; Alcyone links back to The Pleiades | A fuller, meaningful record of discoveries and revisits |
 | Preferences | Daily goal and Reduce motion | Real-device usability checks remain necessary |
 | Web foundation | React/Vite/TypeScript, local content, IndexedDB, PWA and Cloudflare test setup | Verify the latest deployment, real iPhone behaviour and release progress settings |
 
@@ -45,8 +46,8 @@ order needs review; the current app and the existing material below are unchange
 
 The [Chapter 1 blueprint](chapter-one-blueprint.md) maps its six unit goals to
 the ten-question evaluation. [Specific research briefs](next-research-briefs.md)
-are ready for Unit 4 and the Pleiades story. These are editorial preparation,
-not a claim that the new content or chapter-unlock gate is implemented.
+were used for Unit 4 and the Pleiades story, now implemented. The proposed
+remaining units and chapter-unlock gate are not implemented.
 
 Use **Chapter → Unit → Part** consistently in the learner-facing interface.
 The existing internal Unit/Cell records can keep their stable IDs.
@@ -73,7 +74,7 @@ finished lesson waiting only for progress.
 Retain the existing authored material for development. Before presenting it as
 the next full chapter, review its sequence with the owner. Some introductory
 scale/distance topics overlap the new Chapter 1, and the current authored map
-shows cells 1, 3 and Orion. Do not silently delete lessons, renumber stable
+shows cells 1, 3, Orion and The Pleiades. Do not silently delete lessons, renumber stable
 content IDs or fabricate completion. Apply the confirmed chapter-unlock rule
 when the complete curriculum and evaluations are implemented.
 

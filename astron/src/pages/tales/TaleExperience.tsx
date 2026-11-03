@@ -18,6 +18,7 @@ import { TaleHeader, TaleSources } from './TaleCommon';
 import { TaleChapter, TaleCover, TaleStar } from './TaleScenes';
 import { BeltActivity } from './BeltActivity';
 import { TalePreferences } from './TalePreferences';
+import { IllustratedChapter, IllustratedEnding, IllustratedEpilogue } from './IllustratedTale';
 import './TaleExperience.css';
 
 export function TaleExperience({ welcome = false }: { welcome?: boolean }) {
@@ -43,12 +44,18 @@ export function TaleExperience({ welcome = false }: { welcome?: boolean }) {
   useEffect(() => {
     let active = true;
     setData(undefined);
+    setError('');
     if (tale?.reader) void loadTaleExperience(tale.reader).then(value => {
       if (value.taleId !== tale.id) throw new Error('The story content belongs to a different tale.');
+      if ((value.kind === 'illustrated') !== (tale.readerType === 'illustrated')) throw new Error('The story reader type does not match its content.');
+      if (value.kind === 'illustrated') {
+        const chapters = content!.chapters.filter(row => row.taleId === tale.id).sort((a, b) => a.number - b.number);
+        if (chapters.length !== value.scenes.length || chapters.some((chapter, index) => chapter.number !== value.scenes[index].number)) throw new Error('Each story scene needs its illustration.');
+      }
       if (active) setData(value);
     }).catch(problem => { if (active) setError(problem instanceof Error ? problem.message : String(problem)); });
     return () => { active = false; };
-  }, [tale?.reader, tale?.id]);
+  }, [tale?.reader, tale?.id, tale?.readerType, content]);
 
   useEffect(() => {
     if (!data) return;
@@ -96,13 +103,13 @@ export function TaleExperience({ welcome = false }: { welcome?: boolean }) {
     <main id="main-content" ref={main} className="tale-main" tabIndex={-1} aria-busy={busy}>
       {stage !== 'cover' && <TaleHeader context={stage === 'sky' ? 'My sky' : tale.title} closeTo={welcome ? '/welcome?cover' : '/stories'} />}
       {stage === 'cover' && <TaleCover tale={tale} data={data} busy={busy} resume={Boolean(visit && !search.has('again') && !learner?.welcome?.completedOn)} onBegin={() => void save(() => startTaleVisit(db, content, localLearnerId, tale.id, new Date(), { welcome: welcome && !learner?.welcome?.completedOn, restart: search.has('again') || Boolean(welcome && learner?.welcome?.completedOn) }), () => navigate(welcome && !learner?.welcome?.completedOn ? '/welcome' : `/stories/${tale.id}`, { replace: true }))} />}
-      {stage === 'story' && <><TaleChapter key={chapter.number} chapter={chapter} data={data} /><ReadingActions label="Story chapters">
-        <Button disabled={busy} onClick={advance}>{chapter.number === chapters.length ? 'Discover your star' : 'Continue'}</Button>
+      {stage === 'story' && <>{data.kind === 'illustrated' ? <IllustratedChapter key={chapter.number} chapter={chapter} data={data} /> : <TaleChapter key={chapter.number} chapter={chapter} data={data} />}<ReadingActions label="Story chapters">
+        <Button disabled={busy} onClick={advance}>{chapter.number === chapters.length ? data.kind === 'illustrated' ? 'Discover the real sky' : 'Discover your star' : 'Continue'}</Button>
         {chapter.number > 1 && <button type="button" className="reading-previous" disabled={busy} onClick={() => void save(() => previousTaleChapter(db, localLearnerId, tale.id))}>Previous</button>}
         <p className="reading-count">{chapter.number} of {chapters.length}</p></ReadingActions></>}
-      {stage === 'star' && <><TaleStar tale={tale} data={data} collected={collected} /><div className="tale-actions tale-ending-actions"><Button disabled={busy} onClick={() => void save(() => collectTaleStar(db, content, localLearnerId, tale.id, new Date()))}>{collected ? 'Continue' : 'Light this star'}</Button></div></>}
-      {stage === 'activity' && <BeltActivity data={data} outcome={visit?.beltOutcome} busy={busy} onAnswer={answer} onContinue={advance} />}
-      {stage === 'sky' && <><TaleStar tale={tale} data={data} collected={collected} ending /><div className="tale-actions tale-ending-actions"><Button disabled={busy} onClick={advance}>Continue</Button></div></>}
+      {stage === 'star' && <>{data.kind === 'illustrated' ? <IllustratedEpilogue data={data} collected={collected} /> : <TaleStar tale={tale} data={data} collected={collected} />}<div className="tale-actions tale-ending-actions"><Button disabled={busy} onClick={() => void save(() => collectTaleStar(db, content, localLearnerId, tale.id, new Date()))}>{collected ? 'Continue' : 'Light this star'}</Button></div></>}
+      {stage === 'activity' && data.kind !== 'illustrated' && <BeltActivity data={data} outcome={visit?.beltOutcome} busy={busy} onAnswer={answer} onContinue={advance} />}
+      {stage === 'sky' && <>{data.kind === 'illustrated' ? <IllustratedEnding data={data} /> : <TaleStar tale={tale} data={data} collected={collected} ending />}<div className="tale-actions tale-ending-actions"><Button disabled={busy} onClick={advance}>{data.kind === 'illustrated' ? 'My sky' : 'Continue'}</Button></div></>}
       {stage === 'preferences' && (welcome ? <TalePreferences interests={content.interests} selected={progress.learnerInterests.filter(row => row.learnerId === localLearnerId).map(row => row.interestId)} dailyGoal={learner!.dailyGoal} reduceMotion={learner!.reduceMotion} busy={busy} onSave={(interests, goal, motion) => void save(() => finishWelcome(db, content, localLearnerId, interests, goal, motion, new Date()))} /> : <section className="tale-preferences"><h1>Your star is in My sky.</h1><Link to="/sky" className="atlas-button atlas-button--primary">My sky</Link></section>)}
       {(error || loadError) && <div className="tale-save-error" role="alert"><p>{error || loadError}</p><p>Your place is still here. Please try the action again.</p></div>}
       <footer className="tale-footer">{stage !== 'cover' && <TaleSources data={data} />}<Toggle label="Reduce motion" checked={learner?.reduceMotion ?? false} onChange={value => void save(() => setReduceMotion(db, localLearnerId, value))} />{temporaryProgress && <a className="article-open" href="/start">Start from the beginning</a>}</footer>

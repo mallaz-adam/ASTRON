@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { TaleExperienceData } from '../../data/taleExperience';
+import type { OrionTaleData } from '../../data/taleExperience';
 import type { TaleVisit } from '../../data/types';
 import type { BeltChoice } from '../../logic/taleJourney';
 import { Button } from '../../design/Button';
@@ -8,7 +8,7 @@ import { OrionChart } from './OrionChart';
 import { TaleGlaux } from './TaleCommon';
 
 export function BeltActivity({ data, outcome, busy, onAnswer, onContinue }: {
-  data: TaleExperienceData; outcome?: TaleVisit['beltOutcome']; busy: boolean;
+  data: OrionTaleData; outcome?: TaleVisit['beltOutcome']; busy: boolean;
   onAnswer: (choice: BeltChoice | 'show-me') => Promise<boolean | undefined>; onContinue: () => void;
 }) {
   const [choice, setChoice] = useState<BeltChoice>();

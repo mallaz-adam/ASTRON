@@ -1,0 +1,155 @@
+{
+  "kind": "illustrated",
+  "taleId": "pleiades-placeholder",
+  "welcomeLine": "Some stories begin on a road and end among the stars.",
+  "starName": "Alcyone",
+  "starLine": "Keep Alcyone in your sky, as a reminder of the sisters.",
+  "endingLine": "The sisters have a place in the story. Alcyone has one in your sky.",
+  "endingQuestion": "What holds a group of stars together?",
+  "fact": "Alcyone is one of the bright stars in the Pleiades star cluster.",
+  "cover": {
+    "src": "/art/pleiades/vedder-1280.webp",
+    "width": 1280,
+    "height": 838,
+    "alt": "Seven women in pale robes gather among clouds, holding a broken thread of light, in Elihu Vedder's painting The Pleiades.",
+    "caption": "The Pleiades, 1885. A later artist's interpretation, with a missing-star motif from another telling.",
+    "credit": "Elihu Vedder · The Metropolitan Museum of Art, Gift of George A. Hearn, 1910 (10.64.13)",
+    "source": "https://www.metmuseum.org/art/collection/search/13070",
+    "license": "Public domain",
+    "licenseUrl": "https://www.metmuseum.org/about-the-met/policies-and-documents/open-access"
+  },
+  "scenes": [
+    {
+      "number": 1,
+      "artwork": {
+        "src": "/art/pleiades/scene-1.svg",
+        "width": 640, "height": 420,
+        "alt": "Pleione leads seven daughters along a winding road between imagined Greek hills.",
+        "caption": "A family on the road. An imagined scene, drawn for ASTRON.",
+        "credit": "ASTRON · Original atlas illustration",
+        "license": "Modern story illustration"
+      }
+    },
+    {
+      "number": 2,
+      "artwork": {
+        "src": "/art/pleiades/scene-2.svg",
+        "width": 640, "height": 420,
+        "alt": "The family moves away together. Orion stands far behind on a separate ridge.",
+        "caption": "The family turns away. The landscape and poses are imagined.",
+        "credit": "ASTRON · Original atlas illustration",
+        "license": "Modern story illustration"
+      }
+    },
+    {
+      "number": 3,
+      "artwork": {
+        "src": "/art/pleiades/scene-3.svg",
+        "width": 640, "height": 420,
+        "alt": "Pleione and her daughters stay close together as they travel through a dim valley.",
+        "caption": "Together through the valley. An imagined scene, not a recorded route.",
+        "credit": "ASTRON · Original atlas illustration",
+        "license": "Modern story illustration"
+      }
+    },
+    {
+      "number": 4,
+      "artwork": {
+        "src": "/art/pleiades/scene-4.svg",
+        "width": 640, "height": 420,
+        "alt": "The same hillside appears in four panels: new leaves, summer warmth, falling leaves and winter branches.",
+        "caption": "Seasons suggest the passing years. They do not show a seven-year route.",
+        "credit": "ASTRON · Original atlas illustration",
+        "license": "Modern story illustration"
+      }
+    },
+    {
+      "number": 5,
+      "artwork": {
+        "src": "/art/pleiades/scene-5.svg",
+        "width": 640, "height": 420,
+        "alt": "A pale opening in the clouds shines above seven sisters, symbolising Zeus taking notice.",
+        "caption": "A symbolic moment from the myth. Not an observation of the sky.",
+        "credit": "ASTRON · Original atlas illustration",
+        "license": "Modern story illustration"
+      }
+    },
+    {
+      "number": 6,
+      "artwork": {
+        "src": "/art/pleiades/scene-6.svg",
+        "width": 640, "height": 420,
+        "alt": "Seven small figures are echoed by seven lights above them, representing the sisters' place among the stars.",
+        "caption": "The sisters become a sky-story. A mythic image, not how stars form.",
+        "credit": "ASTRON · Original atlas illustration",
+        "license": "Modern story illustration"
+      }
+    },
+    {
+      "number": 7,
+      "artwork": {
+        "src": "/art/pleiades/scene-7.svg",
+        "width": 640, "height": 420,
+        "alt": "A compact group of seven symbolic lights represents the Pleiades; a separate hunter figure represents Orion.",
+        "caption": "Pleiades and Orion in the telling. Symbolic placement, not a sky-finding chart.",
+        "credit": "ASTRON · Original atlas illustration",
+        "license": "Modern story illustration"
+      }
+    }
+  ],
+  "epilogue": {
+    "title": "Meet the real Pleiades",
+    "text": "The story ends, but its little group of lights is real. Astronomers call it the Pleiades, or Messier 45.\n\nIt is a star cluster: a group of stars together in space. Gravity, the pull between objects, helps hold them together. The cluster contains far more stars than the seven sisters of the tale.",
+    "photograph": {
+      "src": "/art/pleiades/cluster-960.webp",
+      "width": 960, "height": 840,
+      "alt": "A real astronomical photograph shows bright blue-white Pleiades stars among many fainter lights, with faint blue haze.",
+      "caption": "A closer view within an astronomical photograph. The faint haze is easier to see in a photograph than with your eyes. Resized, compressed and displayed as a zoomed detail for ASTRON.",
+      "credit": "ESO/S. Brunier",
+      "source": "https://www.eso.org/public/images/b11/",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "pattern": {
+      "src": "/art/pleiades/cluster-pattern.svg",
+      "width": 640, "height": 420,
+      "alt": "A simplified group of bright points represents a star cluster, surrounded by smaller points. It illustrates the idea of a cluster, not exact star positions.",
+      "caption": "An illustrated star cluster. Positions and sizes are schematic, not a sky-finding chart.",
+      "credit": "ASTRON · Original explanatory diagram",
+      "license": "Schematic, not to scale"
+    },
+    "observingNote": "The Pleiades lie in Taurus, the Bull, a named area of the sky. To find them outside, use a sky chart for your location, date, time and viewing direction.",
+    "discoveries": [
+      {
+        "id": "atlas-burden",
+        "label": "Another ancient voice",
+        "text": "Not every ancient writer told the same tale. A surviving piece of a play by Aeschylus describes the sisters grieving for Atlas, their father, as he carries the sky.\n\nIt does not tell the escape story you have just read. Ancient stories could give the same stars different meanings."
+      },
+      {
+        "id": "visible-stars",
+        "label": "Why not exactly seven?",
+        "text": "The Greek poet Aratus wrote of seven sisters, but said only six stars were visible.\n\nYou may see more or fewer. A darker sky and your eyesight change what you notice. Binoculars reveal more stars. The traditional name is not a rule for counting them."
+      }
+    ]
+  },
+  "sourceNotes": [
+    "This original retelling follows Pseudo-Hyginus, Astronomica 2.21.4 (2.21.6 in the University of Georgia source collection). It is a Roman-era Latin witness to a Greek sky-story tradition. Zeus is the Greek name used here for the source's Jupiter.",
+    "In this version Orion threatens Pleione, the mother, and searches for her for seven years. The source says the daughters are placed among the stars. It does not explain what happens to Pleione afterward. Her family connection to Atlas also appears in Pseudo-Apollodorus, Library 3.10.1.",
+    "The road, landscapes, seasons, gestures and emotional descriptions are modern storytelling choices. There is no invented dialogue. Other versions are kept separate from this tale.",
+    "Vedder's painting is nineteenth-century art, not ancient Greek evidence. Its missing-star motif belongs to another interpretation. The seven atlas scenes are modern illustrations. The ESO photograph records real starlight; the explanatory diagram is schematic. The mythical chase is not a physical pursuit between stars.",
+    "Aratus's visible-star count is an ancient report, not a modern rule. The Pleiades are an open star cluster in Taurus. The number visible depends on the observer and sky conditions."
+  ],
+  "sources": [
+    { "title": "Pseudo-Hyginus · The daughters of Atlas (UGA source collection)", "url": "https://open.online.uga.edu/gantzmythsources/chapter/p-214/" },
+    { "title": "Pseudo-Hyginus · Astronomica 2.21, Latin text", "url": "https://latin.packhum.org/loc/899/1/30/" },
+    { "title": "Pseudo-Apollodorus · Library 3.10.1, Frazer translation", "url": "https://www.theoi.com/Text/Apollodorus3.html" },
+    { "title": "Aratus · Phaenomena 253–267, Mair translation", "url": "https://ftp.theoi.com/Text/AratusPhaenomena.html" },
+    { "title": "Aeschylus · Fragment 172, Smyth numbering", "url": "https://www.theoi.com/Text/AeschylusFragments3.html" },
+    { "title": "NASA · Messier 45, the real Pleiades cluster", "url": "https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-45/" },
+    { "title": "NASA APOD · Visibility and the Seven Sisters", "url": "https://science.nasa.gov/image-article/apod-2026-february-23-pleiades-the-seven-sisters-star-cluster/" },
+    { "title": "CDS SIMBAD · Alcyone", "url": "https://simbad.u-strasbg.fr/simbad/sim-id?Ident=Alcyone&protocol=html" },
+    { "title": "The Met · Elihu Vedder, The Pleiades, 1885", "url": "https://www.metmuseum.org/art/collection/search/13070" },
+    { "title": "ESO · Pleiades photograph and credit", "url": "https://www.eso.org/public/images/b11/" },
+    { "title": "ESO · Image reuse terms", "url": "https://www.eso.org/public/copyright/" }
+  ]
+}

@@ -1,5 +1,17 @@
 [
-  { "id": "orion", "name": "Orion", "mythNote": "In Greek tradition, Orion is a hunter whose figure is imagined among the stars." },
-  { "id": "pleiades", "name": "The Pleiades", "mythNote": "Placeholder." },
-  { "id": "clues", "name": "Clues", "mythNote": "" }
+  {
+    "id": "orion",
+    "name": "Orion",
+    "mythNote": "In Greek tradition, Orion is a hunter whose figure is imagined among the stars."
+  },
+  {
+    "id": "pleiades",
+    "name": "The Pleiades",
+    "mythNote": "In one ancient telling, seven sisters are placed among the stars. The real Pleiades are a star cluster in Taurus."
+  },
+  {
+    "id": "clues",
+    "name": "Clues",
+    "mythNote": ""
+  }
 ]

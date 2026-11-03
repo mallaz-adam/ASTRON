@@ -17,7 +17,7 @@ export function Stories() {
       const done = progress?.completions.some(completion => completion.learnerId === localLearnerId && content.cells.some(cell => cell.kind === 'tale' && cell.id === completion.cellId && cell.taleId === tale.id));
       const resume = progress?.learners.find(row => row.id === localLearnerId)?.taleVisit;
       const inProgress = resume?.taleId === tale.id && !['sky', 'preferences'].includes(resume.stage);
-      return <article className="library-story" key={tale.id}><CoverImage /><div><p className="tale-eyebrow">{tale.subtitle}</p><h2>{tale.title}</h2><p>{tale.teaser}</p><Link className="atlas-button atlas-button--primary" to={`/stories/${tale.id}${done && !inProgress ? '?again' : ''}`}>{inProgress ? 'Continue the story' : done ? 'Read again' : 'Begin the story'}</Link></div></article>;
+      return <article className="library-story" key={tale.id}>{tale.cover ? <img className="tale-cover-image" src={tale.cover} width="640" height="419" loading="lazy" decoding="async" alt={tale.coverAlt} /> : <CoverImage />}<div><p className="tale-eyebrow">{tale.subtitle}</p><h2>{tale.title}</h2><p>{tale.teaser}</p><Link className="atlas-button atlas-button--primary" to={`/stories/${tale.id}${done && !inProgress ? '?again' : ''}`}>{inProgress ? 'Continue the story' : done ? 'Read again' : 'Begin the story'}</Link></div></article>;
     })}
     {error && <p role="alert">{error}</p>}<TodayTabs />
   </main></Page>;

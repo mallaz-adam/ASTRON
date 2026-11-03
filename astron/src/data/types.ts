@@ -2,7 +2,7 @@
 export type Interest = { id: string; label: string };
 export type Constellation = { id: string; name: string; mythNote: string };
 export type Star = { id: string; name: string; greekLetter: string; factText: string; constellationId: string };
-export type Tale = { id: string; title: string; subtitle: string; minutes: number; teaser: string; sourceNote: string; starId: string; reader?: string };
+export type Tale = { id: string; title: string; subtitle: string; minutes: number; teaser: string; sourceNote: string; starId: string; reader?: string; readerType?: 'illustrated'; cover?: string; coverAlt?: string };
 export type Chapter = { taleId: string; number: number; title: string; text: string; marginNotes: string[]; glaux?: string; presentation?: 'hunter' | 'landscape' | 'chart' | 'guided-chart' };
 export type Unit = { id: string; title: string; summary: string; orderNo: number };
 export type CellKind = 'lesson' | 'tale' | 'quiz';

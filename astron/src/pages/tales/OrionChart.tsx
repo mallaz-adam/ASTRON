@@ -1,10 +1,10 @@
 import { useId } from 'react';
-import type { TaleExperienceData } from '../../data/taleExperience';
+import type { OrionTaleData } from '../../data/taleExperience';
 import type { BeltChoice } from '../../logic/taleJourney';
 import { projectOrion } from '../../logic/orionChart';
 
 export function OrionChart({ data, highlight, labels = false, connections = true, activity = false }: {
-  data: TaleExperienceData; highlight?: BeltChoice | 'star'; labels?: boolean; connections?: boolean; activity?: boolean;
+  data: OrionTaleData; highlight?: BeltChoice | 'star'; labels?: boolean; connections?: boolean; activity?: boolean;
 }) {
   const id = useId();
   const points = data.chart.stars.map(star => ({ ...star, ...projectOrion(star) }));

@@ -262,11 +262,12 @@ There is one unit, `How stars live and die`, with eleven cells: eight lessons,
 two tales, and a final quiz. Why stars differ is the eight-card lesson with two
 10 XP exercises. The other seven lessons have short placeholder cards. The two
 existing quiz exercises retain their data and have placeholder feedback lines.
-The Orion tale keeps its two chapters. The Pleiades sample adds one
-placeholder chapter, Alcyone, and a Pleiades group in the existing constellation
-table. Its descriptive fields and Greek-letter field are marked as placeholders.
+The Orion tale now has four illustrated scenes. The Pleiades has seven scenes
+and a separate real-sky ending, retaining the existing Alcyone and Pleiades IDs.
+Alcyone's Greek-letter field is empty rather than an invented designation.
 There are still three daily quests and one article.
-The tale is an original fictional vignette, not an ancient text.
+The tales are original retellings, with their selected ancient sources and
+modern adaptation choices explained separately.
 The astronomy source is [NASA’s Betelgeuse article](https://science.nasa.gov/universe/what-is-betelgeuse-inside-the-strange-volatile-star/).
 
 ## Progress and the rules
@@ -611,3 +612,27 @@ does not control Continue. Form/attempt state is local to the reader session,
 with no Answer writes, separate XP, new progress schema or database migration.
 Completion still uses `finishReadingLesson` after the recap. See
 `galaxies-universe.md` and `public/art/galaxies/README.md`.
+
+
+## Illustrated stories without a quiz (3 November 2026)
+
+`Tale.readerType: "illustrated"` selects an illustrated reader; omit it for the
+existing Orion experience. It requires a local `reader` path. Optional library
+`cover` paths must be local WebP files and require a non-empty `coverAlt`.
+
+An illustrated reader JSON has `kind: "illustrated"`, `taleId`, `starName`,
+`welcomeLine`, `starLine`, `endingLine`, `endingQuestion`, `fact`, `sourceNotes`,
+`cover`, numbered `scenes`, `epilogue` and HTTPS `sources`. Each scene's number
+must match the corresponding tale scene in `chapters.json`. Artwork objects
+provide `src`, `alt`, `caption`, positive integer `width` and `height`, `credit`
+and `license`; optional `source` and `licenseUrl` must be HTTPS links.
+
+`epilogue` contains `title`, `text`, `photograph`, `pattern`, `observingNote` and
+`discoveries` with unique `id`, `label` and `text`. The optional discoveries
+never gate completion. No Orion `activity` or `chart` is accepted on this kind.
+Collection uses the shared tale cell and `lightStar` transaction, then moves
+directly to the sky ending. It adds no XP rule or progress migration.
+
+The first example is `/content/pleiades.json`, with seven narrative scenes,
+local art and an Alcyone ending. See [the story guide](pleiades-story.md) and
+[image credits](../public/art/pleiades/README.md).

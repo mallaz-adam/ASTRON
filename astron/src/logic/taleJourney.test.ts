@@ -3,12 +3,12 @@ import { describe, expect, it } from 'vitest';
 import { defaultLearner } from '../data/learner';
 import type { Progress } from '../data/types';
 import { sampleContent } from '../data/contentFixtures';
-import { validateTaleExperience } from '../data/taleExperience';
+import { validateTaleExperience, type OrionTaleData } from '../data/taleExperience';
 import { evaluateBeltChoice, needsWelcome, readableTales } from './taleJourney';
 import { projectOrion } from './orionChart';
 
 const readerFile = () => JSON.parse(readFileSync(new URL('../../public/content/orion.json', import.meta.url), 'utf8'));
-const data = validateTaleExperience(readerFile());
+const data = validateTaleExperience(readerFile()) as OrionTaleData;
 const empty = (): Progress => ({ learners: [defaultLearner('one')], learnerInterests: [], activityDays: [], questDone: [], completions: [], answers: [], litStars: [], articleReads: [] });
 
 describe('First-visit routing', () => {
@@ -30,7 +30,7 @@ describe('First-visit routing', () => {
   });
   it('exposes only authored tale readers and retains all four manuscript chapters', () => {
     const content = sampleContent();
-    expect(readableTales(content).map(tale => tale.id)).toEqual(['orion-shoulder']);
+    expect(readableTales(content).map(tale => tale.id)).toEqual(['orion-shoulder', 'pleiades-placeholder']);
     expect(content.chapters.filter(chapter => chapter.taleId === 'orion-shoulder')).toHaveLength(4);
   });
 });

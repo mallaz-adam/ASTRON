@@ -47,7 +47,7 @@ are separate from earlier permanent progress. See
 | `/cell/stars-milky-way` | Chapter 1, Unit 3: Stars and the Milky Way, unlocked by Unit 2. |
 | `/cell/orion-lesson` | Scale of the cosmos, with optional practice and a recap. |
 | `/cell/star-lesson` | Why stars differ, after its authored prerequisite. |
-| `/stories` | Greek stories. |
+| `/stories` | Orion and The Pleiades, with illustrated scenes and real-sky endings. |
 | `/articles` | Scientific articles. |
 | `/sky` | My sky. |
 | `/settings` | Preferences and Reduce motion. |
@@ -65,5 +65,6 @@ First visits enter the welcome before the normal learning pages.
 - [Scale lesson, practice and performance](docs/scale-of-cosmos.md)
 - [Glaux's character](docs/glaux-character.md)
 - [Orion journey](docs/orion-journey.md)
+- [The Pleiades story](docs/pleiades-story.md)
 - [Art credits and provenance](docs/orion-assets.md)
 - [Hosting and phone testing](docs/private-test.md)

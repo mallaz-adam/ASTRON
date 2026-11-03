@@ -46,6 +46,11 @@ export function checkRows(value: unknown, schema: Schema, file: string): Record<
     if (file.endsWith('lessons.json') && record.reader !== undefined) fields.reader = value => typeof value === 'string' && /^\/content\/[a-zA-Z0-9/_-]+\.json$/.test(value);
     if (file.endsWith('lessons.json') && record.readerType !== undefined) fields.readerType = value => value === 'visual-unit' && typeof record.reader === 'string';
     if (file.endsWith('tales.json') && record.reader !== undefined) fields.reader = value => typeof value === 'string' && /^\/content\/[a-zA-Z0-9/_-]+\.json$/.test(value);
+    if (file.endsWith('tales.json') && record.readerType !== undefined) fields.readerType = value => value === 'illustrated' && typeof record.reader === 'string';
+    if (file.endsWith('tales.json') && record.cover !== undefined) {
+      fields.cover = value => typeof value === 'string' && /^\/art\/[a-zA-Z0-9/_-]+\.webp$/.test(value);
+      fields.coverAlt = text;
+    }
     if (file.endsWith('chapters.json')) {
       if (record.glaux !== undefined) fields.glaux = text;
       if (record.presentation !== undefined) fields.presentation = oneOf('hunter', 'landscape', 'chart', 'guided-chart');

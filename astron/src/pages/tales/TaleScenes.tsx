@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Chapter, Tale } from '../../data/types';
-import type { TaleExperienceData } from '../../data/taleExperience';
+import type { TaleExperienceData, OrionTaleData } from '../../data/taleExperience';
 import { Button } from '../../design/Button';
 import { DiscoveryDetails } from '../../design/DiscoveryDetails';
 import { CoverImage, ReadingText, TaleGlaux, TaleSources } from './TaleCommon';
 import { OrionChart } from './OrionChart';
+import { StoryArtworkFigure } from './IllustratedTale';
 
 export function TaleCover({ tale, data, resume, busy, onBegin }: { tale: Tale; data: TaleExperienceData; resume: boolean; busy: boolean; onBegin: () => void }) {
   return <section className="tale-cover" aria-labelledby="tale-title">
     <Link to="/" className="tale-wordmark cover-wordmark">ASTRON<img src="/art/star.svg" width="20" height="20" alt="" /></Link>
     <div className="cover-heading"><p className="tale-eyebrow">{tale.subtitle}</p><h1 id="tale-title">{tale.title}</h1></div>
-    <div className="cover-art"><CoverImage priority /></div>
+    <div className={`cover-art ${data.kind === 'illustrated' ? 'cover-art--historical' : ''}`}>{data.kind === 'illustrated' ? <StoryArtworkFigure artwork={data.cover} priority /> : <CoverImage priority />}</div>
     <div className="cover-invitation"><p className="cover-teaser">{tale.teaser}</p>
       <Button onClick={onBegin} disabled={busy}>{resume ? 'Resume the story' : 'Begin the story'}</Button>
       <TaleGlaux mood="gentle">{data.welcomeLine}</TaleGlaux>
@@ -24,7 +25,7 @@ function HunterImage() {
   return <img className="tale-hunter-image" src="/art/orion/hunter.webp" width="403" height="530" decoding="async" alt="The supplied illustration of Orion, raising a club and holding an animal skin, with a pattern of stars." />;
 }
 
-export function TaleChapter({ chapter, data }: { chapter: Chapter; data: TaleExperienceData }) {
+export function TaleChapter({ chapter, data }: { chapter: Chapter; data: OrionTaleData }) {
   const [hunterVisible, setHunterVisible] = useState(true);
   const [feature, setFeature] = useState<'belt' | 'star'>('belt');
   const type = chapter.presentation;
@@ -47,7 +48,7 @@ export function TaleChapter({ chapter, data }: { chapter: Chapter; data: TaleExp
   </section>;
 }
 
-export function TaleStar({ tale, data, collected, ending = false }: { tale: Tale; data: TaleExperienceData; collected: boolean; ending?: boolean }) {
+export function TaleStar({ tale, data, collected, ending = false }: { tale: Tale; data: OrionTaleData; collected: boolean; ending?: boolean }) {
   return <section className="tale-star-scene" aria-labelledby="star-title">
     <div className="tale-star-heading"><p className="tale-eyebrow">{ending ? 'Your sky has begun' : "The story's star"}</p><h1 id="star-title">Betelgeuse</h1>{collected && <p className="tale-collected">Added to My sky</p>}<p>{data.fact}</p></div>
     <figure className="tale-plate tale-star-plate"><OrionChart data={data} highlight="star" labels /><figcaption>Orion, seen from Earth</figcaption></figure>

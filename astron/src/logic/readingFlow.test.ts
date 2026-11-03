@@ -44,8 +44,9 @@ describe('A connected reading journey', () => {
       .toEqual({ to: '/cell/star-lesson', title: 'Why stars differ' });
   });
   it('allows the next lesson on replay and returns to the path after the last authored content', () => {
-    const progress = { completions: ['orion-lesson', 'star-lesson', 'orion-tale'].map(completed) };
+    const progress = { completions: ['orion-lesson', 'star-lesson', 'orion-tale', 'pleiades-tale'].map(completed) };
     expect(nextReadingDestination(content, progress, learner, lesson.cellId)?.to).toBe('/cell/star-lesson');
-    expect(nextReadingDestination(content, progress, learner, 'orion-tale')).toEqual({ to: '/learn', title: 'Back to the path' });
+    expect(nextReadingDestination(content, progress, learner, 'orion-tale')).toEqual({ to: '/cell/pleiades-tale', title: 'The Pleiades' });
+    expect(nextReadingDestination(content, progress, learner, 'pleiades-tale')).toEqual({ to: '/learn', title: 'Back to the path' });
   });
 });

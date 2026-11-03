@@ -1,23 +1,75 @@
 import { isBeltChoice, type BeltChoice } from '../logic/taleJourney';
 
 export type ChartStar = { id: string; name: string; raDegrees: number; decDegrees: number };
-export type TaleExperienceData = {
+type TaleReaderBase = {
   taleId: string; welcomeLine: string; starLine: string; endingLine: string; endingQuestion: string; fact: string;
+  sources: { title: string; url: string }[];
+};
+export type OrionTaleData = TaleReaderBase & {
+  kind?: 'orion';
   activity: { prompt: string; hint: string; rightLine: string; showLine: string; explanation: string;
     groups: { id: BeltChoice; label: string; description: string; starIds: string[]; missedLine: string }[] };
   chart: { epoch: string; stars: ChartStar[]; connections: [string, string][] };
-  sources: { title: string; url: string }[];
 };
+
+export type StoryArtwork = {
+  src: string; alt: string; caption: string; width: number; height: number;
+  credit: string; source?: string; license: string; licenseUrl?: string;
+};
+export type IllustratedTaleData = TaleReaderBase & {
+  kind: 'illustrated'; starName: string; sourceNotes: string[];
+  cover: StoryArtwork;
+  scenes: { number: number; artwork: StoryArtwork }[];
+  epilogue: {
+    title: string; text: string; photograph: StoryArtwork; pattern: StoryArtwork;
+    observingNote: string;
+    discoveries: { id: string; label: string; text: string }[];
+  };
+};
+export type TaleExperienceData = OrionTaleData | IllustratedTaleData;
 
 function record(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 const text = (value: unknown): value is string => typeof value === 'string' && value.trim().length > 0;
-function fail(field: string): never { throw new Error(`orion.json: ${field} — missing or invalid value.`); }
+function fail(field: string): never { throw new Error(`Story reader: ${field} — missing or invalid value.`); }
+const https = (value: unknown) => typeof value === 'string' && /^https:\/\//.test(value);
+const paragraphs = (value: unknown): value is string[] => Array.isArray(value) && value.length > 0 && value.every(text);
+
+function checkArtwork(value: unknown, field: string) {
+  if (!record(value)) fail(field);
+  if (typeof value.src !== 'string' || !/^\/art\/[a-zA-Z0-9/_-]+\.(svg|webp)$/.test(value.src)) fail(`${field}.src`);
+  for (const key of ['alt', 'caption', 'credit', 'license']) if (!text(value[key])) fail(`${field}.${key}`);
+  for (const key of ['width', 'height']) if (typeof value[key] !== 'number' || !Number.isInteger(value[key]) || value[key] <= 0) fail(`${field}.${key}`);
+  for (const key of ['source', 'licenseUrl']) if (value[key] !== undefined && !https(value[key])) fail(`${field}.${key}`);
+}
 
 export function validateTaleExperience(value: unknown): TaleExperienceData {
   if (!record(value)) fail('root');
   for (const field of ['taleId', 'welcomeLine', 'starLine', 'endingLine', 'endingQuestion', 'fact']) if (!text(value[field])) fail(field);
+  if (!Array.isArray(value.sources) || !value.sources.length || !value.sources.every(source => record(source) && text(source.title) && https(source.url))) fail('sources');
+  if (value.kind === 'illustrated') {
+    if (!text(value.starName) || !paragraphs(value.sourceNotes)) fail('starName/sourceNotes');
+    checkArtwork(value.cover, 'cover');
+    if (!Array.isArray(value.scenes) || !value.scenes.length) fail('scenes');
+    value.scenes.forEach((scene, index) => {
+      if (!record(scene) || scene.number !== index + 1) fail(`scenes[${index}].number`);
+      checkArtwork(scene.artwork, `scenes[${index}].artwork`);
+    });
+    if (!record(value.epilogue)) fail('epilogue');
+    for (const key of ['title', 'text', 'observingNote']) if (!text(value.epilogue[key])) fail(`epilogue.${key}`);
+    checkArtwork(value.epilogue.photograph, 'epilogue.photograph');
+    checkArtwork(value.epilogue.pattern, 'epilogue.pattern');
+    if (!Array.isArray(value.epilogue.discoveries)) fail('epilogue.discoveries');
+    const detailIds = new Set<string>();
+    for (const detail of value.epilogue.discoveries) {
+      if (!record(detail) || !text(detail.id) || !text(detail.label) || !text(detail.text) || detailIds.has(detail.id)) fail('epilogue.discoveries');
+      detailIds.add(detail.id);
+    }
+    if ('activity' in value || 'chart' in value) fail('illustrated stories do not use the Orion activity');
+    return value as IllustratedTaleData;
+  }
+  if (value.kind !== undefined && value.kind !== 'orion') fail('kind');
   if (!record(value.chart) || !text(value.chart.epoch) || !Array.isArray(value.chart.stars) || !value.chart.stars.length) fail('chart');
   const ids = new Set<string>();
   for (const star of value.chart.stars) {
@@ -38,13 +90,15 @@ export function validateTaleExperience(value: unknown): TaleExperienceData {
     if (group.id !== 'belt' && !text(group.missedLine)) fail('activity.groups.missedLine');
     groups.add(group.id);
   }
-  if (!Array.isArray(value.sources) || !value.sources.every(source => record(source) && text(source.title) && text(source.url) && /^https:\/\//.test(source.url))) fail('sources');
-  return value as TaleExperienceData;
+  return value as OrionTaleData;
 }
 
 export async function loadTaleExperience(path: string, read: typeof fetch = fetch) {
   if (!/^\/content\/[a-zA-Z0-9/_-]+\.json$/.test(path)) throw new Error('This story needs a local content file.');
   const response = await read(path);
   if (!response.ok) throw new Error('The story could not be loaded. Please try again.');
-  return validateTaleExperience(await response.json());
+  try { return validateTaleExperience(await response.json()); }
+  catch (problem) {
+    throw new Error(`${path}: ${problem instanceof SyntaxError ? 'invalid JSON; check commas and quotes.' : problem instanceof Error ? problem.message : 'invalid story content.'}`);
+  }
 }

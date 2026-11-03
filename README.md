@@ -31,6 +31,8 @@ technical details and the future setting that restores permanent saving.
 ## What works today
 
 - A first-visit welcome followed by the illustrated Orion story and belt activity.
+- The Pleiades: seven illustrated scenes, two optional discoveries, a real-sky
+  ending and an Alcyone star in My sky.
 - Five destinations: **Today, Learn, Stories, Articles and My sky**.
 - Today’s quests, sun, streak and freeze views.
 - Chapter 1, **Our place in space**, has three playable units: **Earth, the Sun and the Moon**, **Our solar system** and **Stars and the Milky Way**, with illustrated steps, tappable definitions and optional practice.
@@ -136,9 +138,10 @@ Run these from the `astron` folder:
 | `npm run build` | Check TypeScript and create the production files in `dist`. |
 | `npm run preview` | Open the built production app locally. Build it first. |
 
-The latest chapter/lesson update passed **517 tests in 58 files** and the
-production build. The preceding lesson milestone also passed responsive
-browser checks and an offline cold-start check. These are
+The Pleiades update on 3 November 2026 passed **566 tests in 64 files** and the
+production build. Its cover, scenes and ending were checked at 390, 768 and
+1280 px, with keyboard controls, Reduce motion and an offline reload/read-through.
+These are
 recorded results, not a substitute for rerunning checks after future changes.
 Physical iPhone/Safari and VoiceOver checks remain part of tester feedback.
 
@@ -216,6 +219,7 @@ service worker offers **REFRESH** when its files are ready.
 - [Scale of the cosmos: teaching, practice and performance](astron/docs/scale-of-cosmos.md)
 - [Glaux’s personality](astron/docs/glaux-character.md)
 - [Orion journey](astron/docs/orion-journey.md)
+- [The Pleiades story](astron/docs/pleiades-story.md)
 - [Discovery cues](astron/docs/discovery-cues.md)
 - [Welcome, navigation and article image credit](astron/docs/welcome-and-articles.md)
 - [Orion artwork provenance and limitations](astron/docs/orion-assets.md)

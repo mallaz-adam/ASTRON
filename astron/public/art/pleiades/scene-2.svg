@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420" role="img">
+<title>The family moves away from a distant hunter</title><defs>
+  <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#14213b"/><stop offset="1" stop-color="#3f5264"/></linearGradient>
+  <linearGradient id="robe" x2="1" y2="1"><stop stop-color="#f3e8cc"/><stop offset="1" stop-color="#b7a88c"/></linearGradient>
+  <linearGradient id="hills" x2="0" y2="1"><stop stop-color="#69716d"/><stop offset="1" stop-color="#242e3b"/></linearGradient>
+  <radialGradient id="glow"><stop stop-color="#f0d9a8" stop-opacity=".6"/><stop offset="1" stop-color="#f0d9a8" stop-opacity="0"/></radialGradient>
+  <pattern id="grain" width="41" height="31" patternUnits="userSpaceOnUse"><path d="M3 6h1m12 14h1m18-9h1m-7 18h1M7 27h1" stroke="#f3e8cc" stroke-opacity=".11"/></pattern>
+  <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse"><path d="m0 8 8-8" stroke="#e9dbbb" stroke-opacity=".12" stroke-width=".5"/></pattern>
+  <g id="woman"><ellipse cy="-42" rx="4.5" ry="6.5" fill="#d9bca0" stroke="#2a1c13" stroke-width=".8"/>
+    <path d="M-5-43q-1-9 6-8 6 2 4 11l-3-5-7 3" fill="#332a28"/>
+    <path d="M-4-35 4-35 7-21 12 0Q0 5-11 0L-6-22Z" fill="url(#robe)" stroke="#2a1c13" stroke-width=".8"/>
+    <path d="m-2-32-4 29m8-27 4 30m-10-19 5 3m-7-13-6 16" fill="none" stroke="#7a6544" stroke-width=".8"/>
+    <path d="m-5-30-7 16m17-16 7 14" fill="none" stroke="#d9bca0" stroke-width="2.7" stroke-linecap="round"/>
+  </g>
+  <g id="hunter" fill="#152033" stroke="#9a9c92" stroke-width=".8"><circle cy="-71" r="6"/>
+    <path d="m-6-63 13 0 4 31-8 4-11-3Z"/><path d="m-4-32-7 31m16-30 13 29m-24-57-20-18m33 18 18-12" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="m-25-77-9-32" stroke-width="4"/>
+  </g>
+</defs><rect width="640" height="420" fill="url(#sky)"/><circle cx="55" cy="48" r="1" fill="#f3e8cc" opacity="0.7"/><circle cx="129" cy="97" r="0.8" fill="#f3e8cc" opacity="0.5"/><circle cx="194" cy="46" r="1.2" fill="#f3e8cc" opacity="0.8"/><circle cx="286" cy="85" r="0.7" fill="#f3e8cc" opacity="0.5"/><circle cx="390" cy="41" r="1" fill="#f3e8cc" opacity="0.7"/><circle cx="473" cy="84" r="0.8" fill="#f3e8cc" opacity="0.6"/><circle cx="572" cy="49" r="1.2" fill="#f3e8cc" opacity="0.7"/><circle cx="526" cy="141" r="0.8" fill="#f3e8cc" opacity="0.5"/><circle cx="81" cy="151" r="0.8" fill="#f3e8cc" opacity="0.4"/><circle cx="333" cy="126" r="1" fill="#f3e8cc" opacity="0.5"/><path d="M0 239Q86 112 181 202T381 185 640 160V420H0Z" fill="#6a766f" opacity=".6"/>
+<path d="M0 261Q110 201 223 255T424 218 640 236V420H0Z" fill="url(#hills)"/>
+<path d="M0 339Q147 264 298 318T640 286V420H0Z" fill="#26383d"/>
+<path d="M0 339Q147 264 298 318T640 286V420H0Z" fill="url(#hatch)"/>
+<path d="M345 228Q232 271 367 307T282 420H457Q502 364 402 323T358 231Z" fill="#ac9c7c" opacity=".63"/>
+<path d="M329 257Q292 284 376 310m39 33q53 25 19 48" fill="none" stroke="#ddcfab" stroke-width="1" opacity=".4"/><use href="#hunter" transform="translate(526 240) scale(.7)"/><g transform="translate(97 340) scale(0.92)"><use href="#woman" transform="translate(0 0) scale(1.12)"/><use href="#woman" transform="translate(24 4) scale(0.92)"/><use href="#woman" transform="translate(48 2) scale(0.92)"/><use href="#woman" transform="translate(72 0) scale(0.92)"/><use href="#woman" transform="translate(96 4) scale(0.92)"/><use href="#woman" transform="translate(120 2) scale(0.92)"/><use href="#woman" transform="translate(144 0) scale(0.92)"/><use href="#woman" transform="translate(168 4) scale(0.92)"/></g>
+<rect width="640" height="420" fill="url(#grain)"/><rect x="12" y="12" width="616" height="396" fill="none" stroke="#c9a44a" stroke-opacity=".6" stroke-width="1"/>
+<path d="M22 35V22h13m570 0h13v13M22 385v13h13m570 0h13v-13" fill="none" stroke="#e9dbbb" stroke-opacity=".5"/>
+</svg>

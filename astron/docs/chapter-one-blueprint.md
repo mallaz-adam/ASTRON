@@ -93,5 +93,5 @@ the chapter gate is already implemented.
   existing progress/XP rules before publishing the complete experience.
 
 The [Unit 4 and Pleiades briefs](next-research-briefs.md) supplied the research
-requests. Unit 4 is now implemented; the Pleiades manuscript is still awaited.
+requests. Unit 4 is implemented. The Pleiades manuscript was reviewed and its seven-scene story implemented on 3 November 2026; see [the story guide](pleiades-story.md).
 Unit 5 is the next unbuilt science unit.

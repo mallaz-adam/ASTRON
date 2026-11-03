@@ -17,7 +17,7 @@ describe('Content files', () => {
   it('loads the complete authoring sample', () => {
     const content = sampleContent();
     expect(content.cells.filter(cell => cell.unitId === 'first-sky').map(cell => cell.kind)).toEqual(['lesson', 'lesson', 'lesson', 'tale', 'lesson', 'lesson', 'tale', 'lesson', 'lesson', 'lesson', 'quiz']);
-    expect(content.chapters).toHaveLength(5);
+    expect(content.chapters).toHaveLength(11);
     expect(content.exercises).toHaveLength(12);
     expect(content.exercises.filter(e => e.cellId === 'orion-lesson')).toHaveLength(8);
     expect(Object.isFrozen(content.tales[0])).toBe(true);
@@ -45,7 +45,7 @@ describe('Content files', () => {
   });
   it('rejects duplicate chapter keys', () => {
     const files = sampleFiles(); const chapters = files.chapters as unknown[]; chapters.push(chapters[0]);
-    expect(() => validateContent(files)).toThrow('chapters.json: [5].taleId+number');
+    expect(() => validateContent(files)).toThrow('chapters.json: [11].taleId+number');
   });
   it('requires taleId on a tale cell only', () => {
     const files = sampleFiles(); const cells = files.cells as Record<string, unknown>[]; delete cells[3].taleId;

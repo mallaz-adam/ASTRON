@@ -41,7 +41,7 @@ describe('Temporary path completion', () => {
     for (const cell of content.cells.slice(0, 7)) await completePathCell(database, content, learner, cell.id, now);
     expect((await database.litStars.toArray()).map(star => star.starId).sort()).toEqual(['alcyone', 'betelgeuse']);
     const tale = content.tales.find(row => row.id === content.cells[6].taleId);
-    expect(content.chapters.filter(chapter => chapter.taleId === tale?.id)).toHaveLength(1);
+    expect(content.chapters.filter(chapter => chapter.taleId === tale?.id)).toHaveLength(7);
   });
   it('keeps completion and the next cell after reopening storage', async () => {
     await Promise.all(Array.from({ length: 3 }, () => completePathCell(database, content, learner, content.cells[0].id, now)));

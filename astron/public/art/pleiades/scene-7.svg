@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420" role="img">
+<title>Pleiades and Orion: symbolic placement, not a finding chart</title><defs>
+  <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#14213b"/><stop offset="1" stop-color="#3f5264"/></linearGradient>
+  <linearGradient id="robe" x2="1" y2="1"><stop stop-color="#f3e8cc"/><stop offset="1" stop-color="#b7a88c"/></linearGradient>
+  <linearGradient id="hills" x2="0" y2="1"><stop stop-color="#69716d"/><stop offset="1" stop-color="#242e3b"/></linearGradient>
+  <radialGradient id="glow"><stop stop-color="#f0d9a8" stop-opacity=".6"/><stop offset="1" stop-color="#f0d9a8" stop-opacity="0"/></radialGradient>
+  <pattern id="grain" width="41" height="31" patternUnits="userSpaceOnUse"><path d="M3 6h1m12 14h1m18-9h1m-7 18h1M7 27h1" stroke="#f3e8cc" stroke-opacity=".11"/></pattern>
+  <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse"><path d="m0 8 8-8" stroke="#e9dbbb" stroke-opacity=".12" stroke-width=".5"/></pattern>
+  <g id="woman"><ellipse cy="-42" rx="4.5" ry="6.5" fill="#d9bca0" stroke="#2a1c13" stroke-width=".8"/>
+    <path d="M-5-43q-1-9 6-8 6 2 4 11l-3-5-7 3" fill="#332a28"/>
+    <path d="M-4-35 4-35 7-21 12 0Q0 5-11 0L-6-22Z" fill="url(#robe)" stroke="#2a1c13" stroke-width=".8"/>
+    <path d="m-2-32-4 29m8-27 4 30m-10-19 5 3m-7-13-6 16" fill="none" stroke="#7a6544" stroke-width=".8"/>
+    <path d="m-5-30-7 16m17-16 7 14" fill="none" stroke="#d9bca0" stroke-width="2.7" stroke-linecap="round"/>
+  </g>
+  <g id="hunter" fill="#152033" stroke="#9a9c92" stroke-width=".8"><circle cy="-71" r="6"/>
+    <path d="m-6-63 13 0 4 31-8 4-11-3Z"/><path d="m-4-32-7 31m16-30 13 29m-24-57-20-18m33 18 18-12" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="m-25-77-9-32" stroke-width="4"/>
+  </g>
+</defs><rect width="640" height="420" fill="url(#sky)"/><circle cx="55" cy="48" r="1" fill="#f3e8cc" opacity="0.7"/><circle cx="129" cy="97" r="0.8" fill="#f3e8cc" opacity="0.5"/><circle cx="194" cy="46" r="1.2" fill="#f3e8cc" opacity="0.8"/><circle cx="286" cy="85" r="0.7" fill="#f3e8cc" opacity="0.5"/><circle cx="390" cy="41" r="1" fill="#f3e8cc" opacity="0.7"/><circle cx="473" cy="84" r="0.8" fill="#f3e8cc" opacity="0.6"/><circle cx="572" cy="49" r="1.2" fill="#f3e8cc" opacity="0.7"/><circle cx="526" cy="141" r="0.8" fill="#f3e8cc" opacity="0.5"/><circle cx="81" cy="151" r="0.8" fill="#f3e8cc" opacity="0.4"/><circle cx="333" cy="126" r="1" fill="#f3e8cc" opacity="0.5"/><ellipse cx="217" cy="165" rx="120" ry="100" fill="url(#glow)"/><circle cx="150" cy="155" r="17.5" fill="url(#glow)"/><circle cx="150" cy="155" r="2.5" fill="#f3e8cc"/><path d="M142 155h16M150 147v16" stroke="#f3e8cc" stroke-width=".5" opacity=".65"/><circle cx="195" cy="131" r="17.5" fill="url(#glow)"/><circle cx="195" cy="131" r="2.5" fill="#f3e8cc"/><path d="M187 131h16M195 123v16" stroke="#f3e8cc" stroke-width=".5" opacity=".65"/><circle cx="235" cy="163" r="17.5" fill="url(#glow)"/><circle cx="235" cy="163" r="2.5" fill="#f3e8cc"/><path d="M227 163h16M235 155v16" stroke="#f3e8cc" stroke-width=".5" opacity=".65"/><circle cx="270" cy="126" r="17.5" fill="url(#glow)"/><circle cx="270" cy="126" r="2.5" fill="#f3e8cc"/><path d="M262 126h16M270 118v16" stroke="#f3e8cc" stroke-width=".5" opacity=".65"/><circle cx="306" cy="157" r="17.5" fill="url(#glow)"/><circle cx="306" cy="157" r="2.5" fill="#f3e8cc"/><path d="M298 157h16M306 149v16" stroke="#f3e8cc" stroke-width=".5" opacity=".65"/><circle cx="210" cy="197" r="17.5" fill="url(#glow)"/><circle cx="210" cy="197" r="2.5" fill="#f3e8cc"/><path d="M202 197h16M210 189v16" stroke="#f3e8cc" stroke-width=".5" opacity=".65"/><circle cx="265" cy="199" r="17.5" fill="url(#glow)"/><circle cx="265" cy="199" r="2.5" fill="#f3e8cc"/><path d="M257 199h16M265 191v16" stroke="#f3e8cc" stroke-width=".5" opacity=".65"/><use href="#hunter" transform="translate(474 289) scale(1.55)"/><path d="M345 66v287" stroke="#e9dbbb" stroke-opacity=".25" stroke-dasharray="2 7"/><g fill="#f3e8cc" font-family="Georgia,serif" font-size="23" text-anchor="middle"><text x="226" y="330">Pleiades</text><text x="474" y="330">Orion</text></g>
+<rect width="640" height="420" fill="url(#grain)"/><rect x="12" y="12" width="616" height="396" fill="none" stroke="#c9a44a" stroke-opacity=".6" stroke-width="1"/>
+<path d="M22 35V22h13m570 0h13v13M22 385v13h13m570 0h13v-13" fill="none" stroke="#e9dbbb" stroke-opacity=".5"/>
+</svg>

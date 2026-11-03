@@ -12,10 +12,14 @@
   {
     "id": "pleiades-placeholder",
     "title": "The Pleiades",
-    "subtitle": "Placeholder.",
-    "minutes": 6,
-    "teaser": "Placeholder.",
-    "sourceNote": "Placeholder.",
-    "starId": "alcyone"
+    "subtitle": "The Seven Sisters · A Greek sky story",
+    "minutes": 7,
+    "teaser": "Follow seven sisters and their mother from a quiet road to a place among the stars.",
+    "sourceNote": "An original retelling following Pseudo-Hyginus, Astronomica 2.21.4 (2.21.6 in the UGA source collection), a Roman-era witness to a Greek tradition. The landscapes and gestures are modern adaptation. Other ancient versions exist.",
+    "starId": "alcyone",
+    "reader": "/content/pleiades.json",
+    "readerType": "illustrated",
+    "cover": "/art/pleiades/vedder-640.webp",
+    "coverAlt": "Seven sisters together among clouds, in Elihu Vedder's painting The Pleiades, 1885."
   }
 ]

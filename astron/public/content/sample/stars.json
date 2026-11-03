@@ -9,8 +9,8 @@
   {
     "id": "alcyone",
     "name": "Alcyone",
-    "greekLetter": "Placeholder",
-    "factText": "Placeholder.",
+    "greekLetter": "",
+    "factText": "Alcyone is one of the bright stars in the Pleiades star cluster.",
     "constellationId": "pleiades"
   },
   {

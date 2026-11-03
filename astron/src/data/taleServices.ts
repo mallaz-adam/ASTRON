@@ -71,7 +71,7 @@ export function collectTaleStar(database: AstronDb, content: Content, learnerId:
     // for the picture activity and no fabricated prerequisite completions.
     await completeCell(database, content, learnerId, cell.id, now);
     await lightStar(database, content, learnerId, tale.starId, 'tale', now);
-    if (visit.stage === 'star') await saveVisit(database, learnerId, { ...visit, stage: 'activity' });
+    if (visit.stage === 'star') await saveVisit(database, learnerId, { ...visit, stage: tale.readerType === 'illustrated' ? 'sky' : 'activity' });
   });
 }
 
@@ -80,7 +80,7 @@ export function answerBeltActivity(database: AstronDb, content: Content, learner
   return database.transaction('rw', database.learners, database.litStars, async () => {
     const visit = await savedVisit(database, learnerId, taleId);
     const tale = content.tales.find(row => row.id === taleId);
-    if (visit.stage !== 'activity' || !tale || !await database.litStars.get([learnerId, tale.starId])) throw new Error('Light your star before this activity.');
+    if (visit.stage !== 'activity' || !tale || tale.readerType === 'illustrated' || !await database.litStars.get([learnerId, tale.starId])) throw new Error('Light your star before this activity.');
     if (choice !== 'show-me' && !evaluateBeltChoice(choice)) return false;
     if (!visit.beltOutcome) await saveVisit(database, learnerId, { ...visit, beltOutcome: choice === 'show-me' ? 'assisted' : 'independent' });
     return true;
@@ -93,7 +93,7 @@ export function finishWelcome(database: AstronDb, content: Content, learnerId: s
   return database.transaction('rw', database.tables, async () => {
     const learner = await database.learners.get(learnerId);
     if (learner?.welcome?.completedOn) return;
-    if (!learner?.welcome || learner.taleVisit?.stage !== 'preferences' || !learner.taleVisit.beltOutcome) throw new Error('Finish the Orion experience before choosing your goal.');
+    if (!learner?.welcome || learner.taleVisit?.taleId !== firstTaleId || learner.taleVisit.stage !== 'preferences' || !learner.taleVisit.beltOutcome) throw new Error('Finish the Orion experience before choosing your goal.');
     await changeDailyGoal(database, learnerId, dailyGoal, now);
     await database.learnerInterests.where('learnerId').equals(learnerId).delete();
     await database.learnerInterests.bulkPut([...new Set(interests)].map(interestId => ({ learnerId, interestId })));

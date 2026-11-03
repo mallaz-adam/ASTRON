@@ -22,7 +22,7 @@ describe('Earth, the Sun and the Moon: authored unit', () => {
     expect(path.unit).toMatchObject({ title: 'Our place in space', orderNo: 1 });
     expect(path.cells.map(cell => cell.id)).toEqual(['earth-sun-moon', 'our-solar-system', 'stars-milky-way', 'galaxies-universe']);
     expect(path.upcoming.map(cell => cell.title)).toEqual(['Understanding sizes and distances', 'Light takes time to travel']);
-    expect(buildCoursePath(content, { completions: [] }, 'reader', 'first-sky', true).cells.map(cell => cell.id)).toEqual(['orion-lesson', 'star-lesson', 'orion-tale']);
+    expect(buildCoursePath(content, { completions: [] }, 'reader', 'first-sky', true).cells.map(cell => cell.id)).toEqual(['orion-lesson', 'star-lesson', 'orion-tale', 'pleiades-tale']);
   });
   it('has ten connected teaching steps, eight definitions and two ungraded practices', () => {
     const unit = validateVisualUnit(raw(), lesson);
