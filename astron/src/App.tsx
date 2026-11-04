@@ -12,7 +12,6 @@ import { FirstVisitGate } from './pages/FirstVisitGate';
 import { TaleExperience } from './pages/tales/TaleExperience';
 import { Stories } from './pages/Stories';
 import { MySky } from './pages/MySky';
-import { Articles, ArticleReader } from './pages/Articles';
 import { Settings } from './pages/Settings';
 import { StartupIntro } from './design/StartupIntro';
 import { Welcome } from './pages/Welcome';
@@ -21,6 +20,9 @@ import { Welcome } from './pages/Welcome';
 const DesignCheck = import.meta.env.DEV ? lazy(() => import('./pages/DesignCheck').then(module => ({ default: module.DesignCheck }))) : null;
 const Dev = import.meta.env.DEV ? lazy(() => import('./pages/Dev').then(module => ({ default: module.Dev }))) : null;
 const openingTools = <Page skipLabel="Skip to page"><main id="main-content" aria-busy="true"><h1>Opening the atlas…</h1></main></Page>;
+// Article code and styles load when requested, while the PWA still caches them.
+const Articles = lazy(() => import('./pages/Articles').then(module => ({ default: module.Articles })));
+const ArticleReader = lazy(() => import('./pages/Articles').then(module => ({ default: module.ArticleReader })));
 
 export function AppRoutes({ development = import.meta.env.DEV }: { development?: boolean }) {
   const location = useLocation();
@@ -51,8 +53,8 @@ export function AppRoutes({ development = import.meta.env.DEV }: { development?:
         <Route path="/stories" element={<Stories />} />
         <Route path="/stories/:id" element={<TaleExperience />} />
         <Route path="/sky" element={<MySky />} />
-        <Route path="/articles" element={<Articles />} />
-        <Route path="/articles/:id" element={<ArticleReader />} />
+        <Route path="/articles" element={<Suspense fallback={openingTools}><Articles /></Suspense>} />
+        <Route path="/articles/:id" element={<Suspense fallback={openingTools}><ArticleReader /></Suspense>} />
         <Route path="/settings" element={<Settings />} />
       </Route>
       {development && DesignCheck && <Route path="/design" element={<Suspense fallback={openingTools}><DesignCheck /></Suspense>} />}

@@ -27,3 +27,19 @@
   .welcome-first .atlas-button { grid-column: 3; grid-row: 1; }
   .welcome-ways { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+@media (max-width: 767px) {
+  .welcome-main { gap: 12px; }
+  .welcome-heading { gap: 8px; }
+  .welcome-heading h1 { font-size: 32px; }
+  .welcome-heading > p:last-child { font-size: 18px; line-height: 1.45; }
+  .welcome-guide p { font-size: 17px; line-height: 1.45; }
+  .welcome-ways { gap: 12px; padding-top: 12px; }
+  .welcome-ways h2 { font-size: 21px; }
+  .welcome-ways p { font-size: 17px; line-height: 1.45; }
+  .welcome-orientation { font-size: 16px; line-height: 1.45; }
+  .welcome-first { gap: 12px; padding: 12px; }
+  .welcome-first > img { height: 64px; }
+  .welcome-first > div { gap: 4px; }
+  .welcome-first h2 { font-size: 24px; }
+  .welcome-first p { font-size: 17px; line-height: 1.4; }
+}

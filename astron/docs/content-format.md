@@ -636,3 +636,17 @@ directly to the sky ending. It adds no XP rule or progress migration.
 The first example is `/content/pleiades.json`, with seven narrative scenes,
 local art and an Alcyone ending. See [the story guide](pleiades-story.md) and
 [image credits](../public/art/pleiades/README.md).
+
+
+## Structured article reading (4 November 2026)
+
+Articles may include `sections: [{ id, title, text }]`. IDs must start with a
+lower-case letter and contain only lower-case letters, digits and hyphens.
+They must be unique within the article. Titles and texts must be non-empty.
+Joining section texts with two newlines must equal the existing `body` exactly;
+this keeps the original text available to older consumers and prevents loss or
+duplication during editing. Omitting `sections` keeps plain-body reading.
+
+The article reader builds fragment links and focusable section headings from
+these IDs. Source citations and image credits remain visible and local content
+remains available offline. See [the comfort pass](experience-polish.md).

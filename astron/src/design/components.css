@@ -23,10 +23,42 @@ strong, b { font-weight: var(--font-weight); }
 .skip-link:focus { transform: translateY(0); }
 
 .atlas-button, .atlas-chip { position: relative; border: var(--border-ink); padding: var(--space-14) var(--space-24); font: var(--font-weight) var(--type-label)/1.4 var(--font-label); letter-spacing: var(--label-spacing); text-transform: uppercase; }
-.atlas-button { min-height: var(--button-height); }
+.atlas-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: var(--button-height); text-decoration: none; text-align: center; white-space: normal; }
+.atlas-action-link { min-height: var(--touch-min); }
+.atlas-action-link.atlas-button--secondary { font: 400 18px/1.4 var(--font-reading); letter-spacing: normal; text-transform: none; }
 .atlas-button--primary { background: var(--vermilion); color: var(--parchment); }
 .atlas-button--primary::after { content: ''; position: absolute; inset: var(--space-4); border: var(--border-width) solid currentColor; opacity: .55; pointer-events: none; }
 .atlas-button--secondary { background: transparent; color: var(--ink); }
+.atlas-button { transition: background-color var(--motion-small) ease, color var(--motion-small) ease, transform var(--motion-small) ease; }
+.atlas-button:not(:disabled):active { transform: translateY(1px); }
+@media (hover: hover) and (pointer: fine) {
+  .atlas-button--secondary:hover { background: var(--panel); }
+  .atlas-button--primary:hover { background: var(--ink); }
+}
+.page-content { animation: atlas-page-arrive 220ms ease-out; }
+@keyframes atlas-page-arrive { from { opacity: .5; } to { opacity: 1; } }
+
+/* Small return/explore controls share a visible button shape across readers. */
+:is(a.article-open, .sky-entry a, a.story-return, .unit-header a, .exploration-header a, a.course-return) {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 10px 14px; border: var(--border-line);
+  background: var(--card); color: var(--ink); text-decoration: none; line-height: 1.4;
+}
+.unit-header a, .exploration-header a, a.course-return { font-size: 16px; }
+.sky-entry a { justify-content: flex-start; }
+.unit-definition button { border: var(--border-line); background: var(--card); text-decoration: none; padding-inline: 12px; }
+
+@media (max-width: 1023px) {
+  .atlas-page.atlas-page:has(.navigation-bar) { padding-bottom: calc(112px + env(safe-area-inset-bottom, 0px)); }
+  .atlas-page.atlas-page:has(.navigation-bar) .navigation-bar {
+    position: fixed; z-index: 20; inset: auto 0 0; margin: 0;
+    padding: 0 env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+    background: var(--parchment); border-top: var(--border-line);
+  }
+  .atlas-page:has(.navigation-bar) :is(a, button, summary, input, [tabindex]) { scroll-margin-bottom: calc(100px + env(safe-area-inset-bottom, 0px)); }
+  #root:has(.navigation-bar) .update-notice { bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+  #root:has(.update-notice) .atlas-page:has(.navigation-bar) { padding-bottom: calc(220px + env(safe-area-inset-bottom, 0px)); }
+}
 .atlas-button:disabled { border-style: dashed; }
 .atlas-button:disabled::after { border-style: dashed; }
 .atlas-chip { min-height: var(--touch-min); padding: var(--space-8) var(--space-14); background: transparent; color: var(--ink); }

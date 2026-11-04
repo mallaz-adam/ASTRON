@@ -34,17 +34,19 @@
 .today-quests .quest-title { font-size: var(--type-body); }
 .today-bonus { color: var(--soft-ink); font-style: italic; font-size: var(--type-small); }
 .lining-figures { font-family: var(--font-label); font-variant-numeric: lining-nums; font-style: normal; }
-.today-continue { display: inline-flex; align-items: center; justify-content: center; text-align: center; text-decoration: none; }
+.today-main .today-continue { display: grid; gap: 6px; align-items: center; justify-content: center; text-align: center; text-decoration: none; }
+.today-next-title { font: 400 18px/1.4 var(--font-reading); text-transform: none; letter-spacing: normal; }
 .navigation-bar { margin-top: auto; }
 .navigation-wordmark, .navigation-profile { display: none; }
 .today-tabs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: var(--border-line); padding-top: var(--space-12); }
 .today-tab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-8); min-height: var(--touch-min); padding: var(--space-8) var(--space-4); background: transparent; border: 0; color: var(--soft-ink); text-decoration: none; font: var(--font-weight) var(--type-label)/1.3 var(--font-label); letter-spacing: .08em; text-transform: uppercase; }
 .today-tab svg { width: var(--space-24); height: var(--space-24); fill: none; stroke: currentColor; stroke-width: 1; }
-.today-tab--active { color: var(--vermilion); }
+.today-tab { transition: background-color var(--motion-small) ease, color var(--motion-small) ease; }
+.today-tab--active { color: var(--vermilion); background: var(--card); box-shadow: inset 0 -2px 0 currentColor; }
 .today-dev-link { display: inline-flex; align-self: start; align-items: center; min-height: var(--touch-min); font-size: var(--type-small); }
 .today-test-tools { display: grid; justify-items: center; gap: var(--space-4); grid-column: 1 / -1; grid-row: 9; }
 .test-version { font: 400 10px/1.5 var(--font-label); color: var(--soft-ink); }
-.test-erase { min-height: var(--touch-min); padding: var(--space-8); background: transparent; border: 0; color: var(--soft-ink); text-decoration: underline; text-underline-offset: 3px; font: inherit; font-size: var(--type-small); }
+.test-erase { min-height: var(--touch-min); padding: var(--space-8) var(--space-14); background: transparent; border: var(--border-line); color: var(--soft-ink); text-decoration: none; font: inherit; font-size: var(--type-small); }
 
 /* The same screen opens out on a computer; the phone keeps its vertical order. */
 @media (min-width: 1024px) {
@@ -74,6 +76,13 @@
 }
 @media (max-width: 767px) {
   .today-tab { font-size: 11px; letter-spacing: .03em; padding-inline: 2px; min-width: 0; }
+}
+@media (max-width: 1023px) {
+  .today-tabs { height: 76px; border: 0; padding: 6px 12px; align-items: stretch; }
+  .today-tab { padding-block: 6px; gap: 6px; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .today-page .page-content { max-width: 620px; }
 }
 
 @media (hover: hover) {

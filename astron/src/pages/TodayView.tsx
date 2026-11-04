@@ -7,6 +7,7 @@ import { StreakCard } from './StreakCard';
 import { TodayHeader } from './TodayHeader';
 import { TodayTabs } from './TodayTabs';
 import { TestTools } from './TestTools';
+import { ActionLink } from '../design/ActionLink';
 import './Today.css';
 import './AtlasReaders.css';
 
@@ -17,6 +18,7 @@ export function TodayView({ model, showDevLink = false }: { model: TodayModel; s
       <main id="main-content" className="today-main" tabIndex={-1}>
         {desktop && <TodayTabs />}
         <TodayHeader weekday={model.weekday} />
+        {model.currentCellTitle && <ActionLink variant="primary" className="today-continue" to="/learn"><span>Continue learning</span><span className="today-next-title">{model.currentCellTitle}</span></ActionLink>}
         <StreakCard model={model} />
         <p className="daily-quests-label">{model.questHeading}</p>
         <div className="today-goal">
@@ -29,8 +31,7 @@ export function TodayView({ model, showDevLink = false }: { model: TodayModel; s
           {model.questRows.map(quest => <Link key={quest.id} className="today-quest-link" to={quest.kind === 'Learn' ? '/learn' : quest.kind === 'Read' ? '/articles' : '/stories'}><QuestRow kind={quest.kind} title={quest.title} xp={quest.xp} done={quest.done} /></Link>)}
         </div>
         <p className="today-bonus">Finish all three today for <span className="lining-figures">+10 XP</span>.</p>
-        {model.currentCellTitle && <Link className="atlas-button atlas-button--primary today-continue" to="/learn">Continue: {model.currentCellTitle}</Link>}
-        <aside className="today-discovery-link" aria-label="Keep exploring"><Link to="/articles/betelgeuse-colour">Why does Betelgeuse look red?</Link><Link to="/sky">My sky</Link></aside>
+        <aside className="today-discovery-link" aria-label="Keep exploring"><ActionLink to="/articles/betelgeuse-colour">Why does Betelgeuse look red?</ActionLink><ActionLink to="/sky">My sky</ActionLink></aside>
         {showDevLink && <Link className="today-dev-link" to="/dev">/dev</Link>}
         {!desktop && <TodayTabs />}
         <TestTools />

@@ -35,7 +35,7 @@ technical details and the future setting that restores permanent saving.
   ending and an Alcyone star in My sky.
 - Five destinations: **Today, Learn, Stories, Articles and My sky**.
 - Today’s quests, sun, streak and freeze views.
-- Chapter 1, **Our place in space**, has three playable units: **Earth, the Sun and the Moon**, **Our solar system** and **Stars and the Milky Way**, with illustrated steps, tappable definitions and optional practice.
+- Chapter 1, **Our place in space**, has four playable units: **Earth, the Sun and the Moon**, **Our solar system**, **Stars and the Milky Way** and **Galaxies and the universe**, with illustrated steps, tappable definitions and dedicated practice.
 - The authored **Scale of the cosmos** and **Why stars differ** lessons, with guided practice.
 - Interactive cosmic-address views, scale models, star colours, mass and fuel comparisons.
 - A sourced Betelgeuse article with a real ALMA cover, category and reading time.
@@ -45,7 +45,7 @@ technical details and the future setting that restores permanent saving.
 - An installable PWA that caches the app, authored content, art and local fonts.
 
 The beginner chapter has six planned units and a final ten-question evaluation.
-Units 1–3 are playable; the three remaining units are visibly marked as being prepared.
+Units 1–4 are playable; the two remaining units are visibly marked as being prepared.
 The earlier eleven-cell **How stars live and die** chapter remains available through
 the chapter links for development testing. This is not a chapter-exam unlock: the
 passing threshold and retry policy are still to be decided.
@@ -59,7 +59,8 @@ Run `npm start` inside `astron`, complete the welcome, then choose **Learn**,
 The lesson starts with an introduction. Continue moves through one idea at a time;
 Previous returns to the preceding step. Underlined words reveal a definition and
 example; Escape closes it and returns keyboard focus. Pictures, sources and credits
-are available at the bottom. Both practices are optional and ungraded.
+are available at the bottom. Practice has its own steps: attempt the question,
+read the feedback, then Continue. Practice is ungraded.
 
 The three NASA pictures are stored locally as small WebP files. The painted-style
 orbit, light and lamp diagrams are original SVG drawn in code. Everything needed
@@ -68,15 +69,18 @@ See [the unit's implementation notes](astron/docs/earth-sun-moon.md).
 
 Finishing Unit 1 unlocks **Our solar system**, with Continue opening it directly.
 Unit 2 combines local NASA observations, labelled atlas diagrams, a visible
-inner-planet order reference and optional family sorting. Pluto's classification
+inner-planet order reference and a family-sorting practice. Pluto's classification
 detail stays optional. Its practices have no score or extra XP. See
 [Unit 2 implementation and checks](astron/docs/our-solar-system.md).
 
 Finishing Unit 2 unlocks **Stars and the Milky Way**. Unit 3 has ten teaching
 steps and a separate recap, real sky photographs, clearly labelled galaxy
 reconstructions, and diagrams explaining brightness and stellar depth.
-Its two optional practices use radio buttons and labelled selectors; correct
+Its two practices use radio buttons and labelled selectors; correct
 viewpoint matches are kept. See [Unit 3 notes](astron/docs/stars-milky-way.md).
+
+Finishing Unit 3 unlocks **Galaxies and the universe**, with evidence practice
+and labelled views of other galaxies. See [Unit 4 notes](astron/docs/galaxies-universe.md).
 
 ## Chapters, lessons and evaluation
 
@@ -138,11 +142,11 @@ Run these from the `astron` folder:
 | `npm run build` | Check TypeScript and create the production files in `dist`. |
 | `npm run preview` | Open the built production app locally. Build it first. |
 
-The Pleiades update on 3 November 2026 passed **566 tests in 64 files** and the
-production build. Its cover, scenes and ending were checked at 390, 768 and
-1280 px, with keyboard controls, Reduce motion and an offline reload/read-through.
-These are
-recorded results, not a substitute for rerunning checks after future changes.
+The reading and navigation update on 4 November 2026 passed **577 tests in
+66 files** and the production build. It includes clearer article actions,
+structured reading, persistent phone navigation and lighter background work.
+Main destinations and readers were checked at 320, 390, 768 and 1280 px.
+These are recorded results, not a substitute for rerunning checks after future changes.
 Physical iPhone/Safari and VoiceOver checks remain part of tester feedback.
 
 ## Try it on an iPhone
@@ -220,6 +224,7 @@ service worker offers **REFRESH** when its files are ready.
 - [Glaux’s personality](astron/docs/glaux-character.md)
 - [Orion journey](astron/docs/orion-journey.md)
 - [The Pleiades story](astron/docs/pleiades-story.md)
+- [Reading and navigation improvements](astron/docs/experience-polish.md)
 - [Discovery cues](astron/docs/discovery-cues.md)
 - [Welcome, navigation and article image credit](astron/docs/welcome-and-articles.md)
 - [Orion artwork provenance and limitations](astron/docs/orion-assets.md)

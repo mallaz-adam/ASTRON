@@ -18,7 +18,7 @@
 .unit-definition { padding: 18px; border: var(--border-line); background: var(--card); display: grid; gap: 8px; font-size: 17px; line-height: 1.5; }
 .unit-definition > div { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
 .unit-definition h2 { text-transform: capitalize; }
-.unit-definition button { padding: 8px; min-height: 44px; color: var(--soft-ink); font: inherit; background: none; border: 0; text-decoration: underline; cursor: pointer; }
+.unit-definition button { padding: 8px 12px; min-height: 44px; color: var(--ink); font: inherit; background: var(--card); border: var(--border-line); text-decoration: none; cursor: pointer; }
 .unit-glaux { display: flex; align-items: center; gap: 12px; padding-top: 8px; }
 .unit-glaux .inline-art { width: 44px; height: 44px; flex-shrink: 0; }
 .unit-glaux p { font-size: 18px; line-height: 1.45; font-style: italic; color: var(--soft-ink); }
@@ -69,6 +69,7 @@
 .unit-feedback { padding: 18px; border: var(--border-line); background: var(--card); display: grid; gap: 12px; }
 .unit-feedback > .inline-art { width: 44px; height: 44px; }
 .unit-hint summary, .unit-credits summary { min-height: 44px; padding-block: 12px; cursor: pointer; color: var(--soft-ink); }
+.unit-credits > summary { padding-inline: 14px; border: var(--border-line); background: var(--card); width: fit-content; }
 .unit-hint p { padding: 12px; background: var(--panel); }
 .unit-identity-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .unit-identity-cards > div { display: grid; gap: 8px; text-align: center; background: var(--card); border: var(--border-line); padding: 14px 4px; }

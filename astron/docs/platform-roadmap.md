@@ -4,7 +4,8 @@ Draft for the owner to review, 2 November 2026.
 Grounded in the local app at commit `f7dc2fe` and a fresh browser walkthrough.
 This is a working plan, not a claim that the proposed features already exist.
 Status updated after Unit 4 and dedicated practice phases were implemented on
-2 November, and the Pleiades story on 3 November. The linked initial audit still
+2 November, the Pleiades story on 3 November, and reading/navigation polish on
+4 November. The linked initial audit still
 documents the earlier app state.
 
 ## The result we are working towards
@@ -22,12 +23,12 @@ sections. It does not require an encyclopaedia of astronomy or an account system
 
 | Area | Current state | What still needs work |
 | --- | --- | --- |
-| Welcome | Explains Learn, Stories and Articles, then opens Orion | The first phone action is below the initial viewport |
-| Today | Quests, XP, sun, streak, freeze and next-unit link | The next learning action is below the phone's opening view |
+| Welcome | Explains Learn, Stories and Articles, then opens Orion | Check the compact first view on real iPhones |
+| Today | Quests, XP, sun, streak, freeze and next-unit link | Check the prominent next action and persistent tabs on real phones |
 | Learn | Chapter 1 Units 1–4 are playable, with prerequisites, definitions, pictures and dedicated ungraded practice | Units 5–6, the final evaluation, and a consistent whole-course roadmap |
 | Earlier chapter | Scale of the cosmos, Why stars differ and Orion are available as development material | Its place in the final sequence and its mixed numbering need review |
 | Stories | Orion and The Pleiades, each linked to a collected star | A small coherent collection and easier browsing as it grows |
-| Articles | One sourced Betelgeuse article, with cover, category and reading time | A curated collection connected to the learning topics |
+| Articles | One sourced Betelgeuse article, with cover, category and reading time | A curated collection connected to learning topics; section guide and action buttons are implemented |
 | My sky | Betelgeuse links to its story/article; Alcyone links back to The Pleiades | A fuller, meaningful record of discoveries and revisits |
 | Preferences | Daily goal and Reduce motion | Real-device usability checks remain necessary |
 | Web foundation | React/Vite/TypeScript, local content, IndexedDB, PWA and Cloudflare test setup | Verify the latest deployment, real iPhone behaviour and release progress settings |

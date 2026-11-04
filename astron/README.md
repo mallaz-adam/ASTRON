@@ -45,6 +45,7 @@ are separate from earlier permanent progress. See
 | `/cell/earth-sun-moon` | Chapter 1, Unit 1: Earth, the Sun and the Moon. |
 | `/cell/our-solar-system` | Chapter 1, Unit 2: Our solar system, unlocked by Unit 1. |
 | `/cell/stars-milky-way` | Chapter 1, Unit 3: Stars and the Milky Way, unlocked by Unit 2. |
+| `/cell/galaxies-universe` | Chapter 1, Unit 4: Galaxies and the universe, unlocked by Unit 3. |
 | `/cell/orion-lesson` | Scale of the cosmos, with optional practice and a recap. |
 | `/cell/star-lesson` | Why stars differ, after its authored prerequisite. |
 | `/stories` | Orion and The Pleiades, with illustrated scenes and real-sky endings. |
@@ -66,5 +67,6 @@ First visits enter the welcome before the normal learning pages.
 - [Glaux's character](docs/glaux-character.md)
 - [Orion journey](docs/orion-journey.md)
 - [The Pleiades story](docs/pleiades-story.md)
+- [Reading and navigation improvements](docs/experience-polish.md)
 - [Art credits and provenance](docs/orion-assets.md)
 - [Hosting and phone testing](docs/private-test.md)

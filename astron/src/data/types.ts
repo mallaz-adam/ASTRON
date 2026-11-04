@@ -38,7 +38,8 @@ export type Exercise = {
 export type QuestKind = 'learn' | 'story' | 'read';
 export type Quest = { id: string; kind: QuestKind; title: string; xpReward: number };
 export type ArticleCover = { src: string; alt: string; caption: string; credit: string; source: string; license: string; licenseUrl: string };
-export type Article = { id: string; title: string; summary: string; body: string; readingMin: number; sourceNote?: string; category?: string; cover?: ArticleCover };
+export type ArticleSection = { id: string; title: string; text: string };
+export type Article = { id: string; title: string; summary: string; body: string; readingMin: number; sourceNote?: string; category?: string; cover?: ArticleCover; sections?: ArticleSection[] };
 export type UnitArticle = { unitId: string; articleId: string };
 
 export type DailyGoal = 1 | 2 | 3;

@@ -15,4 +15,19 @@ describe('Article covers and categories', () => {
     article.cover![field] = value;
     expect(() => validateContent(files)).toThrow('cover');
   });
+  it('organises the complete original article into three sections without changing its prose', () => {
+    const article = sampleContent().articles.find(row => row.id === 'betelgeuse-colour')!;
+    expect(article.sections?.map(section => section.text).join('\n\n')).toBe(article.body);
+    expect(article.sections?.map(section => section.title)).toEqual(['Find the red star', 'A changing star', 'Two clues to keep']);
+    expect(sampleContent().articles.find(row => row.id === 'looking-slowly')?.sections).toBeUndefined();
+  });
+  it.each(['duplicate', 'unsafe-id', 'missing-text', 'lost-prose'])('rejects %s article sections', problem => {
+    const files = sampleFiles();
+    const article = (files.articles as { sections?: { id: string; title: string; text: string }[] }[]).find(row => row.sections)!;
+    if (problem === 'duplicate') article.sections![1].id = article.sections![0].id;
+    if (problem === 'unsafe-id') article.sections![0].id = '<script>';
+    if (problem === 'missing-text') article.sections![0].text = '';
+    if (problem === 'lost-prose') article.sections!.pop();
+    expect(() => validateContent(files)).toThrow('sections');
+  });
 });

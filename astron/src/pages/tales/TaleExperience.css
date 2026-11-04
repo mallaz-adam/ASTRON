@@ -24,7 +24,7 @@
 .tale-glaux .speech-box { min-width: 0; flex: 1; margin-left: 0; padding: 14px 18px; font-size: 18px; line-height: 1.5; }
 .tale-glaux .speech-box::before { top: 20px; }
 .tale-sources { font-size: 15px; color: var(--soft-ink); }
-.tale-sources summary { color: var(--vermilion); text-decoration: underline; text-underline-offset: 4px; }
+.tale-sources > .discovery-summary { color: var(--soft-ink); text-decoration: none; border: var(--border-line); background: var(--card); padding: 10px 14px; width: fit-content; min-width: 100px; }
 .tale-sources summary, .tale-discovery summary { cursor: pointer; min-height: 44px; padding-block: 10px; }
 .tale-sources summary:focus-visible, .tale-discovery summary:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
 .tale-sources > div { padding: 18px; background: var(--card); border: var(--border-line); }

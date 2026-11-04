@@ -56,6 +56,19 @@ export function checkRows(value: unknown, schema: Schema, file: string): Record<
       if (record.presentation !== undefined) fields.presentation = oneOf('hunter', 'landscape', 'chart', 'guided-chart');
     }
     if (file.endsWith('articles.json')) {
+      if (record.sections !== undefined) fields.sections = value => {
+        if (!Array.isArray(value) || !value.length) return false;
+        const ids = new Set<string>();
+        for (const section of value) {
+          if (!object(section)) return false;
+          const item = section as Record<string, unknown>;
+          if (typeof item.id !== 'string' || !/^[a-z][a-z0-9-]*$/.test(item.id) || ids.has(item.id) || !text(item.title) || !text(item.text)) return false;
+          if (Object.keys(item).some(key => !['id', 'title', 'text'].includes(key))) return false;
+          ids.add(item.id);
+        }
+        // Headings organise the original prose; no paragraph is silently lost.
+        return value.map(section => section.text).join('\n\n') === record.body;
+      };
       if (record.sourceNote !== undefined) fields.sourceNote = text;
       if (record.category !== undefined) fields.category = text;
       if (record.cover !== undefined) fields.cover = value => {

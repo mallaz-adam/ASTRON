@@ -19,7 +19,9 @@ describe('Today controls and art', () => {
     const html = render();
     expect(html).toContain('type="button" class="profile-control" aria-label="Profile"');
     expect(html).toContain('aria-current="page"');
-    expect(html).toContain('Continue: Earth, the Sun and the Moon');
+    expect(html).toContain('Continue learning');
+    expect(html).toContain('Earth, the Sun and the Moon');
+    expect(html.indexOf('today-continue')).toBeLessThan(html.indexOf('streak-card'));
   });
   it('links all five working destinations without an unavailable placeholder', () => {
     const html = render();
