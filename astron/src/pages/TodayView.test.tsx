@@ -48,4 +48,16 @@ describe('Today controls and art', () => {
     expect(render()).toMatch(/<a[^>]*class="streak-card"[^>]*aria-label="See your sun"[^>]*href="\/sun"/);
     expect(render()).toContain('navigation-wordmark">ASTRON');
   });
+  it('prioritises learning and plain activity instructions while keeping XP in a closed disclosure', () => {
+    const html = render();
+    expect(html).toContain('href="/cell/earth-sun-moon"');
+    expect(html.indexOf('today-continue')).toBeLessThan(html.indexOf('today-activities'));
+    expect(html.indexOf('today-activities')).toBeLessThan(html.indexOf('streak-card'));
+    expect(html).toContain('Stories also count towards Learn.');
+    expect(html).toContain('Open an article, then choose Mark as read.');
+    const details = html.match(/<details[^>]*class="today-rewards"[^>]*>/)![0];
+    expect(details).not.toContain('open=');
+    expect(html).toContain('Daily goal and XP');
+    expect(html).not.toContain('class="quest-xp"');
+  });
 });

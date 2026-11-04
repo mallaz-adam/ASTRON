@@ -30,6 +30,16 @@
 .goal-diamond { width: var(--space-8); height: var(--space-8); border: var(--border-width) solid var(--vermilion); transform: rotate(45deg); }
 .goal-diamond--filled { background: var(--vermilion); }
 .today-quests { display: grid; gap: var(--space-16); }
+.today-activities { display: grid; gap: 16px; min-width: 0; align-content: start; }
+.today-activities h2 { font-size: 28px; line-height: 1.25; }
+.today-activities .quest-description { font-size: 16px; color: var(--soft-ink); line-height: 1.45; }
+.today-activities .quest-status { font-size: 15px; overflow-wrap: anywhere; }
+.today-rules-note { font-size: 16px; line-height: 1.5; color: var(--soft-ink); }
+.today-rewards { border-top: var(--border-line); font-size: 16px; color: var(--soft-ink); }
+.today-rewards summary { display: list-item; min-height: 44px; padding: 12px 0; cursor: pointer; }
+.today-rewards > div { display: grid; gap: 12px; padding: 14px; background: var(--card); border: var(--border-line); line-height: 1.5; }
+.streak-heading { display: flex; align-items: center; justify-content: space-between; font: 400 14px/1.5 var(--font-label); letter-spacing: .08em; }
+.today-page .streak-number { font-size: 36px; }
 .today-quests .quest-row { padding: var(--space-16); gap: var(--space-12); }
 .today-quests .quest-title { font-size: var(--type-body); }
 .today-bonus { color: var(--soft-ink); font-style: italic; font-size: var(--type-small); }
@@ -55,19 +65,18 @@
   .today-main {
     display: grid;
     grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-    grid-template-rows: auto auto auto auto auto auto auto 1fr;
+    grid-template-rows: auto auto auto auto auto auto 1fr;
     gap: var(--space-24);
     min-height: calc(100dvh - var(--space-36) * 4);
   }
   .today-header { grid-column: 1 / -1; grid-row: 2; }
   .today-header .profile-control { display: none; }
-  .streak-card { grid-column: 1; grid-row: 3 / 7; align-self: start; }
-  .daily-quests-label { grid-column: 2; grid-row: 3; }
-  .today-goal { grid-column: 2; grid-row: 4; }
-  .today-quests { grid-column: 2; grid-row: 5; }
-  .today-bonus { grid-column: 2; grid-row: 6; }
-  .today-continue { grid-column: 2; grid-row: 7; align-self: start; }
-  .today-dev-link { grid-column: 1; grid-row: 8; }
+  .streak-card { grid-column: 1; grid-row: 4; align-self: start; }
+  .today-activities { grid-column: 2; grid-row: 4; }
+  .today-continue { grid-column: 1 / -1; grid-row: 3; align-self: start; }
+  .today-main .today-discovery-link { grid-column: 1 / -1; grid-row: 5; }
+  .today-dev-link { grid-column: 1; grid-row: 6; }
+  .today-test-tools { grid-row: 7; }
   .navigation-bar { grid-column: 1 / -1; grid-row: 1; margin-top: 0; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-24); border-bottom: var(--border-line); padding-bottom: var(--space-16); }
   .navigation-wordmark { display: block; font: var(--font-weight) var(--type-large)/1.4 var(--font-label); letter-spacing: var(--label-spacing); }
   .navigation-profile { display: grid; justify-self: end; }

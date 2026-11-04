@@ -5,6 +5,7 @@ import type { TodayModel } from '../logic/today';
 export function StreakCard({ model }: { model: TodayModel }) {
   return (
     <Link to="/sun" className="streak-card" aria-label="See your sun">
+      <span className="streak-heading">Your sun <span aria-hidden="true">→</span></span>
       <div className="streak-top">
         <SunArt stage={model.sunStage} />
         <div className="streak-count"><span className="streak-number">{model.streak}</span><span className="streak-caption">day streak</span></div>

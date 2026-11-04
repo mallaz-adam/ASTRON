@@ -69,5 +69,6 @@ First visits enter the welcome before the normal learning pages.
 - [The Pleiades story](docs/pleiades-story.md)
 - [Reading and navigation improvements](docs/experience-polish.md)
 - [First lesson review response](docs/reviewer-response.md)
+- [Orion and Today follow-up](docs/orion-today-review.md)
 - [Art credits and provenance](docs/orion-assets.md)
 - [Hosting and phone testing](docs/private-test.md)

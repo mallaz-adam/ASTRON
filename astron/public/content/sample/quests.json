@@ -1,5 +1,5 @@
 [
-  { "id": "daily-learn", "kind": "learn", "title": "Learn one small idea", "xpReward": 20 },
-  { "id": "daily-story", "kind": "story", "title": "Discover one tale", "xpReward": 15 },
-  { "id": "daily-read", "kind": "read", "title": "Read one article", "xpReward": 10 }
+  { "id": "daily-learn", "kind": "learn", "title": "Finish a lesson or story", "xpReward": 20 },
+  { "id": "daily-story", "kind": "story", "title": "Explore a Greek story", "xpReward": 15 },
+  { "id": "daily-read", "kind": "read", "title": "Read an article", "xpReward": 10 }
 ]

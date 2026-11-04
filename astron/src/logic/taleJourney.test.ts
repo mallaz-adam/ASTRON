@@ -5,7 +5,7 @@ import type { Progress } from '../data/types';
 import { sampleContent } from '../data/contentFixtures';
 import { validateTaleExperience, type OrionTaleData } from '../data/taleExperience';
 import { evaluateBeltChoice, needsWelcome, readableTales } from './taleJourney';
-import { projectOrion } from './orionChart';
+import { orionPattern, projectOrion } from './orionChart';
 
 const readerFile = () => JSON.parse(readFileSync(new URL('../../public/content/orion.json', import.meta.url), 'utf8'));
 const data = validateTaleExperience(readerFile()) as OrionTaleData;
@@ -59,5 +59,25 @@ describe('The chart and belt activity', () => {
     const links = readerFile(); links.chart.connections[0][0] = 'missing'; expect(() => validateTaleExperience(links)).toThrow('connections');
     const belt = readerFile(); belt.activity.groups[1].starIds[0] = 'rigel'; expect(() => validateTaleExperience(belt)).toThrow('groups.belt');
     const sources = readerFile(); sources.sources[0].url = 'javascript:alert(1)'; expect(() => validateTaleExperience(sources)).toThrow('sources');
+  });
+  it('fits every pattern picture with the same shape as the sourced sky positions', () => {
+    for (const group of data.activity.groups) {
+      const points = orionPattern(data.chart.stars, group.starIds);
+      expect(points.map(point => point.id)).toEqual(group.starIds);
+      for (const point of points) { expect(point.x).toBeGreaterThanOrEqual(10 - 1e-9); expect(point.x).toBeLessThanOrEqual(90 + 1e-9); expect(point.y).toBeGreaterThanOrEqual(14 - 1e-9); expect(point.y).toBeLessThanOrEqual(62 + 1e-9); }
+      const original = group.starIds.map(id => projectOrion(data.chart.stars.find(star => star.id === id)!));
+      const distance = (a: { x: number; y: number }, b: { x: number; y: number }) => Math.hypot(a.x - b.x, a.y - b.y);
+      expect(distance(points[0], points[1]) / distance(points[1], points[2])).toBeCloseTo(distance(original[0], original[1]) / distance(original[1], original[2]), 8);
+    }
+    expect(() => orionPattern(data.chart.stars, ['missing'])).toThrow('unknown star');
+  });
+  it('keeps the belt visibly closer together when the three pictures share a scale', () => {
+    const groups = data.activity.groups.map(group => group.starIds);
+    const span = (id: string) => {
+      const points = orionPattern(data.chart.stars, data.activity.groups.find(group => group.id === id)!.starIds, groups);
+      return Math.max(...points.map(p => p.x)) - Math.min(...points.map(p => p.x));
+    };
+    expect(span('belt')).toBeLessThan(span('upper'));
+    expect(span('belt')).toBeLessThan(span('lower'));
   });
 });

@@ -142,10 +142,12 @@ Run these from the `astron` folder:
 | `npm run build` | Check TypeScript and create the production files in `dist`. |
 | `npm run preview` | Open the built production app locally. Build it first. |
 
-The first lesson review update on 4 November 2026 passed **584 tests in
-67 files** and the production build. It includes clearer diagram instructions,
-nearby feedback, picture-based practice and continuous unit progress. The prior
-reading update added article sections, clearer actions and persistent phone tabs.
+The Orion and Today review update on 4 November 2026 passed **592 tests in
+67 files** and the production build. It adds clearer story characters, a scorpion
+illustration, picture choices for the belt and clearer daily-activity rules.
+The earlier lesson update added nearby diagram feedback, picture-based matching
+and continuous unit progress; the reading update added article sections and
+persistent phone tabs. See the linked review notes for browser testing limits.
 Main destinations and readers were checked at 320, 390, 768 and 1280 px.
 These are recorded results, not a substitute for rerunning checks after future changes.
 Physical iPhone/Safari and VoiceOver checks remain part of tester feedback.
@@ -227,6 +229,7 @@ service worker offers **REFRESH** when its files are ready.
 - [The Pleiades story](astron/docs/pleiades-story.md)
 - [Reading and navigation improvements](astron/docs/experience-polish.md)
 - [First lesson review response](astron/docs/reviewer-response.md)
+- [Orion and Today follow-up](astron/docs/orion-today-review.md)
 - [Discovery cues](astron/docs/discovery-cues.md)
 - [Welcome, navigation and article image credit](astron/docs/welcome-and-articles.md)
 - [Orion artwork provenance and limitations](astron/docs/orion-assets.md)

@@ -30,7 +30,7 @@ export function TaleSources({ data }: { data: TaleExperienceData }) {
   return <DiscoveryDetails emphasis="quiet" className="tale-sources" detailId={`tale:${data.taleId}:sources`} label="Sources"><div>
     {data.kind === 'illustrated' ? data.sourceNotes.map((note, index) => <p key={index}>{note}</p>) : <p>This is one version of the myth. The drawings show the imagined hunter. The chart shows where the stars appear from Earth.</p>}
     <ul>{data.sources.map(source => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a></li>)}</ul>
-    {data.kind !== 'illustrated' && <p>Artwork adapted from images supplied for ASTRON. The welcome painting includes an AI-assisted edit. The hunter illustration retains the supplied linework.</p>}
+    {data.kind !== 'illustrated' && <p>Artwork adapted from images supplied for ASTRON. The welcome painting includes an AI-assisted edit. The hunter illustration retains the supplied linework. The scorpion is an original ASTRON SVG illustration.</p>}
     <p>Essential story and source notes are saved with the app. External source pages need an internet connection.</p>
   </div></DiscoveryDetails>;
 }

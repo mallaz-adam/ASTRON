@@ -39,17 +39,18 @@ describe('Orion reading and activity states', () => {
       for (const paragraph of paragraphs) expect(html.split(paragraph)).toHaveLength(2);
     }
   });
-  it('starts with three native radio choices and immediate help, without an enabled Check', () => {
+  it('offers three native picture buttons and immediate help, without an enabled Check', () => {
     const html = render(<BeltActivity data={data} busy={false} onAnswer={async () => false} onContinue={() => undefined} />);
-    expect(html.match(/type="radio"/g)).toHaveLength(3);
+    expect(html.match(/class="belt-picture-choice"/g)).toHaveLength(3);
+    expect(html).not.toContain('type="radio"');
     expect(html).toContain('Group B. Three close stars in an almost-straight line.');
     expect(html).toContain('>Hint</button>'); expect(html).toContain('>Show me</button>');
     expect(html).toMatch(/<button[^>]*disabled=""[^>]*>Check<\/button>/);
   });
   it('shows the taught belt group selected after help and permits continuing', () => {
     const html = render(<BeltActivity data={data} outcome="assisted" busy={false} onAnswer={async () => true} onContinue={() => undefined} />);
-    const belt = html.match(/<input[^>]*>/g)!.find(input => input.includes('value="belt"'))!;
-    expect(belt).toContain('checked=""'); expect(html).toContain(data.activity.explanation.replaceAll("'", '&#x27;'));
+    const belt = html.match(/<button[^>]*>/g)!.find(button => button.includes('aria-label="Group B.'))!;
+    expect(belt).toContain('aria-pressed="true"'); expect(belt).toContain('disabled=""'); expect(html).toContain(data.activity.explanation.replaceAll("'", '&#x27;'));
     expect(html).toContain('>Continue</button>'); expect(html).not.toContain('>Check</button>');
   });
   it('gives the specific proud response after recognition and no score line', () => {
@@ -74,5 +75,19 @@ describe('Orion reading and activity states', () => {
     const html = render(<ReadingText text={'<script>alert(1)</script>\n\nA second paragraph.'} />);
     expect(html).not.toContain('<script>'); expect(html).toContain('&lt;script&gt;');
     expect(html.match(/<p>/g)).toHaveLength(2);
+  });
+  it('uses a scorpion for the scorpion scene and introduces the myth characters clearly', () => {
+    const chapters = content.chapters.filter(row => row.taleId === tale.id);
+    const html = render(<TaleChapter chapter={chapters[1]} data={data} />);
+    expect(html).toContain('/art/orion/scorpion.svg');
+    expect(html).not.toContain('cover-640.webp');
+    expect(chapters[0].text).toContain('Gaia, the goddess of the Earth');
+    expect(chapters[2].text).toContain('Artemis, the goddess of the hunt, cared about Orion.');
+  });
+  it('places a clear chart instruction and its response before the large picture', () => {
+    const chapter = content.chapters.find(row => row.taleId === tale.id && row.presentation === 'guided-chart')!;
+    const html = render(<TaleChapter chapter={chapter} data={data} />);
+    expect(html.indexOf('Choose the belt or Betelgeuse')).toBeLessThan(html.indexOf('<figure'));
+    expect(html.indexOf('role="status"')).toBeLessThan(html.indexOf('<figure'));
   });
 });

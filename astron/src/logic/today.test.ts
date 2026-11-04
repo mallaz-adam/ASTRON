@@ -32,49 +32,49 @@ describe('Today messages and progress', () => {
     const model = buildTodayModel(progress([], goal), content, now);
     expect(model.streak).toBe(0);
     expect(model.status).toBe('none');
-    expect(model.streakText).toBe(`Begin with ${goal} ${goal === 1 ? 'quest' : 'quests'} today. The atlas grows one discovery at a time.`);
+    expect(model.streakText).toBe(`Begin with ${goal} ${goal === 1 ? 'activity' : 'activities'} today. The atlas grows one discovery at a time.`);
   });
   it('asks only for the remaining quest when starting a streak', () => {
     const model = buildTodayModel(progress(['learn']), content, now);
-    expect(model.streakText).toBe('Begin with 1 quest today. The atlas grows one discovery at a time.');
-    expect(model.goalText).toBe('1 of 2 quests keeps your streak alive');
+    expect(model.streakText).toBe('Begin with 1 activity today. The atlas grows one discovery at a time.');
+    expect(model.goalText).toBe('1 of 2 daily activities complete');
   });
   it('shows an at-risk thirteen-day streak and its next target', () => {
     const model = buildTodayModel(progress([], 2, 13), content, now);
     expect(model.streak).toBe(13);
     expect(model.status).toBe('atRisk');
-    expect(model.streakText).toBe('Finish 2 more quests today to keep your sun alight.');
+    expect(model.streakText).toBe('Finish 2 more activities today to keep your sun alight.');
   });
   it('uses singular quest when one more is needed to keep the streak', () => {
     const model = buildTodayModel(progress(['learn'], 2, 13), content, now);
-    expect(model.streakText).toBe('Finish 1 more quest today to keep your sun alight.');
+    expect(model.streakText).toBe('Finish 1 more activity today to keep your sun alight.');
   });
   it.each([1, 2, 3] as const)('shows the safe text when goal %s is met', goal => {
     const model = buildTodayModel(progress(content.quests.slice(0, goal).map(row => row.kind), goal, 13), content, now);
     expect(model.status).toBe('kept');
     expect(model.streak).toBe(14);
     expect(model.streakText).toBe("Your sun is safe tonight. Let today's discoveries settle.");
-    expect(model.goalText).toBe('Goal met. Your streak is safe tonight.');
+    expect(model.goalText).toBe('Daily goal met.');
   });
   it('orders rows Learn, Read, Discover and marks only today’s matching quest', () => {
     const model = buildTodayModel(progress(['learn'], 2, 2), content, now);
-    expect(model.questRows.map(row => row.kind)).toEqual(['Learn', 'Read', 'Discover']);
+    expect(model.questRows.map(row => row.kind)).toEqual(['Learn', 'Read', 'Stories']);
     expect(model.questRows.map(row => row.done)).toEqual([true, false, false]);
     expect(model.sunStage).toBe(1);
-    expect(model.questHeading).toBe('DAILY QUESTS · 20 / 45 XP');
+    expect(model.questHeading).toBe('DAILY ACTIVITIES · 20 / 45 XP');
     expect(model.diamonds).toEqual([true, false]);
   });
   it('shows stage two and a met Steady goal for two quests', () => {
     const model = buildTodayModel(progress(['learn', 'story']), content, now);
     expect(model.sunStage).toBe(2);
-    expect(model.goalText).toBe('Goal met. Your streak is safe tonight.');
+    expect(model.goalText).toBe('Daily goal met.');
   });
   it('caps the goal diamonds and shows 45/45 quest XP separately from the bonus', () => {
     const saved = progress(['learn', 'story', 'read']);
     saved.completions.push({ learnerId: localLearnerId, cellId: 'example', completedOn: now.toISOString(), correctAnswers: 0, xpEarned: 100 });
     const model = buildTodayModel(saved, content, now);
     expect(model.sunStage).toBe(3);
-    expect(model.questHeading).toBe('DAILY QUESTS · 45 / 45 XP');
+    expect(model.questHeading).toBe('DAILY ACTIVITIES · 45 / 45 XP');
     expect(model.bonusText).toBe('Finish all three today for +10 XP.');
     expect(model.diamonds).toEqual([true, true]);
   });
@@ -99,6 +99,31 @@ describe('Today messages and progress', () => {
     const before = structuredClone(saved);
     expect(buildTodayModel(saved, content, now).freezeText).toBe('1 freeze');
     expect(saved).toEqual(before);
+  });
+  it('opens the next authored lesson directly, then falls back to the path when all ready units are complete', () => {
+    const saved = progress();
+    expect(buildTodayModel(saved, content, now).currentCellTo).toBe('/cell/earth-sun-moon');
+    saved.completions.push({ learnerId: localLearnerId, cellId: 'earth-sun-moon', completedOn: now.toISOString(), correctAnswers: 0, xpEarned: 0 });
+    expect(buildTodayModel(saved, content, now).currentCellTo).toBe('/cell/our-solar-system');
+    for (const cellId of ['our-solar-system', 'stars-milky-way', 'galaxies-universe']) saved.completions.push({ learnerId: localLearnerId, cellId, completedOn: now.toISOString(), correctAnswers: 0, xpEarned: 0 });
+    expect(buildTodayModel(saved, content, now)).toMatchObject({ currentCellTo: '/learn', currentCellTitle: null, learningAction: 'Explore the learning path' });
+  });
+  it('explains both daily credits from a story using the matching saved completion', () => {
+    const saved = progress(['learn', 'story']);
+    const story = content.cells.find(cell => cell.kind === 'tale' && cell.taleId === 'orion-shoulder')!;
+    saved.completions.push({ learnerId: localLearnerId, cellId: story.id, completedOn: now.toISOString(), correctAnswers: 0, xpEarned: 0 });
+    const model = buildTodayModel(saved, content, now);
+    expect(model.questRows[0].completionText).toBe(`Completed: ${story.title}`);
+    expect(model.questRows[2].completionText).toBe(`Completed: ${story.title}`);
+    expect(model.questRows[0].instruction).toContain("story's star");
+    expect(model.questRows[1].instruction).toContain('Mark as read');
+    expect(model.questRows.map(row => row.to)).toEqual(['/learn', '/articles', '/stories']);
+  });
+  it('does not invent a completion source for a replay or ambiguous timestamps', () => {
+    const saved = progress(['learn']);
+    expect(buildTodayModel(saved, content, now).questRows[0].completionText).toBe('Done today');
+    for (const cellId of ['earth-sun-moon', 'our-solar-system']) saved.completions.push({ learnerId: localLearnerId, cellId, completedOn: now.toISOString(), correctAnswers: 0, xpEarned: 0 });
+    expect(buildTodayModel(saved, content, now).questRows[0].completionText).toBe('Done today');
   });
 });
 

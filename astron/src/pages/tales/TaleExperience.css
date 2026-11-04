@@ -51,6 +51,8 @@
 .tale-discovery > p { padding: 8px 0 18px; }
 .tale-discovery .orion-chart { background: var(--lapis); }
 .tale-landscape-image { width: 100%; height: 220px; object-position: 50% 0%; }
+.tale-scorpion-image { display: block; width: 100%; height: auto; max-height: 440px; }
+.tale-exploration-controls { display: grid; gap: 12px; padding: 14px; border: var(--border-line); background: var(--card); font-size: 17px; line-height: 1.5; }
 .tale-picture-note { font-size: 15px; font-style: italic; color: var(--soft-ink); }
 .tale-feature-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .tale-feature-controls button { font-size: 13px; padding-inline: 8px; }
@@ -92,6 +94,16 @@
 .belt-response { display: grid; gap: 18px; }
 .belt-response:empty { display: none; }
 .belt-descriptions { font-size: 15px; }
+.belt-picture-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; scroll-margin-top: 24px; }
+.belt-picture-choice { display: grid; gap: 6px; min-width: 0; min-height: 100px; padding: 10px 4px; background: var(--lapis); color: var(--card); border: 2px solid var(--line); font: 16px/1.4 var(--font-reading); cursor: pointer; }
+.belt-picture-choice svg { width: 100%; height: auto; }
+.belt-picture-choice[aria-pressed='true'] { border-color: var(--vermilion); box-shadow: 0 0 0 2px var(--vermilion); }
+.belt-selection { color: var(--soft-ink); font-size: 16px; }
+.belt-response { scroll-margin-block: 24px; }
+.belt-whole-chart { border-top: var(--border-line); }
+.belt-whole-chart summary { min-height: 44px; padding-block: 12px; cursor: pointer; font-size: 17px; }
+.belt-whole-chart .orion-chart { max-height: 440px; }
+.belt-activity { max-width: 780px; margin-inline: auto; }
 .tale-preferences { max-width: 620px; margin: 36px auto; display: grid; gap: 24px; }
 .interest-choices { display: flex; flex-wrap: wrap; gap: 12px; }
 .daily-goal-choices { padding: 0; margin: 0; border: 0; display: grid; gap: 12px; }
@@ -138,10 +150,7 @@
   .tale-star-copy { grid-column: 2; grid-row: 2; }
   .tale-ending-actions { margin-left: calc(50% + 18px); }
   .tale-actions .atlas-button { flex: 0 1 auto; min-width: 180px; }
-  .belt-activity { grid-template-columns: 1.1fr 1fr; gap: 24px 36px; }
-  .belt-intro { grid-column: 2; grid-row: 1; }
-  .belt-plate { grid-column: 1; grid-row: 1 / 3; }
-  .belt-controls { grid-column: 2; grid-row: 2; }
+  .belt-activity { grid-template-columns: 1fr; gap: 24px; }
 }
 @media (min-width: 1000px) {
   .atlas-page.tale-page { padding: 48px; }

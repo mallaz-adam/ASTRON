@@ -1,5 +1,11 @@
 # Orion artwork assets
 
+4 November addition: `public/art/orion/scorpion.svg` is an original ASTRON vector
+illustration (360 × 300 viewBox), drawn in code for The Scorpion. It represents an
+imagined scorpion on stony ground, not an astronomical photograph or a constellation
+map. It introduces no external media dependency. Existing converted assets below
+are unchanged.
+
 These are deterministic WebP conversions of artwork approved by the owner for ASTRON. No new imagery, crop, frame, retouching, or invented detail was added in this conversion step. Original artist identities, creation methods of the original references, and external licensing status have not been established. Owner approval is recorded as project direction, not a claim of public-domain status or verified third-party rights.
 
 ## Shipped files

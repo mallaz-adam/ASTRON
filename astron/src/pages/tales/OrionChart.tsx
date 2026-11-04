@@ -13,7 +13,7 @@ export function OrionChart({ data, highlight, labels = false, connections = true
   return <svg className="orion-chart" viewBox="0 0 360 440" role="img" aria-labelledby={`${id}-title ${id}-description`}>
     <title id={`${id}-title`}>Orion, seen from Earth</title>
     <desc id={`${id}-description`}>{activity
-      ? 'Seven selected stars from Orion. Use the group buttons and pattern descriptions to choose a pattern.'
+      ? 'Seven selected stars from Orion. Compare the star pictures with this chart.'
       : "Two stars mark the shoulders and two mark the feet. Three close stars form an almost-straight belt between them. Betelgeuse is at the upper left."}</desc>
     {connections && <g className="orion-connections">{data.chart.connections.map(([a, b]) => {
       const first = byId.get(a)!; const second = byId.get(b)!;
@@ -29,6 +29,5 @@ export function OrionChart({ data, highlight, labels = false, connections = true
       <text x="216" y="247">Orion's belt</text>
       <text x="270" y="374">Rigel</text>
     </g>}
-    {activity && <g className="orion-group-labels" aria-hidden="true"><text x="180" y="55">A</text><text x="220" y="225">B</text><text x="182" y="390">C</text></g>}
   </svg>;
 }

@@ -63,9 +63,10 @@ schematic and retain their limitations. No automatic diagram animation added.
 
 ## Remaining review work
 
-Orion's activity and illustrations, whole-app game vocabulary, daily reward-rule
-clarity, beginner vocabulary pacing, the Betelgeuse prerequisite assumption and
-broader visual consistency remain separate passes. Permanent progress remains
+The [Orion and Today follow-up](orion-today-review.md) implements picture choices,
+story illustration/character clarity and plain daily-activity explanations.
+Whole-app vocabulary, beginner terminology pacing, the Betelgeuse prerequisite
+assumption and broader visual consistency remain separate passes. Permanent progress remains
 deliberately disabled during development, per the owner's instruction. Changing
 reward rules, restoring persistence, expanding the myth or adding accounts is
 not part of this implementation.
