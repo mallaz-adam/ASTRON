@@ -7,14 +7,15 @@ production instructions or a claim that every proposed drawing was supplied.
 ## Content and navigation
 
 `public/content/earth-sun-moon.json` holds the introduction, ten teaching steps,
-selected glossary definitions, optional practices, targeted feedback and sources.
+selected glossary definitions, dedicated practices, targeted feedback and sources.
 The shared lesson metadata uses `readerType: "visual-unit"`. The reader and its
 styles are lazy-loaded by the existing `/cell/:id` route.
 
 Chapter metadata remains in the legacy `Unit` table. The first chapter is now
 `our-place`; its first lesson cell is `earth-sun-moon`. Unit 2, Our solar system,
 is now playable and unlocks after Unit 1. Unit 3, Stars and the Milky Way,
-unlocks after Unit 2. The three remaining units are
+unlocks after Unit 2. Unit 4, Galaxies and the universe, unlocks after Unit 3.
+The two remaining units are
 placeholders, explicitly described as being prepared, not functioning lessons.
 The final evaluation is reserved for ten questions across all six units. No pass
 mark, retry policy or cross-chapter exam unlock has been invented. Earlier authored
@@ -22,14 +23,18 @@ lessons remain accessible at `/learn?chapter=first-sky` for development testing.
 
 ## Learning behaviour
 
-- Introduction, ten manageable steps, then completion; one primary Continue.
+- Introduction, ten manageable teaching steps and two dedicated practices, then
+  completion; one primary Continue. The shared counter includes all 13 screens.
 - Definitions appear only on the first marked mention of a selected term in a step.
 - Definition controls are buttons; opening focuses Close, and Escape restores focus.
 - Orbit movement uses a native range input, including arrow keys and spoken state.
 - Path and light reveals use real buttons. No drawing gesture is required.
-- Matching uses labelled native selects; moonlight practice uses native radio inputs.
+- Matching uses one picture at a time and native radio choices with short role
+  descriptions; moonlight practice also uses native radio inputs.
 - Specific feedback preserves correct selections and supports unlimited retries.
-- Optional practices store no answers, scores or extra XP.
+- Each practice requires a complete attempt and feedback, never a correct answer
+  to continue. Answers are retained within the mounted reader for Previous;
+  practice adds no score or extra XP.
 - `finishReadingLesson` uses the existing transaction and reward rules. Repeated
   presses and replays do not duplicate completion or quest rewards.
 - Existing development-preview progress reset behaviour is unchanged.
@@ -51,6 +56,9 @@ qualifications stay in editorial notes rather than adding topics to the first un
 
 All exploration is learner-controlled and untimed. Reduced motion retains the
 same controls with immediate changes; Glaux's decorative motion is disabled.
+Visible instructions and live results stay beside controls, above the large
+diagrams. Optional questions are labelled; Meet the Moon keeps one observation
+instead of a second diagram. See [the review response](reviewer-response.md).
 Phone uses a single column; desktop pairs text and pictures. Existing reading
 actions reserve their measured space above the phone's bottom edge.
 

@@ -1,14 +1,16 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Content, Lesson } from '../data/types';
-import { loadVisualUnit, type ObjectId, type ObjectKind, type UnitStep, type VisualUnitData } from '../data/visualUnit';
+import { loadVisualUnit, type UnitStep, type VisualUnitData } from '../data/visualUnit';
 import { isSolarSystemUnit, loadSolarSystemUnit, type SolarSystemUnitData } from '../data/solarSystemUnit';
 import { isMilkyWayUnit, loadMilkyWayUnit, type MilkyWayUnitData } from '../data/milkyWayUnit';
 import { isGalaxiesUnit, loadGalaxiesUnit, type GalaxiesUnitData } from '../data/galaxiesUnit';
 import { db } from '../data/db';
 import { localLearnerId } from '../data/learner';
 import { finishReadingLesson } from '../data/lessonServices';
-import { matchingFeedback } from '../logic/visualUnit';
+import { unitReadingPosition, unitReadingSequence } from '../logic/unitReadingProgress';
+import { UnitMatching } from './ObjectMatching';
+export { UnitMatching } from './ObjectMatching';
 import { Page } from '../design/Page';
 import { Button } from '../design/Button';
 import { ReadingActions } from '../design/ReadingActions';
@@ -25,7 +27,7 @@ import { useProgress } from '../hooks/useProgress';
 import { nextReadingDestination } from '../logic/readingFlow';
 import { milkyReadingPosition } from '../logic/milkyWay';
 import { galaxyReadingPosition } from '../logic/galaxies';
-import { practiceAfterScene, practiceAttempted } from '../logic/unitPractice';
+import { practiceAfterScene } from '../logic/unitPractice';
 import './VisualUnit.css';
 
 export function UnitWords({ step, data }: { step: Pick<UnitStep, 'paragraphs' | 'terms'>; data: Pick<VisualUnitData, 'glossary'> }) {
@@ -59,34 +61,22 @@ export function UnitWords({ step, data }: { step: Pick<UnitStep, 'paragraphs' | 
   </div>;
 }
 
-export function UnitMatching({ data, onAttempt }: { data: VisualUnitData; onAttempt?: () => void }) {
-  const [answers, setAnswers] = useState<Partial<Record<ObjectId, ObjectKind>>>({});
-  const [checked, setChecked] = useState(false);
-  const feedback = matchingFeedback(data, answers);
-  const complete = feedback.every(item => item.correct);
-  return <div className="unit-practice-content"><p>{data.matching.prompt}</p>
-    <fieldset className="unit-matches"><legend>Choose a label for each object</legend>{data.objects.map(object => <label key={object.id}>
-      <img src={object.src} alt="" width="44" height="44" /><span>{object.name}</span>
-      <select aria-label={`Label for ${object.name}`} value={answers[object.id] ?? ''} onChange={e => { setAnswers({ ...answers, [object.id]: e.target.value as ObjectKind }); setChecked(false); }}>
-        <option value="">Choose a label</option><option value="planet">Planet</option><option value="star">Star</option><option value="natural satellite">Natural satellite</option>
-      </select>
-    </label>)}</fieldset>
-    <details className="unit-hint"><summary>Hint from Glaux</summary><p>{data.matching.hint}</p></details>
-    <Button variant="secondary" onClick={() => { setChecked(true); if (practiceAttempted(data.objects.map(o => answers[o.id]), true)) onAttempt?.(); }}>Check the matches</Button>
-    {checked && <div className="unit-feedback" role="status"><GlauxArt mood={complete ? 'proud' : 'gentle'} />{complete ? <p>{data.matching.right}</p> : feedback.map(item => <p key={item.id}><span aria-hidden="true">{item.correct ? '✓ ' : '↳ '}</span>{item.text}</p>)}</div>}
-  </div>;
-}
-
 export function UnitChoice({ data, onAttempt }: { data: VisualUnitData; onAttempt?: () => void }) {
   const [choice, setChoice] = useState('');
   const [checked, setChecked] = useState(false);
+  const response = useRef<HTMLDivElement>(null);
   const option = data.choice.options.find(item => item.id === choice);
+  useEffect(() => {
+    if (!checked) return;
+    response.current?.focus({ preventScroll: true });
+    response.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }, [checked]);
   return <div className="unit-practice-content"><fieldset className="unit-choices"><legend>{data.choice.prompt}</legend>{data.choice.options.map(item => <label key={item.id}>
     <input type="radio" name="unit-moonlight" value={item.id} checked={item.id === choice} onChange={() => { setChoice(item.id); setChecked(false); }} /><span>{item.id}. {item.text}</span>
   </label>)}</fieldset>
     <details className="unit-hint"><summary>Hint from Glaux</summary><p>{data.choice.hint}</p></details>
     <Button variant="secondary" disabled={!choice} onClick={() => { setChecked(true); if (option) onAttempt?.(); }}>Explore the answer</Button>
-    {checked && option && <div className="unit-feedback" role="status"><GlauxArt mood={choice === data.choice.correct ? 'proud' : 'gentle'} /><p>{option.feedback}</p>{choice === data.choice.correct && <p>{data.choice.explanation}</p>}</div>}
+    <div ref={response} tabIndex={-1} className={checked ? 'unit-feedback' : undefined} role="status" aria-live="polite" aria-atomic="true" aria-label="Moonlight feedback">{checked && option && <><GlauxArt mood={choice === data.choice.correct ? 'proud' : 'gentle'} /><p>{option.feedback}</p>{choice === data.choice.correct && <p>{data.choice.explanation}</p>}</>}</div>
   </div>;
 }
 
@@ -150,6 +140,9 @@ export function VisualUnitReader({ lesson, content, data, reduceMotion }: { less
   const onRecap = !!recap && (galaxies ? galaxyReadingPosition : milkyReadingPosition)(index, data.steps.length) === 'recap';
   const lastReadingIndex = data.steps.length - 1 + (recap ? 1 : 0);
   const unitNumber = isSolarSystemUnit(data) || milky || galaxies ? data.unitNumber : 1;
+  const sequence = unitReadingSequence(data.lessonId, data.steps, Boolean(recap), galaxies ? { reconstruction: data.evidence.questions.length } : {});
+  const position = unitReadingPosition(sequence, { index, practicing, question: questionIndex, finished });
+  const count = `${position.current} / ${position.total}`;
   const cell = content.cells.find(row => row.id === lesson.cellId)!;
   const nextCell = content.cells.filter(row => row.unitId === cell.unitId && row.positionNo > cell.positionNo).sort((a, b) => a.positionNo - b.positionNo)[0];
   const nextReady = nextCell && content.lessons.some(row => row.cellId === nextCell.id && !row.placeholder);
@@ -192,6 +185,7 @@ export function VisualUnitReader({ lesson, content, data, reduceMotion }: { less
   }
   return <Page className={`unit-page${unitNumber === 2 ? ' solar-unit' : ''}${milky ? ' milky-unit' : ''}${galaxies ? ' galaxy-unit' : ''}`} reduceMotion={reduced} skipLabel="Skip to lesson"><main id="main-content" className="unit-main" aria-busy={busy}>
     <header className="unit-header"><Link to="/learn">Back to the path</Link><span>{data.chapter}</span></header>
+    <div className="unit-progress"><p className="unit-eyebrow">Unit {unitNumber} · Step {position.current} of {position.total}</p><progress aria-label="Unit progress" aria-valuetext={`Step ${position.current} of ${position.total}`} value={position.current} max={position.total} /></div>
     {finished ? <section className="unit-finished">
       <p className="unit-eyebrow">Unit {unitNumber} complete</p><h1 ref={heading} tabIndex={-1}>{recap ? data.title : data.steps.at(-1)!.title}</h1>
       {galaxies ? <GalaxyPhoto data={data} id="deep-field" /> : milky ? <MilkyPhoto data={data} id="panorama" /> : <UnitOpeningPicture data={data} />}
@@ -205,24 +199,23 @@ export function VisualUnitReader({ lesson, content, data, reduceMotion }: { less
       <div className="unit-introduction">{galaxies ? <><div className="unit-prose">{data.introduction.map((p, i) => <p key={i}>{p}</p>)}</div><UnitOpeningPicture data={data} /></>
         : <><UnitOpeningPicture data={data} /><div className="unit-prose">{data.introduction.map((p, i) => <p key={i}>{p}</p>)}</div></>}</div>
       <p className="unit-caption">Underlined words open a short definition. Move through the lesson at your own pace.</p>
-      <ReadingActions label="Begin the unit"><Button onClick={() => void advance()}>Continue</Button></ReadingActions>
+      <ReadingActions label="Begin the unit"><Button onClick={() => void advance()}>Continue</Button><span className="reading-count">{count}</span></ReadingActions>
     </> : practicing && practice ? <>
-      <header className="unit-practice-heading"><p className="unit-eyebrow">Unit {unitNumber} · Practice {practice.number} of {practice.total}</p>
+      <header className="unit-practice-heading"><p className="unit-eyebrow">Practice</p>
       <h1 ref={heading} tabIndex={-1}>{practice.title}</h1></header>
     </> : onRecap && recap ? <>
       <p className="unit-eyebrow">Unit {unitNumber} · Recap</p><h1 ref={heading} tabIndex={-1}>{recap.title}</h1>
       {galaxies ? <section className="galaxy-recap"><ol>{recap.paragraphs.map(p => <li key={p}>{p}</li>)}</ol><GalaxyUniverse /></section>
         : milky && <section className="milky-recap"><ol className="milky-recap-points">{recap.paragraphs.map(p => <li key={p}>{p}</li>)}</ol><MilkyViewComparison data={data} interactive={false} /></section>}
       <div className="unit-glaux"><GlauxArt mood="proud" /><p>{recap.glaux}</p></div>
-      <ReadingActions label="Unit recap"><Button disabled={busy} onClick={() => void advance()}>Continue</Button><button type="button" className="reading-previous" disabled={busy} onClick={previous}>Previous</button><span className="reading-count">Recap</span></ReadingActions>
+      <ReadingActions label="Unit recap"><Button disabled={busy} onClick={() => void advance()}>Continue</Button><button type="button" className="reading-previous" disabled={busy} onClick={previous}>Previous</button><span className="reading-count">{count}</span></ReadingActions>
     </> : <>
-      <div className="unit-progress"><p className="unit-eyebrow">Unit {unitNumber} · Step {index + 1} of {data.steps.length}</p><progress aria-label="Unit progress" value={index + 1} max={data.steps.length} /></div>
       <h1 ref={heading} tabIndex={-1}>{step.title}</h1>
       <div className="unit-teaching" key={step.id}>
         <div className="unit-teaching-copy"><UnitWords step={step} data={data} />{step.glaux && <div className="unit-glaux"><GlauxArt mood={['recap', 'solar-recap'].includes(step.scene) ? 'proud' : 'gentle'} /><p>{step.glaux}</p></div>}{galaxies && <p className="galaxy-invitation">{data.steps[index].invitation}</p>}</div>
         <section className="unit-visual" aria-label="Picture and exploration"><TeachingPicture data={data} index={index} /></section>
       </div>
-      <ReadingActions label="Unit steps"><Button disabled={busy} onClick={() => void advance()}>Continue</Button><button type="button" className="reading-previous" disabled={busy} onClick={previous}>Previous</button><span className="reading-count">{index + 1} / {data.steps.length}</span></ReadingActions>
+      <ReadingActions label="Unit steps"><Button disabled={busy} onClick={() => void advance()}>Continue</Button><button type="button" className="reading-previous" disabled={busy} onClick={previous}>Previous</button><span className="reading-count">{count}</span></ReadingActions>
     </>}
     {!finished && visitedPractices.map(at => {
       const item = practiceAfterScene(data.lessonId, data.steps[at].scene)!;
@@ -232,10 +225,10 @@ export function VisualUnitReader({ lesson, content, data, reduceMotion }: { less
       const attempted = attemptedPractices.includes(attemptKey);
       // Keep visited forms mounted so Previous preserves answers and feedback.
       return <section key={at} className="unit-practice-stage" hidden={!active} aria-label={item.title}>
-        <p id={`practice-guidance-${at}`} className="unit-caption">Try each question, then read the feedback. You can continue after an attempt, even if your answer needs another look.</p>
         <PracticeBody data={data} kind={item.kind} questionIndex={position} onAttempt={() => setAttemptedPractices(previous => previous.includes(attemptKey) ? previous : [...previous, attemptKey])} />
-        <p className="unit-practice-status" role="status">{attempted ? 'You have explored the feedback. Continue when you are ready.' : 'Answer each question and explore the feedback to continue.'}</p>
-        <ReadingActions label="Practice steps"><Button disabled={!attempted} aria-describedby={`practice-guidance-${at}`} onClick={() => void advance()}>Continue</Button><button type="button" className="reading-previous" onClick={previous}>Previous</button><span className="reading-count">Practice {item.number} / {item.total}</span></ReadingActions>
+        <p id={`practice-guidance-${at}`} className="unit-caption">Try the question, then read the feedback. You can continue after any complete attempt.</p>
+        <p className="unit-practice-status" role="status">{attempted ? 'Feedback explored. Continue when you are ready.' : 'Complete an attempt to continue.'}</p>
+        <ReadingActions label="Practice steps"><Button disabled={!attempted} aria-describedby={`practice-guidance-${at}`} onClick={() => void advance()}>Continue</Button><button type="button" className="reading-previous" onClick={previous}>Previous</button><span className="reading-count">{count}</span></ReadingActions>
       </section>;
     })}
     {error && <p role="alert">{error}</p>}<Credits data={data} />

@@ -4,6 +4,12 @@ import { orbitPoint, orbitWords } from '../logic/visualUnit';
 
 const names = { earth: 'Earth', sun: 'Sun', moon: 'Moon' };
 
+function ExplorationControls({ instruction, result, children }: { instruction: string; result: string; children: ReactNode }) {
+  return <div className="unit-exploration-controls"><p className="unit-instruction">{instruction}</p>{children}
+    <p className="unit-picture-response" role="status" aria-live="polite" aria-atomic="true">{result}</p>
+  </div>;
+}
+
 // Gradients and a few irregular strokes give the diagrams a painted atlas finish.
 // There are no canvas loops, filters, remote requests or automatic animations.
 export function Plate({ description, children, className = '' }: { description: string; children: ReactNode; className?: string }) {
@@ -61,20 +67,22 @@ function Photo({ object }: { object: UnitObject }) {
 export function ObjectGallery({ objects, interactive = true }: { objects: UnitObject[]; interactive?: boolean }) {
   const [selected, setSelected] = useState<ObjectId>();
   return <div className="unit-gallery-wrap">
+    {interactive && <div className="unit-exploration-controls"><p className="unit-instruction">Choose an object to uncover a clue.</p>
+      <p className="unit-picture-response" role="status" aria-live="polite" aria-atomic="true">{selected ? `${names[selected]} — ${objects.find(o => o.id === selected)!.clue}.` : 'The three objects have different roles.'}</p>
+    </div>}
     <div className="unit-gallery">{objects.map(object => <div key={object.id} className="unit-gallery-item">
       {interactive ? <button type="button" aria-label={`${object.name}: uncover a clue`} aria-pressed={selected === object.id} onClick={() => setSelected(object.id)}>
         <img src={object.src} alt={object.alt} width="160" height="160" decoding="async" /><span>{object.name}</span>
       </button> : <><img src={object.src} alt={object.alt} width="160" height="160" decoding="async" /><span>{object.name}</span></>}
     </div>)}</div>
-    {interactive && <p className="unit-picture-response" role="status">{selected ? `${names[selected]} — ${objects.find(o => o.id === selected)!.clue}.` : 'Choose an object to uncover a clue.'}</p>}
     <p className="unit-caption">Separate views — not to scale.</p>
   </div>;
 }
 
-function OrbitPicture({ value = 0, close = false, revealed = true }: { value?: number; close?: boolean; revealed?: boolean }) {
+function OrbitPicture({ value = 0, close = false }: { value?: number; close?: boolean }) {
   const point = orbitPoint(value, close);
   return <Plate description={close ? 'A schematic shows the Moon on a dashed orbit around Earth. The arrow marks the direction of movement.' : 'A schematic shows Earth on a dashed orbit around the Sun. The arrow marks the direction of movement.'}>
-    <ellipse cx="210" cy="146" rx={close ? 92 : 100} ry={close ? 90 : 96} fill="none" stroke="#e3d6b6" strokeWidth="1.2" strokeDasharray="4 6" opacity={revealed ? .8 : .24} />
+    <ellipse cx="210" cy="146" rx={close ? 92 : 100} ry={close ? 90 : 96} fill="none" stroke="#e3d6b6" strokeWidth="1.2" strokeDasharray="4 6" opacity=".8" />
     <path d={close ? 'M298 110q14 34 0 67' : 'M306 110q13 34 0 67'} fill="none" stroke="#f3e8cc" className="unit-arrow" />
     <PaintedBody kind={close ? 'earth' : 'sun'} x={210} y={146} r={34} />
     <PaintedBody kind={close ? 'moon' : 'earth'} x={point.x} y={point.y} r={close ? 14 : 20} />
@@ -86,24 +94,24 @@ function OrbitPicture({ value = 0, close = false, revealed = true }: { value?: n
 
 export function OrbitExplorer({ close = false }: { close?: boolean }) {
   const [value, setValue] = useState(0);
-  const [revealed, setRevealed] = useState(close);
   return <div className="unit-widget">
-    <OrbitPicture value={value} close={close} revealed={revealed} />
-    {!revealed && <button type="button" className="unit-small-button" onClick={() => setRevealed(true)}>Show orbit</button>}
-    <label className="unit-slider"><span>Move {close ? 'the Moon' : 'Earth'} along its orbit</span>
-      <input type="range" min="0" max="100" value={value} aria-valuetext={orbitWords(value, close)} onChange={e => { setValue(Number(e.target.value)); setRevealed(true); }} />
-    </label>
-    <p className="unit-picture-response" role="status">{orbitWords(value, close)}</p>
+    <ExplorationControls instruction="Move the slider to follow the path. You can also use the arrow keys." result={orbitWords(value, close)}>
+      <label className="unit-slider"><span>Move {close ? 'the Moon' : 'Earth'} along its orbit</span>
+        <input type="range" min="0" max="100" value={value} aria-valuetext={orbitWords(value, close)} onChange={e => setValue(Number(e.target.value))} />
+      </label>
+    </ExplorationControls>
+    <OrbitPicture value={value} close={close} />
     <p className="unit-caption">Concept diagram — not to scale. Dashed line: orbit. Arrow: movement direction.</p>
   </div>;
 }
 
 function Paths() {
   const [close, setClose] = useState(false);
-  return <div className="unit-widget"><div className="unit-switches" role="group" aria-label="Compare the paths">
+  return <div className="unit-widget"><ExplorationControls instruction="Choose a view to compare the two paths." result={close ? 'Close view: the Moon travels around Earth.' : 'Wide view: Earth travels around the Sun.'}>
+    <div className="unit-switches" role="group" aria-label="Compare the paths">
     <button type="button" aria-pressed={!close} onClick={() => setClose(false)}>Wide view</button>
     <button type="button" aria-pressed={close} onClick={() => setClose(true)}>Close view</button>
-  </div><OrbitPicture close={close} /><p className="unit-picture-response" role="status">{close ? 'The Moon travels around Earth.' : 'Earth travels around the Sun.'}</p>
+    </div></ExplorationControls><OrbitPicture close={close} />
     <p className="unit-caption">Concept diagrams — not to scale. The two views use different scales.</p>
   </div>;
 }
@@ -112,6 +120,14 @@ function Sunlight({ reflection = false }: { reflection?: boolean }) {
   const [destination, setDestination] = useState<'earth' | 'moon'>('earth');
   const [stage, setStage] = useState(0);
   return <div className="unit-widget">
+    <ExplorationControls instruction={reflection ? 'Follow the light in two steps, from the Sun to your eyes.' : 'Choose Earth or Moon to follow the light from the Sun.'}
+      result={reflection ? stage === 0 ? 'Start at the Sun.' : stage === 1 ? 'Sunlight reaches the Moon’s rocky surface.' : 'Moonlight is reflected sunlight. Some reaches our eyes on Earth.' : `Sunlight travels from the Sun to ${destination === 'moon' ? 'the Moon' : 'Earth'}.`}>
+      {reflection ? <button type="button" className="unit-small-button" onClick={() => setStage(stage === 2 ? 0 : stage + 1)}>{stage === 0 ? 'Follow sunlight' : stage === 1 ? 'Follow reflected light' : 'Show again'}</button>
+        : <div className="unit-switches" role="group" aria-label="Follow sunlight to a destination">
+          <button type="button" aria-pressed={destination === 'earth'} onClick={() => setDestination('earth')}>Earth</button>
+          <button type="button" aria-pressed={destination === 'moon'} onClick={() => setDestination('moon')}>Moon</button>
+        </div>}
+    </ExplorationControls>
     <Plate description={reflection ? 'Sunlight reaches the sun-facing side of the Moon. Some light scatters towards a person on Earth. The Sun, Moon and Earth are shown offset from one another.' : 'Two straight light paths lead from the Sun, one to Earth and one to the Moon. These are light directions, not orbits.'}>
       <PaintedBody kind="sun" x={65} y={155} r={29} /><text x="65" y="210" textAnchor="middle">Sun</text>
       <PaintedBody kind="earth" x={337} y={218} r={28} /><text x="337" y="267" textAnchor="middle">Earth</text>
@@ -122,20 +138,18 @@ function Sunlight({ reflection = false }: { reflection?: boolean }) {
       </> : <><path d="M97 162L302 209" stroke="#e8c46a" className="unit-arrow" opacity={destination === 'earth' ? 1 : .35} /><path d="M98 144L224 95" stroke="#e8c46a" className="unit-arrow" opacity={destination === 'moon' ? 1 : .35} /></>}
       <text x="155" y="270" textAnchor="middle">{reflection && stage > 1 ? 'Reflected sunlight' : 'Sunlight'}</text>
     </Plate>
-    {reflection ? <>
-      <button type="button" className="unit-small-button" onClick={() => setStage(stage === 2 ? 0 : stage + 1)}>{stage === 0 ? 'Follow sunlight' : stage === 1 ? 'Follow reflected light' : 'Show again'}</button>
-      <p className="unit-picture-response" role="status">{stage === 0 ? 'Start at the Sun.' : stage === 1 ? 'Sunlight reaches the Moon’s rocky surface.' : 'Moonlight is reflected sunlight. Some reaches our eyes on Earth.'}</p>
-    </> : <><div className="unit-switches" role="group" aria-label="Follow sunlight to a destination">
-      <button type="button" aria-pressed={destination === 'earth'} onClick={() => setDestination('earth')}>Earth</button>
-      <button type="button" aria-pressed={destination === 'moon'} onClick={() => setDestination('moon')}>Moon</button>
-    </div><p className="unit-picture-response" role="status">Sunlight travels from the Sun to {names[destination]}.</p></>}
     <p className="unit-caption">Not to scale. Solid arrows show light travelling. {reflection && 'Gold: sunlight. Blue: reflected sunlight. The Moon scatters light in many directions.'}</p>
   </div>;
 }
 
 function Comparison() {
   const [reflectors, setReflectors] = useState(false);
-  return <div className="unit-widget"><Plate description="An imaginary lamp sends light to a pale wall, then to an eye. Below, sunlight reaches the Moon and some reflected light reaches a person on Earth. The comparison is only about light.">
+  return <div className="unit-widget"><ExplorationControls instruction="Choose what to highlight: things that make light, or things that reflect it."
+    result={reflectors ? 'The wall reflects light. The Moon reflects sunlight.' : 'The lamp makes light. The Sun makes its own light.'}>
+    <div className="unit-switches" role="group" aria-label="Compare light sources and reflectors">
+      <button type="button" aria-pressed={!reflectors} onClick={() => setReflectors(false)}>Makes light</button>
+      <button type="button" aria-pressed={reflectors} onClick={() => setReflectors(true)}>Reflects light</button>
+    </div></ExplorationControls><Plate description="An imaginary lamp sends light to a pale wall, then to an eye. Below, sunlight reaches the Moon and some reflected light reaches a person on Earth. The comparison is only about light.">
     <rect x={reflectors ? 241 : 45} y="35" width={reflectors ? 99 : 112} height="78" fill="none" stroke="#e8c46a" />
     <path d="M72 90h32m-16 0V69m-17 0 8-25h18l9 25z" stroke="#e9b173" fill="#e9b173" strokeWidth="2" />
     <path d="M283 43v54" stroke="#efe4c9" strokeWidth="9" /><path d="M111 66L273 66m10 14 60 35" stroke="#e8c46a" className="unit-arrow" />
@@ -146,16 +160,13 @@ function Comparison() {
     <PaintedBody kind="sun" x={88} y={207} r={22} /><PaintedBody kind="moon" x={282} y={207} r={19} halfLit />
     <path d="M120 207L255 207" stroke="#e8c46a" className="unit-arrow" /><path d="M286 226L345 251" stroke="#b8d5ee" className="unit-arrow" />
     <text x="88" y="274" textAnchor="middle">Sun</text><text x="282" y="274" textAnchor="middle">Moon</text>
-  </Plate><div className="unit-switches" role="group" aria-label="Compare light sources and reflectors">
-    <button type="button" aria-pressed={!reflectors} onClick={() => setReflectors(false)}>Makes light</button>
-    <button type="button" aria-pressed={reflectors} onClick={() => setReflectors(true)}>Reflects light</button>
-  </div><p className="unit-picture-response" role="status">{reflectors ? 'The wall reflects light. The Moon reflects sunlight.' : 'The lamp makes light. The Sun makes its own light.'}</p>
+  </Plate>
     <p className="unit-caption">Imaginary example. Comparison only about light, not to scale. The Moon is not a mirror.</p></div>;
 }
 
 function Recap({ data }: { data: VisualUnitData }) {
   const [shown, setShown] = useState(false);
-  return <div className="unit-widget"><div className="unit-identity-cards">{data.objects.map(object => <div key={object.id}><span>{object.name}</span><span>{object.kind}</span></div>)}</div>
+  return <div className="unit-widget"><p className="unit-instruction">Reveal how the three objects are connected.</p><div className="unit-identity-cards">{data.objects.map(object => <div key={object.id}><span>{object.name}</span><span>{object.kind}</span></div>)}</div>
     <button type="button" className="unit-small-button" aria-expanded={shown} onClick={() => setShown(!shown)}>Show the connections</button>
     {shown && <div className="unit-connections" role="status"><p>Earth orbits the Sun. The Moon orbits Earth.</p><p>The Sun makes sunlight. The Moon reflects some towards us.</p></div>}
   </div>;
@@ -163,6 +174,7 @@ function Recap({ data }: { data: VisualUnitData }) {
 
 export function UnitPicture({ scene, data }: { scene: UnitScene; data: VisualUnitData }) {
   const [revealed, setRevealed] = useState(false);
+  const answerId = useId();
   if (scene === 'gallery') return <ObjectGallery objects={data.objects} />;
   if (scene === 'orbit') return <OrbitExplorer />;
   if (scene === 'paths') return <Paths />;
@@ -170,10 +182,12 @@ export function UnitPicture({ scene, data }: { scene: UnitScene; data: VisualUni
   if (scene === 'comparison') return <Comparison />;
   if (scene === 'recap') return <Recap data={data} />;
   const object = data.objects.find(o => o.id === scene)!;
-  return <div className="unit-widget"><Photo object={object} />
-    {scene === 'moon' ? <><OrbitPicture close /><p className="unit-caption">Concept diagram — not to scale.</p></> : <>
-      <button type="button" className="unit-small-button" aria-expanded={revealed} onClick={() => setRevealed(!revealed)}>{scene === 'sun' ? 'Where does sunlight come from?' : 'What kind of object is Earth?'}</button>
-      {revealed && <p className="unit-picture-response" role="status">{scene === 'sun' ? 'Energy made inside the Sun powers its light.' : 'Earth is a planet. It travels around the Sun.'}</p>}
-    </>}
+  return <div className="unit-widget">
+    {scene !== 'moon' && <aside className="unit-optional"><p className="unit-caption">Think about it · Optional</p>
+      <p>{scene === 'sun' ? 'Where does sunlight come from?' : 'What kind of object is Earth?'}</p>
+      <button type="button" className="unit-small-button" aria-expanded={revealed} aria-controls={answerId} onClick={() => setRevealed(!revealed)}>{revealed ? 'Hide explanation' : 'Show explanation'}</button>
+      <div id={answerId} hidden={!revealed}>{revealed && <p className="unit-picture-response" role="status">{scene === 'sun' ? 'Energy made inside the Sun powers its light.' : 'Earth is a planet. It travels around the Sun.'}</p>}</div>
+    </aside>}
+    <Photo object={object} />
   </div>;
 }
