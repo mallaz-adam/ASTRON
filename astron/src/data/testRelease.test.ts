@@ -23,15 +23,15 @@ describe('The growing authored course', () => {
     expect(online.countText).toBe('0 of 4 available steps done');
     expect(buildCoursePath(content, { completions: [] }, undefined, 'first-sky', false).cells).toHaveLength(11);
   });
-  it('opens lesson three after reading the scale lesson without requiring an individual exam or inventing lesson two', async () => {
-    const scale=content.lessons.find(l=>l.id==='patterns')!;
-    await finishReadingLesson(database,content,localLearnerId,scale.id,now);
-    for (const id of ['ex-03-order', 'ex-03-choice']) await saveLessonAnswer(database, content, localLearnerId, 'lesson-03', id, true, now);
-    await finishLesson(database, content, localLearnerId, 'lesson-03', [], now, 'blue');
+  it('starts in the beginner chapter and rejects a later chapter without writing rewards or answers', async () => {
+    await expect(finishReadingLesson(database, content, localLearnerId, 'patterns', now)).rejects.toThrow('Complete the evaluation in Our place in space');
+    await expect(saveLessonAnswer(database, content, localLearnerId, 'lesson-03', 'ex-03-choice', true, now)).rejects.toThrow('Complete the evaluation');
+    await expect(finishLesson(database, content, localLearnerId, 'lesson-03', [], now, 'blue')).rejects.toThrow('Complete the evaluation');
     const progress = await readProgress(database);
-    expect(progress.completions.map(row => row.cellId).sort()).toEqual(['orion-lesson','star-lesson']);
-    expect(totalXp(progress.completions, progress.questDone, progress.answers, content.exercises)).toBe(40);
-    expect(progress.litStars).toHaveLength(1);
+    expect(progress.completions).toEqual([]);
+    expect(progress.answers).toEqual([]);
+    expect(totalXp(progress.completions, progress.questDone, progress.answers, content.exercises)).toBe(0);
+    expect(progress.litStars).toHaveLength(0);
     expect(buildTodayModel(progress, content, now).currentCellTitle).toBe('Earth, the Sun and the Moon');
   });
 });

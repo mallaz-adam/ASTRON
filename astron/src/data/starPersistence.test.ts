@@ -2,13 +2,13 @@ import 'fake-indexeddb/auto';
 import { Dexie } from 'dexie';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AstronDb } from './db';
-import { sampleContent } from './contentFixtures';
+import { sampleChapterContent } from './contentFixtures';
 import { lightStar, openDay, readProgress, exportProgress } from './services';
 import { finishLesson, saveLessonAnswer } from './lessonServices';
 import { completePathCell } from './pathServices';
 import type { HunchChoice, StarTint } from './types';
 
-const content = sampleContent();
+const content = sampleChapterContent('first-sky');
 const now = new Date('2026-10-18T12:00:00');
 const later = new Date('2026-10-19T12:00:00');
 let database: AstronDb;

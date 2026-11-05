@@ -4,7 +4,7 @@ import { localDate } from './dates';
 import { goalMet, questsDoneOn, sunStage } from './quests';
 import { computeStreak, streakStage } from './streak';
 import { weekDays } from './week';
-import { buildCoursePath } from './coursePath';
+import { buildLearningRoadmap } from './learningRoadmap';
 import { glauxLine } from './glauxVoice';
 
 const questOrder: QuestKind[] = ['learn', 'read', 'story'];
@@ -50,7 +50,7 @@ export function buildTodayModel(progress: Progress, content: Content, now: Date,
   const week = weekDays(dayDate, days);
   const xpEarned = questRows.reduce((sum, row) => sum + row.earned, 0);
   const xpAvailable = questRows.reduce((sum, row) => sum + row.xp, 0);
-  const path = buildCoursePath(content, progress, learnerId, undefined, true);
+  const path = buildLearningRoadmap(content, progress, learnerId);
   return {
     dayDate, weekday: new Intl.DateTimeFormat('en', { weekday: 'long' }).format(now),
     sunStage: sunStage(done), streak, streakStage: streakStage(streak),
@@ -62,9 +62,9 @@ export function buildTodayModel(progress: Progress, content: Content, now: Date,
     diamonds: Array.from({ length: dailyGoal }, (_, index) => index < done),
     goalText: met ? 'Daily goal met.' : `${Math.min(done, dailyGoal)} of ${dailyGoal} daily activities complete`,
     bonusText: 'Finish all three today for +10 XP.',
-    currentCellTitle: path.current?.title ?? null,
-    currentCellTo: path.current ? `/cell/${path.current.id}` : '/learn',
-    learningAction: path.current ? 'Continue learning' : 'Explore the learning path',
+    currentCellTitle: path.next?.title ?? null,
+    currentCellTo: path.next?.to ?? '/learn',
+    learningAction: path.next ? 'Continue learning' : 'Explore the learning path',
   };
 }
 

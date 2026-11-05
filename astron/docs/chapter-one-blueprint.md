@@ -78,7 +78,9 @@ unapproved pass mark. Optional retake details remain to be designed.
 Completed chapters remain reviewable. A next chapter that lacks its authored
 content must still be identified as being prepared. Development currently resets
 progress on full reload; this blueprint does not change that policy or claim
-the chapter gate is already implemented.
+the full evaluation player is implemented. The 5 November
+[roadmap update](learning-roadmap.md) now enforces chapter access from authored
+content and completion records, while the real evaluation is still being prepared.
 
 ## Review and implementation checklist
 

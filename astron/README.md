@@ -41,13 +41,13 @@ are separate from earlier permanent progress. See
 | `/start` | Start the welcome and Orion journey again. |
 | `/guide` | Review the short explanation of ASTRON. |
 | `/` | Today, after the welcome. |
-| `/learn` | The authored course path. |
+| `/learn` | Chapter roadmap, progress, unit states and the next lesson. |
 | `/cell/earth-sun-moon` | Chapter 1, Unit 1: Earth, the Sun and the Moon. |
 | `/cell/our-solar-system` | Chapter 1, Unit 2: Our solar system, unlocked by Unit 1. |
 | `/cell/stars-milky-way` | Chapter 1, Unit 3: Stars and the Milky Way, unlocked by Unit 2. |
 | `/cell/galaxies-universe` | Chapter 1, Unit 4: Galaxies and the universe, unlocked by Unit 3. |
-| `/cell/orion-lesson` | Scale of the cosmos, with optional practice and a recap. |
-| `/cell/star-lesson` | Why stars differ, after its authored prerequisite. |
+| `/cell/orion-lesson` | Scale of the cosmos; Chapter 2 requires Chapter 1's completed evaluation. |
+| `/cell/star-lesson` | Why stars differ; completed lessons stay reviewable. |
 | `/stories` | Orion and The Pleiades, with illustrated scenes and real-sky endings. |
 | `/articles` | Scientific articles. |
 | `/sky` | My sky. |
@@ -60,6 +60,7 @@ First visits enter the welcome before the normal learning pages.
 
 - [Content format](docs/content-format.md)
 - [Chapters, lessons and evaluation](docs/learning-structure.md)
+- [Chapter roadmap and unlock rules](docs/learning-roadmap.md)
 - [Earth, the Sun and the Moon](docs/earth-sun-moon.md)
 - [Our solar system](docs/our-solar-system.md)
 - [Stars and the Milky Way](docs/stars-milky-way.md)

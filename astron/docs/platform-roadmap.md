@@ -1,5 +1,15 @@
 # ASTRON: platform and learning roadmap
 
+## Implementation update — 5 November 2026
+
+The [chapter roadmap](learning-roadmap.md) now presents chapters and their planned
+units with explicit readiness, completion and lock states. A shared access model
+gates normal lessons behind the preceding chapter's authored evaluation and unit
+completions. Chapter 2 is a locked preview for new learners, with completed lessons
+still reviewable and Greek stories independently available through Stories.
+The actual evaluation player and remaining Chapter 1 units still need authoring.
+This supersedes the earlier availability/roadmap status below.
+
 Draft for the owner to review, 2 November 2026.
 Grounded in the local app at commit `f7dc2fe` and a fresh browser walkthrough.
 This is a working plan, not a claim that the proposed features already exist.
@@ -146,7 +156,8 @@ presence and history; controls and teaching instructions stay clear.
 - The final assessment has ten questions after the chapter. Completing and
   submitting it unlocks the next chapter; no score threshold is required.
   Design optional retakes and review guidance before implementation.
-- Agree how to present the older development chapter in the normal roadmap.
+- The older chapter is now a locked preview in the normal roadmap; review its
+  overlapping introductory topics before publishing its complete curriculum.
 - Agree the initial story/article collection and its connections, rather than
   adding empty categories or filters that have no useful content.
 - Enable lasting progress only with the owner's decision; it stays on-device.

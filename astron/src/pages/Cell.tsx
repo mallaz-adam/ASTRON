@@ -1,7 +1,7 @@
 import { Component, lazy, Suspense, type ReactNode } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { Page } from '../design/Page';
-import { buildCoursePath } from '../logic/coursePath';
+import { learningCellAccess } from '../logic/learningRoadmap';
 import { useToday } from './useToday';
 import { TemporaryCell } from './TemporaryCell';
 import { NotFound } from './NotFound';
@@ -37,8 +37,9 @@ export function Cell() {
   if (content && !cell) return <Navigate to="/learn" replace />;
   if (cell && !lesson) return <TemporaryCell />;
   if (cell && lesson && content && progress && model) {
-    const path = buildCoursePath(content, progress, undefined, cell.unitId, true);
-    if (path.cells.find(row => row.id === id)?.state === 'locked') return <TemporaryCell />;
+    if (!learningCellAccess(content, progress, localLearnerId, cell.id).allowed) {
+      return <Navigate to={`/learn?chapter=${cell.unitId}`} replace />;
+    }
     return <LessonBoundary key={lesson.id}><Suspense fallback={<Page skipLabel="Skip to lesson"><main id="main-content" aria-busy="true"><h1>Opening the lesson…</h1></main></Page>}>
       {lesson.readerType === 'visual-unit' ? <VisualUnit lesson={lesson} content={content} reduceMotion={model.reduceMotion} />
         : lesson.reader ? <ExplorationLesson lesson={lesson} content={content} reduceMotion={model.reduceMotion} /> : <LessonPlayer lesson={lesson} content={content} reduceMotion={model.reduceMotion} />}

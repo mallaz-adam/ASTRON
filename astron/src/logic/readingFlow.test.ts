@@ -1,11 +1,11 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { sampleContent } from '../data/contentFixtures';
+import { sampleChapterContent } from '../data/contentFixtures';
 import { validateExplorationLesson } from '../data/explorationLesson';
 import type { Completion } from '../data/types';
 import { nextReadingDestination, readingSteps } from './readingFlow';
 
-const content = sampleContent();
+const content = sampleChapterContent('first-sky');
 const lesson = content.lessons.find(item => item.id === 'patterns')!;
 const data = validateExplorationLesson(JSON.parse(readFileSync(new URL('../../public/content/lesson-01.json', import.meta.url), 'utf8')), lesson, content);
 const learner = 'reader';

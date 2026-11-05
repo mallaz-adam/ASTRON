@@ -8,3 +8,10 @@ export function sampleFiles(): Record<string, unknown> {
 }
 
 export function sampleContent() { return validateContent(sampleFiles(), 'public/content/sample/'); }
+
+// Reward/player tests can isolate an existing chapter from the growing roadmap.
+// Full-course chapter gates are covered separately with the complete fixture.
+export function sampleChapterContent(chapterId: string) {
+  const content = sampleContent();
+  return { ...content, units: content.units.filter(unit => unit.id === chapterId) };
+}

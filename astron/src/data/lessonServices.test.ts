@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { AstronDb } from './db';
-import { sampleContent } from './contentFixtures';
+import { sampleChapterContent } from './contentFixtures';
 import { finishLesson, saveLessonAnswer } from './lessonServices';
 import { completePathCell } from './pathServices';
 import { readProgress } from './services';
@@ -10,7 +10,7 @@ import { buildCoursePath } from '../logic/coursePath';
 
 let database: AstronDb;
 let number = 0;
-const content = sampleContent();
+const content = sampleChapterContent('first-sky');
 const learner = 'one';
 const lesson = 'lesson-03';
 const order = 'ex-03-order';

@@ -1,11 +1,11 @@
 import 'fake-indexeddb/auto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AstronDb } from './db';
-import { sampleContent } from './contentFixtures';
+import { sampleChapterContent } from './contentFixtures';
 import { finishReadingLesson } from './lessonServices';
 import { readProgress } from './services';
 
-const content = sampleContent();
+const content = sampleChapterContent('first-sky');
 const lesson = content.lessons.find(item => item.id === 'patterns')!;
 const now = new Date('2026-10-28T12:00:00Z');
 let database: AstronDb;

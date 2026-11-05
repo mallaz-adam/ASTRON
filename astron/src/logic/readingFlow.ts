@@ -1,6 +1,7 @@
 import type { ExplorationLesson, ExplorationSection } from '../data/explorationLesson';
 import type { Content, Progress } from '../data/types';
 import { buildCoursePath } from './coursePath';
+import { learningCellAccess } from './learningRoadmap';
 
 export type ReadingStep = {
   id: string;
@@ -27,6 +28,7 @@ export function nextReadingDestination(content: Content, progress: Pick<Progress
   // Wait for the real saved completion, rather than inventing an unlocked cell.
   if (!cell || !progress?.completions.some(item => item.learnerId === learnerId && item.cellId === cellId)) return null;
   const path = buildCoursePath(content, progress, learnerId, cell.unitId, true);
-  const next = path.cells.find(item => item.positionNo > cell.positionNo && item.state !== 'locked');
+  const next = path.cells.find(item => item.positionNo > cell.positionNo && item.state !== 'locked'
+    && learningCellAccess(content, progress, learnerId, item.id).allowed);
   return next ? { to: `/cell/${next.id}`, title: next.title } : { to: '/learn', title: 'Back to the path' };
 }

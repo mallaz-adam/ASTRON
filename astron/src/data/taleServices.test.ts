@@ -110,21 +110,20 @@ describe('The shared Orion journey', () => {
     await collectTaleStar(database, content, learnerId, taleId, now);
     expect(await database.litStars.count()).toBe(1); expect(await database.completions.count()).toBe(1); expect(await xp()).toBe(35);
   });
-  it('continues from Orion into the real lesson without placeholder progress or duplicate Learn XP', async () => {
+  it('continues from Orion into the beginner chapter without bypassing its evaluation or duplicating Learn XP', async () => {
     await readToStar(); await collectTaleStar(database, content, learnerId, taleId, now);
     await answerBeltActivity(database, content, learnerId, taleId, 'belt');
     await advanceTaleVisit(database, content, learnerId, taleId);
     await advanceTaleVisit(database, content, learnerId, taleId);
     await finishWelcome(database, content, learnerId, [], 2, false, now);
-    const scale=content.lessons.find(l=>l.id==='patterns')!;
-    await finishReadingLesson(database,content,learnerId,scale.id,now);
-    for (const exercise of ['ex-03-order', 'ex-03-choice']) await saveLessonAnswer(database, content, learnerId, 'lesson-03', exercise, true, now);
-    await finishLesson(database, content, learnerId, 'lesson-03', [], now, 'blue');
+    await finishReadingLesson(database, content, learnerId, 'unit-earth-sun-moon', now);
+    await expect(saveLessonAnswer(database, content, learnerId, 'lesson-03', 'ex-03-choice', true, now)).rejects.toThrow('Complete the evaluation');
+    await expect(finishLesson(database, content, learnerId, 'lesson-03', [], now, 'blue')).rejects.toThrow('Complete the evaluation');
     const saved = await readProgress(database);
-    expect(saved.completions.map(row => row.cellId).sort()).toEqual(['orion-lesson','orion-tale', 'star-lesson']);
-    expect(saved.litStars.map(row => row.starId).sort()).toEqual(['betelgeuse', 'star-clue-03']);
+    expect(saved.completions.map(row => row.cellId).sort()).toEqual(['earth-sun-moon', 'orion-tale']);
+    expect(saved.litStars.map(row => row.starId)).toEqual(['betelgeuse']);
     expect(saved.questDone).toHaveLength(2);
-    expect(await xp()).toBe(55);
+    expect(await xp()).toBe(35);
   });
   it('keeps motion changes when moving backwards and forwards', async () => {
     await startTaleVisit(database, content, learnerId, taleId, now);

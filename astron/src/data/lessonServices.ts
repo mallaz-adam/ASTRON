@@ -2,7 +2,7 @@ import type { AstronDb } from './db';
 import type { Content, HunchChoice } from './types';
 import { completeCell, lightStar, recordAnswer } from './learningServices';
 import { readProgress } from './progressServices';
-import { buildCoursePath } from '../logic/coursePath';
+import { learningCellAccess } from '../logic/learningRoadmap';
 import { localDate } from '../logic/dates';
 import { hunchTint } from '../logic/stars';
 
@@ -10,10 +10,11 @@ async function availableLesson(database: AstronDb, content: Content, learnerId: 
   const lesson = content.lessons.find(row => row.id === lessonId && !row.placeholder);
   if (!lesson) throw new Error('Lesson is not available.');
   const cell = content.cells.find(row => row.id === lesson.cellId)!;
-  // Normal screens expose authored content in both builds. Use the identical
-  // path here so a local learner is not blocked by development-only placeholders.
-  const path = buildCoursePath(content, await readProgress(database), learnerId, cell.unitId, true);
-  if (path.cells.find(row => row.id === cell.id)?.state === 'locked') throw new Error('Finish the cell before it to open this one.');
+  // Normal screens and writes share the chapter gate in both builds. Developer
+  // placeholders never make a later chapter available to a new learner.
+  const progress = await readProgress(database);
+  const access = learningCellAccess(content, progress, learnerId, cell.id);
+  if (!access.allowed) throw new Error(access.reason);
   return lesson;
 }
 

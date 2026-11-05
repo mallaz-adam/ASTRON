@@ -104,12 +104,18 @@ understand the explanation. They are not separate exams.
 Scale of the cosmos contains eight teaching parts and two optional, unscored
 practices. A short introduction leads into sixteen reading/exploration steps,
 with **Continue** leading through the recap and on to the next authored lesson.
-There is no contents dropdown. The course path marks
-the full chapter evaluation as **Coming later**, because several lessons are
-still unwritten. Its complete question set and pass-mark rules will be decided
-when that chapter's teaching is ready.
+There is no contents dropdown. Learn now shows separate chapter cards, all
+planned units, completion/readiness states and one primary next-lesson action.
+The evaluation is marked **Still being prepared** because several lessons are
+unwritten. Finish the units, then complete and submit the chapter evaluation to
+unlock the next chapter; there is no minimum score. The real evaluation player
+and its ten-question set still need to be authored.
 
 See [the learning structure](astron/docs/learning-structure.md).
+
+The [5 November roadmap update](astron/docs/learning-roadmap.md) passed **610 tests
+in 68 files** and the production build. It preserves completed-lesson review and
+keeps the welcome and Stories accessible independently of the chapter gate.
 
 ## Run the project on your computer
 
@@ -223,6 +229,7 @@ service worker offers **REFRESH** when its files are ready.
 - [Platform and learning roadmap](astron/docs/platform-roadmap.md)
 - [Content format and validation](astron/docs/content-format.md)
 - [Learning structure and chapter evaluations](astron/docs/learning-structure.md)
+- [Chapter roadmap and unlock rules](astron/docs/learning-roadmap.md)
 - [Scale of the cosmos: teaching, practice and performance](astron/docs/scale-of-cosmos.md)
 - [Glaux’s personality](astron/docs/glaux-character.md)
 - [Orion journey](astron/docs/orion-journey.md)

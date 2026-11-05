@@ -2,6 +2,17 @@
 
 Confirmed with the project owner on 28 October 2026.
 
+## Roadmap update — 5 November 2026
+
+The [learning roadmap](learning-roadmap.md) now shows separate chapters, all
+planned units, clear progress and readiness states, and a single primary next
+lesson action. Normal lesson routes and services enforce the chapter gate using
+authored content and completion records. Completed lessons remain reviewable.
+Stories remain independently accessible. The real ten-question evaluation and
+its submission player are still being prepared, so Chapter 2 is previewable but
+locked for new learners. This supersedes the earlier interface and gate status
+described below; it does not claim the missing evaluation has been implemented.
+
 ## Updated practice decision — 2 November 2026
 
 The owner requested distinct practice phases for important concepts rather
@@ -67,8 +78,8 @@ then complete and submit its ten-question evaluation to unlock the next chapter.
 Completion, rather than a minimum score, is the unlock requirement. Merely
 opening the evaluation does not complete it. Completed chapters stay available
 to revisit; unauthored chapters remain marked as being prepared. This records
-the owner's decision for implementation and does not claim the current app
-already enforces the new chapter gate.
+the owner's decision. The 5 November roadmap update implements its read-side
+chapter gate; authoring the evaluation and its submission flow remains future work.
 
 Development progress remains temporary. The separate permanent database is
 unchanged. No new account, server, analytics or progress upload is introduced.
